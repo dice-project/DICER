@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tosca="http://tosca/1.0">
+  <tosca:TopologyTemplate tosca_definitions_version="cloudify_dsl_1_1">
+    <imports file="http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml"/>
+    <imports file="https://raw.githubusercontent.com/dice-project/DICE-FCO-Plugin-Cloudify//plugin.yaml"/>
+    <imports file="http://www.getcloudify.org/spec/chef-plugin/1.3.1/plugin.yaml"/>
+    <imports file="http://dice-project.github.io/DICE-Deployment-Cloudify/spec///plugin.yaml"/>
+    <imports file="types/dice.yaml"/>
+    <nodeTemplates node_template_name="zookeeper_host" type="dice.hosts.small">
+      <properties property_name="instances" value="1"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="nimbus_host" type="dice.hosts.small">
+      <properties property_name="instances" value="1"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="supervisor_host" type="dice.hosts.small">
+      <properties property_name="instances" value="1"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="zookeeper" type="dice.components.zookeeper.Server">
+      <properties property_name="tickTime" value="1500"/>
+      <properties property_name="initLimit" value="10"/>
+      <properties property_name="syncLimit" value="5"/>
+      <relationships type="cloudify.relationships.contained_in" target="zookeeper_host">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="create" primary="scripts/configure_zookeeper_host.sh"/>
+        </source_interfaces>
+      </relationships>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="zookeeper_quorum" type="dice.components.zookeeper.Quorum">
+      <relationships type="dice.relationships.zookeeper.QuorumContains" target="zookeeper_host"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="nimbus" type="dice.components.storm.Nimbus">
+      <properties property_name="taskTimeout" value="30"/>
+      <properties property_name="supervisorTimeout" value="60"/>
+      <properties property_name="monitorFrequency" value="10"/>
+      <properties property_name="queueSize" value="100000"/>
+      <properties property_name="retryTimes" value="5"/>
+      <properties property_name="retryInterval" value="2000"/>
+      <relationships type="cloudify.relationships.contained_in" target="nimbus_host">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="create" primary="scripts/configure_nimbus_host.sh"/>
+        </source_interfaces>
+      </relationships>
+      <relationships type="cloudify.relationships.connected_to" target="zookeeper">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="preconfigure" primary="scripts/connect_to_zookeeper.sh"/>
+        </source_interfaces>
+      </relationships>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="supervisor" type="dice.components.storm.Worker">
+      <properties property_name="workerStartTimeout" value="120"/>
+      <properties property_name="heartbeatFrequency" value="5"/>
+      <properties property_name="cpuCapacity" value="400"/>
+      <properties property_name="memoryCapacity" value="4096"/>
+      <relationships type="cloudify.relationships.contained_in" target="supervisor_host">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="create" primary="scripts/configure_supervisor_host.sh"/>
+        </source_interfaces>
+      </relationships>
+      <relationships type="cloudify.relationships.connected_to" target="zookeeper">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="preconfigure" primary="scripts/connect_to_zookeeper.sh"/>
+        </source_interfaces>
+      </relationships>
+      <relationships type="cloudify.relationships.connected_to" target="nimbus">
+        <source_interfaces type="cloudify.interfaces.lifecycle">
+          <operations operation_name="preconfigure" primary="scripts/connect_to_nimbus.sh"/>
+        </source_interfaces>
+      </relationships>
+    </nodeTemplates>
+  </tosca:TopologyTemplate>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="preconfigure" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="preconfigure" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="create" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="preconfigure" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="create" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Operation operation_name="download" primary=""/>
+  <tosca:Operation operation_name="create" primary=""/>
+  <tosca:Operation operation_name="install" primary=""/>
+  <tosca:Operation operation_name="start" primary=""/>
+  <tosca:Operation operation_name="stop" primary=""/>
+  <tosca:Relationship type="dice.server_connected_to_virtual_ip" target="zookeeper_host_virtual_ip"/>
+  <tosca:Relationship type="dice.server_connected_to_firewall" target="zookeeper_host_virtual_ip"/>
+  <tosca:Relationship type="dice.server_connected_to_virtual_ip" target="nimbus_host_virtual_ip"/>
+  <tosca:Relationship type="dice.server_connected_to_firewall" target="nimbus_host_virtual_ip"/>
+  <tosca:Relationship type="dice.server_connected_to_virtual_ip" target="supervisor_host_virtual_ip"/>
+  <tosca:Relationship type="dice.server_connected_to_firewall" target="supervisor_host_virtual_ip"/>
+</xmi:XMI>

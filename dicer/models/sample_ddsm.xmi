@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /org.xtext.example.toscadsl/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:Provider" elementId="flexiant"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="zookeeper_host" provider="flexiant">
+    <providedexecutionplatform elementId="provides_zookeeper_hosting" owner="zookeeper_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="nimbus_host" provider="flexiant">
+    <providedexecutionplatform elementId="provides_nimbus_hosting" owner="nimbus_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="supervisor_host" provider="flexiant">
+    <providedexecutionplatform elementId="provides_supervisor_hosting" owner="supervisor_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Zookeeper" elementId="zookeeper">
+    <providedport elementId="zookeeper_access" owner="zookeeper"/>
+    <requiredexecutionplatform elementId="zookeeper_requires_host">
+      <resource resourceId="deploy_zookeeper" createCommand="scripts/configure_zookeeper_host.sh"/>
+    </requiredexecutionplatform>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:StormNimbus" elementId="nimbus">
+    <providedport elementId="nimbus_access" owner="nimbus"/>
+    <requiredport elementId="requires_nimbus2zookeeper">
+      <resource resourceId="connect_nimbus2zookeeper" configureCommand="scripts/connect_to_zookeeper.sh"/>
+    </requiredport>
+    <requiredexecutionplatform elementId="nimbus_requires_host">
+      <resource resourceId="deploy_nimbus" createCommand="scripts/configure_nimbus_host.sh"/>
+    </requiredexecutionplatform>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:StormSupervisor" elementId="supervisor">
+    <requiredport elementId="requires_supervisor2zookeeper">
+      <resource resourceId="connect_supervisor2zookeeper" configureCommand="scripts/connect_to_zookeeper.sh"/>
+    </requiredport>
+    <requiredport elementId="requires_supervisor2nimbus">
+      <resource resourceId="connect_supervisor2nimbus" configureCommand="scripts/connect_to_nimbus.sh"/>
+    </requiredport>
+    <requiredexecutionplatform elementId="supervisor_requires_host">
+      <resource resourceId="deploy_supervisor" createCommand="scripts/configure_supervisor_host.sh"/>
+    </requiredexecutionplatform>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="zookeeper2host" requiredexecutionplatform="zookeeper_requires_host" providedexecutionplatform="provides_zookeeper_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="nimbus2host" requiredexecutionplatform="nimbus_requires_host" providedexecutionplatform="provides_nimbus_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="supervisor2host" requiredexecutionplatform="supervisor_requires_host" providedexecutionplatform="provides_supervisor_hosting"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="supervisor2nimbus" providedport="nimbus_access" requiredport="requires_supervisor2nimbus"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="nimbus2zookeeper" providedport="zookeeper_access" requiredport="requires_nimbus2zookeeper"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="supervisor2zookeeper" providedport="zookeeper_access" requiredport="requires_supervisor2zookeeper"/>
+</ddsm:DDSM>
