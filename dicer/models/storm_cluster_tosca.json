@@ -1,0 +1,303 @@
+{
+	"tosca_definitions_version" : "cloudify_dsl_1_1" ,
+"imports" : [ "http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml",
+	"https://raw.githubusercontent.com/dice-project/DICE-FCO-Plugin-Cloudify//plugin.yaml",
+	"http://www.getcloudify.org/spec/chef-plugin/1.3.1/plugin.yaml",
+	"http://dice-project.github.io/DICE-Deployment-Cloudify/spec///plugin.yaml",
+	"types/dice.yaml" ] ,
+"nodeTemplates" : {
+		"vmq" : {
+			"type" : "dice.hosts.small" ,
+"properties" : [ {
+				"instances" : "3"
+			}
+			]
+		},
+		"vm2" : {
+			"type" : "dice.hosts.large" ,
+"properties" : [ {
+				"instances" : "1"
+			}
+			]
+		},
+		"vm3" : {
+			"type" : "dice.hosts.medium" ,
+"properties" : [ {
+				"instances" : "2"
+			}
+			]
+		},
+		"nimbus_hosts" : {
+			"type" : "dice.hosts.large" ,
+"relationships" : [ {
+				"type" : "dice.server_connected_to_virtual_ip" ,
+"target" : "nimbus_hosts_virtual_ip"
+			},
+			{
+				"type" : "dice.server_connected_to_firewall" ,
+"target" : "nimbus_hosts_virtual_ip"
+			}
+			] ,
+"properties" : [ {
+				"instances" : "1"
+			}
+			]
+		},
+		"zookeeper_hosts" : {
+			"type" : "dice.hosts.medium" ,
+"relationships" : [ {
+				"type" : "dice.server_connected_to_virtual_ip" ,
+"target" : "zookeeper_hosts_virtual_ip"
+			},
+			{
+				"type" : "dice.server_connected_to_firewall" ,
+"target" : "zookeeper_hosts_virtual_ip"
+			}
+			] ,
+"properties" : [ {
+				"instances" : "2"
+			}
+			]
+		},
+		"my_storm_cluster_zookeeper_server" : {
+			"type" : "dice.components.zookeeper.Server" ,
+"relationships" : [ {
+				"type" : "cloudify.relationships.contained_in" ,
+"target" : "zookeeper_hosts" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"create" : "scripts/configure_zookeeper_host.sh"
+						}
+					}
+				}
+			}
+			] ,
+"properties" : [ {
+				"tickTime" : "1000"
+			},
+			{
+				"initLimit" : "1000"
+			},
+			{
+				"syncLimit" : "1000"
+			}
+			]
+		},
+		"my_storm_cluster_zookeeper_quorum" : {
+			"type" : "dice.components.zookeeper.Quorum" ,
+"relationships" : [ {
+				"type" : "dice.relationships.zookeeper.QuorumContains" ,
+"target" : "zookeeper_hosts"
+			}
+			]
+		},
+		"my_storm_cluster_nimbus" : {
+			"type" : "dice.components.storm.Nimbus" ,
+"relationships" : [ {
+				"type" : "cloudify.relationships.contained_in" ,
+"target" : "nimbus_hosts" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"create" : "scripts/configure_nimbus_host.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_zookeeper_server" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_zookeeper.sh"
+						}
+					}
+				}
+			}
+			] ,
+"properties" : [ {
+				"taskTimeout" : "30"
+			},
+			{
+				"supervisorTimeout" : "60"
+			},
+			{
+				"monitorFrequency" : "10"
+			},
+			{
+				"queueSize" : "100000"
+			},
+			{
+				"retryTimes" : "5"
+			},
+			{
+				"retryInterval" : "2000"
+			}
+			]
+		},
+		"my_storm_cluster_vmq_storm_supervisor" : {
+			"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+				"type" : "cloudify.relationships.contained_in" ,
+"target" : "vmq" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"create" : "scripts/configure_supervisor_host.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_zookeeper_server" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_zookeeper.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_nimbus" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_nimbus.sh"
+						}
+					}
+				}
+			}
+			] ,
+"properties" : [ {
+				"workerStartTimeout" : "120"
+			},
+			{
+				"heartbeatFrequency" : "5"
+			},
+			{
+				"cpuCapacity" : "400"
+			},
+			{
+				"memoryCapacity" : "4096"
+			}
+			]
+		},
+		"my_storm_cluster_vm2_storm_supervisor" : {
+			"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+				"type" : "cloudify.relationships.contained_in" ,
+"target" : "vm2" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"create" : "scripts/configure_supervisor_host.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_zookeeper_server" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_zookeeper.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_nimbus" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_nimbus.sh"
+						}
+					}
+				}
+			}
+			] ,
+"properties" : [ {
+				"workerStartTimeout" : "120"
+			},
+			{
+				"heartbeatFrequency" : "5"
+			},
+			{
+				"cpuCapacity" : "400"
+			},
+			{
+				"memoryCapacity" : "4096"
+			}
+			]
+		},
+		"my_storm_cluster_vm3_storm_supervisor" : {
+			"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+				"type" : "cloudify.relationships.contained_in" ,
+"target" : "vm3" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"create" : "scripts/configure_supervisor_host.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_zookeeper_server" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_zookeeper.sh"
+						}
+					}
+				}
+			},
+			{
+				"type" : "cloudify.relationships.connected_to" ,
+"target" : "my_storm_cluster_nimbus" ,
+"source_interfaces" : {
+					"cloudify.interfaces.lifecycle" : {
+					
+"operations" : {
+							"preconfigure" : "scripts/connect_to_nimbus.sh"
+						}
+					}
+				}
+			}
+			] ,
+"properties" : [ {
+				"workerStartTimeout" : "120"
+			},
+			{
+				"heartbeatFrequency" : "5"
+			},
+			{
+				"cpuCapacity" : "400"
+			},
+			{
+				"memoryCapacity" : "4096"
+			}
+			]
+		}
+	}
+}

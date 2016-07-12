@@ -22,7 +22,6 @@ import com.google.inject.Injector;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterDescription;
 
 public class Dicer {
     
@@ -31,9 +30,6 @@ public class Dicer {
     public final static String OUT_METAMODEL = "./metamodels/tosca.ecore";
     public final static String OUT_METAMODEL_NAME = "TOSCA";
 
-    public final static String IN_MODEL = "./models/sample_ddsm.xmi";
-    public final static String OUT_MODEL = "./models/sample_tosca.xmi";
-
     public final static String TRANSFORMATION_DIR = "./transformations/";
     public final static String TRANSFORMATION_MODULE = "ddsm2tosca";
     
@@ -41,16 +37,16 @@ public class Dicer {
     private boolean help = false;
     
     @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-    public String inModelPath = null;
+    public String inModelPath = "./models/storm_cluster.xmi";
     
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-    public String outModelPath = null;
+    public String outModelPath = "./models/storm_cluster_tosca";
     
 
     public static void main(String[] args) throws IOException {
         Dicer dicer = new Dicer();
         JCommander jc = new JCommander(dicer, args);
-        System.out.println(dicer.inModelPath + " , " + dicer.outModelPath);
+        
         if (dicer.help) {
             jc.usage();
             System.exit(0);

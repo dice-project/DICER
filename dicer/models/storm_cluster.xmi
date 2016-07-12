@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:StormCluster" elementId="my_storm_cluster" hasVm="vmq vm2 vm3" nimbusHost="nimbus_hosts" zookeeperHost="zookeeper_hosts"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vmq" provider="my_flexiant" instances="3"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="my_flexiant" genericSize="Large"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm3" provider="my_flexiant" instances="2" genericSize="Medium"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="nimbus_hosts" provider="my_flexiant" genericSize="Large">
+    <publicPorts>8080</publicPorts>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="zookeeper_hosts" provider="my_flexiant" imageId="" instances="2" genericSize="Medium">
+    <publicPorts>8080</publicPorts>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Provider" elementId="my_flexiant"/>
+</ddsm:DDSM>
