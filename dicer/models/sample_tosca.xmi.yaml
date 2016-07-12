@@ -1,0 +1,77 @@
+tosca_definitions_version: cloudify_dsl_1_1
+imports: ['http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml', 'https://raw.githubusercontent.com/dice-project/DICE-FCO-Plugin-Cloudify//plugin.yaml',
+  'http://www.getcloudify.org/spec/chef-plugin/1.3.1/plugin.yaml', 'http://dice-project.github.io/DICE-Deployment-Cloudify/spec///plugin.yaml',
+  types/dice.yaml]
+nodeTemplates:
+  zookeeper_host:
+    type: dice.hosts.small
+    properties:
+    - {instances: '1'}
+  nimbus_host:
+    type: dice.hosts.small
+    properties:
+    - {instances: '1'}
+  supervisor_host:
+    type: dice.hosts.small
+    properties:
+    - {instances: '1'}
+  zookeeper:
+    type: dice.components.zookeeper.Server
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: zookeeper_host
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {create: scripts/configure_zookeeper_host.sh}
+    properties:
+    - {tickTime: '1500'}
+    - {initLimit: '10'}
+    - {syncLimit: '5'}
+  zookeeper_quorum:
+    type: dice.components.zookeeper.Quorum
+    relationships:
+    - {type: dice.relationships.zookeeper.QuorumContains, target: zookeeper_host}
+  nimbus:
+    type: dice.components.storm.Nimbus
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: nimbus_host
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {create: scripts/configure_nimbus_host.sh}
+    - type: cloudify.relationships.connected_to
+      target: zookeeper
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {preconfigure: scripts/connect_to_zookeeper.sh}
+    properties:
+    - {taskTimeout: '30'}
+    - {supervisorTimeout: '60'}
+    - {monitorFrequency: '10'}
+    - {queueSize: '100000'}
+    - {retryTimes: '5'}
+    - {retryInterval: '2000'}
+  supervisor:
+    type: dice.components.storm.Worker
+    relationships:
+    - type: cloudify.relationships.contained_in
+      target: supervisor_host
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {create: scripts/configure_supervisor_host.sh}
+    - type: cloudify.relationships.connected_to
+      target: zookeeper
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {preconfigure: scripts/connect_to_zookeeper.sh}
+    - type: cloudify.relationships.connected_to
+      target: nimbus
+      source_interfaces:
+        cloudify.interfaces.lifecycle:
+          operations: {preconfigure: scripts/connect_to_nimbus.sh}
+    properties:
+    - {workerStartTimeout: '120'}
+    - {heartbeatFrequency: '5'}
+    - {cpuCapacity: '400'}
+    - {memoryCapacity: '4096'}
+

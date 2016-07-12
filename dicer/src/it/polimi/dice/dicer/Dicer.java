@@ -36,29 +36,47 @@ public class Dicer {
 
     public final static String TRANSFORMATION_DIR = "./transformations/";
     public final static String TRANSFORMATION_MODULE = "ddsm2tosca";
+    
+    @Parameter(names = { "-h", "--help", "-help" }, help = true, description = "Shows this help")
+    private boolean help = false;
+    
+    @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
+    public String inModelPath = null;
+    
+    @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
+    public String outModelPath = null;
+    
 
     public static void main(String[] args) throws IOException {
-        runme("models/sample_tosca", "models/sample_tosca");
+        Dicer dicer = new Dicer();
+        JCommander jc = new JCommander(dicer, args);
+        System.out.println(dicer.inModelPath + " , " + dicer.outModelPath);
+        if (dicer.help) {
+            jc.usage();
+            System.exit(0);
+        } else {
+            dicer.runme(dicer.inModelPath, dicer.outModelPath);
+        }
     }
 
     @SuppressWarnings("unchecked")
-    public static void runme(String toscaJsonModelPath, String toscaYamlModelPath) {
+    public void runme(String inputXMIModelPath, String outModelPath) {
 
         ATLTransformationLauncher l = new ATLTransformationLauncher();
         l.registerInputMetamodel(IN_METAMODEL);
         l.registerOutputMetamodel(OUT_METAMODEL);
-        l.launch(IN_MODEL, IN_METAMODEL_NAME, OUT_MODEL, OUT_METAMODEL_NAME, TRANSFORMATION_DIR, TRANSFORMATION_MODULE);
+        l.launch(inputXMIModelPath, IN_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, TRANSFORMATION_DIR, TRANSFORMATION_MODULE);
         
         EPackage.Registry.INSTANCE.put("http://tosca/1.0", ToscaPackage.eINSTANCE);
 
         Injector injector = new ToscaDslStandaloneSetup().createInjectorAndDoEMFRegistration();
         ResourceSet xmiResourceSet = injector.getInstance(ResourceSet.class);
 
-        Resource xmi_resource = (Resource) xmiResourceSet.getResource(URI.createURI(toscaJsonModelPath + ".xmi"), true);
+        Resource xmi_resource = (Resource) xmiResourceSet.getResource(URI.createURI(outModelPath + ".xmi"), true);
 
         ResourceSet xtext_resourceSet = injector.getInstance(ResourceSet.class);
         Resource textualModel_resource = (Resource) xtext_resourceSet
-                .createResource(URI.createURI(toscaJsonModelPath + ".json"));
+                .createResource(URI.createURI(outModelPath + ".json"));
         
         textualModel_resource.getContents().add(xmi_resource.getContents().get(0));
 
@@ -70,13 +88,13 @@ public class Dicer {
 
         try {
 
-            String actualObj =readFile(toscaJsonModelPath + ".json", Charset.defaultCharset());
+            String actualObj =readFile(outModelPath + ".json", Charset.defaultCharset());
             ObjectMapper mapper = new ObjectMapper();
             JsonNode node = mapper.readTree(actualObj);
             Yaml yaml = new Yaml();
             Map<String,Object> map = (Map<String, Object>) yaml.load(node.toString());
 
-            try(  PrintWriter out = new PrintWriter( toscaYamlModelPath + ".yaml" )  ){
+            try(  PrintWriter out = new PrintWriter( outModelPath + ".yaml" )  ){
                 out.println( yaml.dump(map) );
             }
         } catch (IOException e) {

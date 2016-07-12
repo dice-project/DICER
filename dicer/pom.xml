@@ -23,7 +23,7 @@
 			<url>https://repo.eclipse.org/content/groups/atl</url>
 		</repository>
 	</repositories>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -43,7 +43,7 @@
 				</includes>
 			</resource>
 		</resources>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

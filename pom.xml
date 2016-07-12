@@ -12,12 +12,29 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+
+	<scm>
+		<connection>scm:git:git@github.com:MicheleGuerriero/DICER.git</connection>
+		<developerConnection>scm:git:git@github.com:MicheleGuerriero/DICER.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/MicheleGuerriero/DICER</url>
+	</scm>
+
 	<modules>
 		<module>dicer</module>
 	</modules>
+
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.2</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>

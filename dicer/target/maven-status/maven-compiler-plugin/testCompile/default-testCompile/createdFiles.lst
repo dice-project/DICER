@@ -1,0 +1,5 @@
+it/polimi/dice/dicer/ToscaDslRuntimeModule.class
+it/polimi/dice/dicer/scoping/ToscaDslScopeProvider.class
+it/polimi/dice/dicer/generator/ToscaDslGenerator.class
+it/polimi/dice/dicer/ToscaDslStandaloneSetup.class
+it/polimi/dice/dicer/validation/ToscaDslValidator.class
