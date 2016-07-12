@@ -1,1 +1,10 @@
-.setting
+target/
+.classpath
+.metadata
+.settings/
+/bin/
+*.zip
+**/*.log
+.java-version
+pom.xml.*
+.DS_Store
