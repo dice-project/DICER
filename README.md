@@ -12,9 +12,7 @@ http://dynamicgmf.sourceforge.net
 
 In order to install it, after downloading, it is sufficient to copy and paste the .jar plugin file into your eclipse installation's plugin folder. 
 
-It requires GMF 2.0 or higher. You can install the last version of GMF via eclipse update site using the following url:
-
-http://download.eclipse.org/modeling/gmp/updates/releases/
+It requires GMF 2.0 or higher and EMF installed. 
 
 Finally, once you have installed the Ecore Model Diagram Editor plugin into your eclipse installation, you just have to checkout the DICER project, import in Eclipse.
 
