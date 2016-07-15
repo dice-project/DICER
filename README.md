@@ -6,7 +6,17 @@ DICER is still at its early stage and right now the only supported deployment en
 
 # Requirement
 
-DICER leverages the DICE Deployment Specific Metamodel (DDSM), which can be directly used to create DICER-processable models. The metamodel is included in the DICER project. Right now DICER does not provide its own GUI and operates as a simple java tool, runnable from the command line. The same apply for the creation of the input models, which can be created directly from the DDSM using the ecore reflective diagram editor. Once you have installed the ecore reflective diagram editor plugin into your eclipse installation, you just have to checkout the DICER project, import in Eclipse and create a new Reflective Ecore Model Diagram, specifying the metamodels/ddsm.ecore metamodel as the ecore model to use. Once you created your deployment specific model in Eclipse using the Reflective Ecore Diagram Plugin and the porvided DDSM metamodel, you can run the DICER tool to obtain a blueprint deployable with the DICE Deployment Service. Since the DICE Deployment Service leverages Cloudify, the output will be a TOSCA blueprint.
+DICER leverages the DICE Deployment Specific Metamodel (DDSM), which can be directly used to create DICER-processable models. The metamodel is included in the DICER project. Right now DICER does not provide its own GUI and operates as a simple java tool, runnable from the command line. The same apply for the creation of the input models, which can be created directly from the DDSM using the ecore reflective diagram editor. The eclipse Reflective Ecore Model Diagram Editor is available at the following url:
+
+http://dynamicgmf.sourceforge.net
+
+In order to install it, after downloading, it is sufficient to copy and paste the .jar plugin file into your eclipse installation's plugin folder. 
+
+It requires GMF 2.0 or higher. You can install the last version of GMF via eclipse update site using the following url:
+
+http://download.eclipse.org/modeling/gmp/updates/releases/
+
+Finally, once you have installed the Ecore Model Diagram Editor plugin into your eclipse installation, you just have to checkout the DICER project, import in Eclipse.
 
 # Installation
 
