@@ -256,8 +256,8 @@
       <details key="description" value="test generation"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
+        upperBound="-1" eType="#//JobSubmission"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VMSize">
     <eLiterals name="Small"/>
@@ -297,5 +297,13 @@
         eType="#//VM"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="zookeeperHost" lowerBound="1"
         eType="#//VM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JobSubmission">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" upperBound="-1"
+        eType="#//JobSubmission"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobId" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
