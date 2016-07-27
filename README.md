@@ -18,11 +18,11 @@ Finally, once you have installed the Ecore Model Diagram Editor plugin into your
 
 # Installation
 
-In order to user DICER you can either donwload one of the released binary, or directly compile the source code. In this second case you need maven installed and then you can just execute the following commands:
+In order to user DICER you can either download one of the released binary, or directly compile the source code. In this second case you need maven installed and then you can just execute the following commands:
 
-git clone http://dice.git
-cd DICER
-mvn clean package
+    git clone https://github.com/DICERs/DICER.git
+    cd DICER
+    mvn clean package
 
 Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code).
 
@@ -30,6 +30,6 @@ Make sure to put the compiled artifact in the same folder in which the metamodel
 
 In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run the following command:
 
-java -jar dicer.jar -inModel path/to/ddsm_model.xmi -outModel path/to/output_model
+    java -jar dicer.jar -inModel path/to/ddsm_model.xmi -outModel path/to/output_model
 
 Make sure that the -outModel argument is a path to a file with no extention. DICER will create also an xmi and a json version of the generated deployment blueprint.
