@@ -64,8 +64,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredport" upperBound="-1"
         eType="#//RequiredPort" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="internalcomponent" upperBound="-1"
-        eType="#//InternalComponent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredexecutionplatform"
         upperBound="-1" eType="#//RequiredExecutionPlatform" containment="true"/>
   </eClassifiers>
@@ -91,7 +89,6 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="A specific type of Port which specify that a Component provides features (e.g.access to a database) which can be accessed by another Component."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequiredExecutionPlatform" eSuperTypes="#//ExecutionPlatform">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -103,23 +100,24 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="A specific type of ExecutionPlatform which requires hosting (e.g. a Big Data application requires a Big Data platform) from a Component."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship" eSuperTypes="#//CloudElement">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="test generation"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="providedport" eType="#//ProvidedPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredport" eType="#//RequiredPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedport" lowerBound="1"
+        eType="#//ProvidedPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredport" lowerBound="1"
+        eType="#//RequiredPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionBinding" eSuperTypes="#//CloudElement">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Represents a binding between a RequiredExecutionPlatform and a ProvidedExecutionPlatform of two components, meaning that the first component will be hosted on the second one according to the specified binding."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredexecutionplatform"
-        eType="#//RequiredExecutionPlatform"/>
+        lowerBound="1" eType="#//RequiredExecutionPlatform"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="providedexecutionplatform"
-        eType="#//ProvidedExecutionPlatform"/>
+        lowerBound="1" eType="#//ProvidedExecutionPlatform"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalComponent" eSuperTypes="#//Component">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -179,7 +177,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormSupervisor" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="StormSupervisor" eSuperTypes="#//SlaveNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm supervisor slave process."/>
     </eAnnotations>
@@ -198,7 +196,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="heartbeatFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormNimbus" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="StormNimbus" eSuperTypes="#//MasterNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm nimbus master process."/>
     </eAnnotations>
@@ -239,11 +237,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Kafka" eSuperTypes="#//InternalComponent">
-    <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
-      <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a Kafka cluster."/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cluster" eSuperTypes="#//CloudElement">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Inherited from MODACloudsML, it represents a collection of virtual machines on a particular Provider. One Provider can host several Clusters.."/>
@@ -257,29 +250,34 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
-        upperBound="-1" eType="#//JobSubmission"/>
+        eType="#//JobSubmission"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBetweenSubmissions"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSubmissions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VMSize">
     <eLiterals name="Small"/>
     <eLiterals name="Medium" value="1"/>
     <eLiterals name="Large" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="YarnResourceManager" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="YarnResourceManager" eSuperTypes="#//MasterNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a the YARN ResourceManager master process."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="YarnNodeManager" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="YarnNodeManager" eSuperTypes="#//SlaveNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a the YARN  NodeManager slave process."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HDFSNameNode" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="HDFSNameNode" eSuperTypes="#//MasterNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a the YARN ResourceManager master process."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HDFSDataNode" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="HDFSDataNode" eSuperTypes="#//SlaveNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a the YARN ResourceManager master process."/>
     </eAnnotations>
@@ -299,11 +297,11 @@
         eType="#//VM"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JobSubmission">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" upperBound="-1"
-        eType="#//JobSubmission"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobId" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MasterNode" eSuperTypes="#//InternalComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SlaveNode" eSuperTypes="#//InternalComponent"/>
 </ecore:EPackage>

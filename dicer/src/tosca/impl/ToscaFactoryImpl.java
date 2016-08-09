@@ -33,7 +33,7 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
             }
         }
         catch (Exception exception) {
-            //EcorePlugin.INSTANCE.log(exception);
+            EcorePlugin.INSTANCE.log(exception);
         }
         return new ToscaFactoryImpl();
     }
