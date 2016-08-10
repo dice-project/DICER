@@ -8,3 +8,4 @@ target/
 .java-version
 pom.xml.*
 .DS_Store
+.project
