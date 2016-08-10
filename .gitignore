@@ -9,3 +9,5 @@ target/
 pom.xml.*
 .DS_Store
 .project
+*.xtendbin
+.gitignore
