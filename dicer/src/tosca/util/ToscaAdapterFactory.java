@@ -124,6 +124,10 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
                 return createArtifactAdapter();
             }
             @Override
+            public Adapter caseInstances(Instances object) {
+                return createInstancesAdapter();
+            }
+            @Override
             public Adapter defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -336,6 +340,20 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createArtifactAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.Instances <em>Instances</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.Instances
+     * @generated
+     */
+    public Adapter createInstancesAdapter() {
         return null;
     }
 

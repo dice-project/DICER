@@ -19,6 +19,7 @@ import tosca.Attribute;
 import tosca.Capability;
 import tosca.Group;
 import tosca.Import;
+import tosca.Instances;
 import tosca.Interface;
 import tosca.NodeTemplate;
 import tosca.Operation;
@@ -54,6 +55,9 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case ToscaPackage.IMPORT:
 				sequence_Import(context, (Import) semanticObject); 
+				return; 
+			case ToscaPackage.INSTANCES:
+				sequence_Instances(context, (Instances) semanticObject); 
 				return; 
 			case ToscaPackage.INTERFACE:
 				sequence_Interface(context, (Interface) semanticObject); 
@@ -156,6 +160,24 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	
 	/**
 	 * Contexts:
+	 *     Instances returns Instances
+	 *
+	 * Constraint:
+	 *     deploy=INT
+	 */
+	protected void sequence_Instances(ISerializationContext context, Instances semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.INSTANCES__DEPLOY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.INSTANCES__DEPLOY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getInstancesAccess().getDeployINTTerminalRuleCall_2_0(), semanticObject.getDeploy());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Interface returns Interface
 	 *
 	 * Constraint:
@@ -174,6 +196,7 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     (
 	 *         node_template_name=STRING 
 	 *         type=STRING 
+	 *         instances=Instances? 
 	 *         description=STRING? 
 	 *         (relationships+=Relationship relationships+=Relationship*)? 
 	 *         (interfaces+=Interface interfaces+=Interface*)? 

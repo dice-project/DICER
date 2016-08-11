@@ -148,13 +148,22 @@ public interface ToscaPackage extends EPackage {
     int NODE_TEMPLATE__CAPABILITIES = 8;
 
     /**
+     * The feature id for the '<em><b>Instances</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__INSTANCES = 9;
+
+    /**
      * The number of structural features of the '<em>Node Template</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE_FEATURE_COUNT = 9;
+    int NODE_TEMPLATE_FEATURE_COUNT = 10;
 
     /**
      * The number of operations of the '<em>Node Template</em>' class.
@@ -1008,6 +1017,44 @@ public interface ToscaPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link tosca.impl.InstancesImpl <em>Instances</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.InstancesImpl
+     * @see tosca.impl.ToscaPackageImpl#getInstances()
+     * @generated
+     */
+    int INSTANCES = 14;
+
+    /**
+     * The feature id for the '<em><b>Deploy</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INSTANCES__DEPLOY = 0;
+
+    /**
+     * The number of structural features of the '<em>Instances</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INSTANCES_FEATURE_COUNT = 1;
+
+    /**
+     * The number of operations of the '<em>Instances</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int INSTANCES_OPERATION_COUNT = 0;
+
+
+    /**
      * Returns the meta object for class '{@link tosca.NodeTemplate <em>Node Template</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1115,6 +1162,17 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EReference getNodeTemplate_Capabilities();
+
+    /**
+     * Returns the meta object for the containment reference '{@link tosca.NodeTemplate#getInstances <em>Instances</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Instances</em>'.
+     * @see tosca.NodeTemplate#getInstances()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_Instances();
 
     /**
      * Returns the meta object for class '{@link tosca.Interface <em>Interface</em>}'.
@@ -1830,6 +1888,27 @@ public interface ToscaPackage extends EPackage {
     EAttribute getArtifact_ArtifactUri();
 
     /**
+     * Returns the meta object for class '{@link tosca.Instances <em>Instances</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Instances</em>'.
+     * @see tosca.Instances
+     * @generated
+     */
+    EClass getInstances();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.Instances#getDeploy <em>Deploy</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Deploy</em>'.
+     * @see tosca.Instances#getDeploy()
+     * @see #getInstances()
+     * @generated
+     */
+    EAttribute getInstances_Deploy();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1933,6 +2012,14 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EReference NODE_TEMPLATE__CAPABILITIES = eINSTANCE.getNodeTemplate_Capabilities();
+
+        /**
+         * The meta object literal for the '<em><b>Instances</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__INSTANCES = eINSTANCE.getNodeTemplate_Instances();
 
         /**
          * The meta object literal for the '{@link tosca.impl.InterfaceImpl <em>Interface</em>}' class.
@@ -2487,6 +2574,24 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute ARTIFACT__ARTIFACT_URI = eINSTANCE.getArtifact_ArtifactUri();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.InstancesImpl <em>Instances</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.InstancesImpl
+         * @see tosca.impl.ToscaPackageImpl#getInstances()
+         * @generated
+         */
+        EClass INSTANCES = eINSTANCE.getInstances();
+
+        /**
+         * The meta object literal for the '<em><b>Deploy</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute INSTANCES__DEPLOY = eINSTANCE.getInstances_Deploy();
 
     }
 

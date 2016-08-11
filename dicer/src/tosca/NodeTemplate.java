@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.NodeTemplate#getRequirements <em>Requirements</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getCapabilities <em>Capabilities</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getNodeTemplate()
@@ -204,5 +205,31 @@ public interface NodeTemplate extends EObject {
      * @generated
      */
     EList<Capability> getCapabilities();
+
+    /**
+     * Returns the value of the '<em><b>Instances</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Instances</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Instances</em>' containment reference.
+     * @see #setInstances(Instances)
+     * @see tosca.ToscaPackage#getNodeTemplate_Instances()
+     * @model containment="true"
+     * @generated
+     */
+    Instances getInstances();
+
+    /**
+     * Sets the value of the '{@link tosca.NodeTemplate#getInstances <em>Instances</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Instances</em>' containment reference.
+     * @see #getInstances()
+     * @generated
+     */
+    void setInstances(Instances value);
 
 } // NodeTemplate

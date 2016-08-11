@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tosca.Attribute;
 import tosca.Capability;
+import tosca.Instances;
 import tosca.Interface;
 import tosca.NodeTemplate;
 import tosca.Property;
@@ -44,6 +45,7 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRequirements <em>Requirements</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getCapabilities <em>Capabilities</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @generated
@@ -168,6 +170,16 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * @ordered
      */
     protected EList<Capability> capabilities;
+
+    /**
+     * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getInstances()
+     * @generated
+     * @ordered
+     */
+    protected Instances instances;
 
     /**
      * <!-- begin-user-doc -->
@@ -328,6 +340,49 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
+    public Instances getInstances() {
+        return instances;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain basicSetInstances(Instances newInstances, NotificationChain msgs) {
+        Instances oldInstances = instances;
+        instances = newInstances;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ToscaPackage.NODE_TEMPLATE__INSTANCES, oldInstances, newInstances);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setInstances(Instances newInstances) {
+        if (newInstances != instances) {
+            NotificationChain msgs = null;
+            if (instances != null)
+                msgs = ((InternalEObject)instances).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ToscaPackage.NODE_TEMPLATE__INSTANCES, null, msgs);
+            if (newInstances != null)
+                msgs = ((InternalEObject)newInstances).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ToscaPackage.NODE_TEMPLATE__INSTANCES, null, msgs);
+            msgs = basicSetInstances(newInstances, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.NODE_TEMPLATE__INSTANCES, newInstances, newInstances));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
@@ -343,6 +398,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return ((InternalEList<?>)getRelationships()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__CAPABILITIES:
                 return ((InternalEList<?>)getCapabilities()).basicRemove(otherEnd, msgs);
+            case ToscaPackage.NODE_TEMPLATE__INSTANCES:
+                return basicSetInstances(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -373,6 +430,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getRelationships();
             case ToscaPackage.NODE_TEMPLATE__CAPABILITIES:
                 return getCapabilities();
+            case ToscaPackage.NODE_TEMPLATE__INSTANCES:
+                return getInstances();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -419,6 +478,9 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 getCapabilities().clear();
                 getCapabilities().addAll((Collection<? extends Capability>)newValue);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__INSTANCES:
+                setInstances((Instances)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -458,6 +520,9 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__CAPABILITIES:
                 getCapabilities().clear();
                 return;
+            case ToscaPackage.NODE_TEMPLATE__INSTANCES:
+                setInstances((Instances)null);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -488,6 +553,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return relationships != null && !relationships.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__CAPABILITIES:
                 return capabilities != null && !capabilities.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__INSTANCES:
+                return instances != null;
         }
         return super.eIsSet(featureID);
     }

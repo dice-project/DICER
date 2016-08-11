@@ -41,6 +41,7 @@ NodeTemplate returns NodeTemplate:
 	node_template_name=STRING ":"
 	'{'
 		'"type" :' type=STRING 
+		(',\n"instances" : {' instances=Instances '}')?
 		(',\n"description" :' description=STRING )?
 		(',\n"relationships" :' '['relationships+=Relationship ( ","  relationships+=Relationship )* ']' )?
 		(',\n"interfaces" :' '{' interfaces+=Interface ( "," interfaces+=Interface)* '}' )?
@@ -49,6 +50,11 @@ NodeTemplate returns NodeTemplate:
 		(',\n"requirements" :' '{' requirements+=Requirement ( "," requirements+=Requirement)* '}' )?
 		(',\n"capabilities" :' '{' capabilities+=Capability ( "," capabilities+=Capability)* '}' )?
 	'}';
+
+Instances returns Instances:
+	{Instances}
+	'"deploy" :' deploy=INT
+;
 
 Relationship returns Relationship:
 	{Relationship}

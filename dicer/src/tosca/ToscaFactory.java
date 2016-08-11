@@ -148,6 +148,15 @@ public interface ToscaFactory extends EFactory {
     Artifact createArtifact();
 
     /**
+     * Returns a new object of class '<em>Instances</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Instances</em>'.
+     * @generated
+     */
+    Instances createInstances();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

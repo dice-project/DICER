@@ -14,6 +14,7 @@ import tosca.Attribute;
 import tosca.Capability;
 import tosca.Group;
 import tosca.Import;
+import tosca.Instances;
 import tosca.Interface;
 import tosca.NodeTemplate;
 import tosca.Operation;
@@ -130,6 +131,13 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     private EClass artifactEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass instancesEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -280,6 +288,15 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      */
     public EReference getNodeTemplate_Capabilities() {
         return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(8);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getNodeTemplate_Instances() {
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(9);
     }
 
     /**
@@ -881,6 +898,24 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getInstances() {
+        return instancesEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getInstances_Deploy() {
+        return (EAttribute)instancesEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public ToscaFactory getToscaFactory() {
         return (ToscaFactory)getEFactoryInstance();
     }
@@ -914,6 +949,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__REQUIREMENTS);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__RELATIONSHIPS);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__CAPABILITIES);
+        createEReference(nodeTemplateEClass, NODE_TEMPLATE__INSTANCES);
 
         interfaceEClass = createEClass(INTERFACE);
         createEAttribute(interfaceEClass, INTERFACE__INTERFACE_NAME);
@@ -993,6 +1029,9 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         artifactEClass = createEClass(ARTIFACT);
         createEAttribute(artifactEClass, ARTIFACT__NAME);
         createEAttribute(artifactEClass, ARTIFACT__ARTIFACT_URI);
+
+        instancesEClass = createEClass(INSTANCES);
+        createEAttribute(instancesEClass, INSTANCES__DEPLOY);
     }
 
     /**
@@ -1035,6 +1074,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEReference(getNodeTemplate_Requirements(), this.getRequirement(), null, "requirements", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Capabilities(), this.getCapability(), null, "capabilities", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNodeTemplate_Instances(), this.getInstances(), null, "instances", null, 0, 1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(interfaceEClass, Interface.class, "Interface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getInterface_Interface_name(), ecorePackage.getEString(), "interface_name", null, 0, 1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1114,6 +1154,9 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 1, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getArtifact_ArtifactUri(), ecorePackage.getEString(), "artifactUri", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(instancesEClass, Instances.class, "Instances", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getInstances_Deploy(), ecorePackage.getEIntegerObject(), "deploy", null, 0, 1, Instances.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);
