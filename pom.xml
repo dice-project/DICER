@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>dicer-core</module>
+		<module>dicer-service</module>
 	</modules>
 
 	<build>
