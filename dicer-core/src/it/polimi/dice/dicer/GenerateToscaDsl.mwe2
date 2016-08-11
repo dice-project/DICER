@@ -10,7 +10,7 @@ Workflow {
 	component = XtextGenerator {
 		configuration = {
 			project = StandardProjectConfig {
-				baseName = "dicer"
+				baseName = "dicer-core"
 				rootPath = rootPath
 			}
 			code = {
@@ -21,7 +21,7 @@ Workflow {
 		language = StandardLanguage {
 			name = "it.polimi.dice.dicer.ToscaDsl"
 			fileExtensions = "json"
-			referencedResource = "platform:/resource/dicer/metamodels/tosca.genmodel"
+			referencedResource = "platform:/resource/dicer-core/metamodels/tosca.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
