@@ -14,22 +14,51 @@ In order to install it, after downloading, it is sufficient to copy and paste th
 
 It requires GMF 2.0 or higher and EMF installed. 
 
-Finally, once you have installed the Ecore Model Diagram Editor plugin into your eclipse installation, you just have to checkout the DICER project, import in Eclipse.
+Finally, once you have installed the Ecore Model Diagram Editor plugin into your eclipse installation, you just have to checkout the DICER project and to import it in Eclipse.
 
 # Installation
 
-In order to user DICER you can either download one of the released binary, or directly compile the source code. In this second case you need maven installed and then you can just execute the following commands:
+In order to user DICER you can either download one of the available releases, or directly compile the source code. 
+In the case you download the from one of the gihtub [releases](https://github.com/DICERs/DICER/releases), you can find all you need to start using DICER in the available dicer-full.zip binary. Here is the content of the dicer-full.zip artifact:
+
+	tree dicer-full/
+	dicer-full/
+	├── dicer-core-0.1.0.jar
+	├── metamodels
+	│   ├── ddsm.ecore
+	│   ├── ddsm.ecore.oclas
+	│   ├── tosca.ecore
+	│   └── tosca.genmodel
+	├── models
+	│   ├── storm_cluster.xmi
+	│   ├── storm_cluster.xmi_diagram
+	│   ├── storm_deployment.xmi
+	│   └── storm_deployment.xmi_diagram
+	└── transformations
+	    ├── ddsm2tosca.asm
+	    ├── ddsm2tosca.atl
+	    └── ddsm2tosca.emftvm
+
+	3 directories, 12 files
+
+It contains the required Ecore metamodels, the ATL transformation and the java artifact running the DICER as a whole. Moreover some examples are released under the models/ folder to try using the DICER. Each of these component of the dicer-full.zip artifact is also released separately. By using the release the installation phase ends with the download of the dicer-full.zip artifact itseld.
+In order to create more input models right now you can leverage the dynamicgmf Eclipse plugin, as described in the requirement section.
+
+In the case you want to checout and compile the source code you can compile the DICER with maven. :
+Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code). You may using the following commands:
 
     git clone https://github.com/DICERs/DICER.git
     cd DICER
     mvn clean package
-
-Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code).
+    cd dicer-core
+    cp dicer-core/target/dicer-core-0.1.0.jar .
 
 # Usage
 
-In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run the following command:
+In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run compiler .jar artifact giving as input the path to the input DDSM model and the path to the output TOSCA models. In order to run DICER against one o the available models you can execute following command:
 
-    java -jar dicer.jar -inModel path/to/ddsm_model.xmi -outModel path/to/output_model
+    java -jar dicer-core-0.1.0.jar -inModel models/storm_cluster.xmi -outModel models/storm_cluster_tosca
 
 Make sure that the -outModel argument is a path to a file with no extention. DICER will create also an xmi and a json version of the generated deployment blueprint.
+
+	
