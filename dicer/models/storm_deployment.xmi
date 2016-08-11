@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer.parent/dicer/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:Provider" elementId="my_provider"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="my_provider" publicAddress="">
+    <providedexecutionplatform elementId="vm1_rpovides_host" owner="vm1"/>
+    <publicPorts>8080</publicPorts>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Zookeeper" elementId="zookeeper">
+    <providedport elementId="zookeeper_access" portNumber="" owner="zookeeper"/>
+    <requiredexecutionplatform elementId="zookeeper_requires_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="zookeeper_hosting" requiredexecutionplatform="zookeeper_requires_host" providedexecutionplatform="vm1_rpovides_host"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="my_provider">
+    <providedexecutionplatform elementId="vm2_provides_host" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:StormNimbus" elementId="nimbus">
+    <providedport elementId="nimbus_provides_access" owner="nimbus"/>
+    <requiredport elementId="nimbus_requires_zookeeper"/>
+    <requiredexecutionplatform elementId="nimbus_requires_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="nimbus_hosting" requiredexecutionplatform="nimbus_requires_host" providedexecutionplatform="vm2_provides_host"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="nimbus_to_zookeeper" providedport="zookeeper_access" requiredport="nimbus_requires_zookeeper"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm3" provider="my_provider">
+    <providedexecutionplatform elementId="vm3_provides_host" owner="vm3"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:StormSupervisor" elementId="supervisor">
+    <requiredport elementId="supervisor_requires_nimbus"/>
+    <requiredport elementId="supervisor_requires_zookeeper"/>
+    <requiredexecutionplatform elementId="supervisor_requires_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="supervisor_hosting" requiredexecutionplatform="supervisor_requires_host" providedexecutionplatform="vm3_provides_host"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="supervisor_to_nimbus" providedport="nimbus_provides_access" requiredport="supervisor_requires_nimbus"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="supervisor_to_zookeeper" providedport="zookeeper_access" requiredport="supervisor_requires_zookeeper"/>
+</ddsm:DDSM>
