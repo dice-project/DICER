@@ -19,11 +19,15 @@ import org.yaml.snakeyaml.Yaml;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Injector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
 public class Dicer {
+    private static final Logger logger = LoggerFactory
+            .getLogger(Dicer.class);
     
     public final static String IN_METAMODEL = "./metamodels/ddsm.ecore";
     public final static String IN_METAMODEL_NAME = "DDSM";
@@ -51,6 +55,7 @@ public class Dicer {
             jc.usage();
             System.exit(0);
         } else {
+            logger.info("Running DICER on input model: " + dicer.inModelPath);
             dicer.runme(dicer.inModelPath, dicer.outModelPath);
         }
     }
@@ -59,10 +64,18 @@ public class Dicer {
     public void runme(String inputXMIModelPath, String outModelPath) {
 
         ATLTransformationLauncher l = new ATLTransformationLauncher();
+        logger.info("Running the ATL transformation.");
+        
+        logger.info("Registering the input DDSM metamodel.");
         l.registerInputMetamodel(IN_METAMODEL);
+        
+        logger.info("Registering the output TOSCA metamodel.");
         l.registerOutputMetamodel(OUT_METAMODEL);
+        
+        logger.info("Launching the model-to-model transformation.");
         l.launch(inputXMIModelPath, IN_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, TRANSFORMATION_DIR, TRANSFORMATION_MODULE);
         
+        logger.info("Running the Xtext grammar to serialize the output TOSCA model.");
         EPackage.Registry.INSTANCE.put("http://tosca/1.0", ToscaPackage.eINSTANCE);
 
         Injector injector = new ToscaDslStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -75,15 +88,16 @@ public class Dicer {
                 .createResource(URI.createURI(outModelPath + ".json"));
         
         textualModel_resource.getContents().add(xmi_resource.getContents().get(0));
-
+        
+        logger.info("Saving the output JSON model.");
         try {
             textualModel_resource.save(null);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
         try {
-
+            logger.info("Generating TOSCA YAML blueprint from output JSON model.");
             String actualObj =readFile(outModelPath + ".json", Charset.defaultCharset());
             ObjectMapper mapper = new ObjectMapper();
             JsonNode node = mapper.readTree(actualObj);
@@ -97,6 +111,7 @@ public class Dicer {
             e.printStackTrace();
         }
 
+        logger.info("Completed.");
     }
 
     static String readFile(String path, Charset encoding) throws IOException {
