@@ -89,6 +89,7 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="A specific type of Port which specify that a Component provides features (e.g.access to a database) which can be accessed by another Component."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequiredExecutionPlatform" eSuperTypes="#//ExecutionPlatform">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -100,6 +101,7 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="A specific type of ExecutionPlatform which requires hosting (e.g. a Big Data application requires a Big Data platform) from a Component."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Component"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship" eSuperTypes="#//CloudElement">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -130,6 +132,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="region" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Provider" eSuperTypes="#//CloudElement">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -251,11 +254,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
         eType="#//JobSubmission"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBetweenSubmissions"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
-        defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSubmissions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipRunningJob" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VMSize">
     <eLiterals name="Small"/>
@@ -304,4 +305,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterNode" eSuperTypes="#//InternalComponent"/>
   <eClassifiers xsi:type="ecore:EClass" name="SlaveNode" eSuperTypes="#//InternalComponent"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="crontab">
+    <eTypeParameters name="min"/>
+    <eTypeParameters name="hour"/>
+    <eTypeParameters name="dayOfMonth"/>
+    <eTypeParameters name="month"/>
+    <eTypeParameters name="dayOfWeek"/>
+  </eClassifiers>
 </ecore:EPackage>
