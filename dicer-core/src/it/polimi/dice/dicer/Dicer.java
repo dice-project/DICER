@@ -29,12 +29,8 @@ public class Dicer {
     private static final Logger logger = LoggerFactory
             .getLogger(Dicer.class);
     
-    public final static String IN_METAMODEL = "./metamodels/ddsm.ecore";
     public final static String IN_METAMODEL_NAME = "DDSM";
-    public final static String OUT_METAMODEL = "./metamodels/tosca.ecore";
     public final static String OUT_METAMODEL_NAME = "TOSCA";
-
-    public final static String TRANSFORMATION_DIR = "./transformations/";
     public final static String TRANSFORMATION_MODULE = "ddsm2tosca";
     
     @Parameter(names = { "-h", "--help", "-help" }, help = true, description = "Shows this help")
@@ -46,6 +42,15 @@ public class Dicer {
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
     public String outModelPath = "./models/storm_cluster_tosca";
     
+    @Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
+    public String inMetamodelPath = "./metamodels/ddsm.ecore";
+    
+    @Parameter(names = "-outMetamodel", description = "The path for the TOSCA metamodel.")
+    public String outMetamodelPath = "./metamodels/tosca.ecore";
+    
+    @Parameter(names = "-transformationDir", description = "The path for the directory containing the ddsm2tosca ATL transformation.")
+    public String transformationDir = "./transformations/";
+    
 
     public static void main(String[] args) throws IOException {
         Dicer dicer = new Dicer();
@@ -56,24 +61,24 @@ public class Dicer {
             System.exit(0);
         } else {
             logger.info("Running DICER on input model: " + dicer.inModelPath);
-            dicer.runme(dicer.inModelPath, dicer.outModelPath);
+            dicer.runme(dicer.inModelPath, dicer.outModelPath, dicer.inMetamodelPath, dicer.outMetamodelPath, dicer.transformationDir);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public void runme(String inputXMIModelPath, String outModelPath) {
+    public void runme(String inputXMIModelPath, String outModelPath, String inMetamodelPath, String outMetamodelPath, String transformationDir) {
 
         ATLTransformationLauncher l = new ATLTransformationLauncher();
         logger.info("Running the ATL transformation.");
         
         logger.info("Registering the input DDSM metamodel.");
-        l.registerInputMetamodel(IN_METAMODEL);
+        l.registerInputMetamodel(inMetamodelPath);
         
         logger.info("Registering the output TOSCA metamodel.");
-        l.registerOutputMetamodel(OUT_METAMODEL);
+        l.registerOutputMetamodel(outMetamodelPath);
         
         logger.info("Launching the model-to-model transformation.");
-        l.launch(inputXMIModelPath, IN_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, TRANSFORMATION_DIR, TRANSFORMATION_MODULE);
+        l.launch(inputXMIModelPath, IN_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, transformationDir, TRANSFORMATION_MODULE);
         
         logger.info("Running the Xtext grammar to serialize the output TOSCA model.");
         EPackage.Registry.INSTANCE.put("http://tosca/1.0", ToscaPackage.eINSTANCE);
