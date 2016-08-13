@@ -22,8 +22,8 @@ public class DicerServiceLauncher extends Application<DicerServiceConfiguration>
 
     @Override
     public void run(DicerServiceConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().register(new DicerService(configuration.getInMetamodelPath(),
-                configuration.getOutMetamodelPath(), configuration.getTransformationDir()));
+        environment.jersey().register(new DicerService(configuration.getTransformationDir(),
+                configuration.getInMetamodelPath(), configuration.getOutMetamodelPath()));
 
     }
 }
