@@ -4,3 +4,6 @@ server:
   connector:
     type: http
     port: 8176
+transformationDir: ${TRANSFORMATION_DIR}
+inMetamodelPath: ${IN_METAMODEL_PATH}
+outMetamodelPath: ${OUT_METAMODEL_PATH}
