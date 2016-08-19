@@ -1,8 +1,7 @@
 # DICER
 
 DICER is a tool developed in the context of the DICE H2020 European Project with the goal of supporting the deployment and management of Big Data applications. 
-Main goal of DICER is to exploit deployment models specified in accordance with the DICE Deployment Specific metamodel, in order to speed up the deployment process and to avoid the lock-in with specific deployment engines. 
-DICER is still at its early stage and right now the only supported deployment engine is the DICE Deployment Service, based on Cloudify. We plan to support other orchestration engines in the next releases. 
+Main goal of DICER is to exploit deployment models specified in accordance with the DICE Deployment Specific metamodel, in order to speed up the deployment process.
 
 # Requirement
 
