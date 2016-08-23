@@ -180,7 +180,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormSupervisor" eSuperTypes="#//SlaveNode">
+  <eClassifiers xsi:type="ecore:EClass" name="Supervisor" eSuperTypes="#//SlaveNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm supervisor slave process."/>
     </eAnnotations>
@@ -188,7 +188,7 @@
       <details key="constraints" value="mustRequireZookeeperAndNimbus"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="mustRequireZookeeperAndNimbus" value="requiredport -> size() > 1"/>
+      <details key="mustRequireZookeeperAndNimbus" value="requiredport -> size() > 0"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="workerStartTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="120"/>
@@ -199,7 +199,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="heartbeatFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormNimbus" eSuperTypes="#//MasterNode">
+  <eClassifiers xsi:type="ecore:EClass" name="Nimbus" eSuperTypes="#//MasterNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm nimbus master process."/>
     </eAnnotations>
@@ -223,15 +223,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="retryInterval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="2000"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Zookeeper" eSuperTypes="#//InternalComponent">
+  <eClassifiers xsi:type="ecore:EClass" name="ZookeeperServer" eSuperTypes="#//PeerNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a Zookeeper cluster."/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="mustProvideZookeeperAccess"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="mustProvideZookeeperAccess" value="providedport -> size() > 0"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="1500"/>
@@ -240,18 +234,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
         defaultValueLiteral="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Cluster" eSuperTypes="#//CloudElement">
-    <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
-      <details key="description" value="Inherited from MODACloudsML, it represents a collection of virtual machines on a particular Provider. One Provider can host several Clusters.."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hasVm" upperBound="-1"
-        eType="#//VM"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientNode" eSuperTypes="#//InternalComponent">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="test generation"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
         eType="#//JobSubmission"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSubmissions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
@@ -291,25 +277,44 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cookbookId" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormCluster" eSuperTypes="#//Cluster">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nimbusHost" lowerBound="1"
-        eType="#//VM"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="zookeeperHost" lowerBound="1"
-        eType="#//VM"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JobSubmission">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobId" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        iD="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StormCluster" eSuperTypes="#//MasterSlavePlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JobSubmission" eSuperTypes="#//CloudElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterNode" eSuperTypes="#//InternalComponent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SlaveNode" eSuperTypes="#//InternalComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SlaveNode" eSuperTypes="#//InternalComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasMaster" lowerBound="1"
+        eType="#//MasterNode"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="crontab">
     <eTypeParameters name="min"/>
     <eTypeParameters name="hour"/>
     <eTypeParameters name="dayOfMonth"/>
     <eTypeParameters name="month"/>
     <eTypeParameters name="dayOfWeek"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ZookeeperQuorum" eSuperTypes="#//PeersQuorum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraSeed" eSuperTypes="#//PeersQuorum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraWorker" eSuperTypes="#//PeerNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ZookeeperCluster" eSuperTypes="#//PeerToPeerPlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraCluster" eSuperTypes="#//PeerToPeerPlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PeerNode" eSuperTypes="#//InternalComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsToQuorum" lowerBound="1"
+        eType="#//PeersQuorum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PeersQuorum" eSuperTypes="#//InternalComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PeerToPeerPlatform" eSuperTypes="#//InternalComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostPeerOnVm" lowerBound="1"
+        upperBound="-1" eType="#//VM"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostQuorumOnVm" lowerBound="1"
+        eType="#//VM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MasterSlavePlatform" eSuperTypes="#//InternalComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostMasterOnVm" lowerBound="1"
+        eType="#//VM"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostSlaveOnVm" lowerBound="1"
+        upperBound="-1" eType="#//VM"/>
   </eClassifiers>
 </ecore:EPackage>
