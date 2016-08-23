@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:CassandraCluster" elementId="cassandra" hostPeerOnVm="vm2" hostQuorumOnVm="vm1"/>
+  <cloudelement xsi:type="ddsm:ZookeeperCluster" elementId="zookeeper" hostPeerOnVm="vm2" hostQuorumOnVm="vm1">
+    <providedport elementId="provides_zookeeper" owner="zookeeper"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:StormCluster" elementId="storm" hostMasterOnVm="vm1" hostSlaveOnVm="vm2">
+    <requiredport elementId="equires_zookeeper"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="my_flexiant"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="my_flexiant"/>
+  <cloudelement xsi:type="ddsm:Provider" elementId="my_flexiant"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="storm_to_zookeeper" providedport="provides_zookeeper" requiredport="equires_zookeeper"/>
+</ddsm:DDSM>

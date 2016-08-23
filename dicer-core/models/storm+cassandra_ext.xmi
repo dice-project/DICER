@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:Nimbus" elementId="nimbus">
+    <providedexecutionplatform elementId="provides_storm_execution" owner="nimbus"/>
+    <requiredexecutionplatform elementId="nimbus_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Supervisor" elementId="supervisor" hasMaster="nimbus">
+    <requiredexecutionplatform elementId="supervisor_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ZookeeperQuorum" elementId="quorum">
+    <requiredexecutionplatform elementId="quorum_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ZookeeperServer" elementId="server" belongsToQuorum="quorum">
+    <requiredexecutionplatform elementId="server_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:CassandraSeed" elementId="seed">
+    <requiredexecutionplatform elementId="seed_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:CassandraWorker" elementId="worker" belongsToQuorum="seed">
+    <requiredexecutionplatform elementId="worker_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="my_flexiant">
+    <providedexecutionplatform elementId="vm1_host" owner="vm1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="my_flexiant">
+    <providedexecutionplatform elementId="vm2_host" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Provider" elementId="my_flexiant"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="worker_to_vm2" requiredexecutionplatform="worker_host" providedexecutionplatform="vm2_host"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="seed_to_vm1" requiredexecutionplatform="seed_host" providedexecutionplatform="vm1_host"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="server_to_vm2" requiredexecutionplatform="server_host" providedexecutionplatform="vm2_host"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="quorum_to_vm1" requiredexecutionplatform="quorum_host" providedexecutionplatform="vm1_host"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="supervisor_to_vm2" requiredexecutionplatform="supervisor_host" providedexecutionplatform="vm2_host"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="nimbus_to_vm1" requiredexecutionplatform="nimbus_host" providedexecutionplatform="vm1_host"/>
+  <cloudelement xsi:type="ddsm:ClientNode" elementId="word_count" submits="sdkjsdjk">
+    <requiredexecutionplatform elementId="requires_execution"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="job_to_storm" requiredexecutionplatform="requires_execution" providedexecutionplatform="provides_storm_execution"/>
+  <cloudelement xsi:type="ddsm:JobSubmission" elementId="sdkjsdjk" description="" artifactUrl="kvbkhkvkvj" mainClass="njksjnskd" name="job"/>
+</ddsm:DDSM>
