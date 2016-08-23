@@ -84,8 +84,8 @@ rule DDSM2TOSCA{
 rule getStormClientNodeTemplate (s: DDSM!ClientNode) {
     using {
     	flexiantImports: Sequence(TOSCA!Import) = thisModule.getFlexiantImport();
-		application: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application', s.submits.name);
-		topology_name: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_name', s.submits.artifactUrl);
+		application: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application', s.submits.artifactUrl);
+		topology_name: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_name', s.submits.elementId);
 		topology_class: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_class', s.submits.mainClass);
     	storm_client_properties: Sequence(TOSCA!Property) = Sequence{application, topology_name, topology_class}.flatten();
 	}
@@ -98,21 +98,50 @@ rule getStormClientNodeTemplate (s: DDSM!ClientNode) {
 			-> collect(property | thisModule.getProperty(property)).
 				union(storm_client_properties),
 				
-			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getStormClientRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  any(binding | 
-			binding.requiredexecutionplatform.elementId = platform.elementId
-			))).flatten()
+			relationships <- s.requiredexecutionplatform -> select(platform |  DDSM!ExecutionBinding.allInstances() ->  exists(binding | 
+			binding.requiredexecutionplatform.elementId = platform.elementId and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!Nimbus)
+			)) ->
+			collect( platform | 
+			thisModule.getStormClientRelationshipsFromExecutionBindingWithNimbus(platform).flatten()).union(
+				
+			s.requiredexecutionplatform -> collect(platform |  DDSM!ExecutionBinding.allInstances() ->  select(binding | 
+			binding.requiredexecutionplatform.elementId = platform.elementId and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!StormCluster)
+			)).flatten() ->
+			collect( binding | 
+			thisModule.getStormClientRelationshipsFromExecutionBindingWithStormCluster(binding.providedexecutionplatform.owner).flatten())
+			
+			).flatten()
 		)
 	do {
 		Sequence{t};
 	}
 }
 
-rule getStormClientRelationshipFromExecutionBinding(s: DDSM!ExecutionBinding) {
+rule getStormClientRelationshipsFromExecutionBindingWithStormCluster(s: DDSM!StormCluster) {
 	using {
-		client_to_storms: Sequence(TOSCA!Relationship) = thisModule.getClientToStormRelationship(DDSM!Supervisor.allInstances() ->  any(supervisor | 
+		supervisor_bindings: Sequence(DDSM!ExecutionBinding) = s.requiresSlaveVm ->  collect(platform | 
+			DDSM!ExecutionBinding.allInstances() -> select(binding | binding.requiredexecutionplatform.elementId = platform.elementId)
+		).flatten();
+		client_to_storms: Sequence(TOSCA!Relationship) = supervisor_bindings -> collect(
+			binding | thisModule.getClientToStormRelationship(s.elementId + '_' + binding.providedexecutionplatform.owner.elementId + '_supervisor')
+		);
+	}
+	to
+		client_to_nimbus: TOSCA!Relationship(
+			target <- s.elementId + '_nimbus',
+			type <- 'dice.relationships.storm.SubmittedBy'
+		)
+	do {
+		Sequence{client_to_nimbus, client_to_storms};
+	}
+}
+
+rule getStormClientRelationshipsFromExecutionBindingWithNimbus(s: DDSM!ExecutionBinding) {
+	using {
+		required_supervisors: Sequence(DDSM!Supervisor) = DDSM!Supervisor.allInstances() ->  any(supervisor | 
 			supervisor.hasMaster.elementId = s.providedexecutionplatform.owner.elementId
-		));
+		);
+		client_to_storms: Sequence(TOSCA!Relationship) = required_supervisors -> collect(supervisor | thisModule.getClientToStormRelationship(supervisor.elementId));
 	}
 	to
 		client_to_nimbus: TOSCA!Relationship(
@@ -126,10 +155,10 @@ rule getStormClientRelationshipFromExecutionBinding(s: DDSM!ExecutionBinding) {
 
 lazy rule getClientToStormRelationship {
 	from 
-		s: DDSM!Supervisor
+		s: String
 	to 
 		t: TOSCA!Relationship (
-			target <- s.elementId,
+			target <- s,
 			type <- 'dice.relationships.Needs'	
 		)
 }
@@ -139,7 +168,9 @@ lazy rule getClientToStormRelationship {
 
 rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 	using {
-		peers: Sequence(TOSCA!NodeTemplate) = zookeeperCluster.hostPeerOnVm -> collect(peer_host | thisModule.getPeerNodeTemplateForZookeeperCluster(peer_host, zookeeperCluster));
+		peers_exec_bindings: Sequence(DDSM!ExecutionBinding) = zookeeperCluster.requiresPeerVm -> collect(peer_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = peer_required_platform.elementId));
+		peers: Sequence(TOSCA!NodeTemplate) = peers_exec_bindings -> collect(binding | thisModule.getPeerNodeTemplateForZookeeperCluster(binding.providedexecutionplatform.owner, zookeeperCluster));
 	}
 	to
 		quorum: TOSCA!NodeTemplate (
@@ -198,7 +229,9 @@ rule getZookeeperServerRelationshipForZookeeperCluster(host: DDSM!VM, zookeeperC
 rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(zookeeperCluster: DDSM!ZookeeperCluster) {
 	to
 		t: TOSCA!Relationship (
-			target <- zookeeperCluster.hostQuorumOnVm.elementId,
+			target <- (DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = zookeeperCluster.requiresQuorumVm.elementId)).providedexecutionplatform.owner.elementId,
+
 			type <- 'dice.relationships.zookeeper.QuorumContains'
 		)
 	do {
@@ -348,7 +381,9 @@ rule getWorkerToSeedRelationship (s: DDSM!CassandraWorker) {
 
 rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 	using {
-		workers: Sequence(TOSCA!NodeTemplate) = cassandraCluster.hostPeerOnVm -> collect(worker_host | thisModule.getWorkerNodeTemplateForCassandraCluster(worker_host, cassandraCluster));
+		workers_exec_bindings: Sequence(DDSM!ExecutionBinding) = cassandraCluster.requiresPeerVm -> collect(worker_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = worker_required_platform.elementId));
+		workers: Sequence(TOSCA!NodeTemplate) = workers_exec_bindings -> collect(binding | thisModule.getWorkerNodeTemplateForCassandraCluster(binding.providedexecutionplatform.owner, cassandraCluster));
 	}
 	to
 		seed: TOSCA!NodeTemplate (
@@ -370,7 +405,9 @@ rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 rule getCassandraContainedInRelationshipForCassandraCluster(cassandraCluster: DDSM!CassandraCluster) {
 	to
 		t: TOSCA!Relationship (
-			target <- cassandraCluster.hostQuorumOnVm.elementId,
+			target <- (DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | binding.requiredexecutionplatform.elementId = cassandraCluster.requiresQuorumVm.elementId)).providedexecutionplatform.owner.elementId,
+			
 			type <- 'dice.relationships.ContainedIn'
 		)
 	do {
@@ -417,7 +454,9 @@ rule getCassandraWorkerRelationshipForCassandraCluster(host: DDSM!VM, cassandraC
 
 rule getStormCluster (stormCluster: DDSM!StormCluster) {
 	using {
-		slaves: Sequence(TOSCA!NodeTemplate) = stormCluster.hostSlaveOnVm -> collect(slave_host | thisModule.getSupervisorNodeTemplateForStormCluster(slave_host, stormCluster));
+		slaves_exec_bindings: Sequence(DDSM!ExecutionBinding) = stormCluster.requiresSlaveVm -> collect(slave_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = slave_required_platform.elementId));
+		slaves: Sequence(TOSCA!NodeTemplate) = slaves_exec_bindings -> collect(binding | thisModule.getSupervisorNodeTemplateForStormCluster(binding.providedexecutionplatform.owner, stormCluster));
 	}
 	to 
 		nimbus: TOSCA!NodeTemplate (
@@ -495,7 +534,9 @@ rule getSupervisorRelationshipForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 rule getNimbusRelationshipForStormCluster(stormCluster: DDSM!StormCluster) {
 	to
 		nimbus_to_host: TOSCA!Relationship(
-			target <- stormCluster.hostMasterOnVm.elementId,
+		    target <- (DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | binding.requiredexecutionplatform.elementId = stormCluster.requiresMasterVm.elementId)).providedexecutionplatform.owner.elementId,
+			
 			type <- 'dice.relationships.ContainedIn'
 		)
 	do {
