@@ -45,7 +45,7 @@ NodeTemplate returns NodeTemplate:
 		(',\n"description" :' description=STRING )?
 		(',\n"relationships" :' '['relationships+=Relationship ( ","  relationships+=Relationship )* ']' )?
 		(',\n"interfaces" :' '{' interfaces+=Interface ( "," interfaces+=Interface)* '}' )?
-		(',\n"properties" :' '[' properties+=Property ( "," properties+=Property)* ']' )?
+		(',\n"properties" :' '{' properties+=Property ( "," properties+=Property)* '}' )?
 		(',\n"attributes" :' '{' attributes+=Attribute ( "," attributes+=Attribute)* '}' )?
 		(',\n"requirements" :' '{' requirements+=Requirement ( "," requirements+=Requirement)* '}' )?
 		(',\n"capabilities" :' '{' capabilities+=Capability ( "," capabilities+=Capability)* '}' )?
@@ -64,7 +64,7 @@ Relationship returns Relationship:
 		'"type" :' type=STRING
 		(',\n"target" :' target=STRING )?
 		(',\n"interfaces" :' '{' interfaces+=Interface ( "," interfaces+=Interface)* '}' )?
-		(',\n"properties" :' '[' properties+=Property ( "," properties+=Property)* ']' )?
+		(',\n"properties" :' '{' properties+=Property ( "," properties+=Property)* '}' )?
 		(',\n"attributes" :' '{' attributes+=Attribute ( "," attributes+=Attribute)* '}' )?
 		(',\n"source_interfaces" :' '{' source_interfaces+=Interface ( "," source_interfaces+=Interface)* '}' )?
 		(',\n"target_iterfaces" :' '{' target_interfaces+=Interface ( "," target_interfaces+=Interface)* '}' )?
@@ -98,10 +98,8 @@ Interface returns Interface:
 
 Property returns Property:
 	{Property}
-	'{'
 	property_name=STRING ":"
 	value=STRING
-	'}'
 	;
 
 Attribute returns Attribute:

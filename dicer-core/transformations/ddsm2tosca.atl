@@ -387,8 +387,8 @@ rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 	}
 	to
 		seed: TOSCA!NodeTemplate (
-			node_template_name <- cassandraCluster.elementId + '_quorum',	
-			type <- 'dice.components.zookeeper.Quorum', 
+			node_template_name <- cassandraCluster.elementId + '_seed',	
+			type <- 'dice.components.cassandra.Seed', 
 			
 			relationships <- thisModule.getCassandraContainedInRelationshipForCassandraCluster(cassandraCluster).
 			union(
@@ -418,7 +418,7 @@ rule getCassandraContainedInRelationshipForCassandraCluster(cassandraCluster: DD
 rule getWorkerNodeTemplateForCassandraCluster (host: DDSM!VM, cassandraCluster: DDSM!CassandraCluster) {
 	to
 		cassandra_worker: TOSCA!NodeTemplate(
-			node_template_name <- cassandraCluster.elementId + '_' + host.elementId + '_seed',	
+			node_template_name <- cassandraCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.cassandra.Worker', 
 			
 			relationships <- thisModule.getCassandraWorkerRelationshipForCassandraCluster(host, cassandraCluster).

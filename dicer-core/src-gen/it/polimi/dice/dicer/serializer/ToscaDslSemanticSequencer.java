@@ -283,8 +283,8 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.PROPERTY__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_2_0(), semanticObject.getProperty_name());
-		feeder.accept(grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_4_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_1_0(), semanticObject.getProperty_name());
+		feeder.accept(grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_3_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

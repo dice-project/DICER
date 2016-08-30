@@ -1,0 +1,39 @@
+{
+	"tosca_definitions_version" : "cloudify_dsl_1_1" ,
+"imports" : [ "http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml",
+	"https://raw.githubusercontent.com/dice-project/DICE-FCO-Plugin-Cloudify/develop/plugin.yaml",
+	"http://www.getcloudify.org/spec/chef-plugin/1.3.1/plugin.yaml",
+	"http://dice-project.github.io/DICE-Deployment-Cloudify/spec/fco/master/plugin.yaml"
+	] ,
+"nodeTemplates" : {
+		"vmq" : {
+			"type" : "dice.hosts.small" ,
+"instances" : { "deploy" : 1
+		}
+		},
+		"zookeeper_vmq_server" : {
+			"type" : "dice.components.zookeeper.Server" ,
+"relationships" : [ {
+				"type" : "dice.relationships.ContainedIn" ,
+"target" : "vmq"
+			},
+			{
+				"type" : "dice.relationships.zookeeper.MemberOfQuorum" ,
+"target" : "zookeeper_quorum"
+			}
+			] ,
+"properties" : {
+				"tickTime" : "1500",
+				"initLimit" : "10",
+				"syncLimit" : "5"
+			}
+			},
+			"zookeeper_quorum" : {
+				"type" : "dice.components.zookeeper.Quorum" ,
+"relationships" : [ {
+					"type" : "dice.relationships.zookeeper.QuorumContains" ,
+"target" : "vmq"
+				}
+				] }
+			}
+		}

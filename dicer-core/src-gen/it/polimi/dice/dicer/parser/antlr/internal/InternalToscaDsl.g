@@ -906,9 +906,9 @@ ruleNodeTemplate returns [EObject current=null]
 			{
 				newLeafNode(otherlv_23, grammarAccess.getNodeTemplateAccess().getPropertiesKeyword_10_0());
 			}
-			otherlv_24='['
+			otherlv_24='{'
 			{
-				newLeafNode(otherlv_24, grammarAccess.getNodeTemplateAccess().getLeftSquareBracketKeyword_10_1());
+				newLeafNode(otherlv_24, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_10_1());
 			}
 			(
 				(
@@ -954,9 +954,9 @@ ruleNodeTemplate returns [EObject current=null]
 					)
 				)
 			)*
-			otherlv_28=']'
+			otherlv_28='}'
 			{
-				newLeafNode(otherlv_28, grammarAccess.getNodeTemplateAccess().getRightSquareBracketKeyword_10_4());
+				newLeafNode(otherlv_28, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_10_4());
 			}
 		)?
 		(
@@ -1324,9 +1324,9 @@ ruleRelationship returns [EObject current=null]
 			{
 				newLeafNode(otherlv_12, grammarAccess.getRelationshipAccess().getPropertiesKeyword_6_0());
 			}
-			otherlv_13='['
+			otherlv_13='{'
 			{
-				newLeafNode(otherlv_13, grammarAccess.getRelationshipAccess().getLeftSquareBracketKeyword_6_1());
+				newLeafNode(otherlv_13, grammarAccess.getRelationshipAccess().getLeftCurlyBracketKeyword_6_1());
 			}
 			(
 				(
@@ -1372,9 +1372,9 @@ ruleRelationship returns [EObject current=null]
 					)
 				)
 			)*
-			otherlv_17=']'
+			otherlv_17='}'
 			{
-				newLeafNode(otherlv_17, grammarAccess.getRelationshipAccess().getRightSquareBracketKeyword_6_4());
+				newLeafNode(otherlv_17, grammarAccess.getRelationshipAccess().getRightCurlyBracketKeyword_6_4());
 			}
 		)?
 		(
@@ -1985,15 +1985,11 @@ ruleProperty returns [EObject current=null]
 					$current);
 			}
 		)
-		otherlv_1='{'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getPropertyAccess().getLeftCurlyBracketKeyword_1());
-		}
 		(
 			(
-				lv_property_name_2_0=RULE_STRING
+				lv_property_name_1_0=RULE_STRING
 				{
-					newLeafNode(lv_property_name_2_0, grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_property_name_1_0, grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -2002,20 +1998,20 @@ ruleProperty returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"property_name",
-						lv_property_name_2_0,
+						lv_property_name_1_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)
-		otherlv_3=':'
+		otherlv_2=':'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getPropertyAccess().getColonKeyword_3());
+			newLeafNode(otherlv_2, grammarAccess.getPropertyAccess().getColonKeyword_2());
 		}
 		(
 			(
-				lv_value_4_0=RULE_STRING
+				lv_value_3_0=RULE_STRING
 				{
-					newLeafNode(lv_value_4_0, grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_4_0());
+					newLeafNode(lv_value_3_0, grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -2024,15 +2020,11 @@ ruleProperty returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"value",
-						lv_value_4_0,
+						lv_value_3_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)
-		otherlv_5='}'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getPropertyAccess().getRightCurlyBracketKeyword_5());
-		}
 	)
 ;
 

@@ -715,10 +715,10 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2459:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalToscaDsl.g:2459:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalToscaDsl.g:2451:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalToscaDsl.g:2451:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalToscaDsl.g:2459:11: ( '^' )?
+            // InternalToscaDsl.g:2451:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -727,7 +727,7 @@ public class InternalToscaDslLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalToscaDsl.g:2459:11: '^'
+                    // InternalToscaDsl.g:2451:11: '^'
                     {
                     match('^'); 
 
@@ -745,7 +745,7 @@ public class InternalToscaDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalToscaDsl.g:2459:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalToscaDsl.g:2451:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -794,10 +794,10 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2461:10: ( ( '0' .. '9' )+ )
-            // InternalToscaDsl.g:2461:12: ( '0' .. '9' )+
+            // InternalToscaDsl.g:2453:10: ( ( '0' .. '9' )+ )
+            // InternalToscaDsl.g:2453:12: ( '0' .. '9' )+
             {
-            // InternalToscaDsl.g:2461:12: ( '0' .. '9' )+
+            // InternalToscaDsl.g:2453:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -811,7 +811,7 @@ public class InternalToscaDslLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalToscaDsl.g:2461:13: '0' .. '9'
+            	    // InternalToscaDsl.g:2453:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -843,10 +843,10 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2463:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalToscaDsl.g:2463:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalToscaDsl.g:2455:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalToscaDsl.g:2455:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalToscaDsl.g:2463:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalToscaDsl.g:2455:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -864,10 +864,10 @@ public class InternalToscaDslLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalToscaDsl.g:2463:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalToscaDsl.g:2455:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalToscaDsl.g:2463:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalToscaDsl.g:2455:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -883,7 +883,7 @@ public class InternalToscaDslLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2463:21: '\\\\' .
+                    	    // InternalToscaDsl.g:2455:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -891,7 +891,7 @@ public class InternalToscaDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalToscaDsl.g:2463:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalToscaDsl.g:2455:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -916,10 +916,10 @@ public class InternalToscaDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalToscaDsl.g:2463:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalToscaDsl.g:2455:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalToscaDsl.g:2463:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalToscaDsl.g:2455:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -935,7 +935,7 @@ public class InternalToscaDslLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2463:54: '\\\\' .
+                    	    // InternalToscaDsl.g:2455:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -943,7 +943,7 @@ public class InternalToscaDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalToscaDsl.g:2463:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalToscaDsl.g:2455:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -986,12 +986,12 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2465:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalToscaDsl.g:2465:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalToscaDsl.g:2457:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalToscaDsl.g:2457:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalToscaDsl.g:2465:24: ( options {greedy=false; } : . )*
+            // InternalToscaDsl.g:2457:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1016,7 +1016,7 @@ public class InternalToscaDslLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalToscaDsl.g:2465:52: .
+            	    // InternalToscaDsl.g:2457:52: .
             	    {
             	    matchAny(); 
 
@@ -1046,12 +1046,12 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2467:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalToscaDsl.g:2467:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalToscaDsl.g:2459:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalToscaDsl.g:2459:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalToscaDsl.g:2467:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalToscaDsl.g:2459:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1064,7 +1064,7 @@ public class InternalToscaDslLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalToscaDsl.g:2467:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalToscaDsl.g:2459:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1084,7 +1084,7 @@ public class InternalToscaDslLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalToscaDsl.g:2467:40: ( ( '\\r' )? '\\n' )?
+            // InternalToscaDsl.g:2459:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1093,9 +1093,9 @@ public class InternalToscaDslLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalToscaDsl.g:2467:41: ( '\\r' )? '\\n'
+                    // InternalToscaDsl.g:2459:41: ( '\\r' )? '\\n'
                     {
-                    // InternalToscaDsl.g:2467:41: ( '\\r' )?
+                    // InternalToscaDsl.g:2459:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1104,7 +1104,7 @@ public class InternalToscaDslLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalToscaDsl.g:2467:41: '\\r'
+                            // InternalToscaDsl.g:2459:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1136,10 +1136,10 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2469:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalToscaDsl.g:2469:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalToscaDsl.g:2461:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalToscaDsl.g:2461:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalToscaDsl.g:2469:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalToscaDsl.g:2461:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1193,8 +1193,8 @@ public class InternalToscaDslLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalToscaDsl.g:2471:16: ( . )
-            // InternalToscaDsl.g:2471:18: .
+            // InternalToscaDsl.g:2463:16: ( . )
+            // InternalToscaDsl.g:2463:18: .
             {
             matchAny(); 
 

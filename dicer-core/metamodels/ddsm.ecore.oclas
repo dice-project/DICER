@@ -314,9 +314,9 @@ the deployment and configuration details of a Kafka cluster.</values>
       <ownedProperties xmi:id="p.ddsm.ClientNode.mainClass" name="mainClass" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:Enumeration" xmi:id="T.ddsm.VMSize" name="VMSize" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration">
-      <ownedLiterals name="Small"/>
-      <ownedLiterals name="Medium" value="1"/>
-      <ownedLiterals name="Large" value="2"/>
+      <ownedLiterals xmi:id="e.ddsm.VMSize.Small" name="Small"/>
+      <ownedLiterals xmi:id="e.ddsm.VMSize.Medium" name="Medium" value="1"/>
+      <ownedLiterals xmi:id="e.ddsm.VMSize.Large" name="Large" value="2"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.ddsm.YarnResourceManager" name="YarnResourceManager" superClasses="#T.ddsm.InternalComponent">
       <ownedAnnotations xsi:type="pivot:Annotation" name="http://es.unizar.disco/dice/profiles/generator">
@@ -351,8 +351,8 @@ the deployment and configuration details of a the YARN ResourceManager master pr
       </ownedAnnotations>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:Enumeration" xmi:id="T.ddsm.ProviderType" name="ProviderType" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration">
-      <ownedLiterals name="Flexiant"/>
-      <ownedLiterals name="Openstack" value="1"/>
+      <ownedLiterals xmi:id="e.ddsm.ProviderType.Flexiant" name="Flexiant"/>
+      <ownedLiterals xmi:id="e.ddsm.ProviderType.Openstack" name="Openstack" value="1"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.ddsm.Script" name="Script" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedProperties xmi:id="p.ddsm.Script.scriptId" name="scriptId" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
