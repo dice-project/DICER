@@ -518,7 +518,7 @@ lazy rule getConnectedToZookeeperQuorumRelationship {
 	to
 		t: TOSCA!Relationship(
 			target <- s.providedport.owner.elementId,
-			type <- 'dice.relationships.ConnectedToZookeeperQuorum'
+			type <- 'dice.relationships.storm.ConnectedToZookeeperQuorum'
 		)
 }
 
@@ -530,7 +530,7 @@ rule getSupervisorRelationshipForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 		),
 		supervisor_to_nimbus: TOSCA!Relationship(
 			target <- stormCluster.elementId + '_nimbus',
-			type <- 'dice.relationships.ConnectedToNimbus'
+			type <- 'dice.relationships.storm.ConnectedToNimbus'
 		)
 	do {
 		Sequence{supervisor_to_host, supervisor_to_nimbus};
@@ -690,7 +690,7 @@ rule getNodeTemplatesFromVM(s: DDSM!VM){
 	to
 		t : TOSCA!NodeTemplate(
 			node_template_name <- s.elementId,
-            type <- s.getVMGenericSize.toLower(), 
+            type <- s.getVMGenericSize, 
 			
 			properties <- s.property 
 			-> collect(property | thisModule.getProperty(property)),	
@@ -803,19 +803,20 @@ helper context DDSM!Provider def: isFlexiant(): Boolean =
 
 rule getFlexiantImport(){
 	using {
-		FCO_CLIENT_PLUGIN_VERSION: String = 'develop';
+		FCO_CLIENT_PLUGIN_VERSION: String = '0.1.1';
 		PLATFORM: String = 'fco';
-		FCO_PLUGIN_VERSION: String = 'master';
+		FCO_PLUGIN_VERSION: String = 'develop';
+		CHEF_PLUGIN_VERSION: String = '1.3.2';
 	}
 	to 
 		i1: TOSCA!Import(
 			file <- 'http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml'
 		),
 		i2: TOSCA!Import(
-			file <- 'https://raw.githubusercontent.com/dice-project/DICE-FCO-Plugin-Cloudify/' + FCO_CLIENT_PLUGIN_VERSION + '/plugin.yaml'
+			file <- 'http://dice-project.github.io/DICE-FCO-Plugin-Cloudify/' + FCO_CLIENT_PLUGIN_VERSION + '/plugin.yaml'
 		),
 		i3: TOSCA!Import(
-			file <- 'http://www.getcloudify.org/spec/chef-plugin/1.3.1/plugin.yaml'
+			file <- 'http://dice-project.github.io/cloudify-chef-plugin/' + CHEF_PLUGIN_VERSION + '/plugin.yaml'
 		),
 		i4: TOSCA!Import(
 			file <- 'http://dice-project.github.io/DICE-Deployment-Cloudify/spec/' + PLATFORM + '/' + FCO_PLUGIN_VERSION + '/plugin.yaml'
