@@ -247,10 +247,6 @@ rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(zookeeperCluster:
 
 rule getZookeeperServerNodeTemplate (s: DDSM!ZookeeperServer) {
 	using {
-		tickTime: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('tickTime', s.tickTime);
-		initLimit: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('initLimit', s.initLimit);
-		syncLimit: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('syncLimit', s.syncLimit);
-		zookeeper_properties: Sequence(TOSCA!Property) = Sequence{tickTime, initLimit, syncLimit}.flatten();
 		member_of_quorum_relationship: Sequence(TOSCA!Relationship) = thisModule.getZookeeperMemberOfQuorumRelationship(s);
 	}
 	to
@@ -270,8 +266,11 @@ rule getZookeeperServerNodeTemplate (s: DDSM!ZookeeperServer) {
 			),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)).
-			union(zookeeper_properties),
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('tickTime', 1500).union(
+			thisModule.getConfigurationFromAttribute('initLimit', 10)).union(
+			thisModule.getConfigurationFromAttribute('syncLimit', 5)),
 			
 			interfaces <- 
 			s.resource 
@@ -476,13 +475,15 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 				(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
 			)))),
 			
-			properties <- thisModule.getPropertyFromAttribute('taskTimeout', 30).union(
-			thisModule.getPropertyFromAttribute('supervisorTimeout', 60)).union(
-			thisModule.getPropertyFromAttribute('monitorFrequency', 10)).union(
-			thisModule.getPropertyFromAttribute('queueSize', 100000)).union(
-			thisModule.getPropertyFromAttribute('retryTimes', 5)).union(
-			thisModule.getPropertyFromAttribute('retryInterval', 2000))
-		)		
+			properties <- stormCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', 30).union(
+			thisModule.getConfigurationFromAttribute('supervisorTimeout', 60)).union(
+			thisModule.getConfigurationFromAttribute('monitorFrequency', 10)).union(
+			thisModule.getConfigurationFromAttribute('queueSize', 100000)).union(
+			thisModule.getConfigurationFromAttribute('retryTimes', 5)).union(
+			thisModule.getConfigurationFromAttribute('retryInterval', 2000)))		
 	do {
 		Sequence{nimbus, slaves};
 	}
@@ -502,10 +503,13 @@ rule getSupervisorNodeTemplateForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 				(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
 			)))),
 			
-			properties <- thisModule.getPropertyFromAttribute('workerStartTimeout', 120).union(
-			thisModule.getPropertyFromAttribute('heartbeatFrequency', 5)).union(
-			thisModule.getPropertyFromAttribute('cpuCapacity', 400)).union(
-			thisModule.getPropertyFromAttribute('memoryCapacity', 4096))
+			properties <- stormCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('workerStartTimeout', 120).union(
+			thisModule.getConfigurationFromAttribute('heartbeatFrequency', 5)).union(
+			thisModule.getConfigurationFromAttribute('cpuCapacity', 400)).union(
+			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096))	
 		)
 	do {
 		supervisor;
@@ -551,15 +555,6 @@ rule getNimbusRelationshipForStormCluster(stormCluster: DDSM!StormCluster) {
 }
 
 rule getNimbusNodeTemplate (s: DDSM!Nimbus) {
-	using {
-		taskTimeout: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('taskTimeout', s.taskTimeout);
-		supervisorTimeout: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('supervisorTimeout', s.supervisorTimeout);
-		monitorFrequency: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('monitorFrequency', s.monitorFrequency);
-		queueSize: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('queueSize', s.queueSize);
-		retryTimes: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('retryTimes', s.retryTimes);
-		retryInterval: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('retryInterval', s.retryInterval);
-		nimbus_properties: Sequence(TOSCA!Property) = Sequence{taskTimeout, supervisorTimeout, monitorFrequency, queueSize, retryTimes, retryInterval}.flatten();
-	}
 	to
 		nimbus: TOSCA!NodeTemplate (
 			node_template_name <- s.elementId,	
@@ -575,8 +570,14 @@ rule getNimbusNodeTemplate (s: DDSM!Nimbus) {
 			)))),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)).
-			union(nimbus_properties),
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', 30).union(
+			thisModule.getConfigurationFromAttribute('supervisorTimeout', 60)).union(
+			thisModule.getConfigurationFromAttribute('monitorFrequency', 10)).union(
+			thisModule.getConfigurationFromAttribute('queueSize', 100000)).union(
+			thisModule.getConfigurationFromAttribute('retryTimes', 5)).union(
+			thisModule.getConfigurationFromAttribute('retryInterval', 2000)),
 			
 			interfaces <- 
 			s.resource 
@@ -594,11 +595,6 @@ rule getNimbusNodeTemplate (s: DDSM!Nimbus) {
 
 rule getStormSupervisorNodeTemplate (s: DDSM!Supervisor) {
 	using {
-		workerStartTimeout: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('workerStartTimeout', s.workerStartTimeout);
-		heartbeatFrequency: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('heartbeatFrequency', s.heartbeatFrequency);
-		cpuCapacity: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('cpuCapacity', s.cpuCapacity);
-		memoryCapacity: Sequence(TOSCA!Property) = thisModule.getPropertyFromAttribute('memoryCapacity', s.memoryCapacity);
-		supervisor_properties: Sequence(TOSCA!Property) = Sequence{workerStartTimeout, heartbeatFrequency, cpuCapacity, memoryCapacity}.flatten();
 		has_master_relationship: Sequence(TOSCA!Relationship) = thisModule.getSupervisorHasMasterRelationship(s);	
 	}
 	to
@@ -618,8 +614,12 @@ rule getStormSupervisorNodeTemplate (s: DDSM!Supervisor) {
 			),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)).
-			union(supervisor_properties),
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('workerStartTimeout', 120).union(
+			thisModule.getConfigurationFromAttribute('heartbeatFrequency', 5)).union(
+			thisModule.getConfigurationFromAttribute('cpuCapacity', 400)).union(
+			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096)),
 			
 			interfaces <- 
 			s.resource 
