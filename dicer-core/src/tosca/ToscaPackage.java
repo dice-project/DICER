@@ -157,13 +157,22 @@ public interface ToscaPackage extends EPackage {
     int NODE_TEMPLATE__INSTANCES = 9;
 
     /**
+     * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__CONFIGURATIONS = 10;
+
+    /**
      * The number of structural features of the '<em>Node Template</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE_FEATURE_COUNT = 10;
+    int NODE_TEMPLATE_FEATURE_COUNT = 11;
 
     /**
      * The number of operations of the '<em>Node Template</em>' class.
@@ -1055,6 +1064,53 @@ public interface ToscaPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link tosca.impl.ConfigurationImpl <em>Configuration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.ConfigurationImpl
+     * @see tosca.impl.ToscaPackageImpl#getConfiguration()
+     * @generated
+     */
+    int CONFIGURATION = 15;
+
+    /**
+     * The feature id for the '<em><b>Property name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONFIGURATION__PROPERTY_NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONFIGURATION__VALUE = 1;
+
+    /**
+     * The number of structural features of the '<em>Configuration</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONFIGURATION_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>Configuration</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONFIGURATION_OPERATION_COUNT = 0;
+
+
+    /**
      * Returns the meta object for class '{@link tosca.NodeTemplate <em>Node Template</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1173,6 +1229,17 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EReference getNodeTemplate_Instances();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getConfigurations <em>Configurations</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Configurations</em>'.
+     * @see tosca.NodeTemplate#getConfigurations()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_Configurations();
 
     /**
      * Returns the meta object for class '{@link tosca.Interface <em>Interface</em>}'.
@@ -1909,6 +1976,38 @@ public interface ToscaPackage extends EPackage {
     EAttribute getInstances_Deploy();
 
     /**
+     * Returns the meta object for class '{@link tosca.Configuration <em>Configuration</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Configuration</em>'.
+     * @see tosca.Configuration
+     * @generated
+     */
+    EClass getConfiguration();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.Configuration#getProperty_name <em>Property name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Property name</em>'.
+     * @see tosca.Configuration#getProperty_name()
+     * @see #getConfiguration()
+     * @generated
+     */
+    EAttribute getConfiguration_Property_name();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.Configuration#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see tosca.Configuration#getValue()
+     * @see #getConfiguration()
+     * @generated
+     */
+    EAttribute getConfiguration_Value();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2020,6 +2119,14 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EReference NODE_TEMPLATE__INSTANCES = eINSTANCE.getNodeTemplate_Instances();
+
+        /**
+         * The meta object literal for the '<em><b>Configurations</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__CONFIGURATIONS = eINSTANCE.getNodeTemplate_Configurations();
 
         /**
          * The meta object literal for the '{@link tosca.impl.InterfaceImpl <em>Interface</em>}' class.
@@ -2592,6 +2699,32 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute INSTANCES__DEPLOY = eINSTANCE.getInstances_Deploy();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.ConfigurationImpl <em>Configuration</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.ConfigurationImpl
+         * @see tosca.impl.ToscaPackageImpl#getConfiguration()
+         * @generated
+         */
+        EClass CONFIGURATION = eINSTANCE.getConfiguration();
+
+        /**
+         * The meta object literal for the '<em><b>Property name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CONFIGURATION__PROPERTY_NAME = eINSTANCE.getConfiguration_Property_name();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute CONFIGURATION__VALUE = eINSTANCE.getConfiguration_Value();
 
     }
 

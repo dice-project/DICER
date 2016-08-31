@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.NodeTemplate#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getInstances <em>Instances</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getConfigurations <em>Configurations</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getNodeTemplate()
@@ -231,5 +232,21 @@ public interface NodeTemplate extends EObject {
      * @generated
      */
     void setInstances(Instances value);
+
+    /**
+     * Returns the value of the '<em><b>Configurations</b></em>' containment reference list.
+     * The list contents are of type {@link tosca.Configuration}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Configurations</em>' containment reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Configurations</em>' containment reference list.
+     * @see tosca.ToscaPackage#getNodeTemplate_Configurations()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Configuration> getConfigurations();
 
 } // NodeTemplate

@@ -71,6 +71,7 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
             case ToscaPackage.PARAMETER: return createParameter();
             case ToscaPackage.ARTIFACT: return createArtifact();
             case ToscaPackage.INSTANCES: return createInstances();
+            case ToscaPackage.CONFIGURATION: return createConfiguration();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -224,6 +225,16 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
     public Instances createInstances() {
         InstancesImpl instances = new InstancesImpl();
         return instances;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Configuration createConfiguration() {
+        ConfigurationImpl configuration = new ConfigurationImpl();
+        return configuration;
     }
 
     /**

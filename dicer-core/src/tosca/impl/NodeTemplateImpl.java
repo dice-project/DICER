@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tosca.Attribute;
 import tosca.Capability;
+import tosca.Configuration;
 import tosca.Instances;
 import tosca.Interface;
 import tosca.NodeTemplate;
@@ -46,6 +47,7 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getConfigurations <em>Configurations</em>}</li>
  * </ul>
  *
  * @generated
@@ -180,6 +182,16 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * @ordered
      */
     protected Instances instances;
+
+    /**
+     * The cached value of the '{@link #getConfigurations() <em>Configurations</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getConfigurations()
+     * @generated
+     * @ordered
+     */
+    protected EList<Configuration> configurations;
 
     /**
      * <!-- begin-user-doc -->
@@ -383,6 +395,18 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
+    public EList<Configuration> getConfigurations() {
+        if (configurations == null) {
+            configurations = new EObjectContainmentEList<Configuration>(Configuration.class, this, ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS);
+        }
+        return configurations;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
@@ -400,6 +424,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return ((InternalEList<?>)getCapabilities()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__INSTANCES:
                 return basicSetInstances(null, msgs);
+            case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
+                return ((InternalEList<?>)getConfigurations()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -432,6 +458,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getCapabilities();
             case ToscaPackage.NODE_TEMPLATE__INSTANCES:
                 return getInstances();
+            case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
+                return getConfigurations();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -481,6 +509,10 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__INSTANCES:
                 setInstances((Instances)newValue);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
+                getConfigurations().clear();
+                getConfigurations().addAll((Collection<? extends Configuration>)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -523,6 +555,9 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__INSTANCES:
                 setInstances((Instances)null);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
+                getConfigurations().clear();
+                return;
         }
         super.eUnset(featureID);
     }
@@ -555,6 +590,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return capabilities != null && !capabilities.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__INSTANCES:
                 return instances != null;
+            case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
+                return configurations != null && !configurations.isEmpty();
         }
         return super.eIsSet(featureID);
     }

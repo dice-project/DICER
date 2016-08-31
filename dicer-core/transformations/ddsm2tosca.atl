@@ -177,6 +177,9 @@ rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 			node_template_name <- zookeeperCluster.elementId + '_quorum',	
 			type <- 'dice.components.zookeeper.Quorum', 
 			
+			properties <- zookeeperCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
 			relationships <- thisModule.getZookeeperQuorumContainsRelationshipForZookeeperCluster(zookeeperCluster).
 			union(
 				zookeeperCluster.requiredport -> collect( port | 
@@ -195,6 +198,9 @@ rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DD
 			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_server',	
 			type <- 'dice.components.zookeeper.Server', 
 			
+			properties <- zookeeperCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
 			relationships <- thisModule.getZookeeperServerRelationshipForZookeeperCluster(host, zookeeperCluster).
 			union(
 				zookeeperCluster.requiredport -> collect( port | 
@@ -202,9 +208,9 @@ rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DD
 				relationship.requiredport.elementId = port.elementId
 			)))),
 			
-			properties <- thisModule.getPropertyFromAttribute('tickTime', 1500).union(
-			thisModule.getPropertyFromAttribute('initLimit', 10)).union(
-			thisModule.getPropertyFromAttribute('syncLimit', 5))
+			configurations <- thisModule.getConfigurationFromAttribute('tickTime', 1500).union(
+			thisModule.getConfigurationFromAttribute('initLimit', 10)).union(
+			thisModule.getConfigurationFromAttribute('syncLimit', 5))
 		)
 	do {
 		zookeeper_peer;
@@ -855,6 +861,17 @@ lazy rule getProperty{
 rule getPropertyFromAttribute(name: String, value: Integer){
 	to
 		t : TOSCA!Property(
+			property_name <- name,
+			value <- value.toString()
+		)
+	do {
+		Sequence{t};
+	}
+}
+
+rule getConfigurationFromAttribute(name: String, value: Integer){
+	to
+		t : TOSCA!Configuration(
 			property_name <- name,
 			value <- value.toString()
 		)

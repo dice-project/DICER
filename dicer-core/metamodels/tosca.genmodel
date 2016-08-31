@@ -17,6 +17,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/relationships"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/capabilities"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/instances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/configurations"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Interface">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Interface/interface_name"/>
@@ -99,6 +100,10 @@
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Instances">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Instances/deploy"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//Configuration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Configuration/property_name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Configuration/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

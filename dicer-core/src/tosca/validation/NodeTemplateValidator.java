@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 
 import tosca.Attribute;
 import tosca.Capability;
+import tosca.Configuration;
 import tosca.Instances;
 import tosca.Interface;
 import tosca.Property;
@@ -34,6 +35,8 @@ public interface NodeTemplateValidator {
     boolean validateCapabilities(EList<Capability> value);
 
     boolean validateInstances(Instances value);
+
+    boolean validateConfigurations(EList<Configuration> value);
 
     boolean validateInstances(Integer value);
 }

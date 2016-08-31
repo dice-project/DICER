@@ -157,6 +157,15 @@ public interface ToscaFactory extends EFactory {
     Instances createInstances();
 
     /**
+     * Returns a new object of class '<em>Configuration</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Configuration</em>'.
+     * @generated
+     */
+    Configuration createConfiguration();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

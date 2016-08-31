@@ -24,6 +24,8 @@
         eType="#//Capability" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" eType="#//Instances"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
+        eType="#//Configuration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interface">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -175,5 +177,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Instances">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deploy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="property_name" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

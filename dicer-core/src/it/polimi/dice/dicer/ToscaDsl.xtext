@@ -45,11 +45,20 @@ NodeTemplate returns NodeTemplate:
 		(',\n"description" :' description=STRING )?
 		(',\n"relationships" :' '['relationships+=Relationship ( ","  relationships+=Relationship )* ']' )?
 		(',\n"interfaces" :' '{' interfaces+=Interface ( "," interfaces+=Interface)* '}' )?
-		(',\n"properties" :' '{' properties+=Property ( "," properties+=Property)* '}' )?
+		',\n"properties" :' '{' 
+		('\n"configuration" : {' (configurations+=Configuration ( "," configurations+=Configuration)*)? '}' (',' properties+=Property ( "," properties+=Property)* )?)?
+	    '}'
 		(',\n"attributes" :' '{' attributes+=Attribute ( "," attributes+=Attribute)* '}' )?
+		//(',\n"configuration" : {' configurations+=Configuration ( "," configurations+=Configuration)* '}' )? 
 		(',\n"requirements" :' '{' requirements+=Requirement ( "," requirements+=Requirement)* '}' )?
 		(',\n"capabilities" :' '{' capabilities+=Capability ( "," capabilities+=Capability)* '}' )?
 	'}';
+	
+Configuration returns Configuration:
+	{Configuration}
+	"\n" property_name=STRING ":"
+	value=STRING
+;
 
 Instances returns Instances:
 	{Instances}
@@ -98,7 +107,7 @@ Interface returns Interface:
 
 Property returns Property:
 	{Property}
-	property_name=STRING ":"
+	"\n" property_name=STRING ":"
 	value=STRING
 	;
 

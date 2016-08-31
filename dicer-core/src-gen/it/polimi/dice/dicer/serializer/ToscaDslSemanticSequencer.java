@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import tosca.Attribute;
 import tosca.Capability;
+import tosca.Configuration;
 import tosca.Group;
 import tosca.Import;
 import tosca.Instances;
@@ -49,6 +50,9 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case ToscaPackage.CAPABILITY:
 				sequence_Capability(context, (Capability) semanticObject); 
+				return; 
+			case ToscaPackage.CONFIGURATION:
+				sequence_Configuration(context, (Configuration) semanticObject); 
 				return; 
 			case ToscaPackage.GROUP:
 				sequence_Group(context, (Group) semanticObject); 
@@ -129,6 +133,27 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	
 	/**
 	 * Contexts:
+	 *     Configuration returns Configuration
+	 *
+	 * Constraint:
+	 *     (property_name=STRING value=STRING)
+	 */
+	protected void sequence_Configuration(ISerializationContext context, Configuration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.CONFIGURATION__PROPERTY_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.CONFIGURATION__PROPERTY_NAME));
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.CONFIGURATION__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.CONFIGURATION__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigurationAccess().getProperty_nameSTRINGTerminalRuleCall_2_0(), semanticObject.getProperty_name());
+		feeder.accept(grammarAccess.getConfigurationAccess().getValueSTRINGTerminalRuleCall_4_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Group returns Group
 	 *
 	 * Constraint:
@@ -200,6 +225,7 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *         description=STRING? 
 	 *         (relationships+=Relationship relationships+=Relationship*)? 
 	 *         (interfaces+=Interface interfaces+=Interface*)? 
+	 *         (configurations+=Configuration configurations+=Configuration*)? 
 	 *         (properties+=Property properties+=Property*)? 
 	 *         (attributes+=Attribute attributes+=Attribute*)? 
 	 *         (requirements+=Requirement requirements+=Requirement*)? 
@@ -283,8 +309,8 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.PROPERTY__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_1_0(), semanticObject.getProperty_name());
-		feeder.accept(grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_3_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getPropertyAccess().getProperty_nameSTRINGTerminalRuleCall_2_0(), semanticObject.getProperty_name());
+		feeder.accept(grammarAccess.getPropertyAccess().getValueSTRINGTerminalRuleCall_4_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

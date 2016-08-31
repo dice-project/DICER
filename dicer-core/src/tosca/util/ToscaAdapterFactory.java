@@ -128,6 +128,10 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
                 return createInstancesAdapter();
             }
             @Override
+            public Adapter caseConfiguration(Configuration object) {
+                return createConfigurationAdapter();
+            }
+            @Override
             public Adapter defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -354,6 +358,20 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createInstancesAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.Configuration <em>Configuration</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.Configuration
+     * @generated
+     */
+    public Adapter createConfigurationAdapter() {
         return null;
     }
 
