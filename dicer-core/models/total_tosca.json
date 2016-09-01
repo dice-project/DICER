@@ -1,0 +1,228 @@
+{
+	"tosca_definitions_version" : "cloudify_dsl_1_1" ,
+"imports" : [ "http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml",
+	"http://dice-project.github.io/DICE-FCO-Plugin-Cloudify/0.1.1/plugin.yaml",
+	"http://dice-project.github.io/cloudify-chef-plugin/1.3.2/plugin.yaml",
+	"http://dice-project.github.io/DICE-Deployment-Cloudify/spec/fco/develop/plugin.yaml"
+	] ,
+"nodeTemplates" : {
+		"vm1" : {
+			"type" : "dice.hosts.Large" ,
+"instances" : { "deploy" : 2
+		}
+		,
+"properties" : {
+			} },
+			"vm2" : {
+				"type" : "dice.hosts.Medium" ,
+"instances" : { "deploy" : 3
+			}
+			,
+"properties" : {
+				} },
+				"vm3" : {
+					"type" : "dice.hosts.Small" ,
+"instances" : { "deploy" : 1
+				}
+				,
+"properties" : {
+					} },
+					"storm_nimbus" : {
+						"type" : "dice.components.storm.Nimbus" ,
+"relationships" : [ {
+							"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm1"
+						},
+						{
+							"type" : "dice.relationships.storm.ConnectedToZookeeperQuorum" ,
+"target" : "zookeeper"
+						}
+						] ,
+"properties" : {
+
+"configuration" : { 
+							"taskTimeout" : "30",
+							
+							"supervisorTimeout" : "60",
+							
+							"monitorFrequency" : "10",
+							
+							"queueSize" : "100000",
+							
+							"retryTimes" : "5",
+							
+							"retryInterval" : "2000"
+						}
+						} },
+						"storm_vm2_supervisor" : {
+							"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+								"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm2"
+							},
+							{
+								"type" : "dice.relationships.storm.ConnectedToNimbus" ,
+"target" : "storm_nimbus"
+							},
+							{
+								"type" : "dice.relationships.storm.ConnectedToZookeeperQuorum" ,
+"target" : "zookeeper"
+							}
+							] ,
+"properties" : {
+
+"configuration" : { 
+								"workerStartTimeout" : "120",
+								
+								"heartbeatFrequency" : "5",
+								
+								"cpuCapacity" : "400",
+								
+								"memoryCapacity" : "4096"
+							}
+							} },
+							"storm_vm3_supervisor" : {
+								"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+									"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm3"
+								},
+								{
+									"type" : "dice.relationships.storm.ConnectedToNimbus" ,
+"target" : "storm_nimbus"
+								},
+								{
+									"type" : "dice.relationships.storm.ConnectedToZookeeperQuorum" ,
+"target" : "zookeeper"
+								}
+								] ,
+"properties" : {
+
+"configuration" : { 
+									"workerStartTimeout" : "120",
+									
+									"heartbeatFrequency" : "5",
+									
+									"cpuCapacity" : "400",
+									
+									"memoryCapacity" : "4096"
+								}
+								} },
+								"zookeeper_vm1_server" : {
+									"type" : "dice.components.zookeeper.Server" ,
+"relationships" : [ {
+										"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm1"
+									},
+									{
+										"type" : "dice.relationships.zookeeper.MemberOfQuorum" ,
+"target" : "zookeeper_quorum"
+									}
+									] ,
+"properties" : {
+
+"configuration" : { 
+										"tickTime" : "1500",
+										
+										"initLimit" : "10",
+										
+										"syncLimit" : "5"
+									}
+									} },
+									"zookeeper_vm2_server" : {
+										"type" : "dice.components.zookeeper.Server" ,
+"relationships" : [ {
+											"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm2"
+										},
+										{
+											"type" : "dice.relationships.zookeeper.MemberOfQuorum" ,
+"target" : "zookeeper_quorum"
+										}
+										] ,
+"properties" : {
+
+"configuration" : { 
+											"tickTime" : "1500",
+											
+											"initLimit" : "10",
+											
+											"syncLimit" : "5"
+										}
+										} },
+										"zookeeper_quorum" : {
+											"type" : "dice.components.zookeeper.Quorum" ,
+"relationships" : [ {
+												"type" : "dice.relationships.zookeeper.QuorumContains" ,
+"target" : "vm1"
+											},
+											{
+												"type" : "dice.relationships.zookeeper.QuorumContains" ,
+"target" : "vm2"
+											}
+											] ,
+"properties" : {
+												} },
+												"cassandra_seed" : {
+													"type" : "dice.components.cassandra.Seed" ,
+"relationships" : [ {
+														"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm2"
+													}
+													] ,
+"properties" : {
+														} },
+														"cassandra_vm2_worker" : {
+															"type" : "dice.components.cassandra.Worker" ,
+"relationships" : [ {
+																"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm2"
+															},
+															{
+																"type" : "dice.relationships.cassandra.ConnectedToSeed" ,
+"target" : "cassandra_seed"
+															}
+															] ,
+"properties" : {
+																} },
+																"cassandra_vm1_worker" : {
+																	"type" : "dice.components.cassandra.Worker" ,
+"relationships" : [ {
+																		"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm1"
+																	},
+																	{
+																		"type" : "dice.relationships.cassandra.ConnectedToSeed" ,
+"target" : "cassandra_seed"
+																	}
+																	] ,
+"properties" : {
+																		} },
+																		"wikistats_application" : {
+																			"type" : "dice.components.storm.Topology" ,
+"relationships" : [ {
+																				"type" : "dice.relationships.storm.SubmittedBy" ,
+"target" : "storm_nimbus"
+																			},
+																			{
+																				"type" : "dice.relationships.Needs" ,
+"target" : "storm_vm2_supervisor"
+																			},
+																			{
+																				"type" : "dice.relationships.Needs" ,
+"target" : "storm_vm3_supervisor"
+																			}
+																			] ,
+"properties" : {
+
+"configuration" : {
+																			},
+																			
+																			"application" : "wikistats-topology-0.1.0-SNAPSHOT.jar",
+																			
+																			"topology_name" : "wikistats_topology",
+																			
+																			"topology_class" :
+																			"rg.apache.storm.starter.WikimediaTopology" } }
+																		}
+																	}

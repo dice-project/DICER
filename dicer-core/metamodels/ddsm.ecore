@@ -280,7 +280,6 @@
     <eTypeParameters name="dayOfWeek"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperQuorum" eSuperTypes="#//PeersQuorum"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CassandraSeed" eSuperTypes="#//PeersQuorum"/>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraWorker" eSuperTypes="#//PeerNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperCluster" eSuperTypes="#//PeerToPeerPlatform"/>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraCluster" eSuperTypes="#//PeerToPeerPlatform"/>
@@ -292,8 +291,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="PeerToPeerPlatform" eSuperTypes="#//InternalComponent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresPeerVm" lowerBound="1"
         upperBound="-1" eType="#//RequiredExecutionPlatform"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requiresQuorumVm" lowerBound="1"
-        eType="#//RequiredExecutionPlatform"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterSlavePlatform" eSuperTypes="#//InternalComponent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresMasterVm" lowerBound="1"
@@ -301,4 +298,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresSlaveVm" lowerBound="1"
         upperBound="-1" eType="#//RequiredExecutionPlatform"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraQuorum" eSuperTypes="#//PeersQuorum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires_bootstrapping_seed"
+        lowerBound="1" eType="#//RequiredPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraSeed" eSuperTypes="#//InternalComponent"/>
 </ecore:EPackage>

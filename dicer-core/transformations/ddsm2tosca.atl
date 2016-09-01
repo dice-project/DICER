@@ -32,12 +32,9 @@ rule DDSM2TOSCA{
 		stormCluster: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!StormCluster))
 			-> collect(element | thisModule.getStormCluster(element)).flatten();
-		cassandraWorkers: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
-			-> select(element | element.oclIsTypeOf(DDSM!CassandraWorker))
-			-> collect(element | thisModule.getCassandraWorkerNodeTemplate(element)).flatten();
-		cassandraSeeds: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
-			-> select(element | element.oclIsTypeOf(DDSM!CassandraSeed))
-			-> collect(element | thisModule.getCassandraSeedNodeTemplate(element)).flatten();
+		cassandraNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!CassandraQuorum))
+			-> collect(element | thisModule.getCassandraNodeTemplates(element)).flatten();
 		cassandraClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!CassandraCluster))
 			-> collect(element | thisModule.getCassandraCluster(element)).flatten();
@@ -63,8 +60,7 @@ rule DDSM2TOSCA{
 			union(supervisorNodes).
 			union(stormCluster).
 			union(zookeeperCluster).
-			union(cassandraWorkers).
-			union(cassandraSeeds).
+			union(cassandraNodes).
 			union(cassandraClusters).
 			union(storm_clients)
 		)
@@ -169,8 +165,11 @@ lazy rule getClientToStormRelationship {
 rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 	using {
 		peers_exec_bindings: Sequence(DDSM!ExecutionBinding) = zookeeperCluster.requiresPeerVm -> collect(peer_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
-			any(binding | binding.requiredexecutionplatform.elementId = peer_required_platform.elementId));
-		peers: Sequence(TOSCA!NodeTemplate) = peers_exec_bindings -> collect(binding | thisModule.getPeerNodeTemplateForZookeeperCluster(binding.providedexecutionplatform.owner, zookeeperCluster));
+			select(binding | binding.requiredexecutionplatform.elementId = peer_required_platform.elementId 
+				and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))) -> flatten();
+	
+		peers: Sequence(TOSCA!NodeTemplate) = peers_exec_bindings -> collect(binding | 
+			thisModule.getPeerNodeTemplateForZookeeperCluster(binding.providedexecutionplatform.owner, zookeeperCluster)) -> flatten();
 	}
 	to
 		quorum: TOSCA!NodeTemplate (
@@ -180,8 +179,10 @@ rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 			properties <- zookeeperCluster.property 
 			-> collect(property | thisModule.getProperty(property)),
 			
-			relationships <- thisModule.getZookeeperQuorumContainsRelationshipForZookeeperCluster(zookeeperCluster).
-			union(
+			relationships <- zookeeperCluster.requiresPeerVm -> collect(platform | DDSM!ExecutionBinding.allInstances() ->
+			select(binding | binding.requiredexecutionplatform.elementId = platform.elementId)
+			) -> flatten() -> collect(binding | thisModule.getZookeeperQuorumContainsRelationshipForZookeeperCluster(binding.providedexecutionplatform.owner.elementId)) -> flatten()
+			.union(
 				zookeeperCluster.requiredport -> collect( port | 
 				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
 				relationship.requiredport.elementId = port.elementId
@@ -189,6 +190,18 @@ rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 		)
 	do {
 		Sequence{peers, quorum};
+	}
+}
+
+rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(targ: String) {
+	to
+		t: TOSCA!Relationship (
+			target <- targ,
+
+			type <- 'dice.relationships.zookeeper.QuorumContains'
+		)
+	do {
+		Sequence{t};
 	}
 }
 
@@ -229,19 +242,6 @@ rule getZookeeperServerRelationshipForZookeeperCluster(host: DDSM!VM, zookeeperC
 		)
 	do {
 		Sequence{zookeeper_to_host, zookeeper_to_quorum};
-	}
-}
-
-rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(zookeeperCluster: DDSM!ZookeeperCluster) {
-	to
-		t: TOSCA!Relationship (
-			target <- (DDSM!ExecutionBinding.allInstances() -> 
-			any(binding | binding.requiredexecutionplatform.elementId = zookeeperCluster.requiresQuorumVm.elementId)).providedexecutionplatform.owner.elementId,
-
-			type <- 'dice.relationships.zookeeper.QuorumContains'
-		)
-	do {
-		Sequence{t};
 	}
 }
 
@@ -291,10 +291,12 @@ rule getZookeeperQuorumNodeTemplate (s: DDSM!ZookeeperQuorum) {
 		quorum: TOSCA!NodeTemplate (
 			node_template_name <- s.elementId,	
 			type <- 'dice.components.zookeeper.Quorum', 
-			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getZookeeperQuorumContainsRelationship(DDSM!ExecutionBinding.allInstances() ->  any(binding | 
-			binding.requiredexecutionplatform.elementId = platform.elementId
-			)))
+			
+			relationships <- DDSM!ZookeeperServer.allInstances() -> select(server | server.belongsToQuorum.elementId = s.elementId)
+			-> collect( server | server.requiredexecutionplatform ->
+			collect(platform | DDSM!ExecutionBinding.allInstances() ->
+			select(binding | binding.requiredexecutionplatform.elementId = platform.elementId and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))	
+			) -> flatten()) ->flatten() -> collect(binding | thisModule.getZookeeperQuorumContainsRelationship(binding))
 			
 		)
 	do {
@@ -329,42 +331,64 @@ rule getZookeeperMemberOfQuorumRelationship(s: DDSM!ZookeeperServer) {
 
 -------------------- Cassandra rules --------------------
 
-rule getCassandraSeedNodeTemplate (s: DDSM!CassandraSeed){
-	to 
+rule getCassandraNodeTemplates (s: DDSM!CassandraQuorum){
+	using {
+		seed: TOSCA!NodeTemplate = thisModule.getSeedNodeTemplate(DDSM!Relationship.allInstances() -> 
+			any(relationship | relationship.requiredport.elementId = s.requires_bootstrapping_seed.elementId and 
+			relationship.providedport.owner.oclIsTypeOf(DDSM!CassandraSeed)).providedport.owner); 
+	
+		workers: Sequence(TOSCA!NodeTemplate) = DDSM!CassandraWorker.allInstances() ->
+			select(worker | worker.belongsToQuorum.elementId = s.elementId) ->
+			collect(worker | thisModule.getCassandraWorkerNodeTemplate(worker, seed));
+	
+	}
+	do {
+		Sequence{seed, workers};
+	}
+}
+
+lazy rule getSeedNodeTemplate{
+	from
+		s: DDSM!CassandraSeed
+	to	
 		t: TOSCA!NodeTemplate(
 			node_template_name <- s.elementId,
 			type <- 'dice.components.cassandra.Seed',
 			
 			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  any(binding | 		
-			binding.requiredexecutionplatform.elementId = platform.elementId
-			))),
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
-		)
-	do {
-		Sequence{t};
-	}
-}
-
-rule getCassandraWorkerNodeTemplate (s: DDSM!CassandraWorker){
-	using {
-		connected_to_seed_relationship: Sequence(TOSCA!Relationship) = thisModule.getWorkerToSeedRelationship(s);
-	}
-	to
-		t: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId,
-			type <- 'dice.components.cassandra.Worker',
-			
-			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  any(binding | 		
+			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  select(binding | 		
 			binding.requiredexecutionplatform.elementId = platform.elementId
 			))).union(
-				connected_to_seed_relationship
-			),
+				s.requiredport -> collect( port | 
+				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  select(relationship | 
+				relationship.requiredport.elementId = port.elementId
+			)))),
 			
 			properties <- s.property 
+			-> collect(property | thisModule.getProperty(property))
+			
+		)	
+}
+
+
+rule getCassandraWorkerNodeTemplate (w: DDSM!CassandraWorker, s: DDSM!CassandraSeed){
+	to
+		t: TOSCA!NodeTemplate(
+			node_template_name <- w.elementId,
+			type <- 'dice.components.cassandra.Worker',
+			
+			relationships <- w.requiredexecutionplatform -> collect( platform | 
+			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  select(binding | 		
+			binding.requiredexecutionplatform.elementId = platform.elementId
+			))).union(
+				w.requiredport -> collect( port | 
+				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  select(relationship | 
+				relationship.requiredport.elementId = port.elementId
+			)))).union(
+				thisModule.getWorkerToSeedRelationship(s)
+			),
+			
+			properties <- w.property 
 			-> collect(property | thisModule.getProperty(property))
 		)
 	do {
@@ -372,11 +396,10 @@ rule getCassandraWorkerNodeTemplate (s: DDSM!CassandraWorker){
 	}
 }
 
-rule getWorkerToSeedRelationship (s: DDSM!CassandraWorker) {
+rule getWorkerToSeedRelationship (s: DDSM!CassandraSeed) {
 	to
 		t: TOSCA!Relationship (
-			--relationship_name <- s.elementId + '_quorum',
-			target <- s.belongsToQuorum.elementId,
+			target <- s.elementId,
 			type <- 'dice.relationships.cassandra.ConnectedToSeed'
 		)
 	do {
@@ -386,32 +409,31 @@ rule getWorkerToSeedRelationship (s: DDSM!CassandraWorker) {
 
 rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 	using {
-		workers_exec_bindings: Sequence(DDSM!ExecutionBinding) = cassandraCluster.requiresPeerVm -> collect(worker_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
-			any(binding | binding.requiredexecutionplatform.elementId = worker_required_platform.elementId));
-		workers: Sequence(TOSCA!NodeTemplate) = workers_exec_bindings -> collect(binding | thisModule.getWorkerNodeTemplateForCassandraCluster(binding.providedexecutionplatform.owner, cassandraCluster));
+		workers: Sequence(TOSCA!NodeTemplate) = 
+			cassandraCluster.requiresPeerVm -> collect(worker_required_platform |  
+				DDSM!ExecutionBinding.allInstances() -> select(binding | 
+					binding.requiredexecutionplatform.elementId = worker_required_platform.elementId
+					and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))) -> flatten() -> collect(binding 
+						| thisModule.getWorkerNodeTemplateForCassandraCluster(binding.providedexecutionplatform.owner, cassandraCluster));
 	}
 	to
 		seed: TOSCA!NodeTemplate (
 			node_template_name <- cassandraCluster.elementId + '_seed',	
 			type <- 'dice.components.cassandra.Seed', 
 			
-			relationships <- thisModule.getCassandraContainedInRelationshipForCassandraCluster(cassandraCluster).
-			union(
-				cassandraCluster.requiredport -> collect( port | 
-				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId
-			))))
+			relationships <- thisModule.getContainedInRelationshipForCassandraClusterSeed(cassandraCluster)
 		)
 	do {
 		Sequence{seed, workers};
 	}
 }
 
-rule getCassandraContainedInRelationshipForCassandraCluster(cassandraCluster: DDSM!CassandraCluster) {
+rule getContainedInRelationshipForCassandraClusterSeed(cassandraCluster: DDSM!CassandraCluster) {
 	to
 		t: TOSCA!Relationship (
-			target <- (DDSM!ExecutionBinding.allInstances() -> 
-				any(binding | binding.requiredexecutionplatform.elementId = cassandraCluster.requiresQuorumVm.elementId)).providedexecutionplatform.owner.elementId,
+			target <- DDSM!ExecutionBinding.allInstances() -> any(binding |
+				binding.requiredexecutionplatform.elementId = cassandraCluster.requiresPeerVm.first().elementId and
+				binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM)).providedexecutionplatform.owner.elementId,
 			
 			type <- 'dice.relationships.ContainedIn'
 		)
@@ -426,12 +448,7 @@ rule getWorkerNodeTemplateForCassandraCluster (host: DDSM!VM, cassandraCluster: 
 			node_template_name <- cassandraCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.cassandra.Worker', 
 			
-			relationships <- thisModule.getCassandraWorkerRelationshipForCassandraCluster(host, cassandraCluster).
-			union(
-				cassandraCluster.requiredport -> collect( port | 
-				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId
-			))))
+			relationships <- thisModule.getCassandraWorkerRelationshipForCassandraCluster(host, cassandraCluster)
 		)
 	do {
 		cassandra_worker;
@@ -470,10 +487,15 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 			relationships <- thisModule.getNimbusRelationshipForStormCluster(stormCluster).
 			union(
 				stormCluster.requiredport -> collect( port | 
-				thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId and 
-				(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-			)))),
+					thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  
+						any(relationship | 
+							relationship.requiredport.elementId = port.elementId and 
+							(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or 
+							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
+						)
+					) 
+				)
+			),
 			
 			properties <- stormCluster.property 
 			-> collect(property | thisModule.getProperty(property)),
@@ -498,10 +520,15 @@ rule getSupervisorNodeTemplateForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 			relationships <- thisModule.getSupervisorRelationshipForStormCluster(host, stormCluster).
 			union(
 				stormCluster.requiredport -> collect( port | 
-				thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId and 
-				(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-			)))),
+					thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  
+						any(relationship | 
+							relationship.requiredport.elementId = port.elementId and 
+							(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or 
+							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
+						)
+					)
+				) 
+			),
 			
 			properties <- stormCluster.property 
 			-> collect(property | thisModule.getProperty(property)),
