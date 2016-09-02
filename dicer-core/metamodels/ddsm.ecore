@@ -203,6 +203,12 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm nimbus master process."/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="dependsOnZookeeper"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="dependsOnZookeeper" value="Relationship.allInstances() ->&#xA;&#x9;exists(r | &#xA;&#x9;&#x9;self.requiredport -> exists(p |&#xA;&#x9;&#x9;&#x9;p.elementId = r.requiredport.elementId&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="60"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="supervisorFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -286,7 +292,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasMaster" lowerBound="1"
         eType="#//MasterNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="Crontab">
+  <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="crontab">
     <eTypeParameters name="min"/>
     <eTypeParameters name="hour"/>
     <eTypeParameters name="dayOfMonth"/>
@@ -310,10 +316,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PeersQuorum" eSuperTypes="#//InternalComponent"/>
   <eClassifiers xsi:type="ecore:EClass" name="PeerToPeerPlatform" eSuperTypes="#//InternalComponent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="peerPlatformsNeedBinding"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="peerPlatformsNeedBinding" value="requiresPeerVm -> forAll(platform | ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = platform.elementId and &#xA;&#x9;     b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;)"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresPeerVm" lowerBound="1"
         upperBound="-1" eType="#//RequiredExecutionPlatform"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterSlavePlatform" eSuperTypes="#//InternalComponent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="mustBelongToZookeeperQuorum"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="slavePlatformsNeedBinding" value="requiresSlaveVm -> forAll(platform | ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = platform.elementId and &#xA;&#x9;         b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;)"/>
+      <details key="masterPlatformNeedBinding" value="ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = hasMasterVm.elementId and &#xA;&#x9;         b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresMasterVm" lowerBound="1"
         eType="#//RequiredExecutionPlatform"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresSlaveVm" lowerBound="1"
