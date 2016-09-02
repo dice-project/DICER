@@ -683,7 +683,7 @@ lazy rule getNimbusNodeTemplate {
 			-> collect(property | thisModule.getProperty(property)),
 			
 			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', 30).union(
-			thisModule.getConfigurationFromAttribute('supervisorTimeout', 60)).union(
+			thisModule.getConfigurationFromAttribute('supervisorFrequency', 60)).union(
 			thisModule.getConfigurationFromAttribute('monitorFrequency', 10)).union(
 			thisModule.getConfigurationFromAttribute('queueSize', 100000)).union(
 			thisModule.getConfigurationFromAttribute('retryTimes', 5)).union(
