@@ -161,10 +161,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sshKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicAddress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="genericSize" eType="#//VMSize"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instances" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
-        defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicPorts" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publicPorts"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DDSM">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -185,40 +183,40 @@
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm supervisor slave process."/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="mustRequireZookeeperAndNimbus"/>
+      <details key="constraints" value="mustHaveNimbusMaster"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="mustRequireZookeeperAndNimbus" value="requiredport -> size() > 0"/>
+      <details key="mustHaveNimbusMaster" value=" hasMaster.oclIsTypeOf(Nimbus)"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="workerStartTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cpuCapacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="memoryCapacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="heartbeatFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workerStartTimeout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cpuCapacity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memoryCapacity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="heartbeatFrequency"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Nimbus" eSuperTypes="#//MasterNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of the Storm nimbus master process."/>
     </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="mustRequireZookeeper"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="mustRequireZookeeper" value="requiredport -> select(port | Relationship ->&#xA;&#x9;&#x9;&#x9;exists(rel | rel.requiredport.elementId = port.elementId and &#xA;&#x9;&#x9;&#x9;&#x9;(rel.providedport.owner.oclIsTypeOf(ZookeeperQuorum) or rel.providedport.owner.oclIsTypeOf(ZookeeperCluster))&#xA;&#x9;&#x9;&#x9;)&#xA;&#x9;&#x9;) -> size() > 0"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="supervisorFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="monitorFrequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="retryTimes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="retryInterval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskTimeout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supervisorFrequency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="monitorFrequency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queueSize"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="retryTimes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="retryInterval"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperServer" eSuperTypes="#//PeerNode">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="Specilization of an InternalComponent introduced in the context of DICE which captures &#xA;the deployment and configuration details of a Zookeeper cluster."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tickTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="mustBelongToZookeeperQuorum"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="mustBelongToZookeeperQuorum" value=" belongsToQuorum.oclIsTypeOf(ZookeeperQuorum)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tickTime"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncLimit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initLimit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientNode" eSuperTypes="#//InternalComponent">
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
@@ -227,7 +225,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
         eType="#//JobSubmission"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipRunningJob" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSubmissions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numberOfSubmissions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VMSize">
     <eLiterals name="Small"/>
@@ -272,7 +270,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasMaster" lowerBound="1"
         eType="#//MasterNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="Crontab">
+  <eClassifiers xsi:type="ecore:EDataType" name="Crontab">
     <eTypeParameters name="min"/>
     <eTypeParameters name="hour"/>
     <eTypeParameters name="dayOfMonth"/>
@@ -280,7 +278,14 @@
     <eTypeParameters name="dayOfWeek"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperQuorum" eSuperTypes="#//PeersQuorum"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CassandraWorker" eSuperTypes="#//PeerNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CassandraWorker" eSuperTypes="#//PeerNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="mustBelongToCassandraQuorum"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="mustBelongToCassandraQuorum" value=" belongsToQuorum.oclIsTypeOf(CassandraQuorum)"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperCluster" eSuperTypes="#//PeerToPeerPlatform"/>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraCluster" eSuperTypes="#//PeerToPeerPlatform"/>
   <eClassifiers xsi:type="ecore:EClass" name="PeerNode" eSuperTypes="#//InternalComponent">
