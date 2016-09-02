@@ -36,6 +36,6 @@
   <cloudelement xsi:type="ddsm:ClientNode" elementId="wikistats_application" submits="wikistats_topology">
     <requiredexecutionplatform elementId="requires_storm"/>
   </cloudelement>
-  <cloudelement xsi:type="ddsm:JobSubmission" elementId="wikistats_topology" artifactUrl="wikistats-topology-0.1.0-SNAPSHOT.jar" mainClass="rg.apache.storm.starter.WikimediaTopology"/>
+  <cloudelement xsi:type="ddsm:JobSubmission" elementId="wikistats_topology" artifactUrl="wikistats-topology-0.1.0-SNAPSHOT.jar" mainClass="org.apache.storm.starter.WikimediaTopology"/>
   <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="wikistats_to_storm" requiredexecutionplatform="requires_storm" providedexecutionplatform="provides_storm"/>
 </ddsm:DDSM>

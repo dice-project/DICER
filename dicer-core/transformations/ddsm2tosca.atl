@@ -355,7 +355,6 @@ lazy rule getZookeeperMemberOfQuorumRelationship {
 		s: DDSM!ZookeeperServer
 	to
 		t: TOSCA!Relationship (
-			--relationship_name <- s.elementId + '_quorum',
 			target <- s.belongsToQuorum.elementId,
 			type <- 'dice.relationships.zookeeper.MemberOfQuorum'
 		)
@@ -845,12 +844,10 @@ rule getFloatingIpNodeFromFrontend (elementId: String, publicPorts: Sequence(Int
 rule getSecutiryHostRelationships (vmId: String) {
 	to 
 		ip: TOSCA!Relationship(
-			--relationship_name <- vmId + '_to_virtual_ip',
 			target <- vmId + '_virtual_ip',
 			type <- 'dice.server_connected_to_virtual_ip'
 		),
 		sec: TOSCA!Relationship(
-			--relationship_name <- vmId + '_to_firewall',
 			target <- vmId + '_virtual_ip',
 			type <- 'dice.server_connected_to_firewall'
 		)
@@ -936,7 +933,6 @@ lazy rule getContainedInRelationshipFromExecutionBinding{
 		s:  DDSM!ExecutionBinding
 	to
 		t: TOSCA!Relationship(
-			--relationship_name <- s.elementId,
 			target <- s.providedexecutionplatform.owner.elementId,
 			type <- 'dice.relationships.ContainedIn',
 			source_interfaces <- s.requiredexecutionplatform.resource 
@@ -953,7 +949,6 @@ lazy rule getConnectedToRelationshipFromRelationship {
 		s:  DDSM!Relationship
 	to
 		t: TOSCA!Relationship(
-			--relationship_name <- s.elementId,
 			target <- s.providedport.owner.elementId,
 			type <- 'dice.relationships.ConnectedTo',
 			source_interfaces <- s.requiredport.resource 
