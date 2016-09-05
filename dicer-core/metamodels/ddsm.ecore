@@ -339,6 +339,12 @@
         upperBound="-1" eType="#//RequiredExecutionPlatform"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraQuorum" eSuperTypes="#//PeersQuorum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="cassandraNeedASeed"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="cassandraNeedASeed" value="Relationship.allInstances() ->&#xA;&#x9;exists( r |&#xA;&#x9;&#x9;r.providedport.owner.oclIsTypeOf(CassandraSeed) and&#xA;&#x9;&#x9;r.requiredport.elementId = self.requires_bootstrapping_seed.elementId&#xA;&#x9;)&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requires_bootstrapping_seed"
         lowerBound="1" eType="#//RequiredPort"/>
   </eClassifiers>
