@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 ../metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:StormCluster" elementId="storm" requiresMasterVm="requires_master" requiresSlaveVm="requires_slave1">
+    <requiredport elementId="requires_zookeeper"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="requires_master"/>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="requires_slave1"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="flexiant">
+    <providedexecutionplatform elementId="vm1_hosting" owner="vm1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="flexiant">
+    <providedexecutionplatform elementId="vm2_hosting" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="slave1_host" requiredexecutionplatform="requires_slave1" providedexecutionplatform="vm2_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="slave2_host" requiredexecutionplatform="requires_master" providedexecutionplatform="vm1_hosting"/>
+  <cloudelement xsi:type="ddsm:Provider" elementId="flexiant"/>
+  <cloudelement xsi:type="ddsm:ZookeeperCluster" elementId="zookeeper" requiresPeerVm="requires_server">
+    <providedport elementId="provides_zookeeper" owner="zookeeper"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="storm_to_zookeeper" providedport="provides_zookeeper" requiredport="requires_zookeeper"/>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="requires_server"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="server_host" requiredexecutionplatform="requires_server" providedexecutionplatform="vm1_hosting"/>
+</ddsm:DDSM>

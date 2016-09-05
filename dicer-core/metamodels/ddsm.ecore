@@ -207,7 +207,7 @@
       <details key="constraints" value="dependsOnZookeeper"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="dependsOnZookeeper" value="Relationship.allInstances() ->&#xA;&#x9;exists(r | &#xA;&#x9;&#x9;self.requiredport -> exists(p |&#xA;&#x9;&#x9;&#x9;p.elementId = r.requiredport.elementId&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
+      <details key="dependsOnZookeeper" value="Relationship.allInstances() ->&#xA;&#x9;exists(r | &#xA;&#x9;&#x9;self.requiredport -> exists(p |&#xA;&#x9;&#x9;&#x9;p.elementId = r.requiredport.elementId and&#xA;&#x9;&#x9;&#x9;(r.providedport.owner.oclIsTypeOf(ZookeeperCluster) or&#xA;&#x9;&#x9;&#x9;r.providedport.owner.oclIsTypeOf(ZookeeperQuorum))&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="60"/>
@@ -282,7 +282,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cookbookId" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StormCluster" eSuperTypes="#//MasterSlavePlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StormCluster" eSuperTypes="#//MasterSlavePlatform">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="stormClusterDependsOnZookeeper"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="stormClusterDependsOnZookeeper" value="Relationship.allInstances() ->&#xA;&#x9;exists(r | &#xA;&#x9;&#x9;self.requiredport -> exists(p |&#xA;&#x9;&#x9;&#x9;p.elementId = r.requiredport.elementId and&#xA;&#x9;&#x9;&#x9;(r.providedport.owner.oclIsTypeOf(ZookeeperCluster) or&#xA;&#x9;&#x9;&#x9;r.providedport.owner.oclIsTypeOf(ZookeeperQuorum))&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JobSubmission" eSuperTypes="#//CloudElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -327,11 +334,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterSlavePlatform" eSuperTypes="#//InternalComponent">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="mustBelongToZookeeperQuorum"/>
+      <details key="constraints" value="slavePlatformsNeedBinding masterPlatformNeedBinding"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="slavePlatformsNeedBinding" value="requiresSlaveVm -> forAll(platform | ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = platform.elementId and &#xA;&#x9;         b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;)"/>
-      <details key="masterPlatformNeedBinding" value="ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = hasMasterVm.elementId and &#xA;&#x9;         b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;"/>
+      <details key="masterPlatformNeedBinding" value="ExecutionBinding.allInstances() ->&#xA;&#x9;exists(b |&#xA;&#x9;&#x9; b.requiredexecutionplatform.elementId = requiresMasterVm.elementId and &#xA;&#x9;         b.providedexecutionplatform.owner.oclIsTypeOf(VM)&#xA;&#x9;)&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresMasterVm" lowerBound="1"
         eType="#//RequiredExecutionPlatform"/>
