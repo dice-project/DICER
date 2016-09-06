@@ -248,6 +248,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipRunningJob" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSubmissions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasSchedule" eType="#//Crontab"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VMSize">
     <eLiterals name="Small"/>
@@ -299,13 +300,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasMaster" lowerBound="1"
         eType="#//MasterNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Crontab" instanceTypeName="crontab">
-    <eTypeParameters name="min"/>
-    <eTypeParameters name="hour"/>
-    <eTypeParameters name="dayOfMonth"/>
-    <eTypeParameters name="month"/>
-    <eTypeParameters name="dayOfWeek"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ZookeeperQuorum" eSuperTypes="#//PeersQuorum"/>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraWorker" eSuperTypes="#//PeerNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -356,4 +350,13 @@
         lowerBound="1" eType="#//RequiredPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CassandraSeed" eSuperTypes="#//InternalComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Crontab">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hour" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayOfMonth" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayOfWeek" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
 </ecore:EPackage>
