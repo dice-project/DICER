@@ -1,0 +1,30 @@
+tosca_definitions_version: cloudify_dsl_1_1
+imports: ['http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml', 'http://dice-project.github.io/DICE-FCO-Plugin-Cloudify/0.1.1/plugin.yaml',
+  'http://dice-project.github.io/cloudify-chef-plugin/1.3.2/plugin.yaml', 'http://dice-project.github.io/DICE-Deployment-Cloudify/spec/fco/develop/plugin.yaml']
+nodeTemplates:
+  vm1:
+    type: dice.hosts.Small
+    instances: {deploy: 1}
+    properties: {}
+  vm2:
+    type: dice.hosts.Small
+    instances: {deploy: 1}
+    properties: {}
+  seed:
+    type: dice.components.cassandra.Seed
+    relationships:
+    - {type: dice.relationships.ContainedIn, target: vm2}
+    properties: {}
+  seed_firewall:
+    type: dice.firewall_rules.cassandra.Common
+    properties: {}
+  worker:
+    type: dice.components.cassandra.Worker
+    relationships:
+    - {type: dice.relationships.ContainedIn, target: vm1}
+    - {type: dice.relationships.cassandra.ConnectedToSeed, target: seed}
+    properties: {}
+  worker_firewall:
+    type: dice.firewall_rules.cassandra.Common
+    properties: {}
+
