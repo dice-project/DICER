@@ -65,7 +65,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInputsParameterParserRuleCall_6_3_1_0 = (RuleCall)cInputsAssignment_6_3_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6_4 = (Keyword)cGroup_6.eContents().get(4);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cNodeTemplatesKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Keyword cNode_templatesKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
 		private final Assignment cNodeTemplatesAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
 		private final RuleCall cNodeTemplatesNodeTemplateParserRuleCall_7_2_0 = (RuleCall)cNodeTemplatesAssignment_7_2.eContents().get(0);
@@ -111,7 +111,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		//	'"tosca_definitions_version" :' tosca_definitions_version=STRING (',\n"description" :' description=STRING)?
 		//	(',\n"imports" :' '[' imports+=Import ("," imports+=Import)* ']')? (',\n"outputs" :' '{' outputs+=Parameter (","
 		//	outputs+=Parameter)* '}')? (',\n"inputs" :' '{' inputs+=Parameter ("," inputs+=Parameter)* '}')?
-		//	(',\n"nodeTemplates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
+		//	(',\n"node_templates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
 		//	(',\n"realtionships" :' '{' realtionships+=Relationship ("," realtionships+=Relationship)* '}')? (',\n"groups" :' '{'
 		//	groups+=Group ("," groups+=Group)* '}')? (',\n"policies" :' '{' policies+=Policy ("," policies+=Policy)* '}')?
 		//	'}';
@@ -120,7 +120,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'{' '"tosca_definitions_version" :' tosca_definitions_version=STRING (',\n"description" :' description=STRING)?
 		//(',\n"imports" :' '[' imports+=Import ("," imports+=Import)* ']')? (',\n"outputs" :' '{' outputs+=Parameter (","
 		//outputs+=Parameter)* '}')? (',\n"inputs" :' '{' inputs+=Parameter ("," inputs+=Parameter)* '}')?
-		//(',\n"nodeTemplates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
+		//(',\n"node_templates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
 		//(',\n"realtionships" :' '{' realtionships+=Relationship ("," realtionships+=Relationship)* '}')? (',\n"groups" :' '{'
 		//groups+=Group ("," groups+=Group)* '}')? (',\n"policies" :' '{' policies+=Policy ("," policies+=Policy)* '}')? '}'
 		public Group getGroup() { return cGroup; }
@@ -239,11 +239,11 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_4() { return cRightCurlyBracketKeyword_6_4; }
 		
-		//(',\n"nodeTemplates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
+		//(',\n"node_templates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
 		public Group getGroup_7() { return cGroup_7; }
 		
-		//',\n"nodeTemplates" :'
-		public Keyword getNodeTemplatesKeyword_7_0() { return cNodeTemplatesKeyword_7_0; }
+		//',\n"node_templates" :'
+		public Keyword getNode_templatesKeyword_7_0() { return cNode_templatesKeyword_7_0; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7_1() { return cLeftCurlyBracketKeyword_7_1; }
@@ -1825,7 +1825,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	'"tosca_definitions_version" :' tosca_definitions_version=STRING (',\n"description" :' description=STRING)?
 	//	(',\n"imports" :' '[' imports+=Import ("," imports+=Import)* ']')? (',\n"outputs" :' '{' outputs+=Parameter (","
 	//	outputs+=Parameter)* '}')? (',\n"inputs" :' '{' inputs+=Parameter ("," inputs+=Parameter)* '}')?
-	//	(',\n"nodeTemplates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
+	//	(',\n"node_templates" :' '{' nodeTemplates+=NodeTemplate ("," nodeTemplates+=NodeTemplate)* '}')?
 	//	(',\n"realtionships" :' '{' realtionships+=Relationship ("," realtionships+=Relationship)* '}')? (',\n"groups" :' '{'
 	//	groups+=Group ("," groups+=Group)* '}')? (',\n"policies" :' '{' policies+=Policy ("," policies+=Policy)* '}')?
 	//	'}';

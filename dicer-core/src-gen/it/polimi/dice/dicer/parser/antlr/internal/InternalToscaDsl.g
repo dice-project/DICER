@@ -301,9 +301,9 @@ ruleTopologyTemplate returns [EObject current=null]
 			}
 		)?
 		(
-			otherlv_23=',\n"nodeTemplates" :'
+			otherlv_23=',\n"node_templates" :'
 			{
-				newLeafNode(otherlv_23, grammarAccess.getTopologyTemplateAccess().getNodeTemplatesKeyword_7_0());
+				newLeafNode(otherlv_23, grammarAccess.getTopologyTemplateAccess().getNode_templatesKeyword_7_0());
 			}
 			otherlv_24='{'
 			{

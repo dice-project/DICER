@@ -12,7 +12,7 @@
 ',\n"instances" : {'=27
 ',\n"interfaces" :'=29
 ',\n"node" :'=43
-',\n"nodeTemplates" :'=21
+',\n"node_templates" :'=21
 ',\n"outputs" :'=18
 ',\n"policies" :'=24
 ',\n"properties" :'=30
