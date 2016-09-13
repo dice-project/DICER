@@ -300,9 +300,9 @@ lazy rule getZookeeperServerNodeTemplate {
 			properties <- s.property 
 			-> collect(property | thisModule.getProperty(property)),
 			
-			configurations <- thisModule.getConfigurationFromAttribute('tickTime', 1500).union(
-			thisModule.getConfigurationFromAttribute('initLimit', 10)).union(
-			thisModule.getConfigurationFromAttribute('syncLimit', 5)),
+			configurations <- thisModule.getConfigurationFromAttribute('tickTime', s.tickTime).union(
+			thisModule.getConfigurationFromAttribute('initLimit', s.initLimit)).union(
+			thisModule.getConfigurationFromAttribute('syncLimit', s.syncLimit)),
 			
 			interfaces <- 
 			s.resource 
@@ -605,7 +605,11 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 			thisModule.getConfigurationFromAttribute('monitorFrequency', 10)).union(
 			thisModule.getConfigurationFromAttribute('queueSize', 100000)).union(
 			thisModule.getConfigurationFromAttribute('retryTimes', 5)).union(
-			thisModule.getConfigurationFromAttribute('retryInterval', 2000))
+			thisModule.getConfigurationFromAttribute('retryInterval', 2000)).union(
+			thisModule.getConfigurationFromAttribute('workerStartTimeout', 120)).union(
+			thisModule.getConfigurationFromAttribute('heartbeatFrequency', 5)).union(
+			thisModule.getConfigurationFromAttribute('cpuCapacity', 400)).union(
+			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096)),
 		),
 		
 		nimbus_firewall: TOSCA!NodeTemplate(
@@ -727,12 +731,17 @@ lazy rule getNimbusNodeTemplate {
 			properties <- s.property 
 			-> collect(property | thisModule.getProperty(property)),
 			
-			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', 30).union(
-			thisModule.getConfigurationFromAttribute('supervisorFrequency', 60)).union(
-			thisModule.getConfigurationFromAttribute('monitorFrequency', 10)).union(
-			thisModule.getConfigurationFromAttribute('queueSize', 100000)).union(
-			thisModule.getConfigurationFromAttribute('retryTimes', 5)).union(
-			thisModule.getConfigurationFromAttribute('retryInterval', 2000)),
+			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', s.taskTimeout).union(
+			thisModule.getConfigurationFromAttribute('supervisorFrequency', s.supervisorFrequency)).union(
+			thisModule.getConfigurationFromAttribute('monitorFrequency', s.monitorFrequency)).union(
+			thisModule.getConfigurationFromAttribute('queueSize', s.queueSize)).union(
+			thisModule.getConfigurationFromAttribute('retryTimes', s.retryTimes)).union(
+			thisModule.getConfigurationFromAttribute('retryInterval', s.retryInterval)).union()
+			thisModule.getConfigurationFromAttribute('workerStartTimeout', s.workerStartTimeout)).union(
+			thisModule.getConfigurationFromAttribute('heartbeatFrequency', s.heartbeatFrequency)).union(
+			thisModule.getConfigurationFromAttribute('cpuCapacity', s.cpuCapacity)).union(
+			thisModule.getConfigurationFromAttribute('memoryCapacity', s.memoryCapacity)),
+			
 			
 			interfaces <- 
 			s.resource 
@@ -830,10 +839,10 @@ lazy rule getStormSupervisorNodeTemplate {
 			properties <- s.property 
 			-> collect(property | thisModule.getProperty(property)),
 			
-			configurations <- thisModule.getConfigurationFromAttribute('workerStartTimeout', 120).union(
-			thisModule.getConfigurationFromAttribute('heartbeatFrequency', 5)).union(
-			thisModule.getConfigurationFromAttribute('cpuCapacity', 400)).union(
-			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096)),
+			configurations <- thisModule.getConfigurationFromAttribute('workerStartTimeout', s.workerStartTimeout).union(
+			thisModule.getConfigurationFromAttribute('heartbeatFrequency', s.heartbeatFrequency)).union(
+			thisModule.getConfigurationFromAttribute('cpuCapacity', s.cpuCapacity)).union(
+			thisModule.getConfigurationFromAttribute('memoryCapacity', s.memoryCapacity)),
 			
 			interfaces <- 
 			s.resource 
