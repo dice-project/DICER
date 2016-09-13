@@ -37,10 +37,10 @@ public class Dicer {
     private boolean help = false;
     
     @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-    public String inModelPath = "./models/storm.xmi";
+    public String inModelPath = "./models/default.xmi";
     
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-    public String outModelPath = "./models/storm_tosca";
+    public String outModelPath = "./models/default_tosca";
     
     @Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
     public String inMetamodelPath = "./metamodels/ddsm.ecore";

@@ -5,7 +5,7 @@
 	"http://dice-project.github.io/cloudify-chef-plugin/1.3.2/plugin.yaml",
 	"http://dice-project.github.io/DICE-Deployment-Cloudify/spec/fco/develop/plugin.yaml"
 	] ,
-"nodeTemplates" : {
+"node_templates" : {
 		"vm1" : {
 			"type" : "dice.hosts.Medium" ,
 "instances" : { "deploy" : 1

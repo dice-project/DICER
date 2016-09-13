@@ -38,7 +38,7 @@
   </nodeTemplates>
   <nodeTemplates node_template_name="zookeeper_vm1_worker" type="dice.components.zookeeper.Server">
     <relationships type="dice.relationships.ContainedIn" target="vm1"/>
-    <relationships type="dice.relationships.zookeeper.MemberOfQuorum" target="zookeeper_quorum"/>
+    <relationships type="dice.relationships.zookeeper.MemberOfQuorum" target="zookeeper"/>
     <configurations property_name="tickTime" value="1500"/>
     <configurations property_name="initLimit" value="10"/>
     <configurations property_name="syncLimit" value="5"/>
