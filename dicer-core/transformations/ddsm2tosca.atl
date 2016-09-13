@@ -47,7 +47,7 @@ rule DDSM2TOSCA{
 	}
 	to 
 		t: TOSCA!TopologyTemplate(
-			tosca_definitions_version <- 'cloudify_dsl_1_1',
+			tosca_definitions_version <- 'cloudify_dsl_1_2',
 			
 			description <- s.description,
 					
@@ -201,7 +201,7 @@ rule getZookeeperCluster ( zookeeperCluster: DDSM!ZookeeperCluster) {
 	}
 	to
 		quorum: TOSCA!NodeTemplate (
-			node_template_name <- zookeeperCluster.elementId + '_quorum',	
+			node_template_name <- zookeeperCluster.elementId,	
 			type <- 'dice.components.zookeeper.Quorum', 
 			
 			properties <- zookeeperCluster.property 
@@ -609,7 +609,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 			thisModule.getConfigurationFromAttribute('workerStartTimeout', 120)).union(
 			thisModule.getConfigurationFromAttribute('heartbeatFrequency', 5)).union(
 			thisModule.getConfigurationFromAttribute('cpuCapacity', 400)).union(
-			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096)),
+			thisModule.getConfigurationFromAttribute('memoryCapacity', 4096))
 		),
 		
 		nimbus_firewall: TOSCA!NodeTemplate(
@@ -736,7 +736,7 @@ lazy rule getNimbusNodeTemplate {
 			thisModule.getConfigurationFromAttribute('monitorFrequency', s.monitorFrequency)).union(
 			thisModule.getConfigurationFromAttribute('queueSize', s.queueSize)).union(
 			thisModule.getConfigurationFromAttribute('retryTimes', s.retryTimes)).union(
-			thisModule.getConfigurationFromAttribute('retryInterval', s.retryInterval)).union()
+			thisModule.getConfigurationFromAttribute('retryInterval', s.retryInterval)).union(
 			thisModule.getConfigurationFromAttribute('workerStartTimeout', s.workerStartTimeout)).union(
 			thisModule.getConfigurationFromAttribute('heartbeatFrequency', s.heartbeatFrequency)).union(
 			thisModule.getConfigurationFromAttribute('cpuCapacity', s.cpuCapacity)).union(
