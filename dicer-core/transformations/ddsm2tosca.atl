@@ -236,7 +236,7 @@ rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(targ: String) {
 rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DDSM!ZookeeperCluster) {
 	to
 		zookeeper_peer: TOSCA!NodeTemplate(
-			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_server',	
+			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.zookeeper.Server', 
 			
 			properties <- zookeeperCluster.property 
@@ -255,7 +255,7 @@ rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DD
 		),
 		
 		zookeeper_peer_firewall: TOSCA!NodeTemplate(
-			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_server_firewall',	
+			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_worker_firewall',	
 			type <- 'dice.firewall_rules.zookeeper.Server'
 		)
 	do {
@@ -270,7 +270,7 @@ rule getZookeeperServerRelationshipForZookeeperCluster(host: DDSM!VM, zookeeperC
 			type <- 'dice.relationships.ContainedIn'
 		),
 		zookeeper_to_quorum: TOSCA!Relationship(
-			target <- zookeeperCluster.elementId + '_quorum',
+			target <- zookeeperCluster.elementId,
 			type <- 'dice.relationships.zookeeper.MemberOfQuorum'
 		)
 	do {
@@ -512,14 +512,9 @@ rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 			type <- 'dice.components.cassandra.Seed', 
 			
 			relationships <- thisModule.getContainedInRelationshipForCassandraClusterSeed(cassandraCluster)
-		),
-		
-		seed_firewall: TOSCA!NodeTemplate(
-			node_template_name <- cassandraCluster.elementId + '_seed' + '_firewall',
-			type <- 'dice.firewall_rules.cassandra.Common'
-		)	
+		)
 	do {
-		Sequence{seed, seed_firewall, workers};
+		Sequence{seed, workers};
 	}
 }
 
@@ -582,7 +577,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 	}
 	to 
 		nimbus: TOSCA!NodeTemplate (
-			node_template_name <- stormCluster.elementId + '_nimbus',	
+			node_template_name <- stormCluster.elementId,	
 			type <- 'dice.components.storm.Nimbus', 
 			relationships <- thisModule.getNimbusRelationshipForStormCluster(stormCluster).
 			union(
@@ -613,7 +608,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 		),
 		
 		nimbus_firewall: TOSCA!NodeTemplate(
-			node_template_name <- stormCluster.elementId + '_nimbus' + '_firewall',
+			node_template_name <- stormCluster.elementId + '_firewall',
 			type <- 'dice.firewall_rules.storm.Nimbus'
 		)		
 	do {
@@ -624,7 +619,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 rule getSupervisorNodeTemplateForStormCluster(host: DDSM!VM, stormCluster: DDSM!StormCluster) {
 	to
 		supervisor: TOSCA!NodeTemplate(
-			node_template_name <- stormCluster.elementId + '_' + host.elementId + '_supervisor',	
+			node_template_name <- stormCluster.elementId + '_' + host.elementId + '_slave',	
 			type <- 'dice.components.storm.Worker', 
 			
 			relationships <- thisModule.getSupervisorRelationshipForStormCluster(host, stormCluster).
@@ -670,7 +665,7 @@ rule getSupervisorRelationshipForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 			type <- 'dice.relationships.ContainedIn'
 		),
 		supervisor_to_nimbus: TOSCA!Relationship(
-			target <- stormCluster.elementId + '_nimbus',
+			target <- stormCluster.elementId,
 			type <- 'dice.relationships.storm.ConnectedToNimbus'
 		)
 	do {
@@ -882,43 +877,20 @@ lazy rule getSupervisorToNimbusRelationship {
 }
 -------------------- Storm rules --------------------
 
-rule getFloatingIpNodeFromFrontend (elementId: String, publicPorts: Sequence(Integer)) {
-	using {
-		securityProperties: Sequence(TOSCA!Property) = publicPorts ->
-		collect(port | thisModule.getPropertyFromAttribute('port', port)).flatten();
-	}
+lazy rule getProvidedByRelationships {
+	from
+		s: String
 	to
-		t: TOSCA!NodeTemplate(
-			node_template_name <- elementId + '_virtual_ip',
-			type <- 'dice.virtual_ip'
-		),
-		u: TOSCA!NodeTemplate(
-			node_template_name <- elementId + '_firewall',
-			type <- 'dice.firewall_rules.' + elementId, 
-			properties <- securityProperties
+		t: TOSCA!Relationship (
+			target <- s,
+			type <- 'dice.relationships.ProtectedBy'
 		)
-	do {
-		Sequence{t,u};
-	}
 		
 }
 
-rule getSecutiryHostRelationships (vmId: String) {
-	to 
-		ip: TOSCA!Relationship(
-			target <- vmId + '_virtual_ip',
-			type <- 'dice.server_connected_to_virtual_ip'
-		),
-		sec: TOSCA!Relationship(
-			target <- vmId + '_virtual_ip',
-			type <- 'dice.server_connected_to_firewall'
-		)
-	do {
-		Sequence{ip, sec};
-	}
-}
-
-rule getNodeTemplatesFromVM(s: DDSM!VM){
+lazy rule getNodeTemplatesFromVM{
+	from
+		s: DDSM!VM
 	to
 		t : TOSCA!NodeTemplate(
 			node_template_name <- s.elementId,
@@ -936,14 +908,64 @@ rule getNodeTemplatesFromVM(s: DDSM!VM){
 			s.resource 
 			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
 			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
+			),
+			
+			relationships <- 
+			DDSM!PeerToPeerPlatform.allInstances() -> 
+			select( peer2peer | 
+				peer2peer.requiresPeerVm ->
+				exists(reqPlatform | 
+					s.providedexecutionplatform ->
+					exists(provPlatform | 
+							DDSM!ExecutionBinding.allInstances() ->
+							exists(binding | 
+								binding.requiredexecutionplatform.elementId = reqPlatform.elementId and
+								binding.providedexecutionplatform.elementId = provPlatform.elementId
+							)
+					)
+				)
+			) ->
+			collect(peer2peer | thisModule.getProvidedByRelationships(peer2peer.elementId + '_' + s.elementId + '_worker_firewall'))
+			.union(
+				DDSM!CassandraSeed.allInstances().asSequence()
+				.union(
+				DDSM!Nimbus.allInstances().asSequence()
+				).union(
+				DDSM!CassandraWorker.allInstances().asSequence()
+				).union(
+				DDSM!ZookeeperServer.allInstances().asSequence()
+				) -> 
+				select(comp | 
+					comp.requiredexecutionplatform ->
+					exists(reqPlatform | 
+						s.providedexecutionplatform ->
+						exists(provPlatform | 
+								DDSM!ExecutionBinding.allInstances() ->
+								exists(binding | 
+									binding.requiredexecutionplatform.elementId = reqPlatform.elementId and
+									binding.providedexecutionplatform.elementId = provPlatform.elementId
+								)
+						)
+					)
+					
+				) ->
+				collect(comp | thisModule.getProvidedByRelationships(comp.elementId + '_firewall'))					
 			)
+			.union(
+				DDSM!MasterSlavePlatform.allInstances() -> 
+				select(masterslave | 
+					s.providedexecutionplatform ->
+					exists(provPlatform | 
+							DDSM!ExecutionBinding.allInstances() ->
+							exists(binding | 
+								binding.requiredexecutionplatform.elementId = masterslave.requiresMasterVm.elementId and
+								binding.providedexecutionplatform.elementId = provPlatform.elementId
+							)
+					)
+				) ->
+				collect(masterslave | thisModule.getProvidedByRelationships(masterslave.elementId + '_firewall'))
+			)			
 		)
-	do {
-		if (s.publicPorts.size() > 0) {
-			t.relationships <- thisModule.getSecutiryHostRelationships(s.elementId);
-		}
-		t;
-	}
 }
 
 lazy rule getInstancesElement{

@@ -1,83 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore" xmi:id="_XDtC0HNZEea625mtia-Uaw" type="Xml" name="zookeeper.xmi_diagram" measurementUnit="Pixel">
-  <children xmi:type="notation:Node" xmi:id="_X7xTQHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_X7x6UHNZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_X7xTQXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://ddsm/1.0 ../metamodels/ddsm.ecore" xmi:id="_s2ZxcHmsEeafQcV2xpVJmw" type="Xml" name="zookeeper.xmi_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_yPG7gHmsEeafQcV2xpVJmw" type="1003">
+    <children xmi:type="notation:Node" xmi:id="_yPHikHmsEeafQcV2xpVJmw" type="4002"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_yPG7gXmsEeafQcV2xpVJmw" fontName=".Helvetica Neue DeskInterface"/>
     <element xmi:type="ddsm:ZookeeperCluster" href="zookeeper.xmi#zookeeper"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_X7xTQnNZEea625mtia-Uaw" x="420" y="238"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yPG7gnmsEeafQcV2xpVJmw" x="304" y="204"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_Y_30kHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_Y_4boHNZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_Y_30kXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xmi:type="ddsm:RequiredExecutionPlatform" href="zookeeper.xmi#server1_platform"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y_30knNZEea625mtia-Uaw" x="350" y="324"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_bwjzgHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_bwjzg3NZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_bwjzgXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xmi:type="ddsm:VM" href="zookeeper.xmi#vm1"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bwjzgnNZEea625mtia-Uaw" x="204" y="508"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_cZifEHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_cZjGIHNZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_cZifEXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xmi:type="ddsm:Provider" href="zookeeper.xmi#flexiant"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cZifEnNZEea625mtia-Uaw" x="491" y="537"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_eMfDYHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_eMfDY3NZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_eMfDYXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xmi:type="ddsm:ProvidedExecutionPlatform" href="zookeeper.xmi#vm1_hosting"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eMfDYnNZEea625mtia-Uaw" x="324" y="468"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_iF1TgHNZEea625mtia-Uaw" type="1003">
-    <children xmi:type="notation:Node" xmi:id="_iF16kHNZEea625mtia-Uaw" type="4002"/>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_iF1TgXNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xmi:type="ddsm:ExecutionBinding" href="zookeeper.xmi#server1_to_host"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iF1TgnNZEea625mtia-Uaw" x="446" y="415"/>
-  </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_XDtC0XNZEea625mtia-Uaw"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_s2ZxcXmsEeafQcV2xpVJmw"/>
   <element xmi:type="ddsm:DDSM" href="zookeeper.xmi#/"/>
-  <edges xmi:type="notation:Edge" xmi:id="_Y_7e8HNZEea625mtia-Uaw" type="3003" source="_X7xTQHNZEea625mtia-Uaw" target="_Y_30kHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_Y_7e8XNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_Y_7e8nNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Y_7e83NZEea625mtia-Uaw" points="[-39, -20, 456, 238]$[-495, -258, 0, 0]"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_dVmesHNZEea625mtia-Uaw" type="3003" source="_bwjzgHNZEea625mtia-Uaw" target="_cZifEHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_dVmesXNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_dVmesnNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dVmes3NZEea625mtia-Uaw" points="[0, 0, -243, -15]$[229, 15, -14, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dVoT4HNZEea625mtia-Uaw" id="(1.0,0.9)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dVoT4XNZEea625mtia-Uaw" id="(0.14893617021276595,0.55)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_eMitwHNZEea625mtia-Uaw" type="3002" source="_bwjzgHNZEea625mtia-Uaw" target="_eMfDYHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_eMitwXNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_eMitwnNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eMitw3NZEea625mtia-Uaw" points="[-9, -20, 224, 508]$[-233, -528, 0, 0]"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_hkL_AHNZEea625mtia-Uaw" type="3003" source="_eMfDYHNZEea625mtia-Uaw" target="_bwjzgHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_hkL_AXNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_hkL_AnNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hkL_A3NZEea625mtia-Uaw" points="[0, 0, 193, -20]$[-164, 20, 29, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hkN0MHNZEea625mtia-Uaw" id="(0.504950495049505,1.0)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_jENAQHNZEea625mtia-Uaw" type="3003" source="_iF1TgHNZEea625mtia-Uaw" target="_eMfDYHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_jENAQXNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_jENAQnNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_jENAQ3NZEea625mtia-Uaw" points="[0, 0, 74, -37]$[-45, 38, 29, 1]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_jEOOYHNZEea625mtia-Uaw" id="(0.7183908045977011,1.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_jEOOYXNZEea625mtia-Uaw" id="(0.8564356435643564,0.6)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_jTA4UHNZEea625mtia-Uaw" type="3003" source="_iF1TgHNZEea625mtia-Uaw" target="_Y_30kHNZEea625mtia-Uaw">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_jTA4UXNZEea625mtia-Uaw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_jTA4UnNZEea625mtia-Uaw" fontName=".Helvetica Neue DeskInterface"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_jTA4U3NZEea625mtia-Uaw" points="[-30, -40, 78, 71]$[3, -107, 111, 4]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_jTCGcHNZEea625mtia-Uaw" id="(0.7011494252873564,1.0)"/>
-  </edges>
 </notation:Diagram>

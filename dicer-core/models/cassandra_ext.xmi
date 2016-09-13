@@ -1,22 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore">
-  <cloudelement xsi:type="ddsm:CassandraQuorum" elementId="cassandra" requires_bootstrapping_seed="requires_seed"/>
-  <cloudelement xsi:type="ddsm:CassandraSeed" elementId="seed">
-    <providedport elementId="provides_seed" owner="seed"/>
-    <requiredexecutionplatform elementId="requires_host"/>
+<ddsm:DDSM xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ddsm="http://ddsm/1.0"
+    xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore">
+  <cloudelement
+      xsi:type="ddsm:CassandraQuorum"
+      elementId="cassandra"
+      requires_bootstrapping_seed="requires_seed"/>
+  <cloudelement
+      xsi:type="ddsm:CassandraSeed"
+      elementId="seed">
+    <providedport
+        elementId="provides_seed"
+        owner="seed"/>
+    <requiredexecutionplatform
+        elementId="requires_host"/>
   </cloudelement>
-  <cloudelement xsi:type="ddsm:RequiredPort" elementId="requires_seed"/>
-  <cloudelement xsi:type="ddsm:Relationship" elementId="seed_to_cassandra" providedport="provides_seed" requiredport="requires_seed"/>
-  <cloudelement xsi:type="ddsm:CassandraWorker" elementId="worker" belongsToQuorum="cassandra">
-    <requiredexecutionplatform elementId="equires_host"/>
+  <cloudelement
+      xsi:type="ddsm:RequiredPort"
+      elementId="requires_seed"/>
+  <cloudelement
+      xsi:type="ddsm:Relationship"
+      elementId="seed_to_cassandra"
+      providedport="provides_seed"
+      requiredport="requires_seed"/>
+  <cloudelement
+      xsi:type="ddsm:CassandraWorker"
+      elementId="worker"
+      belongsToQuorum="cassandra">
+    <requiredexecutionplatform
+        elementId="equires_host"/>
   </cloudelement>
-  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="flexiant">
-    <providedexecutionplatform elementId="vm1_hosting" owner="vm1"/>
+  <cloudelement
+      xsi:type="ddsm:VM"
+      elementId="vm1"
+      provider="flexiant">
+    <providedexecutionplatform
+        elementId="vm1_hosting"
+        owner="vm1"/>
   </cloudelement>
-  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="flexiant">
-    <providedexecutionplatform elementId="vm2_hosting" owner="vm2"/>
+  <cloudelement
+      xsi:type="ddsm:VM"
+      elementId="vm2"
+      provider="flexiant">
+    <providedexecutionplatform
+        elementId="vm2_hosting"
+        owner="vm2"/>
   </cloudelement>
-  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="seed_to_host" requiredexecutionplatform="requires_host" providedexecutionplatform="vm2_hosting"/>
-  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="worker_to_host" requiredexecutionplatform="equires_host" providedexecutionplatform="vm1_hosting"/>
-  <cloudelement xsi:type="ddsm:Provider" elementId="flexiant"/>
+  <cloudelement
+      xsi:type="ddsm:ExecutionBinding"
+      elementId="seed_to_host"
+      requiredexecutionplatform="requires_host"
+      providedexecutionplatform="vm2_hosting"/>
+  <cloudelement
+      xsi:type="ddsm:ExecutionBinding"
+      elementId="worker_to_host"
+      requiredexecutionplatform="equires_host"
+      providedexecutionplatform="vm1_hosting"/>
+  <cloudelement
+      xsi:type="ddsm:Provider"
+      elementId="flexiant"/>
 </ddsm:DDSM>
