@@ -11,7 +11,7 @@ TopologyTemplate returns TopologyTemplate:
 		(',\n"imports" :' '[' imports+=Import ( "," imports+=Import)* ']' )? 
 		(',\n"outputs" :' '{' outputs+=Parameter ( "," outputs+=Parameter)* '}' )? 
 		(',\n"inputs" :' '{' inputs+=Parameter ( "," inputs+=Parameter)* '}' )? 
-		(',\n"nodeTemplates" :' '{' nodeTemplates+=NodeTemplate ( "," nodeTemplates+=NodeTemplate)* '}' )? 
+		(',\n"node_templates" :' '{' nodeTemplates+=NodeTemplate ( "," nodeTemplates+=NodeTemplate)* '}' )? 
 		(',\n"realtionships" :' '{' realtionships+=Relationship ( "," realtionships+=Relationship)* '}' )? 
 		(',\n"groups" :' '{' groups+=Group ( "," groups+=Group)* '}')? 
 		(',\n"policies" :' '{' policies+=Policy ( "," policies+=Policy)* '}')? 
