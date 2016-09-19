@@ -611,7 +611,12 @@ lazy rule getSparkMasterNodeTemplate {
 				),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('driverMemory', s.driverMemory).union(
+			thisModule.getConfigurationFromAttribute('driverCores', s.driverCores)).union(
+			thisModule.getConfigurationFromAttribute('maxResultSize', s.maxResultSize)).union(
+			thisModule.getConfigurationFromAttribute('UIPort', s.UIPort))
 		),
 		
 		spark_master_firewall: TOSCA!NodeTemplate(
@@ -658,7 +663,9 @@ lazy rule getSparkWorkerNodeTemplate {
 				),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('sparkExecutorMemory', s.sparkExecutorMemory)
 		),
 		
 		spark_slave_firewall: TOSCA!NodeTemplate(
