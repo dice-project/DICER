@@ -32,6 +32,12 @@ rule DDSM2TOSCA{
 		stormCluster: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!StormCluster))
 			-> collect(element | thisModule.getStormCluster(element)).flatten();
+		sparkMasterNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!SparkMaster))
+			-> collect(element | thisModule.getSparkMasterNodeTemplate(element)).flatten();
+		sparkWorkerNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!SparkWorker))
+			-> collect(element | thisModule.getSparkWorkerNodeTemplate(element)).flatten();
 		cassandraSeeds: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!CassandraSeed))
 			-> collect(element | thisModule.getSeedNodeTemplate(element)).flatten();
@@ -62,6 +68,8 @@ rule DDSM2TOSCA{
 			union(nimbusNodes).
 			union(supervisorNodes).
 			union(stormCluster).
+			union(sparkMasterNodes).
+			union(sparkWorkerNodes).
 			union(zookeeperCluster).
 			union(cassandraSeeds).
 			union(cassandraWorkers).
@@ -566,6 +574,113 @@ rule getCassandraWorkerRelationshipForCassandraCluster(host: DDSM!VM, cassandraC
 }
 
 -------------------- Cassandra rules --------------------
+-------------------- Spark rules --------------------
+
+lazy rule getSparkMasterNodeTemplate {
+	from
+		s: DDSM!SparkMaster
+	to
+		sparkMaster: TOSCA!NodeTemplate(
+			node_template_name <- s.elementId,
+			type <- 'dice.components.spark.Master',
+			
+			relationships <- s.requiredexecutionplatform -> 
+				collect(platform | 
+					DDSM!ExecutionBinding.allInstances() ->  
+					select(binding | 		
+						binding.requiredexecutionplatform.elementId = platform.elementId
+					)
+				) -> flatten() -> 
+				collect(binding | 
+					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
+				)
+				.union(
+ 					s.requiredport -> 
+					collect(port | 
+						DDSM!Relationship.allInstances() ->  
+						select(relationship | 		
+							relationship.requiredport.elementId = port.elementId and
+							not (relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or
+								 relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
+						)
+					) -> flatten() -> 
+					collect(relationship | 
+						thisModule.getConnectedToRelationshipFromRelationship(relationship)
+					)	
+				),
+			
+			properties <- s.property 
+			-> collect(property | thisModule.getProperty(property))
+		),
+		
+		spark_master_firewall: TOSCA!NodeTemplate(
+			node_template_name <- s.elementId + '_firewall',
+			type <- 'dice.firewall_rules.spark.Master'
+		)		
+	do {
+		Sequence{sparkMaster, spark_master_firewall};
+	}
+}
+
+lazy rule getSparkWorkerNodeTemplate {
+	from
+		s: DDSM!SparkWorker
+	to
+		sparkSlave: TOSCA!NodeTemplate (
+			node_template_name <- s.elementId,
+			type <- 'dice.components.spark.Worker',
+			
+			relationships <- s.requiredexecutionplatform -> 
+				collect(platform | 
+					DDSM!ExecutionBinding.allInstances() ->  
+					select(binding | 		
+						binding.requiredexecutionplatform.elementId = platform.elementId
+					)
+				) -> flatten() -> 
+				collect(binding | 
+					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
+				)
+				.union(
+ 					s.requiredport -> 
+					collect(port | 
+						DDSM!Relationship.allInstances() ->  
+						select(relationship | 		
+							relationship.requiredport.elementId = port.elementId
+						)
+					) -> flatten() -> 
+					collect(relationship | 
+						thisModule.getConnectedToRelationshipFromRelationship(relationship)
+					)	
+				)
+				.append(
+					thisModule.getSparkWorkerHasMasterRelationship(s)
+				),
+			
+			properties <- s.property 
+			-> collect(property | thisModule.getProperty(property))
+		),
+		
+		spark_slave_firewall: TOSCA!NodeTemplate(
+			node_template_name <- s.elementId + '_firewall',
+			type <- 'dice.firewall_rules.spark.Worker'
+		)		
+	do {
+		Sequence{sparkSlave, spark_slave_firewall};
+	}
+
+}
+
+lazy rule getSparkWorkerHasMasterRelationship {
+	from
+		s: DDSM!SparkWorker
+	to
+		t: TOSCA!Relationship (
+			target <- s.hasMaster.elementId,
+			type <- 'dice.relationships.spark.ConnectedToMaster'
+		)
+}
+
+-------------------- Spark rules --------------------
 
 -------------------- Storm rules --------------------
 
@@ -934,6 +1049,10 @@ lazy rule getNodeTemplatesFromVM{
 				DDSM!CassandraWorker.allInstances().asSequence()
 				).union(
 				DDSM!ZookeeperServer.allInstances().asSequence()
+				).union(
+				DDSM!SparkMaster.allInstances().asSequence()
+				).union(
+				DDSM!SparkWorker.allInstances().asSequence()
 				) -> 
 				select(comp | 
 					comp.requiredexecutionplatform ->

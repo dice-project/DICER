@@ -367,4 +367,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayOfWeek" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SparkCluster" eSuperTypes="#//MasterSlavePlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SparkMaster" eSuperTypes="#//MasterNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SparkWorker" eSuperTypes="#//SlaveNode"/>
 </ecore:EPackage>
