@@ -29,7 +29,7 @@ rule DDSM2TOSCA{
 		supervisorNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!Supervisor))
 			-> collect(element | thisModule.getStormSupervisorNodeTemplate(element)).flatten();
-		stormCluster: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+		stormClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!StormCluster))
 			-> collect(element | thisModule.getStormCluster(element)).flatten();
 		sparkMasterNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
@@ -38,6 +38,9 @@ rule DDSM2TOSCA{
 		sparkWorkerNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!SparkWorker))
 			-> collect(element | thisModule.getSparkWorkerNodeTemplate(element)).flatten();
+		sparkClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!SparkCluster))
+			-> collect(element | thisModule.getSparkCluster(element)).flatten();
 		cassandraSeeds: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!CassandraSeed))
 			-> collect(element | thisModule.getSeedNodeTemplate(element)).flatten();
@@ -67,9 +70,10 @@ rule DDSM2TOSCA{
 			union(zookeeperQuorumNodes).
 			union(nimbusNodes).
 			union(supervisorNodes).
-			union(stormCluster).
+			union(stormClusters).
 			union(sparkMasterNodes).
 			union(sparkWorkerNodes).
+			union(sparkClusters).
 			union(zookeeperCluster).
 			union(cassandraSeeds).
 			union(cassandraWorkers).
@@ -577,6 +581,91 @@ rule getCassandraWorkerRelationshipForCassandraCluster(host: DDSM!VM, cassandraC
 -------------------- Cassandra rules --------------------
 -------------------- Spark rules --------------------
 
+lazy rule getSparkCluster {
+	from
+		sparkCluster: DDSM!SparkCluster
+	to 
+		master: TOSCA!NodeTemplate (
+			node_template_name <- sparkCluster.elementId,	
+			type <- 'dice.components.spark.Master', 
+			relationships <- Sequence{thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | 
+					binding.requiredexecutionplatform.elementId = sparkCluster.requiresMasterVm.elementId
+				)
+			)},
+			
+			properties <- sparkCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('driverMemory', 1).union(
+			thisModule.getConfigurationFromAttribute('driverCores', 1)).union(
+			thisModule.getConfigurationFromAttribute('maxResultSize', 1)).union(
+			thisModule.getConfigurationFromAttribute('UIPort', 4040))
+		),
+		
+		master_firewall: TOSCA!NodeTemplate(
+			node_template_name <- sparkCluster.elementId + '_firewall',
+			type <- 'dice.firewall_rules.spark.Master'
+		)
+	do {
+		Sequence{master, master_firewall, sparkCluster.requiresSlaveVm -> 
+			collect(slave_required_platform |  
+				DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | 
+					binding.requiredexecutionplatform.elementId = slave_required_platform.elementId
+				)
+			) -> 
+			collect(binding | 
+				thisModule.getWorkerNodeTemplateForSparkCluster(binding.providedexecutionplatform.owner, sparkCluster)
+			)
+		}.flatten();
+	}
+}
+
+lazy rule getWorkerNodeTemplateForSparkCluster {
+	from 
+		host: DDSM!VM, 
+		sparkCluster: DDSM!SparkCluster
+	to
+		worker: TOSCA!NodeTemplate(
+			node_template_name <- sparkCluster.elementId + '_' + host.elementId + '_worker',	
+			type <- 'dice.components.spark.Worker', 
+			
+			relationships <- thisModule.getSparkWorkerRelationshipForSparkCluster(host, sparkCluster),
+			
+			properties <- sparkCluster.property 
+			-> collect(property | thisModule.getProperty(property)),
+			
+			configurations <- thisModule.getConfigurationFromAttribute('sparkExecutorMemory', 1)
+		),
+		
+		spark_worker_firewall: TOSCA!NodeTemplate(
+			node_template_name <- sparkCluster.elementId  + '_' + host.elementId + '_worker' + '_firewall',
+			type <- 'dice.firewall_rules.spark.Worker'
+		)		
+	do {
+		Sequence{worker	, spark_worker_firewall};
+	}
+}
+
+lazy rule getSparkWorkerRelationshipForSparkCluster {
+	from
+		host: DDSM!VM,
+		sparkCluster: DDSM!SparkCluster
+	to
+		worker_to_host: TOSCA!Relationship(
+			target <- host.elementId,
+			type <- 'dice.relationships.ContainedIn'
+		),
+		worker_to_master: TOSCA!Relationship(
+			target <- sparkCluster.elementId,
+			type <- 'dice.relationships.spark.ConnectedToMaster'
+		)
+	do {
+		Sequence{worker_to_host, worker_to_master};
+	}
+}
+
 lazy rule getSparkMasterNodeTemplate {
 	from
 		s: DDSM!SparkMaster
@@ -632,7 +721,7 @@ lazy rule getSparkWorkerNodeTemplate {
 	from
 		s: DDSM!SparkWorker
 	to
-		sparkSlave: TOSCA!NodeTemplate (
+		sparkWorker: TOSCA!NodeTemplate (
 			node_template_name <- s.elementId,
 			type <- 'dice.components.spark.Worker',
 			
@@ -668,12 +757,12 @@ lazy rule getSparkWorkerNodeTemplate {
 			configurations <- thisModule.getConfigurationFromAttribute('sparkExecutorMemory', s.sparkExecutorMemory)
 		),
 		
-		spark_slave_firewall: TOSCA!NodeTemplate(
+		spark_worker_firewall: TOSCA!NodeTemplate(
 			node_template_name <- s.elementId + '_firewall',
 			type <- 'dice.firewall_rules.spark.Worker'
 		)		
 	do {
-		Sequence{sparkSlave, spark_slave_firewall};
+		Sequence{sparkWorker, spark_worker_firewall};
 	}
 
 }
