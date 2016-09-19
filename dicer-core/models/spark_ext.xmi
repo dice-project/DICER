@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 /dicer-core/metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:SparkMaster" elementId="spark_master1">
+    <requiredexecutionplatform elementId="spark_master_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:SparkWorker" elementId="spark_worker_1" hasMaster="spark_master1">
+    <requiredexecutionplatform elementId="spark_worker1_host"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="flexiant1">
+    <providedexecutionplatform elementId="vm1_hosting" owner="vm1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="flexiant1">
+    <providedexecutionplatform elementId="vm2_hosting" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="spark_master_to_host" requiredexecutionplatform="spark_master_host" providedexecutionplatform="vm1_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="spark_worker1_to_host" requiredexecutionplatform="spark_worker1_host" providedexecutionplatform="vm2_hosting"/>
+  <cloudelement xsi:type="ddsm:Provider" elementId="flexiant1"/>
+</ddsm:DDSM>
