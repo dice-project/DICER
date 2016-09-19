@@ -302,6 +302,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="JobSubmission" eSuperTypes="#//CloudElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="artifactUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationArguments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MasterNode" eSuperTypes="#//InternalComponent"/>
   <eClassifiers xsi:type="ecore:EClass" name="SlaveNode" eSuperTypes="#//InternalComponent">

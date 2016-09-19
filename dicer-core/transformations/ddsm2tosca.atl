@@ -94,6 +94,7 @@ rule getStormClientNodeTemplate (s: DDSM!ClientNode) {
 		application: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application', s.submits.artifactUrl);
 		topology_name: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_name', s.submits.elementId);
 		topology_class: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_class', s.submits.mainClass);
+    	application_arguments: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application_arguments', s.submits.applicationArguments);
     	storm_client_properties: Sequence(TOSCA!Property) = Sequence{application, topology_name, topology_class}.flatten();
 	}
 	to
