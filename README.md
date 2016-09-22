@@ -9,11 +9,11 @@ DICER leverages the DICE Deployment Specific Metamodel (DDSM), which can be dire
 
 http://dynamicgmf.sourceforge.net
 
-You can download the 0.2.1 version (direct binary download url ()). Unzio the downloaded file and copy and paste extracted .jar into the "plugins" folder of your Eclipse installation.
+You can download the 0.2.1 version (direct binary download url ()). Unzip the downloaded file and copy and paste extracted .jar into the "plugins" folder of your Eclipse installation.
 
-The plugin requires the following additionals Eclipse plugins:
+The plugin requires the following additional Eclipse plugins:
 
-3. [Ecore Tools](http://www.eclipse.org/ecoretools/): from the download tab, choose the 3.1.x Nightly update site. You can install just the Ecore Tools and Ecore Tools SDK items. 
+3. [Ecore Tools](http://www.eclipse.org/ecoretools/): from the download tab, choose the 3.1.x Nightly update site. You can install just the Ecore Diagram Editor and the Ecore Diargam Editor SDK items. 
 
 1. [GMF](http://www.eclipse.org/modeling/gmp/): use this [update site](http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/) to install just the necessary GMF Runtime plugin.
 
@@ -31,7 +31,7 @@ Make sure to put the compiled artifact in the same folder in which the metamodel
     cd DICER
     mvn clean package
     cd dicer-core
-    cp dicer-core/target/dicer-core-0.1.0.jar .
+    cp target/dicer-core-0.1.0.jar .
 
 # Usage
 
