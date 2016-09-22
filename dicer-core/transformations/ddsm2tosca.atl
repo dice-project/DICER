@@ -9,7 +9,6 @@ rule DDSM2TOSCA{
 	from 
 		s: DDSM!DDSM
 	using{
-		flexiantImports: Sequence(TOSCA!Import) = thisModule.getFlexiantImport();
 		additionalNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement
 			-> select(element | element.oclIsTypeOf(DDSM!VM))
 			-> select(vm | vm.publicPorts.size() > 0)
@@ -78,19 +77,20 @@ rule DDSM2TOSCA{
 			union(cassandraSeeds).
 			union(cassandraWorkers).
 			union(cassandraClusters).
-			union(storm_clients)
+			union(storm_clients),
+			
+			imports <- DDSM!Provider.allInstances() -> collect(p | thisModule.getProviderImport(p))
 		)
-	do {
-		for (p in DDSM!Provider.allInstances() ){
-		
-			if (p.isFlexiant()) {
-				t.imports <- flexiantImports;
-			}
-		}	
-				
-	}
 }
 
+lazy rule getProviderImport {
+	from
+		p: DDSM!Provider
+	to
+		i: TOSCA!Import (
+			file <-	'http://dice-project.github.io/DICE-Deployment-Cloudify/spec/' + p.type.toString().replaceAll('#','').toLower() + '/develop/plugin.yaml'
+		)
+}
 
 -------------------- Client rules --------------------
 rule getStormClientNodeTemplate (s: DDSM!ClientNode) {
@@ -1259,55 +1259,6 @@ lazy rule getConnectedToRelationshipFromRelationship {
 			-> collect(property | thisModule.getProperty(property))
 		)
 		
-}
-
-helper context DDSM!Provider def: isFlexiant(): Boolean =
-	if self.type = #Flexiant then
-		true
-	else
-		false
-	endif
-;
-
-rule getFlexiantImport(){
-	using {
-		FCO_CLIENT_PLUGIN_VERSION: String = '0.1.1';
-		PLATFORM: String = 'fco';
-		FCO_PLUGIN_VERSION: String = 'develop';
-		CHEF_PLUGIN_VERSION: String = '1.3.2';
-	}
-	to 
-		i1: TOSCA!Import(
-			file <- 'http://www.getcloudify.org/spec/cloudify/3.3.1/types.yaml'
-		),
-		i2: TOSCA!Import(
-			file <- 'http://dice-project.github.io/DICE-FCO-Plugin-Cloudify/' + FCO_CLIENT_PLUGIN_VERSION + '/plugin.yaml'
-		),
-		i3: TOSCA!Import(
-			file <- 'http://dice-project.github.io/cloudify-chef-plugin/' + CHEF_PLUGIN_VERSION + '/plugin.yaml'
-		),
-		i4: TOSCA!Import(
-			file <- 'http://dice-project.github.io/DICE-Deployment-Cloudify/spec/' + PLATFORM + '/' + FCO_PLUGIN_VERSION + '/plugin.yaml'
-		)
-	do {
-		Sequence{i1,i2,i3,i4};	
-	}
-}
-
-rule getOpenstackImport(){
-	using {
-		OPENSTACK_VERSION: String = '';
-	}
-	to 
-		i1: TOSCA!Import(
-			file <- 'openstack-example-import-1' + OPENSTACK_VERSION
-		),
-		i2: TOSCA!Import(
-			file <- 'openstack-example-import-2' + OPENSTACK_VERSION
-		)
-	do {
-		Sequence{i1,i2};	
-	}
 }
 
 helper context DDSM!VM def: getVMGenericSize: String =
