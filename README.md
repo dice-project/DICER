@@ -19,16 +19,13 @@ The plugin requires the following additional Eclipse plugins:
 
 2. [EMF](https://eclipse.org/modeling/emf/): use this [update site] (http://download.eclipse.org/modeling/emf/updates/releases/). You can install just one of the available EMF SDK items (suggested version 2.4.2).
 
-At this step the required environment for creating EMF models from an Ecore metamodel is ready.
-Once the DICER metamodels are imported into Eclipse you can use the Reflective Ecore Model Diagram Editor plugin to start creating DICER models.
-
-If you download the dicer-full.zip release, you can create a new general project and import the dicer-full.zip released archive or directly, Otherwise you can just checkout and import the maven project contained in this repository. At this point all you have to do is to use the now available "Reflective Ecore Diagram Editor" option from the "New" wizard, as shown in the following screenshot:
+At this step the required environment for creating EMF models from an Ecore metamodel is ready and the "Reflective Ecore Diagram Editor" option from the "New" wizard should be now available, as shown in the following screenshot:
 
 ![alt text](https://github.com/DICERs/DICER/blob/master/doc/images/reflective-ecore-diagram.png "New wizar with Reflective Ecore Diagram Editor option.")
 
 # Installation
 
-The DICER is at its early ages and has not been released yet. We plan to release it in the next few weeks. Right now if you want to use the DICER you can checkout this repository and compile it with maven.
+If you want to use the DICER you can checkout this repository and compile it with maven.
 Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code). You may using the following commands:
 
     git clone https://github.com/DICERs/DICER.git
@@ -37,9 +34,13 @@ Make sure to put the compiled artifact in the same folder in which the metamodel
     cd dicer-core
     cp target/dicer-core-0.1.0.jar .
 
+Then you can just import the DICER project into Eclipse to start using the DDSM metamodel to create new models.
+
+If you directly download the released dicer-full.zip archive, everything you need is already packaged withint it and you just have to import it as an archive into an Eclipse project. At this step you can create a new "Reflective Ecore Diagram Editor", pointing at the ddsm.ecore metamodel contained into the metamodels/ folder. 
+
 # Usage
 
-In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run compiler .jar artifact giving as input the path to the input DDSM model and the path to the output TOSCA models. In order to run DICER against one o the available models you can execute following command:
+In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run the compiler .jar artifact giving as input the path to the input DDSM model and the path to the output TOSCA models. If youMake sure the dicer-core-0.1.0.jar is in the same directory of the transformation/ and metamodels/ folders. In order to run DICER against one o the available models you can execute following command:
 
     java -jar dicer-core-0.1.0.jar -inModel models/storm_cluster.xmi -outModel models/storm_cluster_tosca
 
