@@ -22,7 +22,7 @@ The plugin requires the following additional Eclipse plugins:
 At this step the required environment for creating EMF models from an Ecore metamodel is ready.
 Once the DICER metamodels are imported into Eclipse you can use the Reflective Ecore Model Diagram Editor plugin to start creating DICER models.
 
-In particular you can either create a new general project and import the dicer-full.zip released archive or directly import the maven project you obtain checking out this repository. At this point all you have to do is to use the now available "Reflective Ecore Diagram Editor" option from the "New" wizard. The following video shows the steps to perform once all the required plugin have been installed.
+If you download the dicer-full.zip release, you can create a new general project and import the dicer-full.zip released archive or directly, Otherwise you can just checkout and import the maven project contained in this repository. At this point all you have to do is to use the now available "Reflective Ecore Diagram Editor" option from the "New" wizard. 
 
 # Installation
 
