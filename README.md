@@ -9,7 +9,7 @@ DICER leverages the DICE Deployment Specific Metamodel (DDSM), which can be dire
 
 http://dynamicgmf.sourceforge.net
 
-You can download the 0.2.1 version (direct binary download url ()). Unzip the downloaded file and copy and paste extracted .jar into the "plugins" folder of your Eclipse installation.
+You can download the 0.2.1 version (direct binary download url ()). Unzip the downloaded file and copy and paste extracted .jar into the "dropins" folder of your Eclipse installation.
 
 The plugin requires the following additional Eclipse plugins:
 
