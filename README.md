@@ -28,7 +28,7 @@ At this step the required environment for creating EMF models from an Ecore meta
 If you want to use the DICER you can checkout this repository and compile it with maven.
 Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code). You may using the following commands:
 
-    git clone https://github.com/DICERs/DICER.git
+    git clone https://github.com/dice-project/DICER.git
     cd DICER
     mvn clean package
     cd dicer-core
