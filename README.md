@@ -21,7 +21,7 @@ The plugin requires the following additional Eclipse plugins:
 
 At this step the required environment for creating EMF models from an Ecore metamodel is ready and the "Reflective Ecore Diagram Editor" option from the "New" wizard should be now available, as shown in the following screenshot:
 
-![alt text](https://github.com/DICERs/DICER/blob/master/doc/images/reflective-ecore-diagram.png "New wizar with Reflective Ecore Diagram Editor option.")
+![alt text](https://github.com/DICERs/DICER/blob/master/doc/images/creating-dicer-model-1.png "New wizar with Reflective Ecore Diagram Editor option.")
 
 # Installation
 
