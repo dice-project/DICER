@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_2dVSAKhoEeaNA-dLwCzxHQ" name="SampleDdsmModel">
+    <packagedElement xmi:type="uml:Device" xmi:id="_5OE7UKhoEeaNA-dLwCzxHQ" name="StormVmCluster">
+      <nestedNode xmi:type="uml:Node" xmi:id="_7_90IKhoEeaNA-dLwCzxHQ" name="Storm">
+        <deployment xmi:type="uml:Deployment" xmi:id="__5QZ4KhoEeaNA-dLwCzxHQ" client="_7_90IKhoEeaNA-dLwCzxHQ" supplier="_-coD0KhoEeaNA-dLwCzxHQ" deployedArtifact="_-coD0KhoEeaNA-dLwCzxHQ"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_9KwMQKhoEeaNA-dLwCzxHQ" name="StormMasterVm"/>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_-coD0KhoEeaNA-dLwCzxHQ" name="sampleStormApp"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_AYcQQKhpEeaNA-dLwCzxHQ" client="_-coD0KhoEeaNA-dLwCzxHQ" supplier="_9KwMQKhoEeaNA-dLwCzxHQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_BgAVQKhpEeaNA-dLwCzxHQ" client="_7_90IKhoEeaNA-dLwCzxHQ" supplier="_9KwMQKhoEeaNA-dLwCzxHQ"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_4sw-AKhoEeaNA-dLwCzxHQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4sxlEKhoEeaNA-dLwCzxHQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmStormCluster xmi:id="_D9tt0KhpEeaNA-dLwCzxHQ" base_Node="_7_90IKhoEeaNA-dLwCzxHQ"/>
+  <DDSM:DdsmVm xmi:id="_FHfZUKhpEeaNA-dLwCzxHQ" base_Device="_5OE7UKhoEeaNA-dLwCzxHQ" genericSize="medium"/>
+  <DDSM:DdsmBigDataJob xmi:id="_GBMBcKhpEeaNA-dLwCzxHQ" base_Artifact="_-coD0KhoEeaNA-dLwCzxHQ"/>
+  <DDSM:DdsmJobSubmission xmi:id="_HPoKgKhpEeaNA-dLwCzxHQ" base_Deployment="__5QZ4KhoEeaNA-dLwCzxHQ"/>
+</xmi:XMI>

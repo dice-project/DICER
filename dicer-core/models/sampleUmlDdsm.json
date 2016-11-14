@@ -1,0 +1,13 @@
+{
+	"tosca_definitions_version" : "SampleDdsmModel" ,
+"node_templates" : {
+		"StormVmCluster" : {
+			"type" : "sbidbv" ,
+"properties" : {
+				} },
+				"StormMasterVm" : {
+					"type" : "sbidbv" ,
+"properties" : {
+						} }
+					}
+				}
