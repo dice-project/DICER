@@ -18,12 +18,18 @@ rule DDSMUML2TOSCA{
 		)
 }
 
+helper context MMUML!Element def: hasStereotype(name : String) : Boolean =
+	not self.getAppliedStereotype(name).oclIsUndefined();
+
 lazy rule getNodeTemplatesFromVMDevice{
 	from
-		s: MMUML!Device
+		s: MMUML!Device(s.hasStereotype('DDSM::DdsmVm'))
 	to
 		t : MMTOSCA!NodeTemplate(
-			node_template_name <- s.name,
-			type <- s.toString()
+			node_template_name <- s.name
 		)
+	do {
+		s.getAppliedStereotypes() -> forAll(ster | ster.genericSize.debug);
+	}
+		
 }

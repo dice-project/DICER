@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <tosca:TopologyTemplate xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tosca="http://tosca/1.0" tosca_definitions_version="SampleDdsmModel">
-  <nodeTemplates node_template_name="StormVmCluster" type="org.eclipse.uml2.uml.internal.impl.DeviceImpl@66ff9ffe (name: StormVmCluster, visibility: &lt;unset>) (isLeaf: false, isAbstract: false, isFinalSpecialization: false) (isActive: false)"/>
-  <nodeTemplates node_template_name="StormMasterVm" type="org.eclipse.uml2.uml.internal.impl.DeviceImpl@6d060b1 (name: StormMasterVm, visibility: &lt;unset>) (isLeaf: false, isAbstract: false, isFinalSpecialization: false) (isActive: false)"/>
+  <nodeTemplates node_template_name="StormVmCluster"/>
+  <nodeTemplates node_template_name="StormMasterVm"/>
 </tosca:TopologyTemplate>
