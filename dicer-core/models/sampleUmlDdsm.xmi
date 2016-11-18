@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<tosca:TopologyTemplate xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tosca="http://tosca/1.0" tosca_definitions_version="SampleDdsmModel">
-  <nodeTemplates node_template_name="StormVmCluster"/>
-  <nodeTemplates node_template_name="StormMasterVm"/>
-</tosca:TopologyTemplate>

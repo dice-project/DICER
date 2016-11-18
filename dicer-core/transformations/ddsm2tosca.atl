@@ -291,224 +291,9 @@ rule getZookeeperServerRelationshipForZookeeperCluster(host: DDSM!VM, zookeeperC
 	}
 }
 
-lazy rule getZookeeperServerNodeTemplate {
-	from
-		s: DDSM!ZookeeperServer
-	to
-		server: TOSCA!NodeTemplate (
-			node_template_name <- s.elementId,	
-			type <- 'dice.components.zookeeper.Server', 
-			
-			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  any(binding | 		
-			binding.requiredexecutionplatform.elementId = platform.elementId
-			))).union(
-				s.requiredport -> collect( port | 
-				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId
-			)))).union(
-				thisModule.getZookeeperMemberOfQuorumRelationship(s)
-			),
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)),
-			
-			configurations <- thisModule.getConfigurationFromAttribute('tickTime', s.tickTime).union(
-			thisModule.getConfigurationFromAttribute('initLimit', s.initLimit)).union(
-			thisModule.getConfigurationFromAttribute('syncLimit', s.syncLimit)),
-			
-			interfaces <- 
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!Resource))
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)).union(
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
-			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
-			)	
-		),
-		
-		zookeeper_server_firewall: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId + '_firewall',	
-			type <- 'dice.firewall_rules.zookeeper.Server'
-		)
-	do {
-		Sequence{server, zookeeper_server_firewall};
-	}
-}
-
-lazy rule getZookeeperQuorumNodeTemplate {
-	from
-		s: DDSM!ZookeeperQuorum
-	to
-		quorum: TOSCA!NodeTemplate (
-			node_template_name <- s.elementId,	
-			type <- 'dice.components.zookeeper.Quorum', 
-			
-			relationships <- 
-				DDSM!ZookeeperServer.allInstances() -> 
-					select(server | 
-						server.belongsToQuorum.elementId = s.elementId
-					) -> 
-					collect( server | 
-						server.requiredexecutionplatform ->
-							collect(platform | 
-								DDSM!ExecutionBinding.allInstances() ->
-									select(binding | 
-										binding.requiredexecutionplatform.elementId = platform.elementId and 
-										binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM)
-									)	
-							) -> flatten()
-					) -> flatten() ->
-					collect(binding |
-						thisModule.getZookeeperQuorumContainsRelationship(binding)
-					)
-		)
-}
-
-lazy rule getZookeeperQuorumContainsRelationship {
-	from
-		s: DDSM!ExecutionBinding
-	to
-		t: TOSCA!Relationship (
-			--relationship_name <- s.elementId + '_quorum',
-			target <- s.providedexecutionplatform.owner.elementId,
-			type <- 'dice.relationships.zookeeper.QuorumContains'
-		)
-}
-
-lazy rule getZookeeperMemberOfQuorumRelationship {
-	from
-		s: DDSM!ZookeeperServer
-	to
-		t: TOSCA!Relationship (
-			target <- s.belongsToQuorum.elementId,
-			type <- 'dice.relationships.zookeeper.MemberOfQuorum'
-		)
-	do {
-		Sequence{t};
-	}
-}
-
 -------------------- Zookeeper rules --------------------
 
 -------------------- Cassandra rules --------------------
-
-lazy rule getSeedNodeTemplate{
-	from
-		s: DDSM!CassandraSeed
-	to	
-		seed: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId,
-			type <- 'dice.components.cassandra.Seed',
-			
-			relationships <- s.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
-					s.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredexecutionplatform.elementId = port.elementId
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				),
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
-			
-		),
-		
-		seed_firewall: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId + '_firewall',
-			type <- 'dice.firewall_rules.cassandra.Common'
-		)	
-	do {
-		Sequence{seed, seed_firewall};
-	}	
-}
-
-
-lazy rule getCassandraWorkerNodeTemplate {
-	from
-		w: DDSM!CassandraWorker
-	to
-		worker: TOSCA!NodeTemplate(
-			node_template_name <- w.elementId,
-			type <- 'dice.components.cassandra.Worker',
-			
-			relationships <- w.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
-					w.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredport.elementId = port.elementId
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				)
-				.union(
-					thisModule.getWorkerToSeedRelationship(w)
-				),
-			
-			properties <- w.property 
-			-> collect(property | thisModule.getProperty(property))
-		),
-		
-		worker_firewall: TOSCA!NodeTemplate(
-			node_template_name <- w.elementId + '_firewall',
-			type <- 'dice.firewall_rules.cassandra.Common'
-		)	
-	do {
-		Sequence{worker, worker_firewall};
-	}	
-}
-
-lazy rule getWorkerToSeedRelationship {
-	from 
-		s: DDSM!CassandraWorker
-	to
-		t: TOSCA!Relationship (
-			target <- 
-			if DDSM!Relationship.allInstances() ->one(relationship | relationship.requiredport.elementId = s.belongsToQuorum.requires_bootstrapping_seed.elementId and
-					relationship.providedport.owner.oclIsTypeOf(DDSM!CassandraSeed)) 
-			then 
-			DDSM!Relationship.allInstances() ->select(relationship | 
-					relationship.requiredport.elementId = s.belongsToQuorum.requires_bootstrapping_seed.elementId and
-					relationship.providedport.owner.oclIsTypeOf(DDSM!CassandraSeed)
-			).first().providedport.owner.elementId
-			else 
-				'error_no_relationship_connecting_to_a_seed'
-			endif,
-			
-			type <- 'dice.relationships.cassandra.ConnectedToSeed'
-		)
-	do {
-		Sequence{t};
-	}
-}
 
 rule getCassandraCluster (cassandraCluster: DDSM!CassandraCluster){
 	using {
@@ -579,6 +364,7 @@ rule getCassandraWorkerRelationshipForCassandraCluster(host: DDSM!VM, cassandraC
 }
 
 -------------------- Cassandra rules --------------------
+
 -------------------- Spark rules --------------------
 
 lazy rule getSparkCluster {
@@ -664,117 +450,6 @@ lazy rule getSparkWorkerRelationshipForSparkCluster {
 	do {
 		Sequence{worker_to_host, worker_to_master};
 	}
-}
-
-lazy rule getSparkMasterNodeTemplate {
-	from
-		s: DDSM!SparkMaster
-	to
-		sparkMaster: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId,
-			type <- 'dice.components.spark.Master',
-			
-			relationships <- s.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
- 					s.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredport.elementId = port.elementId and
-							not (relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or
-								 relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				),
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)),
-			
-			configurations <- thisModule.getConfigurationFromAttribute('driverMemory', s.driverMemory).union(
-			thisModule.getConfigurationFromAttribute('driverCores', s.driverCores)).union(
-			thisModule.getConfigurationFromAttribute('maxResultSize', s.maxResultSize)).union(
-			thisModule.getConfigurationFromAttribute('UIPort', s.UIPort))
-		),
-		
-		spark_master_firewall: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId + '_firewall',
-			type <- 'dice.firewall_rules.spark.Master'
-		)		
-	do {
-		Sequence{sparkMaster, spark_master_firewall};
-	}
-}
-
-lazy rule getSparkWorkerNodeTemplate {
-	from
-		s: DDSM!SparkWorker
-	to
-		sparkWorker: TOSCA!NodeTemplate (
-			node_template_name <- s.elementId,
-			type <- 'dice.components.spark.Worker',
-			
-			relationships <- s.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
- 					s.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredport.elementId = port.elementId
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				)
-				.append(
-					thisModule.getSparkWorkerHasMasterRelationship(s)
-				),
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)),
-			
-			configurations <- thisModule.getConfigurationFromAttribute('sparkExecutorMemory', s.sparkExecutorMemory)
-		),
-		
-		spark_worker_firewall: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId + '_firewall',
-			type <- 'dice.firewall_rules.spark.Worker'
-		)		
-	do {
-		Sequence{sparkWorker, spark_worker_firewall};
-	}
-
-}
-
-lazy rule getSparkWorkerHasMasterRelationship {
-	from
-		s: DDSM!SparkWorker
-	to
-		t: TOSCA!Relationship (
-			target <- s.hasMaster.elementId,
-			type <- 'dice.relationships.spark.ConnectedToMaster'
-		)
 }
 
 -------------------- Spark rules --------------------
@@ -898,196 +573,207 @@ rule getNimbusRelationshipForStormCluster(stormCluster: DDSM!StormCluster) {
 	}
 }
 
-lazy rule getNimbusNodeTemplate {
-	from
-		s: DDSM!Nimbus
-	to
-		nimbus: TOSCA!NodeTemplate (
-			node_template_name <- s.elementId,	
-			type <- 'dice.components.storm.Nimbus', 
+-------------------- Storm rules --------------------
+
+-------------------- YARN rules --------------------
+rule getYarnCluster (yarnCluster: DDSM!YarnCluster) {
+	using {
+		slaves_exec_bindings: Sequence(DDSM!ExecutionBinding) = yarnCluster.requiresSlaveVm -> collect(slave_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = slave_required_platform.elementId));
+		slaves: Sequence(TOSCA!NodeTemplate) = slaves_exec_bindings -> collect(binding | thisModule.getNodeManagerNodeTemplateForYarnCluster(binding.providedexecutionplatform.owner, yarnCluster));
+	}
+	to 
+		resourceManager: TOSCA!NodeTemplate (
+			node_template_name <- yarnCluster.elementId,	
+			type <- 'dice.components.hadoop.ResourceManager', 
+			relationships <- thisModule.getResouceManagerRelationshipForYarnCluster(yarnCluster),
 			
-			relationships <- s.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
- 					s.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredport.elementId = port.elementId and
-							not (relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or
-								 relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				)
-				.union(
-					thisModule.getStormToZookeeperRelationship(s)
-				)
-			,
-			
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)),
-			
-			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', s.taskTimeout).union(
-			thisModule.getConfigurationFromAttribute('supervisorFrequency', s.supervisorFrequency)).union(
-			thisModule.getConfigurationFromAttribute('monitorFrequency', s.monitorFrequency)).union(
-			thisModule.getConfigurationFromAttribute('queueSize', s.queueSize)).union(
-			thisModule.getConfigurationFromAttribute('retryTimes', s.retryTimes)).union(
-			thisModule.getConfigurationFromAttribute('retryInterval', s.retryInterval)).union(
-			thisModule.getConfigurationFromAttribute('workerStartTimeout', s.workerStartTimeout)).union(
-			thisModule.getConfigurationFromAttribute('heartbeatFrequency', s.heartbeatFrequency)).union(
-			thisModule.getConfigurationFromAttribute('cpuCapacity', s.cpuCapacity)).union(
-			thisModule.getConfigurationFromAttribute('memoryCapacity', s.memoryCapacity)),
-			
-			
-			interfaces <- 
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!Resource))
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)).union(
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
-			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
-			)	
+			properties <- yarnCluster.property 
+			-> collect(property | thisModule.getProperty(property))
 		),
 		
-		nimbus_firewall: TOSCA!NodeTemplate(
-			node_template_name <- s.elementId + '_firewall',
-			type <- 'dice.firewall_rules.storm.Nimbus'
+		resourceManager_firewall: TOSCA!NodeTemplate(
+			node_template_name <- yarnCluster.elementId + '_firewall',
+			type <- 'dice.firewall_rules.hadoop.ResourceManager'
 		)		
 	do {
-		Sequence{nimbus, nimbus_firewall};
+		Sequence{resourceManager, resourceManager_firewall, slaves};
 	}
 }
 
-lazy rule getStormToZookeeperRelationship {
-	from 
-		s: DDSM!Nimbus
+rule getNodeManagerNodeTemplateForYarnCluster(host: DDSM!VM, yarnCluster: DDSM!YarnCluster) {
 	to
-		t: TOSCA!Relationship (
-			target <- 
-			if DDSM!Relationship.allInstances() ->
-			one(relationship | 
-				s.requiredport ->
-				one(port | 
-					relationship.requiredport.elementId = port.elementId and
-					(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or
-					relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-				)
-			) 
-			then 
-			DDSM!Relationship.allInstances() ->
-			select(relationship | 
-				s.requiredport ->
-				one(port | 
-					relationship.requiredport.elementId = port.elementId and
-					(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or
-					relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
-				)
-			).first().providedport.owner.elementId
-			else 
-				'error_no_relationship_connecting_to_a_zookeeper'
-			endif,
+		nodeManager: TOSCA!NodeTemplate(
+			node_template_name <- yarnCluster.elementId + '_' + host.elementId + '_slave',	
+			type <- 'dice.components.hadoop.NodeManager', 
 			
-			type <- 'dice.relationships.storm.ConnectedToZookeeperQuorum'
+			relationships <- thisModule.getNodeManagerRelationshipForYarnCluster(host, yarnCluster),
+			
+			properties <- yarnCluster.property 
+			-> collect(property | thisModule.getProperty(property))
 		)
 	do {
-		Sequence{t};
+		nodeManager;
 	}
 }
 
-lazy rule getStormSupervisorNodeTemplate {
-	from
-		s: DDSM!Supervisor
+rule getNodeManagerRelationshipForYarnCluster(host: DDSM!VM, yarnCluster: DDSM!YarnCluster) {
 	to
-		supervisor: TOSCA!NodeTemplate (
-			node_template_name <- s.elementId,	
-			type <- 'dice.components.storm.Worker', 
+		node_manager_to_host: TOSCA!Relationship(
+			target <- host.elementId,
+			type <- 'dice.relationships.ContainedIn'
+		),
+		node_manager_to_resource_manager: TOSCA!Relationship(
+			target <- yarnCluster.elementId,
+			type <- 'dice.relationships.hadoop.ConnectedToResourceManager'
+		)
+	do {
+		Sequence{node_manager_to_host, node_manager_to_resource_manager};
+	}
+}
+
+rule getResourceManagerRelationshipForYarnCluster(yarnCluster: DDSM!YarnCluster) {
+	to
+		resource_manager_to_host: TOSCA!Relationship(
+		    target <- (DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | binding.requiredexecutionplatform.elementId = yarnCluster.requiresMasterVm.elementId)).providedexecutionplatform.owner.elementId,
 			
-			relationships <- s.requiredexecutionplatform -> 
-				collect(platform | 
-					DDSM!ExecutionBinding.allInstances() ->  
-					select(binding | 		
-						binding.requiredexecutionplatform.elementId = platform.elementId
-					)
-				) -> flatten() -> 
-				collect(binding | 
-					thisModule.getContainedInRelationshipFromExecutionBinding(binding)
-				)
-				.union(
- 					s.requiredport -> 
-					collect(port | 
-						DDSM!Relationship.allInstances() ->  
-						select(relationship | 		
-							relationship.requiredport.elementId = port.elementId
-						)
-					) -> flatten() -> 
-					collect(relationship | 
-						thisModule.getConnectedToRelationshipFromRelationship(relationship)
-					)	
-				)
-				.union(
-					thisModule.getSupervisorHasMasterRelationship(s)
-				)				
-				.union(
-					thisModule.getStormToZookeeperRelationship(s.hasMaster)
-				)
-			,
+			type <- 'dice.relationships.ContainedIn'
+		)
+	do {
+		Sequence{resource_manager_to_host};
+	}
+}
+-------------------- YARN rules --------------------
+
+-------------------- Kafka rules --------------------
+
+rule getKafkaCluster ( kafkaCluster: DDSM!KafkaCluster) {
+	using {
+		peers_exec_bindings: Sequence(DDSM!ExecutionBinding) = kafkaCluster.requiresPeerVm -> collect(peer_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			select(binding | binding.requiredexecutionplatform.elementId = peer_required_platform.elementId 
+				and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))) -> flatten();
+	
+		peers: Sequence(TOSCA!NodeTemplate) = peers_exec_bindings -> collect(binding | 
+			thisModule.getPeerNodeTemplateForKafkaCluster(binding.providedexecutionplatform.owner, kafkaCluster)) -> flatten();
+	}
+	do {
+		Sequence{peers};
+	}
+}
+
+rule getPeerNodeTemplateForKafkasCluster (host: DDSM!VM, kafkaCluster: DDSM!KafkaCluster) {
+	to
+		kafka_peer: TOSCA!NodeTemplate(
+			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_broker',	
+			type <- 'dice.components.kafka.Broker', 
 			
-			properties <- s.property 
+			properties <- kafkaCluster.property 
 			-> collect(property | thisModule.getProperty(property)),
 			
-			configurations <- thisModule.getConfigurationFromAttribute('workerStartTimeout', s.workerStartTimeout).union(
-			thisModule.getConfigurationFromAttribute('heartbeatFrequency', s.heartbeatFrequency)).union(
-			thisModule.getConfigurationFromAttribute('cpuCapacity', s.cpuCapacity)).union(
-			thisModule.getConfigurationFromAttribute('memoryCapacity', s.memoryCapacity)),
+			relationships <- thisModule.getKafkaServerRelationshipForKafkaCluster(host, kafkaCluster).
+			union(
+				kafkaCluster.requiredport -> collect( port | 
+				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
+				relationship.requiredport.elementId = port.elementId
+			))))
+		),
+		
+		kafka_peer_firewall: TOSCA!NodeTemplate(
+			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_broker_firewall',	
+			type <- 'dice.firewall_rules.kafka.Broker'
+		)
+	do {
+		Sequence{kafka_peer, kafka_peer_firewall};
+	}
+}
+
+rule getKafkaServerRelationshipForKafkaCluster(host: DDSM!VM, kafkaCluster: DDSM!KafkaCluster) {
+	to
+		kafka_to_host: TOSCA!Relationship(
+			target <- host.elementId,
+			type <- 'dice.relationships.ContainedIn'
+		)
+	do {
+		Sequence{kafka_to_host};
+	}
+}
+
+-------------------- Kafka rules --------------------
+
+-------------------- HDFS rules --------------------
+
+rule getHdfsCluster (hdfsCluster: DDSM!HdfsCluster) {
+	using {
+		slaves_exec_bindings: Sequence(DDSM!ExecutionBinding) = hdfsCluster.requiresSlaveVm -> collect(slave_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
+			any(binding | binding.requiredexecutionplatform.elementId = slave_required_platform.elementId));
+		slaves: Sequence(TOSCA!NodeTemplate) = slaves_exec_bindings -> collect(binding | thisModule.getDataNodeNodeTemplateForHdfsCluster(binding.providedexecutionplatform.owner, hdfsCluster));
+	}
+	to 
+		nameNode: TOSCA!NodeTemplate (
+			node_template_name <- hdfsCluster.elementId,	
+			type <- 'dice.components.hadoop.NameNode', 
+			relationships <- thisModule.getNameNodeRelationshipForHdfsCluster(hdfsCluster),
 			
-			interfaces <- 
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!Resource))
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)).union(
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
-			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
-			)	
-		)
-}
-
-lazy rule getSupervisorHasMasterRelationship {
-	from
-		s: DDSM!Supervisor
-	to
-		t: TOSCA!Relationship (
-			target <- s.hasMaster.elementId,
-			type <- 'dice.relationships.storm.ConnectedToNimbus'
-		)
+			properties <- hdfsCluster.property 
+			-> collect(property | thisModule.getProperty(property))
+		),
+		
+		dataNode_firewall: TOSCA!NodeTemplate(
+			node_template_name <- hdfsCluster.elementId + '_firewall',
+			type <- 'dice.firewall_rules.hadoop.DataNode'
+		)		
 	do {
-		Sequence{t};
+		Sequence{nameNode, dataNode_firewall, slaves};
 	}
 }
 
-lazy rule getSupervisorToNimbusRelationship {
-	from
-		s: DDSM!Supervisor
+rule getDataNodeNodeTemplateForHdfsCluster(host: DDSM!VM, hdfsCluster: DDSM!HdfsCluster) {
 	to
-		t: TOSCA!Relationship (
-			target <- s.hasMaster.elementId,
-			type <- 'dice.relationships.storm.ConnectedToNimbus'
+		dataNode: TOSCA!NodeTemplate(
+			node_template_name <- hdfsCluster.elementId + '_' + host.elementId + '_slave',	
+			type <- 'dice.components.hadoop.DataNode', 
+			
+			relationships <- thisModule.getDataNodeRelationshipForHdfsCluster(host, hdfsCluster),
+			
+			properties <- hdfsCluster.property 
+			-> collect(property | thisModule.getProperty(property))
 		)
 	do {
-		Sequence{t};
+		dataNode;
 	}
 }
--------------------- Storm rules --------------------
+
+rule getDataNodeRelationshipForHdfsCluster(host: DDSM!VM, hdfsCluster: DDSM!HdfsCluster) {
+	to
+		data_node_to_host: TOSCA!Relationship(
+			target <- host.elementId,
+			type <- 'dice.relationships.ContainedIn'
+		),
+		data_node_manager_to_resource_manager: TOSCA!Relationship(
+			target <- hdfsCluster.elementId,
+			type <- 'dice.relationships.hadoop.ConnectedToNameNode'
+		)
+	do {
+		Sequence{data_node_to_host, data_node_manager_to_resource_manager};
+	}
+}
+
+rule getNameNodeRelationshipForHdfsCluster(hdfsCluster: DDSM!HdfsCluster) {
+	to
+		name_node_to_host: TOSCA!Relationship(
+		    target <- (DDSM!ExecutionBinding.allInstances() -> 
+				any(binding | binding.requiredexecutionplatform.elementId = hdfsCluster.requiresMasterVm.elementId)).providedexecutionplatform.owner.elementId,
+			
+			type <- 'dice.relationships.ContainedIn'
+		)
+	do {
+		Sequence{name_node_to_host};
+	}
+}
+
+-------------------- HDFS rules --------------------
+
 
 lazy rule getProvidedByRelationships {
 	from
