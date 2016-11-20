@@ -28,6 +28,9 @@ rule DDSM2TOSCA{
 		hdfsClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!HDFSCluster))
 			-> collect(element | thisModule.getHdfsCluster(element)).flatten();
+		yarnClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!YarnCluster))
+			-> collect(element | thisModule.getYarnCluster(element)).flatten();
 		storm_clients: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!ClientNode))
 			-> collect(element | thisModule.getStormClientNodeTemplate(element)).flatten();
@@ -50,6 +53,7 @@ rule DDSM2TOSCA{
 			union(zookeeperCluster).
 			union(cassandraClusters).
 			union(hdfsClusters).
+			union(yarnClusters).
 			union(storm_clients),
 			
 			imports <- DDSM!Provider.allInstances() -> collect(p | thisModule.getProviderImport(p))
@@ -523,7 +527,7 @@ rule getYarnCluster (yarnCluster: DDSM!YarnCluster) {
 		resourceManager: TOSCA!NodeTemplate (
 			node_template_name <- yarnCluster.elementId,	
 			type <- 'dice.components.hadoop.ResourceManager', 
-			relationships <- thisModule.getResouceManagerRelationshipForYarnCluster(yarnCluster),
+			relationships <- thisModule.getResourceManagerRelationshipForYarnCluster(yarnCluster),
 			
 			properties <- yarnCluster.property 
 			-> collect(property | thisModule.getProperty(property))
