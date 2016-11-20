@@ -297,6 +297,13 @@
         defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HDFSCluster" eSuperTypes="#//MasterSlavePlatform"/>
-  <eClassifiers xsi:type="ecore:EClass" name="KafkaCluster" eSuperTypes="#//PeerToPeerPlatform"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KafkaCluster" eSuperTypes="#//PeerToPeerPlatform">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="kafkaClusterDependsOnZookeeper"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="kafkaClusterDependsOnZookeeper" value="Relationship.allInstances() ->&#xA;&#x9;exists(r | &#xA;&#x9;&#x9;self.requiredport -> exists(p |&#xA;&#x9;&#x9;&#x9;p.elementId = r.requiredport.elementId and&#xA;&#x9;&#x9;&#x9;r.providedport.owner.oclIsTypeOf(ZookeeperCluster)&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="YarnCluster" eSuperTypes="#//MasterSlavePlatform"/>
 </ecore:EPackage>

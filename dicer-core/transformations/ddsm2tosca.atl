@@ -16,6 +16,9 @@ rule DDSM2TOSCA{
 		zookeeperCluster: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!ZookeeperCluster))
 			-> collect(element | thisModule.getZookeeperCluster(element)).flatten();
+		kafkaClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
+			-> select(element | element.oclIsTypeOf(DDSM!KafkaCluster))
+			-> collect(element | thisModule.getKafkaCluster(element)).flatten();
 		stormClusters: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!StormCluster))
 			-> collect(element | thisModule.getStormCluster(element)).flatten();
@@ -52,6 +55,7 @@ rule DDSM2TOSCA{
 			union(sparkClusters).
 			union(zookeeperCluster).
 			union(cassandraClusters).
+			union(kafkaClusters).
 			union(hdfsClusters).
 			union(yarnClusters).
 			union(storm_clients),
@@ -413,8 +417,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 					thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  
 						any(relationship | 
 							relationship.requiredport.elementId = port.elementId and 
-							(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or 
-							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
+							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster)
 						)
 					) 
 				)
@@ -591,15 +594,15 @@ rule getResourceManagerRelationshipForYarnCluster(yarnCluster: DDSM!YarnCluster)
 
 rule getKafkaCluster ( kafkaCluster: DDSM!KafkaCluster) {
 	using {
-		peers_exec_bindings: Sequence(DDSM!ExecutionBinding) = kafkaCluster.requiresPeerVm -> collect(peer_required_platform |  DDSM!ExecutionBinding.allInstances() -> 
-			select(binding | binding.requiredexecutionplatform.elementId = peer_required_platform.elementId 
-				and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))) -> flatten();
-	
-		peers: Sequence(TOSCA!NodeTemplate) = peers_exec_bindings -> collect(binding | 
-			thisModule.getPeerNodeTemplateForKafkaCluster(binding.providedexecutionplatform.owner, kafkaCluster)) -> flatten();
+		brokers: Sequence(TOSCA!NodeTemplate) = 
+		kafkaCluster.requiresPeerVm -> collect(broker_required_platform |  
+			DDSM!ExecutionBinding.allInstances() -> select(binding | 
+				binding.requiredexecutionplatform.elementId = broker_required_platform.elementId
+				and binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!VM))) -> flatten() -> collect(binding 
+					| thisModule.getPeerNodeTemplateForKafkasCluster(binding.providedexecutionplatform.owner, kafkaCluster));
 	}
 	do {
-		Sequence{peers};
+		Sequence{brokers};
 	}
 }
 
@@ -615,9 +618,14 @@ rule getPeerNodeTemplateForKafkasCluster (host: DDSM!VM, kafkaCluster: DDSM!Kafk
 			relationships <- thisModule.getKafkaServerRelationshipForKafkaCluster(host, kafkaCluster).
 			union(
 				kafkaCluster.requiredport -> collect( port | 
-				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId
-			))))
+					thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  
+						any(relationship | 
+							relationship.requiredport.elementId = port.elementId and 
+							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster)
+						)
+					) 
+				)
+			)
 		),
 		
 		kafka_peer_firewall: TOSCA!NodeTemplate(
@@ -764,7 +772,7 @@ lazy rule getNodeTemplatesFromVM{
 					)
 				)
 			) ->
-			collect(peer2peer | thisModule.getProvidedByRelationships(peer2peer.elementId + '_' + s.elementId + '_worker_firewall'))
+			collect(peer2peer | thisModule.getProtectedByRelationships(peer2peer.elementId + '_' + s.elementId + '_worker_firewall'))
 			.union(
 				DDSM!MasterSlavePlatform.allInstances() -> 
 				select(masterslave | 
