@@ -184,6 +184,12 @@
     <eAnnotations source="http://es.unizar.disco/dice/profiles/generator">
       <details key="description" value="test generation"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasSingleExecutionPlatorm"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="hasSingleExecutionPlatorm" value="requiredexecutionplatform ->&#xA;&#x9;one(platform |  &#xA;&#x9;&#x9;ExecutionBinding.allInstances() ->  &#xA;&#x9;&#x9;exists(binding | &#xA;&#x9;&#x9;&#x9;binding.requiredexecutionplatform.elementId = platform.elementId and&#xA;&#x9;&#x9;&#x9;(binding.providedexecutionplatform.owner.oclIsKindOf(MasterSlavePlatform) or&#xA;&#x9;&#x9;&#x9;binding.providedexecutionplatform.owner.oclIsKindOf(PeerToPeerPlatform))&#xA;&#x9;&#x9;)&#xA;&#x9;)"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="submits" lowerBound="1"
         eType="#//JobSubmission"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipRunningJob" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

@@ -9,10 +9,6 @@ rule DDSM2TOSCA{
 	from 
 		s: DDSM!DDSM
 	using{
-		additionalNodes: Sequence(TOSCA!NodeTemplate) = s.cloudelement
-			-> select(element | element.oclIsTypeOf(DDSM!VM))
-			-> select(vm | vm.publicPorts.size() > 0)
-			-> collect(frontendVm | thisModule.getFloatingIpNodeFromFrontend(frontendVm.elementId, frontendVm.publicPorts)).flatten();
 		zookeeperCluster: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!ZookeeperCluster))
 			-> collect(element | thisModule.getZookeeperCluster(element)).flatten();
@@ -36,7 +32,7 @@ rule DDSM2TOSCA{
 			-> collect(element | thisModule.getYarnCluster(element)).flatten();
 		storm_clients: Sequence(TOSCA!NodeTemplate) = s.cloudelement 
 			-> select(element | element.oclIsTypeOf(DDSM!ClientNode))
-			-> collect(element | thisModule.getStormClientNodeTemplate(element)).flatten();
+			-> collect(element | thisModule.getClientNodeTemplates(element)).flatten();
 
 	}
 	to 
@@ -74,43 +70,41 @@ lazy rule getProviderImport {
 }
 
 -------------------- Client rules --------------------
-rule getStormClientNodeTemplate (s: DDSM!ClientNode) {
+rule getClientNodeTemplates (s: DDSM!ClientNode) {
     using {
 		application: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application', s.submits.artifactUrl);
-		topology_name: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_name', s.submits.elementId);
-		topology_class: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('topology_class', s.submits.mainClass);
-    	application_arguments: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('application_arguments', s.submits.applicationArguments);
-    	storm_client_properties: Sequence(TOSCA!Property) = Sequence{application, topology_name, topology_class}.flatten();
+		name: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('name', s.submits.elementId);
+		main_class: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('class', s.submits.mainClass);
+    	arguments: Sequence(TOSCA!Property) = thisModule.getPropertyFromStringAttribute('arguments', s.submits.applicationArguments);
+    	storm_client_properties: Sequence(TOSCA!Property) = Sequence{application, name, main_class, arguments}.flatten();
+    	
+    	executing_platform: DDSM!MasterSlavePlatform = s.requiredexecutionplatform ->
+									collect(platform |  
+										DDSM!ExecutionBinding.allInstances() ->  
+										select(binding | 
+											binding.requiredexecutionplatform.elementId = platform.elementId and
+											binding.providedexecutionplatform.owner.oclIsKindOf(DDSM!MasterSlavePlatform)
+										)
+									) -> flatten() -> first().providedexecutionplatform.owner;
 	}
 	to
 		t: TOSCA!NodeTemplate (
 			node_template_name <- s.elementId,
-			type <- 'dice.components.storm.Topology',
+			-- the type have to be parametric to the master node to which the client is linked
+			type <- 'dice.components.' + executing_platform.getPlatformType + 'Application',
 			 
 			properties <- s.property 
 			-> collect(property | thisModule.getProperty(property)).
 				union(storm_client_properties),
 				
-			relationships <- s.requiredexecutionplatform -> 
-						collect(platform |  
-							DDSM!ExecutionBinding.allInstances() ->  
-							select(binding | 
-								binding.requiredexecutionplatform.elementId = platform.elementId and
-								binding.providedexecutionplatform.owner.oclIsTypeOf(DDSM!StormCluster)
-							)
-						) -> flatten() ->
-						collect( binding |
-							thisModule.getStormClientRelationshipsFromExecutionBindingWithStormCluster(
-								binding.providedexecutionplatform.owner
-							)
-						) -> flatten()
+			relationships <- thisModule.getClientRelationshipsWithMasterSlavePlatform(executing_platform)
 		)
 	do {
 		Sequence{t};
 	}
 }
 
-rule getStormClientRelationshipsFromExecutionBindingWithStormCluster(s: DDSM!StormCluster) {
+rule getClientRelationshipsWithMasterSlavePlatform(s: DDSM!MasterSlavePlatform) {
 	using {
 		supervisor_bindings: Sequence(DDSM!ExecutionBinding) = s.requiresSlaveVm ->  
 			collect(platform | 
@@ -121,17 +115,18 @@ rule getStormClientRelationshipsFromExecutionBindingWithStormCluster(s: DDSM!Sto
 				)
 			) -> flatten();
 	
-		client_to_storms: Sequence(TOSCA!Relationship) = supervisor_bindings -> collect(
-			binding | thisModule.getClientToStormRelationship(s.elementId + '_' + binding.providedexecutionplatform.owner.elementId + '_supervisor')
+		client_to_workers: Sequence(TOSCA!Relationship) = supervisor_bindings -> collect(
+			binding | thisModule.getClientToStormRelationship(s.elementId + '_' + binding.providedexecutionplatform.owner.elementId + '_worker')
 		);
 	}
 	to
-		client_to_nimbus: TOSCA!Relationship(
-			target <- s.elementId + '_nimbus',
-			type <- 'dice.relationships.storm.SubmittedBy'
+		client_to_master: TOSCA!Relationship(
+			target <- s.elementId,
+			-- the type have to be parametric to the master node to which the client is linked
+			type <- 'dice.relationships.' + s.getPlatformType + 'SubmittedBy'
 		)
 	do {
-		Sequence{client_to_nimbus, client_to_storms};
+		Sequence{client_to_master, client_to_workers} -> flatten();
 	}
 }
 
@@ -144,6 +139,18 @@ lazy rule getClientToStormRelationship {
 			type <- 'dice.relationships.Needs'	
 		)
 }
+
+helper context DDSM!MasterSlavePlatform def: getPlatformType: String =
+	if not self.oclIsTypeOf(DDSM!StormCluster) then
+		if not self.oclIsTypeOf(DDSM!SparkCluster) then
+			''
+		else
+			'spark.'
+		endif
+	else
+		'storm.'
+	endif;
+
 -------------------- Client rules --------------------
 
 -------------------- Zookeeper rules --------------------
@@ -194,7 +201,7 @@ rule getZookeeperQuorumContainsRelationshipForZookeeperCluster(targ: String) {
 rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DDSM!ZookeeperCluster) {
 	to
 		zookeeper_peer: TOSCA!NodeTemplate(
-			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_worker',	
+			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_slave',	
 			type <- 'dice.components.zookeeper.Server', 
 			
 			properties <- zookeeperCluster.property 
@@ -213,7 +220,7 @@ rule getPeerNodeTemplateForZookeeperCluster (host: DDSM!VM, zookeeperCluster: DD
 		),
 		
 		zookeeper_peer_firewall: TOSCA!NodeTemplate(
-			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_worker_firewall',	
+			node_template_name <- zookeeperCluster.elementId + '_' + host.elementId + '_slave_firewall',	
 			type <- 'dice.firewall_rules.zookeeper.Server'
 		)
 	do {
@@ -450,7 +457,7 @@ rule getStormCluster (stormCluster: DDSM!StormCluster) {
 rule getSupervisorNodeTemplateForStormCluster(host: DDSM!VM, stormCluster: DDSM!StormCluster) {
 	to
 		supervisor: TOSCA!NodeTemplate(
-			node_template_name <- stormCluster.elementId + '_' + host.elementId + '_slave',	
+			node_template_name <- stormCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.storm.Worker', 
 			
 			relationships <- thisModule.getSupervisorRelationshipForStormCluster(host, stormCluster).
@@ -548,7 +555,7 @@ rule getYarnCluster (yarnCluster: DDSM!YarnCluster) {
 rule getNodeManagerNodeTemplateForYarnCluster(host: DDSM!VM, yarnCluster: DDSM!YarnCluster) {
 	to
 		nodeManager: TOSCA!NodeTemplate(
-			node_template_name <- yarnCluster.elementId + '_' + host.elementId + '_slave',	
+			node_template_name <- yarnCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.hadoop.NodeManager', 
 			
 			relationships <- thisModule.getNodeManagerRelationshipForYarnCluster(host, yarnCluster),
@@ -609,7 +616,7 @@ rule getKafkaCluster ( kafkaCluster: DDSM!KafkaCluster) {
 rule getPeerNodeTemplateForKafkasCluster (host: DDSM!VM, kafkaCluster: DDSM!KafkaCluster) {
 	to
 		kafka_peer: TOSCA!NodeTemplate(
-			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_broker',	
+			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.kafka.Broker', 
 			
 			properties <- kafkaCluster.property 
@@ -629,7 +636,7 @@ rule getPeerNodeTemplateForKafkasCluster (host: DDSM!VM, kafkaCluster: DDSM!Kafk
 		),
 		
 		kafka_peer_firewall: TOSCA!NodeTemplate(
-			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_broker_firewall',	
+			node_template_name <- kafkaCluster.elementId + '_' + host.elementId + '_worker_firewall',	
 			type <- 'dice.firewall_rules.kafka.Broker'
 		)
 	do {
@@ -680,7 +687,7 @@ rule getHdfsCluster (hdfsCluster: DDSM!HDFSCluster) {
 rule getDataNodeNodeTemplateForHdfsCluster(host: DDSM!VM, hdfsCluster: DDSM!HDFSCluster) {
 	to
 		dataNode: TOSCA!NodeTemplate(
-			node_template_name <- hdfsCluster.elementId + '_' + host.elementId + '_slave',	
+			node_template_name <- hdfsCluster.elementId + '_' + host.elementId + '_worker',	
 			type <- 'dice.components.hadoop.DataNode', 
 			
 			relationships <- thisModule.getDataNodeRelationshipForHdfsCluster(host, hdfsCluster),
