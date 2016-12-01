@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 ../metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:StormCluster" elementId="storm" requiresMasterVm="storm_master" requiresSlaveVm="storm_slave1">
+    <requiredport elementId="requires_zookeeper"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:ZookeeperCluster" elementId="zookeeper">
+    <providedport elementId="zookeeper_access" owner="zookeeper"/>
+    <requiresPeerVm elementId="server1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="storm_master"/>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="storm_slave1"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="openstack">
+    <providedexecutionplatform elementId="vm1_hosting" owner="vm1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="openstack">
+    <providedexecutionplatform elementId="vm2_hosting" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm3" provider="openstack">
+    <providedexecutionplatform elementId="vm3_hosting" owner="vm3"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Provider" elementId="openstack"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="storm_slave1_to_vm2" requiredexecutionplatform="storm_slave1" providedexecutionplatform="vm2_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="storm_master_to_vm1" requiredexecutionplatform="storm_master" providedexecutionplatform="vm1_hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="server1_to_vm3" requiredexecutionplatform="server1" providedexecutionplatform="vm3_hosting"/>
+  <cloudelement xsi:type="ddsm:Relationship" elementId="storm_to_zookeeper" providedport="zookeeper_access" requiredport="requires_zookeeper"/>
+</ddsm:DDSM>
