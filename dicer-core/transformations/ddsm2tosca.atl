@@ -758,11 +758,7 @@ lazy rule getNodeTemplatesFromVM{
 			interfaces <- 
 			s.resource 
 			-> select(resource | resource.oclIsTypeOf(DDSM!Resource))
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)).union(
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
-			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
-			),
+			-> collect(resource | thisModule.getInterfaceFromResource(resource)),
 			
 			relationships <- 
 			DDSM!PeerToPeerPlatform.allInstances() -> 
@@ -815,30 +811,88 @@ lazy rule getNodeTemplatesFromInternalComponent{
 	to
 		t : TOSCA!NodeTemplate(
 			node_template_name <- s.elementId,	
-			type <- 'dice.' + s.oclType().refGetValue('name').toString().toLower(), 
+			type <- 'dice.chef.SoftwareComponent', 
 			
-			relationships <- s.requiredexecutionplatform -> collect( platform | 
-			thisModule.getContainedInRelationshipFromExecutionBinding(DDSM!ExecutionBinding.allInstances() ->  any(binding | 
-			binding.requiredexecutionplatform.elementId = platform.elementId
-			))).union(
-				s.requiredport -> collect( port | 
-				thisModule.getConnectedToRelationshipFromRelationship(DDSM!Relationship.allInstances() ->  any(relationship | 
-				relationship.requiredport.elementId = port.elementId
-			)))),
+			relationships <- (
+			s.requiredexecutionplatform -> collect( platform | 
+				DDSM!ExecutionBinding.allInstances() ->  select(binding | 
+				binding.requiredexecutionplatform.elementId = platform.elementId) -> collect(binding |
+				thisModule.getContainedInRelationshipFromExecutionBinding(binding)
+				)
+			).
+			union(
+			s.requiredport -> collect( port | 
+				DDSM!Relationship.allInstances() ->  select(relationship | 
+				relationship.requiredport.elementId = port.elementId) -> collect(relationship |
+				thisModule.getConnectedToRelationshipFromRelationship(relationship)	
+				)
+			))).flatten(),
 			
 			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property)),
+			-> collect(property | thisModule.getProperty(property)).union(
+				thisModule.getCreateRunListProperty()
+			),
 			
 			interfaces <- 
 			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!Resource))
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)).union(
-			s.resource 
-			-> select(resource | resource.oclIsTypeOf(DDSM!ChefResource))
-			-> collect(chef_resource | thisModule.getInterfaceFromChefResource(chef_resource))
-			)	
+			-> collect(resource | thisModule.getLifecycleInterfaceFromResource(resource))	
 		)
 		
+}
+
+rule getCreateRunListProperty() {
+	to
+		t: TOSCA!Property(
+			property_name <- 'create_runlist',
+			value <- '[recipe[apt::default], recipe[dice_common::default]]'
+		)
+	do {
+		Sequence{t};
+	}
+}
+
+rule getLifecycleInterfaceFromResource (s: DDSM!Resource){
+	to
+		t: TOSCA!Interface (
+			interface_name <- s.resourceId,
+			type <- 'cloudify.interfaces.lifecycle',
+			operations <- Sequence{
+				if not s.download.oclIsUndefined() then thisModule.getOperationFromArtifact(s.download, 'download') else thisModule.getEmptyOperation('download') endif,
+				if not s.install.oclIsUndefined() then thisModule.getOperationFromArtifact(s.install, 'install') else thisModule.getEmptyOperation('install') endif,
+				if not s.configure.oclIsUndefined() then thisModule.getOperationFromArtifact(s.configure, 'configure') else thisModule.getEmptyOperation('configure') endif,
+				if not s.start.oclIsUndefined() then thisModule.getOperationFromArtifact(s.start, 'start') else thisModule.getEmptyOperation('start') endif,
+				if not s.stop.oclIsUndefined() then thisModule.getOperationFromArtifact(s.stop, 'stop') else thisModule.getEmptyOperation('stop') endif,
+				if not s.destroy.oclIsUndefined() then thisModule.getOperationFromArtifact(s.destroy, 'destroy') else thisModule.getEmptyOperation('destroy') endif	
+			}
+		)
+	do {
+		t;
+	}
+}
+
+rule getEmptyOperation (type: String) {
+	to
+		t: TOSCA!Operation(
+			operation_name <- type
+		)
+	do {
+		t;
+	}
+}
+
+lazy rule getOperationFromArtifact {
+	from
+		s: DDSM!Artifact,
+		type: String
+	to
+		t: TOSCA!Operation (
+			operation_name <- type,
+			dependentArtifacts <- s.resources,
+			inputs <- Sequence{
+				thisModule.getPropertyFromStringAttribute('language', s.language.toString().replaceAll('#', '').toLower()),
+				thisModule.getPropertyFromStringAttribute('script', s.artifactPath)
+			}.flatten()
+		)
 }
 
 lazy rule getContainedInRelationshipFromExecutionBinding{
@@ -847,13 +901,7 @@ lazy rule getContainedInRelationshipFromExecutionBinding{
 	to
 		t: TOSCA!Relationship(
 			target <- s.providedexecutionplatform.owner.elementId,
-			type <- 'dice.relationships.ContainedIn',
-			source_interfaces <- s.requiredexecutionplatform.resource 
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)),
-			target_interfaces <- s.providedexecutionplatform.resource 
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)),
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
+			type <- 'dice.relationships.ContainedIn'
 		)
 }
 
@@ -863,13 +911,7 @@ lazy rule getConnectedToRelationshipFromRelationship {
 	to
 		t: TOSCA!Relationship(
 			target <- s.providedport.owner.elementId,
-			type <- 'dice.relationships.ConnectedTo',
-			source_interfaces <- s.requiredport.resource 
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)),
-			target_interfaces <- s.providedport.resource 
-			-> collect(resource | thisModule.getInterfaceFromResource(resource)),
-			properties <- s.property 
-			-> collect(property | thisModule.getProperty(property))
+			type <- 'dice.relationships.Needs'
 		)
 		
 }

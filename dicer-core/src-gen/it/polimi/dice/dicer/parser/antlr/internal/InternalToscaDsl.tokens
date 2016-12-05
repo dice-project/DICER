@@ -1,7 +1,8 @@
-'"capabiity" :'=42
+'"capabiity" :'=41
 '"deploy" :'=36
 '"tosca_definitions_version" :'=12
 '"type" :'=26
+', '=45
 ','=16
 ',\n"attributes" :'=32
 ',\n"capabilities" :'=34
@@ -11,7 +12,7 @@
 ',\n"inputs" :'=20
 ',\n"instances" : {'=27
 ',\n"interfaces" :'=29
-',\n"node" :'=43
+',\n"node" :'=42
 ',\n"node_templates" :'=21
 ',\n"outputs" :'=18
 ',\n"policies" :'=24
@@ -19,6 +20,7 @@
 ',\n"realtionships" :'=22
 ',\n"relationships" :'=28
 ',\n"requirements" :'=33
+',\n"resources" :'=44
 ',\n"source_interfaces" :'=38
 ',\n"target" :'=37
 ',\n"target_iterfaces" :'=39
@@ -26,7 +28,7 @@
 ':'=25
 '['=15
 '\n"configuration" : {'=31
-'\n"operations" :'=41
+'\n"inputs" :'=43
 '\n'=35
 ']'=17
 '{'=11
@@ -71,3 +73,5 @@ T__40=40
 T__41=41
 T__42=42
 T__43=43
+T__44=44
+T__45=45

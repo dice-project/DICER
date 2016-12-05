@@ -242,19 +242,10 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Operation returns Operation
 	 *
 	 * Constraint:
-	 *     (operation_name=STRING primary=STRING)
+	 *     (operation_name=STRING (inputs+=Property inputs+=Property* (dependentArtifacts+=STRING dependentArtifacts+=STRING*)?)?)
 	 */
 	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.OPERATION__OPERATION_NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.OPERATION__OPERATION_NAME));
-			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.OPERATION__PRIMARY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.OPERATION__PRIMARY));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOperationAccess().getOperation_nameSTRINGTerminalRuleCall_1_0(), semanticObject.getOperation_name());
-		feeder.accept(grammarAccess.getOperationAccess().getPrimarySTRINGTerminalRuleCall_3_0(), semanticObject.getPrimary());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
