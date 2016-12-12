@@ -1,0 +1,35 @@
+-- @url MMUML=http://www.eclipse.org/uml2/5.0.0/UML
+-- @path MMTOSCA=/dicer-core/metamodels/tosca.ecore
+-- @atlcompiler emftvm
+
+module umlddsm2tosca;
+create tosca : MMTOSCA from ddsmuml : MMUML;
+
+rule DDSMUML2TOSCA{	
+	from 
+		s: MMUML!Model
+	to 
+		t: MMTOSCA!TopologyTemplate(
+			tosca_definitions_version <- s.name,
+			
+			
+			nodeTemplates <- MMUML!Device.allInstances()
+				-> collect(element | thisModule.getNodeTemplatesFromVMDevice(element))
+		)
+}
+
+helper context MMUML!Element def: hasStereotype(name : String) : Boolean =
+	not self.getAppliedStereotype(name).oclIsUndefined();
+
+lazy rule getNodeTemplatesFromVMDevice{
+	from
+		s: MMUML!Device(s.hasStereotype('DDSM::DdsmVm'))
+	to
+		t : MMTOSCA!NodeTemplate(
+			node_template_name <- s.name
+		)
+	do {
+		s.getAppliedStereotypes() -> forAll(ster | ster.genericSize.debug);
+	}
+		
+}

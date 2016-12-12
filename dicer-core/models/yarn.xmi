@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ddsm:DDSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddsm="http://ddsm/1.0" xsi:schemaLocation="http://ddsm/1.0 ../metamodels/ddsm.ecore">
+  <cloudelement xsi:type="ddsm:YarnCluster" elementId="myYarnCluster" requiresMasterVm="resourceManager" requiresSlaveVm="nodeManager1"/>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm1" provider="myOpenstack">
+    <providedexecutionplatform elementId="vm1Hosting" owner="vm1"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:VM" elementId="vm2" provider="myOpenstack">
+    <providedexecutionplatform elementId="vm2Hosting" owner="vm2"/>
+  </cloudelement>
+  <cloudelement xsi:type="ddsm:Provider" elementId="myOpenstack"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="nodeManager1ToVm2" requiredexecutionplatform="nodeManager1" providedexecutionplatform="vm2Hosting"/>
+  <cloudelement xsi:type="ddsm:ExecutionBinding" elementId="resourceManagerToVm1" requiredexecutionplatform="resourceManager" providedexecutionplatform="vm1Hosting"/>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="resourceManager"/>
+  <cloudelement xsi:type="ddsm:RequiredExecutionPlatform" elementId="nodeManager1"/>
+</ddsm:DDSM>

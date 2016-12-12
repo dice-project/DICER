@@ -68,7 +68,7 @@ public class DicerService {
         }
         
         dicer.runme("./temp/temp_input_model.xmi", "./temp/temp_input_model_tosca", inMetamodelPath, outMetamodelPath,
-                transformationDir);
+                transformationDir, 0);
         
         String blueprint = "";
         try {

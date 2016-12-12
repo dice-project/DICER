@@ -101,7 +101,7 @@ Interface returns Interface:
 	'{'
 		//'"type" :' type=STRING 
 		//(',\n"operations" :' '{' operations+=Operation ( "," operations+=Operation)* '}' )?
-		('\n"operations" :' '{' operations+=Operation ( "," operations+=Operation)* '}' )?
+		(operations+=Operation ( "," operations+=Operation)* )?
 		//(',\n"inputs" :' '{' inputs+=Property ( "," inputs+=Property)* '}' )?
 	'}';
 
@@ -134,11 +134,10 @@ Capability returns Capability:
 Operation returns Operation:
 	{Operation}
 		operation_name=STRING ":"
-		primary=STRING
-	//'{'
+	'{'
 		//'"primary" :' primary=STRING
 		//(',\n"description" :' description=STRING )?
-		//(',\n"dependentArtifacts" :' '{' dependentArtifacts+=EString ( "," dependentArtifacts+=EString)* '}' )?
-		//(',\n"inputs" :' '{' inputs+=Property ( "," inputs+=Property)* '}' )?
-	//'}'
+		('\n"inputs" :' '{' inputs+=Property ( "," inputs+=Property)* (',\n"resources" :' '[' dependentArtifacts+=STRING ( ', ' dependentArtifacts+=STRING )* ']' )? '}' )?
+		
+	'}'
 	;
