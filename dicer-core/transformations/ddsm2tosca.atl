@@ -466,8 +466,7 @@ rule getSupervisorNodeTemplateForStormCluster(host: DDSM!VM, stormCluster: DDSM!
 					thisModule.getConnectedToZookeeperQuorumRelationship(DDSM!Relationship.allInstances() ->  
 						any(relationship | 
 							relationship.requiredport.elementId = port.elementId and 
-							(relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperQuorum) or 
-							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster))
+							relationship.providedport.owner.oclIsTypeOf(DDSM!ZookeeperCluster)
 						)
 					)
 				) 
