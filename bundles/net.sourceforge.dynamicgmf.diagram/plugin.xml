@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension-point id="modelImporterDescriptors" name="%modelImporterDescriptors_extensionpoint" schema="schema/modelImporterDescriptors.exsd" />
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <?gmfgen generated="true"?>
+      <fileTypes
+         type="text"
+         extension="xml_diagram">
+      </fileTypes>
+      <fileTypes
+            extension="xmi_diagram"
+            type="text">
+      </fileTypes>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="true"?>
+      <parser
+         type="xml_diagram"
+         class="net.sourceforge.dynamicgmf.diagram.resources.DynamicGMFResourceFactory">
+      </parser>
+      <parser
+            class="net.sourceforge.dynamicgmf.diagram.resources.DynamicGMFResourceFactory"
+            type="xmi_diagram">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <?gmfgen generated="true"?>
+      <editor
+         id="net.sourceforge.dynamicgmf.diagram.part.ReflectiveDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/EcoreModelDiagramFile.gif"
+         extensions="xmi_diagram"
+         default="true"
+         class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramEditor"
+         matchingStrategy="net.sourceforge.dynamicgmf.diagram.part.EcoreModelMatchingStrategy"
+         contributorClass="net.sourceforge.dynamicgmf.diagram.part.EcoreModelActionBarContributor">
+      </editor>
+      <editor
+            class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramEditor$XML"
+            contributorClass="net.sourceforge.dynamicgmf.diagram.part.XMLActionBarContributor"
+            default="true"
+            extensions="xml_diagram"
+            icon="icons/obj16/EcoreModelDiagramFile.gif"
+            id="net.sourceforge.dynamicgmf.diagram.part.XMLReflectiveDiagramEditorID"
+            matchingStrategy="net.sourceforge.dynamicgmf.diagram.part.EcoreModelMatchingStrategy"
+            name="%editorName">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="net.sourceforge.dynamicgmf.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/EcoreModelDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="net.sourceforge.dynamicgmf.diagram.wizard.DynamicGMFModelWizard"
+  	     id="net.sourceforge.dynamicgmf.diagram.part.DynamicGMFModelWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            adaptable="false"
+            id="net.sourceforge.dynamicgmf.diagram.LoadResource"
+            objectClass="net.sourceforge.dynamicgmf.diagram.edit.parts.RootEditPart">
+         <action
+               class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelLoadResourceAction"
+               enablesFor="1"
+               id="net.sourceforge.dynamicgmf.diagram.LoadResourceAction"
+               label="%loadResourceActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>           
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="net.sourceforge.dynamicgmf.diagram.InitDiagram"
+            nameFilter="*.xmi"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="net.sourceforge.dynamicgmf.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="net.sourceforge.dynamicgmf.diagram.XMLInitDiagram"
+            nameFilter="*.xml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelInitDiagramFileAction$XML"
+               enablesFor="1"
+               id="net.sourceforge.dynamicgmf.diagram.XMLInitDiagramAction"
+               label="%xmlInitDiagramActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="net.sourceforge.dynamicgmf.diagram.CreateDynamicInstance"
+            objectClass="org.eclipse.emf.ecore.EClass">
+         <action
+               class="net.sourceforge.dynamicgmf.diagram.part.CreateDynamicInstanceAction"
+               enablesFor="1"
+               id="net.sourceforge.dynamicgmf.diagram.CreateDynamicInstanceAction"
+               label="%createDynamicInstance_menu_item"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="XmlPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="XmlPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="XmlRender">
+         <Priority name="Lowest"/>
+         <ViewId id="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
+            checkPluginLoaded="false">
+         <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="net.sourceforge.dynamicgmf.diagram.edit.parts.EContainmentEditPart"/>
+            <popupAction path="/editGroup" id="deleteFromModelAction"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+         </popupContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <?gmfgen generated="true"?>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.general"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.general"
+            class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.appearance"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.appearance"
+            category="net.sourceforge.dynamicgmf.diagram.general"
+            class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.connections"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.connections"
+            category="net.sourceforge.dynamicgmf.diagram.general"
+            class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.printing"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.printing"
+            category="net.sourceforge.dynamicgmf.diagram.general"
+            class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.rulersAndGrid"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.rulersAndGrid"
+            category="net.sourceforge.dynamicgmf.diagram.general"
+            class="net.sourceforge.dynamicgmf.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+      <page
+            id="net.sourceforge.dynamicgmf.diagram.pathmaps"
+            name="%preference.page.title.net.sourceforge.dynamicgmf.diagram.pathmaps"
+            category="net.sourceforge.dynamicgmf.diagram.general"
+            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="net.sourceforge.dynamicgmf.diagram"
+            labelProvider="net.sourceforge.dynamicgmf.diagram.sheet.EcoreModelSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="net.sourceforge.dynamicgmf.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="net.sourceforge.dynamicgmf.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="net.sourceforge.dynamicgmf.diagram.sheet.EcoreModelPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <?gmfgen generated="true"?>
+      <viewProvider class="net.sourceforge.dynamicgmf.diagram.providers.EcoreModelViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Xml"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="net.sourceforge.dynamicgmf.diagram.providers.EcoreModelEditPartProvider">
+         <Priority name="Lowest"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="net.sourceforge.dynamicgmf.diagram.providers.EcoreModelModelingAssistantProvider">
+         <Priority name="Lowest"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      <?gmfgen generated="true"?>
+      <IconProvider class="net.sourceforge.dynamicgmf.diagram.providers.EcoreModelIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="net.sourceforge.dynamicgmf.diagram.providers.EcoreModelParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="EcoreModelClientContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="net.sourceforge.dynamicgmf.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="net.sourceforge.dynamicgmf.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="net.sourceforge.dynamicgmf.diagram"
+           properties="isURIEditorInput"
+           class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="net.sourceforge.dynamicgmf.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="net.sourceforge.dynamicgmf.diagram"
+           properties="isDomainModelElement"
+           class="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="net.sourceforge.dynamicgmf.diagram.resourceContent"/>
+			<contentExtension pattern="net.sourceforge.dynamicgmf.diagram.domainResourceContent"/>
+            <contentExtension pattern="net.sourceforge.dynamicgmf.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="net.sourceforge.dynamicgmf.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="net.sourceforge.dynamicgmf.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelNavigatorContentProvider" 
+            labelProvider="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelNavigatorLabelProvider"
+            icon="icons/obj16/EcoreModelDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="xml_diagram"/>
+               </and>
+               <instanceof value="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="net.sourceforge.dynamicgmf.diagram.navigatorSorter" 
+               class="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="xml_diagram"/>
+                  </and>
+                  <instanceof value="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="net.sourceforge.dynamicgmf.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelDomainNavigatorContentProvider" 
+            labelProvider="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelDomainNavigatorLabelProvider"
+            icon="icons/obj16/EcoreModelDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="xml"/>
+               </and>
+               <and>
+                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
+                  <test property="net.sourceforge.dynamicgmf.diagram.isDomainModelElement"/>
+               </and>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <and>
+       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
+       	       <test property="net.sourceforge.dynamicgmf.diagram.isDomainModelElement"/>
+       	    </and>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="net.sourceforge.dynamicgmf.diagram.navigatorActionProvider"
+            class="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="net.sourceforge.dynamicgmf.diagram.navigatorLinkHelper"
+            class="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="net.sourceforge.dynamicgmf.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="net.sourceforge.dynamicgmf.diagram.navigator.EcoreModelAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="net.sourceforge.dynamicgmf.diagram.part.EcoreModelDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="net.sourceforge.dynamicgmf.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="net.sourceforge.dynamicgmf.diagram.updateDiagram"
+         contextId="net.sourceforge.dynamicgmf.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+   <extension
+         point="net.sourceforge.dynamicgmf.diagram.modelImporterDescriptors">
+      <modelImporterDescriptor
+            description="%xsdImporter_description"
+            extensions="xsd,wsdl"
+            icon="icons/obj16/XSDModelFile.gif"
+            id="net.sourceforge.dynamicgmf.diagram.xsdImporter"
+            name="%xsdImporter_label"
+            wizard="net.sourceforge.dynamicgmf.diagram.wizard.XSDModelCreationImporterWizard">
+      </modelImporterDescriptor>
+      <modelImporterDescriptor
+            description="%ecoreImporter_description"
+            extensions="ecore,emof"
+            icon="icons/obj16/EcoreModelFile.gif"
+            id="net.sourceforge.dynamicgmf.diagram.ecoreImporter"
+            name="%ecoreImporter_label"
+            wizard="net.sourceforge.dynamicgmf.diagram.wizard.EcoreModelCreationImporterWizard">
+      </modelImporterDescriptor>
+   </extension>
+</plugin>

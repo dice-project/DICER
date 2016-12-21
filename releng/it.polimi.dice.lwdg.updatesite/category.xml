@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/it.polimi.dice.lwdg.launcher.feature_1.0.0.qualifier.jar" id="it.polimi.dice.lwdg.launcher.feature" version="1.0.0.qualifier">
+      <category name="DICE-LWDG.Launcher"/>
+   </feature>
+   <feature url="features/it.polimi.dice.lwdg.loadDemo.feature_1.0.0.qualifier.jar" id="it.polimi.dice.lwdg.loadDemo.feature" version="1.0.0.qualifier">
+      <category name="DICE-LWDG.loadDemo"/>
+   </feature>
+   <category-def name="DICE-LWDG.Launcher" label="DICE-LWDG Launcher"/>
+   <category-def name="DICE-LWDG.loadDemo" label="DICE-LWDG load Demo"/>
+</site>

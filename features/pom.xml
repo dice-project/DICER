@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+        <groupId>it.polimi.dice.lwdg</groupId>
+        <artifactId>it.polimi.dice.lwdg.features</artifactId>
+        <packaging>pom</packaging>
+
+        <parent>
+                <groupId>dicer</groupId>
+                <artifactId>dicer.parent</artifactId>
+                <version>0.1.0</version>
+                <relativePath>../pom.xml</relativePath>
+        </parent>
+
+        <modules>
+                <module>it.polimi.dice.lwdg.launcher.feature</module>
+                 <module>it.polimi.dice.lwdg.loadDemo.feature</module>
+        </modules>
+        
+            <build>
+
+    </build>
+</project>

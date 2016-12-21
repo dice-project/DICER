@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!--extension point for launch configuration -->   
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="it.polimi.dice.lwdg.launcher.LWDGLaunchConfigurationDelegate"
+            id="it.polimi.dice.lwdg.launcher.launchConfigurationType"
+            modes="run"
+            name="DICE-LWDG Launcher">
+      </launchConfigurationType>
+   </extension>
+<!--extension point for launch configuration tabs -->  
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="it.polimi.dice.lwdg.launcher.LWDGLaunchConfigurationTabGroup"
+            id="it.polimi.dice.lwdg.launcher.launchConfigurationTabGroup"
+            type="it.polimi.dice.lwdg.launcher.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+</plugin>

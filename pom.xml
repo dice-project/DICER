@@ -6,6 +6,13 @@
 	<artifactId>dicer.parent</artifactId>
 	<packaging>pom</packaging>
 
+  <parent>
+ 	  <groupId>it.polimi.dice.lwdg</groupId>
+  	<artifactId>it.polimi.dice.lwdg.configuration</artifactId>
+  	<version>0.1.0</version>
+  	<relativePath>.\releng\it.polimi.dice.lwdg.configuration</relativePath>
+ 	</parent>
+
 	<properties>
 		<xtextVersion>2.10.0</xtextVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,6 +23,9 @@
 	<modules>
 		<module>dicer-core</module>
 		<module>dicer-service</module>
+		<module>bundles</module>
+    <module>features</module>
+    <module>releng</module>
 	</modules>
 
 	<build>

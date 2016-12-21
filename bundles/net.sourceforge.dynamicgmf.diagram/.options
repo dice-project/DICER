@@ -1,0 +1,7 @@
+# Tracing options for the net.sourceforge.dynamicgmf.diagram plug-in
+
+# Common issues
+net.sourceforge.dynamicgmf.diagram/debug=false
+
+# Visual IDs
+net.sourceforge.dynamicgmf.diagram/debug/visualID=false
