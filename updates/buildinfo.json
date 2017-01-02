@@ -1,0 +1,41 @@
+{
+    "timestamp" : 1483977666642,
+    "revision" : {
+        "HEAD" : "10f12d7fd3b9cf2db0e52940f79d49edc4ef46bc",
+        "currentBranch" : "refs/heads/master",
+        "knownReferences" : [
+            {
+                "name" : "origin",
+                "url" : "https://github.com/dice-project/DICER.git",
+                "ref" : "HEAD"
+            },
+            {
+                "name" : "origin",
+                "url" : "https://github.com/dice-project/DICER.git",
+                "ref" : "master"
+            }
+        ]
+    },
+    "properties" : {
+        "TARGET_PLATFORM_VERSION_MAXIMUM" : "null",
+        "java.version" : "1.8.0_66",
+        "user.dir" : "/Users/michele/workspace/DICER",
+        "os.arch" : "x86_64",
+        "RELEASE" : "null",
+        "BUILD_ALIAS" : "null",
+        "JOB_NAME" : "null",
+        "os.version" : "10.10.5",
+        "BUILD_NUMBER" : "null",
+        "TARGET_PLATFORM_VERSION" : "null",
+        "NODE_NAME" : "null",
+        "HOSTNAME" : "MacBook-Air-di-Luigi-2.local",
+        "java.vendor" : "Oracle Corporation",
+        "os.name" : "Mac OS X",
+        "ZIPSUFFIX" : "null",
+        "WORKSPACE" : "/Users/michele/workspace/DICER"
+    },
+    "upstream" : {
+        "http://download.eclipse.org/releases/neon" : "Build info file not accessible: http://download.eclipse.org/releases/neon/buildinfo.json",
+        "http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon" : "Build info file not accessible: http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/buildinfo.json"
+    }
+}
