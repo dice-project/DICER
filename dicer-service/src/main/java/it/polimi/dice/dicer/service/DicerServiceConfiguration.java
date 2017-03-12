@@ -12,8 +12,11 @@ public class DicerServiceConfiguration extends Configuration {
     private String transformationDir;
 
     @NotEmpty
-    private String inMetamodelPath;
+    private String ddsmMetamodelPath;
 
+    @NotEmpty
+    private String diceProfilePath;
+    
     @NotEmpty
     private String outMetamodelPath;
 
@@ -26,17 +29,27 @@ public class DicerServiceConfiguration extends Configuration {
     public void setTransformationDir(String transformationDir) {
         this.transformationDir = transformationDir;
     }
-
-    @JsonProperty("inMetamodelPath")
-    public String getInMetamodelPath() {
-        return inMetamodelPath;
+    
+    @JsonProperty("ddsmMetamodelPath")
+    public String getDdsmMetamodelPath() {
+        return ddsmMetamodelPath;
     }
 
-    @JsonProperty("inMetamodelPath")
-    public void setInMetamodelPath(String inMetamodelPath) {
-        this.inMetamodelPath = inMetamodelPath;
+    @JsonProperty("ddsmMetamodelPath")
+    public void setDdsmMetamodelPath(String ddsmMetamodelPath) {
+        this.ddsmMetamodelPath = ddsmMetamodelPath;
     }
 
+    @JsonProperty("diceProfilePath")
+    public String getDiceProfilePath() {
+        return diceProfilePath;
+    }
+
+    @JsonProperty("diceProfilePath")
+    public void setDiceProfilePath(String diceProfilePath) {
+        this.diceProfilePath = diceProfilePath;
+    }
+    
     @JsonProperty("outMetamodelPath")
     public String getOutMetamodelPath() {
         return outMetamodelPath;

@@ -26,21 +26,24 @@ public class DicerService {
     static Logger log = LoggerFactory.getLogger(DicerService.class);
 
     private static String transformationDir;
-    private static String inMetamodelPath;
+    private static String ddsmMetamodelPath;
+    private static String diceProfilePath;
     private static String outMetamodelPath;
 
     private static final Dicer dicer = new Dicer();
 
-    public DicerService(String transformation, String inMetamodel, String outMetamodel) {
+    public DicerService(String transformation, String ddsmMetamodel, String diceProfile, String outMetamodel) {
         
         log.info("Starting DICER-Service");
         
         log.info("Transformatioon directory: " + transformation);
-        log.info("Input DDSM metamodel path: " + inMetamodel);
+        log.info("Input DDSM metamodel path: " + ddsmMetamodel);
+        log.info("Input DICE Profile path: " + diceProfile);
         log.info("Output TOSCA metamodel path " + outMetamodel);
 
         transformationDir = transformation;
-        inMetamodelPath = inMetamodel;
+        ddsmMetamodelPath = ddsmMetamodel;
+        diceProfilePath = diceProfile;
         outMetamodelPath = outMetamodel;
         
         java.nio.file.Path path = Paths.get("./temp/");
@@ -67,7 +70,7 @@ public class DicerService {
             log.error(e.getMessage(), e.getCause());
         }
         
-        dicer.runme("./temp/temp_input_model.xmi", "./temp/temp_input_model_tosca", inMetamodelPath, outMetamodelPath,
+        dicer.runme("./temp/temp_input_model.xmi", "./temp/temp_input_model_tosca", ddsmMetamodelPath, diceProfilePath, outMetamodelPath,
                 transformationDir, 0);
         
         String blueprint = "";

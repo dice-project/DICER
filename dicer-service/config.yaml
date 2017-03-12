@@ -5,5 +5,6 @@ server:
     type: http
     port: 8176
 transformationDir: ${TRANSFORMATION_DIR}
-inMetamodelPath: ${IN_METAMODEL_PATH}
+ddsmMetamodelPath: ${DDSM_METAMODEL_PATH}
+diceProfilePath: ${DICE_PROFILE_PATH}
 outMetamodelPath: ${OUT_METAMODEL_PATH}
