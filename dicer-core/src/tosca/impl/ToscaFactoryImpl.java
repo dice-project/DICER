@@ -60,7 +60,6 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
             case ToscaPackage.INTERFACE: return createInterface();
             case ToscaPackage.RELATIONSHIP: return createRelationship();
             case ToscaPackage.PROPERTY: return createProperty();
-            case ToscaPackage.ATTRIBUTE: return createAttribute();
             case ToscaPackage.REQUIREMENT: return createRequirement();
             case ToscaPackage.OPERATION: return createOperation();
             case ToscaPackage.TOPOLOGY_TEMPLATE: return createTopologyTemplate();
@@ -72,6 +71,12 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
             case ToscaPackage.ARTIFACT: return createArtifact();
             case ToscaPackage.INSTANCES: return createInstances();
             case ToscaPackage.CONFIGURATION: return createConfiguration();
+            case ToscaPackage.ARGUMENT: return createArgument();
+            case ToscaPackage.EXPRESSION: return createExpression();
+            case ToscaPackage.VALUE: return createValue();
+            case ToscaPackage.SIMPLE_VALUE: return createSimpleValue();
+            case ToscaPackage.GET_ATTRIBUTE: return createGetAttribute();
+            case ToscaPackage.FIREWALL_RULE: return createFirewallRule();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -115,16 +120,6 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
     public Property createProperty() {
         PropertyImpl property = new PropertyImpl();
         return property;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public Attribute createAttribute() {
-        AttributeImpl attribute = new AttributeImpl();
-        return attribute;
     }
 
     /**
@@ -235,6 +230,66 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
     public Configuration createConfiguration() {
         ConfigurationImpl configuration = new ConfigurationImpl();
         return configuration;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Argument createArgument() {
+        ArgumentImpl argument = new ArgumentImpl();
+        return argument;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Expression createExpression() {
+        ExpressionImpl expression = new ExpressionImpl();
+        return expression;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Value createValue() {
+        ValueImpl value = new ValueImpl();
+        return value;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public SimpleValue createSimpleValue() {
+        SimpleValueImpl simpleValue = new SimpleValueImpl();
+        return simpleValue;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public GetAttribute createGetAttribute() {
+        GetAttributeImpl getAttribute = new GetAttributeImpl();
+        return getAttribute;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public FirewallRule createFirewallRule() {
+        FirewallRuleImpl firewallRule = new FirewallRuleImpl();
+        return firewallRule;
     }
 
     /**

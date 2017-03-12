@@ -15,12 +15,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import tosca.Attribute;
+import tosca.Argument;
 import tosca.Capability;
 import tosca.Configuration;
+import tosca.FirewallRule;
 import tosca.Instances;
 import tosca.Interface;
 import tosca.NodeTemplate;
@@ -42,12 +43,14 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.NodeTemplateImpl#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getProperties <em>Properties</em>}</li>
- *   <li>{@link tosca.impl.NodeTemplateImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRequirements <em>Requirements</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getConfigurations <em>Configurations</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getResources <em>Resources</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @generated
@@ -134,16 +137,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
     protected EList<Property> properties;
 
     /**
-     * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAttributes()
-     * @generated
-     * @ordered
-     */
-    protected EList<Attribute> attributes;
-
-    /**
      * The cached value of the '{@link #getRequirements() <em>Requirements</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -192,6 +185,36 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * @ordered
      */
     protected EList<Configuration> configurations;
+
+    /**
+     * The cached value of the '{@link #getResources() <em>Resources</em>}' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getResources()
+     * @generated
+     * @ordered
+     */
+    protected EList<String> resources;
+
+    /**
+     * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getArguments()
+     * @generated
+     * @ordered
+     */
+    protected EList<Argument> arguments;
+
+    /**
+     * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getRules()
+     * @generated
+     * @ordered
+     */
+    protected EList<FirewallRule> rules;
 
     /**
      * <!-- begin-user-doc -->
@@ -304,11 +327,23 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Attribute> getAttributes() {
-        if (attributes == null) {
-            attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, ToscaPackage.NODE_TEMPLATE__ATTRIBUTES);
+    public EList<Argument> getArguments() {
+        if (arguments == null) {
+            arguments = new EObjectContainmentEList<Argument>(Argument.class, this, ToscaPackage.NODE_TEMPLATE__ARGUMENTS);
         }
-        return attributes;
+        return arguments;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EList<FirewallRule> getRules() {
+        if (rules == null) {
+            rules = new EObjectContainmentEList<FirewallRule>(FirewallRule.class, this, ToscaPackage.NODE_TEMPLATE__RULES);
+        }
+        return rules;
     }
 
     /**
@@ -407,6 +442,18 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
+    public EList<String> getResources() {
+        if (resources == null) {
+            resources = new EDataTypeUniqueEList<String>(String.class, this, ToscaPackage.NODE_TEMPLATE__RESOURCES);
+        }
+        return resources;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
@@ -414,8 +461,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return ((InternalEList<?>)getInterfaces()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__PROPERTIES:
                 return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.NODE_TEMPLATE__ATTRIBUTES:
-                return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__REQUIREMENTS:
                 return ((InternalEList<?>)getRequirements()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__RELATIONSHIPS:
@@ -426,6 +471,10 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return basicSetInstances(null, msgs);
             case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
                 return ((InternalEList<?>)getConfigurations()).basicRemove(otherEnd, msgs);
+            case ToscaPackage.NODE_TEMPLATE__ARGUMENTS:
+                return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+            case ToscaPackage.NODE_TEMPLATE__RULES:
+                return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -448,8 +497,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getDescription();
             case ToscaPackage.NODE_TEMPLATE__PROPERTIES:
                 return getProperties();
-            case ToscaPackage.NODE_TEMPLATE__ATTRIBUTES:
-                return getAttributes();
             case ToscaPackage.NODE_TEMPLATE__REQUIREMENTS:
                 return getRequirements();
             case ToscaPackage.NODE_TEMPLATE__RELATIONSHIPS:
@@ -460,6 +507,12 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getInstances();
             case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
                 return getConfigurations();
+            case ToscaPackage.NODE_TEMPLATE__RESOURCES:
+                return getResources();
+            case ToscaPackage.NODE_TEMPLATE__ARGUMENTS:
+                return getArguments();
+            case ToscaPackage.NODE_TEMPLATE__RULES:
+                return getRules();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -490,10 +543,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 getProperties().clear();
                 getProperties().addAll((Collection<? extends Property>)newValue);
                 return;
-            case ToscaPackage.NODE_TEMPLATE__ATTRIBUTES:
-                getAttributes().clear();
-                getAttributes().addAll((Collection<? extends Attribute>)newValue);
-                return;
             case ToscaPackage.NODE_TEMPLATE__REQUIREMENTS:
                 getRequirements().clear();
                 getRequirements().addAll((Collection<? extends Requirement>)newValue);
@@ -512,6 +561,18 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
                 getConfigurations().clear();
                 getConfigurations().addAll((Collection<? extends Configuration>)newValue);
+                return;
+            case ToscaPackage.NODE_TEMPLATE__RESOURCES:
+                getResources().clear();
+                getResources().addAll((Collection<? extends String>)newValue);
+                return;
+            case ToscaPackage.NODE_TEMPLATE__ARGUMENTS:
+                getArguments().clear();
+                getArguments().addAll((Collection<? extends Argument>)newValue);
+                return;
+            case ToscaPackage.NODE_TEMPLATE__RULES:
+                getRules().clear();
+                getRules().addAll((Collection<? extends FirewallRule>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -540,9 +601,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__PROPERTIES:
                 getProperties().clear();
                 return;
-            case ToscaPackage.NODE_TEMPLATE__ATTRIBUTES:
-                getAttributes().clear();
-                return;
             case ToscaPackage.NODE_TEMPLATE__REQUIREMENTS:
                 getRequirements().clear();
                 return;
@@ -557,6 +615,15 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return;
             case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
                 getConfigurations().clear();
+                return;
+            case ToscaPackage.NODE_TEMPLATE__RESOURCES:
+                getResources().clear();
+                return;
+            case ToscaPackage.NODE_TEMPLATE__ARGUMENTS:
+                getArguments().clear();
+                return;
+            case ToscaPackage.NODE_TEMPLATE__RULES:
+                getRules().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -580,8 +647,6 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
             case ToscaPackage.NODE_TEMPLATE__PROPERTIES:
                 return properties != null && !properties.isEmpty();
-            case ToscaPackage.NODE_TEMPLATE__ATTRIBUTES:
-                return attributes != null && !attributes.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__REQUIREMENTS:
                 return requirements != null && !requirements.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__RELATIONSHIPS:
@@ -592,6 +657,12 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return instances != null;
             case ToscaPackage.NODE_TEMPLATE__CONFIGURATIONS:
                 return configurations != null && !configurations.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__RESOURCES:
+                return resources != null && !resources.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__ARGUMENTS:
+                return arguments != null && !arguments.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__RULES:
+                return rules != null && !rules.isEmpty();
         }
         return super.eIsSet(featureID);
     }
@@ -612,6 +683,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
         result.append(type);
         result.append(", description: ");
         result.append(description);
+        result.append(", resources: ");
+        result.append(resources);
         result.append(')');
         return result.toString();
     }

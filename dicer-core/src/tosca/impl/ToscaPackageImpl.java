@@ -8,11 +8,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import tosca.Argument;
 import tosca.Artifact;
-import tosca.Attribute;
 import tosca.Capability;
 import tosca.Configuration;
+import tosca.Expression;
+import tosca.FirewallRule;
+import tosca.GetAttribute;
 import tosca.Group;
 import tosca.Import;
 import tosca.Instances;
@@ -24,9 +26,11 @@ import tosca.Policy;
 import tosca.Property;
 import tosca.Relationship;
 import tosca.Requirement;
+import tosca.SimpleValue;
 import tosca.TopologyTemplate;
 import tosca.ToscaFactory;
 import tosca.ToscaPackage;
+import tosca.Value;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,13 +66,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     private EClass propertyEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass attributeEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -146,6 +143,48 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     private EClass configurationEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass argumentEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass expressionEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass valueEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass simpleValueEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass getAttributeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass firewallRuleEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -267,8 +306,17 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getNodeTemplate_Attributes() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(5);
+    public EReference getNodeTemplate_Arguments() {
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(11);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getNodeTemplate_Rules() {
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(12);
     }
 
     /**
@@ -277,7 +325,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EReference getNodeTemplate_Requirements() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(6);
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(5);
     }
 
     /**
@@ -286,7 +334,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EReference getNodeTemplate_Relationships() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(7);
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(6);
     }
 
     /**
@@ -295,7 +343,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EReference getNodeTemplate_Capabilities() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(8);
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(7);
     }
 
     /**
@@ -304,7 +352,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EReference getNodeTemplate_Instances() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(9);
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(8);
     }
 
     /**
@@ -313,7 +361,16 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EReference getNodeTemplate_Configurations() {
-        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(10);
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(9);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getNodeTemplate_Resources() {
+        return (EAttribute)nodeTemplateEClass.getEStructuralFeatures().get(10);
     }
 
     /**
@@ -402,7 +459,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getRelationship_Attributes() {
+    public EReference getRelationship_Source_interfaces() {
         return (EReference)relationshipEClass.getEStructuralFeatures().get(3);
     }
 
@@ -411,7 +468,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getRelationship_Source_interfaces() {
+    public EReference getRelationship_Target_interfaces() {
         return (EReference)relationshipEClass.getEStructuralFeatures().get(4);
     }
 
@@ -420,17 +477,8 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getRelationship_Target_interfaces() {
-        return (EReference)relationshipEClass.getEStructuralFeatures().get(5);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public EAttribute getRelationship_Target() {
-        return (EAttribute)relationshipEClass.getEStructuralFeatures().get(6);
+        return (EAttribute)relationshipEClass.getEStructuralFeatures().get(5);
     }
 
     /**
@@ -439,7 +487,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * @generated
      */
     public EAttribute getRelationship_Relationship_name() {
-        return (EAttribute)relationshipEClass.getEStructuralFeatures().get(7);
+        return (EAttribute)relationshipEClass.getEStructuralFeatures().get(6);
     }
 
     /**
@@ -467,24 +515,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      */
     public EAttribute getProperty_Value() {
         return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getAttribute() {
-        return attributeEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getAttribute_Attribute_name() {
-        return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
     }
 
     /**
@@ -852,17 +882,8 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getCapability_Attributes() {
-        return (EReference)capabilityEClass.getEStructuralFeatures().get(3);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public EAttribute getCapability_Capability_name() {
-        return (EAttribute)capabilityEClass.getEStructuralFeatures().get(4);
+        return (EAttribute)capabilityEClass.getEStructuralFeatures().get(3);
     }
 
     /**
@@ -881,6 +902,15 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      */
     public EAttribute getParameter_Parameter_name() {
         return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getParameter_Parameter_value() {
+        return (EReference)parameterEClass.getEStructuralFeatures().get(1);
     }
 
     /**
@@ -960,6 +990,123 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getArgument() {
+        return argumentEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getArgument_Argument_name() {
+        return (EAttribute)argumentEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getArgument_Argument_value() {
+        return (EReference)argumentEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getExpression() {
+        return expressionEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getValue() {
+        return valueEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getSimpleValue() {
+        return simpleValueEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getSimpleValue_Value() {
+        return (EAttribute)simpleValueEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getGetAttribute() {
+        return getAttributeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getGetAttribute_Node() {
+        return (EAttribute)getAttributeEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getGetAttribute_Attribute() {
+        return (EAttribute)getAttributeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getFirewallRule() {
+        return firewallRuleEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getFirewallRule_Remote_ip_prefix() {
+        return (EAttribute)firewallRuleEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getFirewallRule_Port() {
+        return (EAttribute)firewallRuleEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public ToscaFactory getToscaFactory() {
         return (ToscaFactory)getEFactoryInstance();
     }
@@ -989,12 +1136,14 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__INTERFACES);
         createEAttribute(nodeTemplateEClass, NODE_TEMPLATE__DESCRIPTION);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__PROPERTIES);
-        createEReference(nodeTemplateEClass, NODE_TEMPLATE__ATTRIBUTES);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__REQUIREMENTS);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__RELATIONSHIPS);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__CAPABILITIES);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__INSTANCES);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__CONFIGURATIONS);
+        createEAttribute(nodeTemplateEClass, NODE_TEMPLATE__RESOURCES);
+        createEReference(nodeTemplateEClass, NODE_TEMPLATE__ARGUMENTS);
+        createEReference(nodeTemplateEClass, NODE_TEMPLATE__RULES);
 
         interfaceEClass = createEClass(INTERFACE);
         createEAttribute(interfaceEClass, INTERFACE__INTERFACE_NAME);
@@ -1006,7 +1155,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         createEAttribute(relationshipEClass, RELATIONSHIP__TYPE);
         createEReference(relationshipEClass, RELATIONSHIP__INTERFACES);
         createEReference(relationshipEClass, RELATIONSHIP__PROPERTIES);
-        createEReference(relationshipEClass, RELATIONSHIP__ATTRIBUTES);
         createEReference(relationshipEClass, RELATIONSHIP__SOURCE_INTERFACES);
         createEReference(relationshipEClass, RELATIONSHIP__TARGET_INTERFACES);
         createEAttribute(relationshipEClass, RELATIONSHIP__TARGET);
@@ -1015,9 +1163,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         propertyEClass = createEClass(PROPERTY);
         createEAttribute(propertyEClass, PROPERTY__PROPERTY_NAME);
         createEAttribute(propertyEClass, PROPERTY__VALUE);
-
-        attributeEClass = createEClass(ATTRIBUTE);
-        createEAttribute(attributeEClass, ATTRIBUTE__ATTRIBUTE_NAME);
 
         requirementEClass = createEClass(REQUIREMENT);
         createEAttribute(requirementEClass, REQUIREMENT__REQUIREMENT_NAME);
@@ -1065,11 +1210,11 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         createEAttribute(capabilityEClass, CAPABILITY__TYPE);
         createEAttribute(capabilityEClass, CAPABILITY__DESCRIPTION);
         createEReference(capabilityEClass, CAPABILITY__PROPERTIES);
-        createEReference(capabilityEClass, CAPABILITY__ATTRIBUTES);
         createEAttribute(capabilityEClass, CAPABILITY__CAPABILITY_NAME);
 
         parameterEClass = createEClass(PARAMETER);
         createEAttribute(parameterEClass, PARAMETER__PARAMETER_NAME);
+        createEReference(parameterEClass, PARAMETER__PARAMETER_VALUE);
 
         artifactEClass = createEClass(ARTIFACT);
         createEAttribute(artifactEClass, ARTIFACT__NAME);
@@ -1081,6 +1226,25 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         configurationEClass = createEClass(CONFIGURATION);
         createEAttribute(configurationEClass, CONFIGURATION__PROPERTY_NAME);
         createEAttribute(configurationEClass, CONFIGURATION__VALUE);
+
+        argumentEClass = createEClass(ARGUMENT);
+        createEAttribute(argumentEClass, ARGUMENT__ARGUMENT_NAME);
+        createEReference(argumentEClass, ARGUMENT__ARGUMENT_VALUE);
+
+        expressionEClass = createEClass(EXPRESSION);
+
+        valueEClass = createEClass(VALUE);
+
+        simpleValueEClass = createEClass(SIMPLE_VALUE);
+        createEAttribute(simpleValueEClass, SIMPLE_VALUE__VALUE);
+
+        getAttributeEClass = createEClass(GET_ATTRIBUTE);
+        createEAttribute(getAttributeEClass, GET_ATTRIBUTE__NODE);
+        createEAttribute(getAttributeEClass, GET_ATTRIBUTE__ATTRIBUTE);
+
+        firewallRuleEClass = createEClass(FIREWALL_RULE);
+        createEAttribute(firewallRuleEClass, FIREWALL_RULE__REMOTE_IP_PREFIX);
+        createEAttribute(firewallRuleEClass, FIREWALL_RULE__PORT);
     }
 
     /**
@@ -1111,6 +1275,9 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         // Set bounds for type parameters
 
         // Add supertypes to classes
+        expressionEClass.getESuperTypes().add(this.getValue());
+        simpleValueEClass.getESuperTypes().add(this.getValue());
+        getAttributeEClass.getESuperTypes().add(this.getExpression());
 
         // Initialize classes, features, and operations; add parameters
         initEClass(nodeTemplateEClass, NodeTemplate.class, "NodeTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1119,15 +1286,17 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEReference(getNodeTemplate_Interfaces(), this.getInterface(), null, "interfaces", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getNodeTemplate_Description(), ecorePackage.getEString(), "description", null, 0, 1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Properties(), this.getProperty(), null, "properties", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNodeTemplate_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Requirements(), this.getRequirement(), null, "requirements", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Capabilities(), this.getCapability(), null, "capabilities", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Instances(), this.getInstances(), null, "instances", null, 0, 1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Configurations(), this.getConfiguration(), null, "configurations", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getNodeTemplate_Resources(), ecorePackage.getEString(), "resources", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNodeTemplate_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNodeTemplate_Rules(), this.getFirewallRule(), null, "rules", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(interfaceEClass, Interface.class, "Interface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getInterface_Interface_name(), ecorePackage.getEString(), "interface_name", null, 0, 1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getInterface_Interface_name(), ecorePackage.getEString(), "interface_name", null, 0, 1, Interface.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getInterface_Operations(), this.getOperation(), null, "operations", null, 0, -1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getInterface_Inputs(), this.getProperty(), null, "inputs", null, 0, -1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getInterface_Type(), ecorePackage.getEString(), "type", null, 1, 1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1136,7 +1305,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEAttribute(getRelationship_Type(), ecorePackage.getEString(), "type", null, 1, 1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRelationship_Interfaces(), this.getInterface(), null, "interfaces", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRelationship_Properties(), this.getProperty(), null, "properties", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRelationship_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRelationship_Source_interfaces(), this.getInterface(), null, "source_interfaces", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRelationship_Target_interfaces(), this.getInterface(), null, "target_interfaces", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getRelationship_Target(), ecorePackage.getEString(), "target", null, 0, 1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1145,9 +1313,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getProperty_Property_name(), ecorePackage.getEString(), "property_name", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getProperty_Value(), ecorePackage.getEString(), "value", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getAttribute_Attribute_name(), ecorePackage.getEString(), "attribute_name", null, 1, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(requirementEClass, Requirement.class, "Requirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getRequirement_Requirement_name(), ecorePackage.getEString(), "requirement_name", null, 1, 1, Requirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1195,11 +1360,11 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEAttribute(getCapability_Type(), ecorePackage.getEString(), "type", null, 1, 1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getCapability_Description(), ecorePackage.getEString(), "description", null, 0, 1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getCapability_Properties(), this.getProperty(), null, "properties", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getCapability_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getCapability_Capability_name(), ecorePackage.getEString(), "capability_name", null, 1, 1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getParameter_Parameter_name(), ecorePackage.getEString(), "parameter_name", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getParameter_Parameter_value(), this.getValue(), null, "parameter_value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(artifactEClass, Artifact.class, "Artifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getArtifact_Name(), ecorePackage.getEString(), "name", null, 1, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1211,6 +1376,25 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEClass(configurationEClass, Configuration.class, "Configuration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getConfiguration_Property_name(), ecorePackage.getEString(), "property_name", null, 1, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getConfiguration_Value(), ecorePackage.getEString(), "value", null, 1, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getArgument_Argument_name(), ecorePackage.getEString(), "argument_name", null, 1, 1, Argument.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getArgument_Argument_value(), this.getValue(), null, "argument_value", null, 1, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(simpleValueEClass, SimpleValue.class, "SimpleValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getSimpleValue_Value(), ecorePackage.getEString(), "value", null, 1, 1, SimpleValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(getAttributeEClass, GetAttribute.class, "GetAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getGetAttribute_Node(), ecorePackage.getEString(), "node", null, 1, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGetAttribute_Attribute(), ecorePackage.getEString(), "attribute", null, 1, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(firewallRuleEClass, FirewallRule.class, "FirewallRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getFirewallRule_Remote_ip_prefix(), ecorePackage.getEString(), "remote_ip_prefix", null, 1, 1, FirewallRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getFirewallRule_Port(), ecorePackage.getEString(), "port", null, 1, 1, FirewallRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);
@@ -1253,13 +1437,6 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
            });	
         addAnnotation
           (propertyEClass, 
-           source, 
-           new String[] {
-             "description", "value desr",
-             "exclude", ""
-           });	
-        addAnnotation
-          (attributeEClass, 
            source, 
            new String[] {
              "description", "value desr",

@@ -58,15 +58,6 @@ public interface ToscaFactory extends EFactory {
     Property createProperty();
 
     /**
-     * Returns a new object of class '<em>Attribute</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>Attribute</em>'.
-     * @generated
-     */
-    Attribute createAttribute();
-
-    /**
      * Returns a new object of class '<em>Requirement</em>'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -164,6 +155,60 @@ public interface ToscaFactory extends EFactory {
      * @generated
      */
     Configuration createConfiguration();
+
+    /**
+     * Returns a new object of class '<em>Argument</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Argument</em>'.
+     * @generated
+     */
+    Argument createArgument();
+
+    /**
+     * Returns a new object of class '<em>Expression</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Expression</em>'.
+     * @generated
+     */
+    Expression createExpression();
+
+    /**
+     * Returns a new object of class '<em>Value</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Value</em>'.
+     * @generated
+     */
+    Value createValue();
+
+    /**
+     * Returns a new object of class '<em>Simple Value</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Simple Value</em>'.
+     * @generated
+     */
+    SimpleValue createSimpleValue();
+
+    /**
+     * Returns a new object of class '<em>Get Attribute</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Get Attribute</em>'.
+     * @generated
+     */
+    GetAttribute createGetAttribute();
+
+    /**
+     * Returns a new object of class '<em>Firewall Rule</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Firewall Rule</em>'.
+     * @generated
+     */
+    FirewallRule createFirewallRule();
 
     /**
      * Returns the package supported by this factory.

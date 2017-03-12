@@ -90,12 +90,6 @@ public class ToscaSwitch<T> extends Switch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case ToscaPackage.ATTRIBUTE: {
-                Attribute attribute = (Attribute)theEObject;
-                T result = caseAttribute(attribute);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
             case ToscaPackage.REQUIREMENT: {
                 Requirement requirement = (Requirement)theEObject;
                 T result = caseRequirement(requirement);
@@ -162,6 +156,46 @@ public class ToscaSwitch<T> extends Switch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case ToscaPackage.ARGUMENT: {
+                Argument argument = (Argument)theEObject;
+                T result = caseArgument(argument);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case ToscaPackage.EXPRESSION: {
+                Expression expression = (Expression)theEObject;
+                T result = caseExpression(expression);
+                if (result == null) result = caseValue(expression);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case ToscaPackage.VALUE: {
+                Value value = (Value)theEObject;
+                T result = caseValue(value);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case ToscaPackage.SIMPLE_VALUE: {
+                SimpleValue simpleValue = (SimpleValue)theEObject;
+                T result = caseSimpleValue(simpleValue);
+                if (result == null) result = caseValue(simpleValue);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case ToscaPackage.GET_ATTRIBUTE: {
+                GetAttribute getAttribute = (GetAttribute)theEObject;
+                T result = caseGetAttribute(getAttribute);
+                if (result == null) result = caseExpression(getAttribute);
+                if (result == null) result = caseValue(getAttribute);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case ToscaPackage.FIREWALL_RULE: {
+                FirewallRule firewallRule = (FirewallRule)theEObject;
+                T result = caseFirewallRule(firewallRule);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -223,21 +257,6 @@ public class ToscaSwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseProperty(Property object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseAttribute(Attribute object) {
         return null;
     }
 
@@ -403,6 +422,96 @@ public class ToscaSwitch<T> extends Switch<T> {
      * @generated
      */
     public T caseConfiguration(Configuration object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseArgument(Argument object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseExpression(Expression object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Value</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseValue(Value object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Simple Value</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Simple Value</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseSimpleValue(SimpleValue object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Get Attribute</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Get Attribute</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseGetAttribute(GetAttribute object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Firewall Rule</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Firewall Rule</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFirewallRule(FirewallRule object) {
         return null;
     }
 

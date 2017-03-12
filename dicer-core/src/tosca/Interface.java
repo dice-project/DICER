@@ -37,7 +37,7 @@ public interface Interface extends EObject {
      * @return the value of the '<em>Interface name</em>' attribute.
      * @see #setInterface_name(String)
      * @see tosca.ToscaPackage#getInterface_Interface_name()
-     * @model
+     * @model transient="true"
      * @generated
      */
     String getInterface_name();

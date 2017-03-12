@@ -20,12 +20,14 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.NodeTemplate#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getDescription <em>Description</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getProperties <em>Properties</em>}</li>
- *   <li>{@link tosca.NodeTemplate#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getRequirements <em>Requirements</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getRelationships <em>Relationships</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getInstances <em>Instances</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getConfigurations <em>Configurations</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getResources <em>Resources</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getNodeTemplate()
@@ -144,20 +146,36 @@ public interface NodeTemplate extends EObject {
     EList<Property> getProperties();
 
     /**
-     * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Attribute}.
+     * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+     * The list contents are of type {@link tosca.Argument}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+     * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Attributes</em>' containment reference list.
-     * @see tosca.ToscaPackage#getNodeTemplate_Attributes()
+     * @return the value of the '<em>Arguments</em>' containment reference list.
+     * @see tosca.ToscaPackage#getNodeTemplate_Arguments()
      * @model containment="true"
      * @generated
      */
-    EList<Attribute> getAttributes();
+    EList<Argument> getArguments();
+
+    /**
+     * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+     * The list contents are of type {@link tosca.FirewallRule}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Rules</em>' containment reference list.
+     * @see tosca.ToscaPackage#getNodeTemplate_Rules()
+     * @model containment="true"
+     * @generated
+     */
+    EList<FirewallRule> getRules();
 
     /**
      * Returns the value of the '<em><b>Requirements</b></em>' containment reference list.
@@ -248,5 +266,21 @@ public interface NodeTemplate extends EObject {
      * @generated
      */
     EList<Configuration> getConfigurations();
+
+    /**
+     * Returns the value of the '<em><b>Resources</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Resources</em>' attribute list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Resources</em>' attribute list.
+     * @see tosca.ToscaPackage#getNodeTemplate_Resources()
+     * @model
+     * @generated
+     */
+    EList<String> getResources();
 
 } // NodeTemplate

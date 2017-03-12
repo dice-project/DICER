@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import tosca.Attribute;
 import tosca.Capability;
 import tosca.Property;
 import tosca.ToscaPackage;
@@ -34,7 +32,6 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.CapabilityImpl#getType <em>Type</em>}</li>
  *   <li>{@link tosca.impl.CapabilityImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link tosca.impl.CapabilityImpl#getProperties <em>Properties</em>}</li>
- *   <li>{@link tosca.impl.CapabilityImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link tosca.impl.CapabilityImpl#getCapability_name <em>Capability name</em>}</li>
  * </ul>
  *
@@ -90,16 +87,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
      * @ordered
      */
     protected EList<Property> properties;
-
-    /**
-     * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAttributes()
-     * @generated
-     * @ordered
-     */
-    protected EList<Attribute> attributes;
 
     /**
      * The default value of the '{@link #getCapability_name() <em>Capability name</em>}' attribute.
@@ -199,18 +186,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Attribute> getAttributes() {
-        if (attributes == null) {
-            attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, ToscaPackage.CAPABILITY__ATTRIBUTES);
-        }
-        return attributes;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public String getCapability_name() {
         return capability_name;
     }
@@ -237,8 +212,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
         switch (featureID) {
             case ToscaPackage.CAPABILITY__PROPERTIES:
                 return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.CAPABILITY__ATTRIBUTES:
-                return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -257,8 +230,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
                 return getDescription();
             case ToscaPackage.CAPABILITY__PROPERTIES:
                 return getProperties();
-            case ToscaPackage.CAPABILITY__ATTRIBUTES:
-                return getAttributes();
             case ToscaPackage.CAPABILITY__CAPABILITY_NAME:
                 return getCapability_name();
         }
@@ -284,10 +255,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
                 getProperties().clear();
                 getProperties().addAll((Collection<? extends Property>)newValue);
                 return;
-            case ToscaPackage.CAPABILITY__ATTRIBUTES:
-                getAttributes().clear();
-                getAttributes().addAll((Collection<? extends Attribute>)newValue);
-                return;
             case ToscaPackage.CAPABILITY__CAPABILITY_NAME:
                 setCapability_name((String)newValue);
                 return;
@@ -312,9 +279,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
             case ToscaPackage.CAPABILITY__PROPERTIES:
                 getProperties().clear();
                 return;
-            case ToscaPackage.CAPABILITY__ATTRIBUTES:
-                getAttributes().clear();
-                return;
             case ToscaPackage.CAPABILITY__CAPABILITY_NAME:
                 setCapability_name(CAPABILITY_NAME_EDEFAULT);
                 return;
@@ -336,8 +300,6 @@ public class CapabilityImpl extends MinimalEObjectImpl.Container implements Capa
                 return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
             case ToscaPackage.CAPABILITY__PROPERTIES:
                 return properties != null && !properties.isEmpty();
-            case ToscaPackage.CAPABILITY__ATTRIBUTES:
-                return attributes != null && !attributes.isEmpty();
             case ToscaPackage.CAPABILITY__CAPABILITY_NAME:
                 return CAPABILITY_NAME_EDEFAULT == null ? capability_name != null : !CAPABILITY_NAME_EDEFAULT.equals(capability_name);
         }

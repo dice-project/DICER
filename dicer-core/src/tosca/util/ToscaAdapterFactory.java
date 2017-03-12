@@ -84,10 +84,6 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
                 return createPropertyAdapter();
             }
             @Override
-            public Adapter caseAttribute(Attribute object) {
-                return createAttributeAdapter();
-            }
-            @Override
             public Adapter caseRequirement(Requirement object) {
                 return createRequirementAdapter();
             }
@@ -130,6 +126,30 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
             @Override
             public Adapter caseConfiguration(Configuration object) {
                 return createConfigurationAdapter();
+            }
+            @Override
+            public Adapter caseArgument(Argument object) {
+                return createArgumentAdapter();
+            }
+            @Override
+            public Adapter caseExpression(Expression object) {
+                return createExpressionAdapter();
+            }
+            @Override
+            public Adapter caseValue(Value object) {
+                return createValueAdapter();
+            }
+            @Override
+            public Adapter caseSimpleValue(SimpleValue object) {
+                return createSimpleValueAdapter();
+            }
+            @Override
+            public Adapter caseGetAttribute(GetAttribute object) {
+                return createGetAttributeAdapter();
+            }
+            @Override
+            public Adapter caseFirewallRule(FirewallRule object) {
+                return createFirewallRuleAdapter();
             }
             @Override
             public Adapter defaultCase(EObject object) {
@@ -204,20 +224,6 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createPropertyAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link tosca.Attribute <em>Attribute</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see tosca.Attribute
-     * @generated
-     */
-    public Adapter createAttributeAdapter() {
         return null;
     }
 
@@ -372,6 +378,90 @@ public class ToscaAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createConfigurationAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.Argument <em>Argument</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.Argument
+     * @generated
+     */
+    public Adapter createArgumentAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.Expression <em>Expression</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.Expression
+     * @generated
+     */
+    public Adapter createExpressionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.Value <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.Value
+     * @generated
+     */
+    public Adapter createValueAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.SimpleValue <em>Simple Value</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.SimpleValue
+     * @generated
+     */
+    public Adapter createSimpleValueAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.GetAttribute <em>Get Attribute</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.GetAttribute
+     * @generated
+     */
+    public Adapter createGetAttributeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link tosca.FirewallRule <em>Firewall Rule</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see tosca.FirewallRule
+     * @generated
+     */
+    public Adapter createFirewallRuleAdapter() {
         return null;
     }
 

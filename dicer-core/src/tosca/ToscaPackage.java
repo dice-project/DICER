@@ -112,22 +112,13 @@ public interface ToscaPackage extends EPackage {
     int NODE_TEMPLATE__PROPERTIES = 4;
 
     /**
-     * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int NODE_TEMPLATE__ATTRIBUTES = 5;
-
-    /**
      * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE__REQUIREMENTS = 6;
+    int NODE_TEMPLATE__REQUIREMENTS = 5;
 
     /**
      * The feature id for the '<em><b>Relationships</b></em>' containment reference list.
@@ -136,7 +127,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE__RELATIONSHIPS = 7;
+    int NODE_TEMPLATE__RELATIONSHIPS = 6;
 
     /**
      * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
@@ -145,7 +136,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE__CAPABILITIES = 8;
+    int NODE_TEMPLATE__CAPABILITIES = 7;
 
     /**
      * The feature id for the '<em><b>Instances</b></em>' containment reference.
@@ -154,7 +145,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE__INSTANCES = 9;
+    int NODE_TEMPLATE__INSTANCES = 8;
 
     /**
      * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
@@ -163,7 +154,34 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE__CONFIGURATIONS = 10;
+    int NODE_TEMPLATE__CONFIGURATIONS = 9;
+
+    /**
+     * The feature id for the '<em><b>Resources</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__RESOURCES = 10;
+
+    /**
+     * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__ARGUMENTS = 11;
+
+    /**
+     * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__RULES = 12;
 
     /**
      * The number of structural features of the '<em>Node Template</em>' class.
@@ -172,7 +190,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE_FEATURE_COUNT = 11;
+    int NODE_TEMPLATE_FEATURE_COUNT = 13;
 
     /**
      * The number of operations of the '<em>Node Template</em>' class.
@@ -285,22 +303,13 @@ public interface ToscaPackage extends EPackage {
     int RELATIONSHIP__PROPERTIES = 2;
 
     /**
-     * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int RELATIONSHIP__ATTRIBUTES = 3;
-
-    /**
      * The feature id for the '<em><b>Source interfaces</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int RELATIONSHIP__SOURCE_INTERFACES = 4;
+    int RELATIONSHIP__SOURCE_INTERFACES = 3;
 
     /**
      * The feature id for the '<em><b>Target interfaces</b></em>' containment reference list.
@@ -309,7 +318,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int RELATIONSHIP__TARGET_INTERFACES = 5;
+    int RELATIONSHIP__TARGET_INTERFACES = 4;
 
     /**
      * The feature id for the '<em><b>Target</b></em>' attribute.
@@ -318,7 +327,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int RELATIONSHIP__TARGET = 6;
+    int RELATIONSHIP__TARGET = 5;
 
     /**
      * The feature id for the '<em><b>Relationship name</b></em>' attribute.
@@ -327,7 +336,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int RELATIONSHIP__RELATIONSHIP_NAME = 7;
+    int RELATIONSHIP__RELATIONSHIP_NAME = 6;
 
     /**
      * The number of structural features of the '<em>Relationship</em>' class.
@@ -336,7 +345,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int RELATIONSHIP_FEATURE_COUNT = 8;
+    int RELATIONSHIP_FEATURE_COUNT = 7;
 
     /**
      * The number of operations of the '<em>Relationship</em>' class.
@@ -394,43 +403,6 @@ public interface ToscaPackage extends EPackage {
     int PROPERTY_OPERATION_COUNT = 0;
 
     /**
-     * The meta object id for the '{@link tosca.impl.AttributeImpl <em>Attribute</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see tosca.impl.AttributeImpl
-     * @see tosca.impl.ToscaPackageImpl#getAttribute()
-     * @generated
-     */
-    int ATTRIBUTE = 4;
-
-    /**
-     * The feature id for the '<em><b>Attribute name</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ATTRIBUTE__ATTRIBUTE_NAME = 0;
-
-    /**
-     * The number of structural features of the '<em>Attribute</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ATTRIBUTE_FEATURE_COUNT = 1;
-
-    /**
-     * The number of operations of the '<em>Attribute</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ATTRIBUTE_OPERATION_COUNT = 0;
-
-    /**
      * The meta object id for the '{@link tosca.impl.RequirementImpl <em>Requirement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -438,7 +410,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getRequirement()
      * @generated
      */
-    int REQUIREMENT = 5;
+    int REQUIREMENT = 4;
 
     /**
      * The feature id for the '<em><b>Requirement name</b></em>' attribute.
@@ -493,7 +465,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getOperation()
      * @generated
      */
-    int OPERATION = 6;
+    int OPERATION = 5;
 
     /**
      * The feature id for the '<em><b>Operation name</b></em>' attribute.
@@ -566,7 +538,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getTopologyTemplate()
      * @generated
      */
-    int TOPOLOGY_TEMPLATE = 7;
+    int TOPOLOGY_TEMPLATE = 6;
 
     /**
      * The feature id for the '<em><b>Tosca definitions version</b></em>' attribute.
@@ -675,7 +647,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getImport()
      * @generated
      */
-    int IMPORT = 8;
+    int IMPORT = 7;
 
     /**
      * The feature id for the '<em><b>Import name</b></em>' attribute.
@@ -748,7 +720,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getGroup()
      * @generated
      */
-    int GROUP = 9;
+    int GROUP = 8;
 
     /**
      * The feature id for the '<em><b>Group name</b></em>' attribute.
@@ -830,7 +802,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getPolicy()
      * @generated
      */
-    int POLICY = 10;
+    int POLICY = 9;
 
     /**
      * The feature id for the '<em><b>Policy name</b></em>' attribute.
@@ -876,7 +848,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getCapability()
      * @generated
      */
-    int CAPABILITY = 11;
+    int CAPABILITY = 10;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -906,22 +878,13 @@ public interface ToscaPackage extends EPackage {
     int CAPABILITY__PROPERTIES = 2;
 
     /**
-     * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CAPABILITY__ATTRIBUTES = 3;
-
-    /**
      * The feature id for the '<em><b>Capability name</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CAPABILITY__CAPABILITY_NAME = 4;
+    int CAPABILITY__CAPABILITY_NAME = 3;
 
     /**
      * The number of structural features of the '<em>Capability</em>' class.
@@ -930,7 +893,7 @@ public interface ToscaPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CAPABILITY_FEATURE_COUNT = 5;
+    int CAPABILITY_FEATURE_COUNT = 4;
 
     /**
      * The number of operations of the '<em>Capability</em>' class.
@@ -949,7 +912,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getParameter()
      * @generated
      */
-    int PARAMETER = 12;
+    int PARAMETER = 11;
 
     /**
      * The feature id for the '<em><b>Parameter name</b></em>' attribute.
@@ -961,13 +924,22 @@ public interface ToscaPackage extends EPackage {
     int PARAMETER__PARAMETER_NAME = 0;
 
     /**
+     * The feature id for the '<em><b>Parameter value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PARAMETER__PARAMETER_VALUE = 1;
+
+    /**
      * The number of structural features of the '<em>Parameter</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int PARAMETER_FEATURE_COUNT = 1;
+    int PARAMETER_FEATURE_COUNT = 2;
 
     /**
      * The number of operations of the '<em>Parameter</em>' class.
@@ -986,7 +958,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getArtifact()
      * @generated
      */
-    int ARTIFACT = 13;
+    int ARTIFACT = 12;
 
     /**
      * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1033,7 +1005,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getInstances()
      * @generated
      */
-    int INSTANCES = 14;
+    int INSTANCES = 13;
 
     /**
      * The feature id for the '<em><b>Deploy</b></em>' attribute.
@@ -1071,7 +1043,7 @@ public interface ToscaPackage extends EPackage {
      * @see tosca.impl.ToscaPackageImpl#getConfiguration()
      * @generated
      */
-    int CONFIGURATION = 15;
+    int CONFIGURATION = 14;
 
     /**
      * The feature id for the '<em><b>Property name</b></em>' attribute.
@@ -1108,6 +1080,239 @@ public interface ToscaPackage extends EPackage {
      * @ordered
      */
     int CONFIGURATION_OPERATION_COUNT = 0;
+
+
+    /**
+     * The meta object id for the '{@link tosca.impl.ArgumentImpl <em>Argument</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.ArgumentImpl
+     * @see tosca.impl.ToscaPackageImpl#getArgument()
+     * @generated
+     */
+    int ARGUMENT = 15;
+
+    /**
+     * The feature id for the '<em><b>Argument name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARGUMENT__ARGUMENT_NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Argument value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARGUMENT__ARGUMENT_VALUE = 1;
+
+    /**
+     * The number of structural features of the '<em>Argument</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARGUMENT_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>Argument</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARGUMENT_OPERATION_COUNT = 0;
+
+    /**
+     * The meta object id for the '{@link tosca.impl.ValueImpl <em>Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.ValueImpl
+     * @see tosca.impl.ToscaPackageImpl#getValue()
+     * @generated
+     */
+    int VALUE = 17;
+
+    /**
+     * The number of structural features of the '<em>Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALUE_FEATURE_COUNT = 0;
+
+    /**
+     * The number of operations of the '<em>Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALUE_OPERATION_COUNT = 0;
+
+    /**
+     * The meta object id for the '{@link tosca.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.ExpressionImpl
+     * @see tosca.impl.ToscaPackageImpl#getExpression()
+     * @generated
+     */
+    int EXPRESSION = 16;
+
+    /**
+     * The number of structural features of the '<em>Expression</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+
+    /**
+     * The number of operations of the '<em>Expression</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link tosca.impl.SimpleValueImpl <em>Simple Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.SimpleValueImpl
+     * @see tosca.impl.ToscaPackageImpl#getSimpleValue()
+     * @generated
+     */
+    int SIMPLE_VALUE = 18;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SIMPLE_VALUE__VALUE = VALUE_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>Simple Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SIMPLE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+    /**
+     * The number of operations of the '<em>Simple Value</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SIMPLE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link tosca.impl.GetAttributeImpl <em>Get Attribute</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.GetAttributeImpl
+     * @see tosca.impl.ToscaPackageImpl#getGetAttribute()
+     * @generated
+     */
+    int GET_ATTRIBUTE = 19;
+
+    /**
+     * The feature id for the '<em><b>Node</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GET_ATTRIBUTE__NODE = EXPRESSION_FEATURE_COUNT + 0;
+
+    /**
+     * The feature id for the '<em><b>Attribute</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GET_ATTRIBUTE__ATTRIBUTE = EXPRESSION_FEATURE_COUNT + 1;
+
+    /**
+     * The number of structural features of the '<em>Get Attribute</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GET_ATTRIBUTE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+    /**
+     * The number of operations of the '<em>Get Attribute</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GET_ATTRIBUTE_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+
+    /**
+     * The meta object id for the '{@link tosca.impl.FirewallRuleImpl <em>Firewall Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.FirewallRuleImpl
+     * @see tosca.impl.ToscaPackageImpl#getFirewallRule()
+     * @generated
+     */
+    int FIREWALL_RULE = 20;
+
+    /**
+     * The feature id for the '<em><b>Remote ip prefix</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIREWALL_RULE__REMOTE_IP_PREFIX = 0;
+
+    /**
+     * The feature id for the '<em><b>Port</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIREWALL_RULE__PORT = 1;
+
+    /**
+     * The number of structural features of the '<em>Firewall Rule</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIREWALL_RULE_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>Firewall Rule</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIREWALL_RULE_OPERATION_COUNT = 0;
 
 
     /**
@@ -1176,15 +1381,26 @@ public interface ToscaPackage extends EPackage {
     EReference getNodeTemplate_Properties();
 
     /**
-     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getAttributes <em>Attributes</em>}'.
+     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getArguments <em>Arguments</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Attributes</em>'.
-     * @see tosca.NodeTemplate#getAttributes()
+     * @return the meta object for the containment reference list '<em>Arguments</em>'.
+     * @see tosca.NodeTemplate#getArguments()
      * @see #getNodeTemplate()
      * @generated
      */
-    EReference getNodeTemplate_Attributes();
+    EReference getNodeTemplate_Arguments();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getRules <em>Rules</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Rules</em>'.
+     * @see tosca.NodeTemplate#getRules()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_Rules();
 
     /**
      * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getRequirements <em>Requirements</em>}'.
@@ -1240,6 +1456,17 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EReference getNodeTemplate_Configurations();
+
+    /**
+     * Returns the meta object for the attribute list '{@link tosca.NodeTemplate#getResources <em>Resources</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Resources</em>'.
+     * @see tosca.NodeTemplate#getResources()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EAttribute getNodeTemplate_Resources();
 
     /**
      * Returns the meta object for class '{@link tosca.Interface <em>Interface</em>}'.
@@ -1339,17 +1566,6 @@ public interface ToscaPackage extends EPackage {
     EReference getRelationship_Properties();
 
     /**
-     * Returns the meta object for the containment reference list '{@link tosca.Relationship#getAttributes <em>Attributes</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Attributes</em>'.
-     * @see tosca.Relationship#getAttributes()
-     * @see #getRelationship()
-     * @generated
-     */
-    EReference getRelationship_Attributes();
-
-    /**
      * Returns the meta object for the containment reference list '{@link tosca.Relationship#getSource_interfaces <em>Source interfaces</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1424,27 +1640,6 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EAttribute getProperty_Value();
-
-    /**
-     * Returns the meta object for class '{@link tosca.Attribute <em>Attribute</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>Attribute</em>'.
-     * @see tosca.Attribute
-     * @generated
-     */
-    EClass getAttribute();
-
-    /**
-     * Returns the meta object for the attribute '{@link tosca.Attribute#getAttribute_name <em>Attribute name</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Attribute name</em>'.
-     * @see tosca.Attribute#getAttribute_name()
-     * @see #getAttribute()
-     * @generated
-     */
-    EAttribute getAttribute_Attribute_name();
 
     /**
      * Returns the meta object for class '{@link tosca.Requirement <em>Requirement</em>}'.
@@ -1880,17 +2075,6 @@ public interface ToscaPackage extends EPackage {
     EReference getCapability_Properties();
 
     /**
-     * Returns the meta object for the containment reference list '{@link tosca.Capability#getAttributes <em>Attributes</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Attributes</em>'.
-     * @see tosca.Capability#getAttributes()
-     * @see #getCapability()
-     * @generated
-     */
-    EReference getCapability_Attributes();
-
-    /**
      * Returns the meta object for the attribute '{@link tosca.Capability#getCapability_name <em>Capability name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1921,6 +2105,17 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EAttribute getParameter_Parameter_name();
+
+    /**
+     * Returns the meta object for the containment reference '{@link tosca.Parameter#getParameter_value <em>Parameter value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Parameter value</em>'.
+     * @see tosca.Parameter#getParameter_value()
+     * @see #getParameter()
+     * @generated
+     */
+    EReference getParameter_Parameter_value();
 
     /**
      * Returns the meta object for class '{@link tosca.Artifact <em>Artifact</em>}'.
@@ -2008,6 +2203,143 @@ public interface ToscaPackage extends EPackage {
     EAttribute getConfiguration_Value();
 
     /**
+     * Returns the meta object for class '{@link tosca.Argument <em>Argument</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Argument</em>'.
+     * @see tosca.Argument
+     * @generated
+     */
+    EClass getArgument();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.Argument#getArgument_name <em>Argument name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Argument name</em>'.
+     * @see tosca.Argument#getArgument_name()
+     * @see #getArgument()
+     * @generated
+     */
+    EAttribute getArgument_Argument_name();
+
+    /**
+     * Returns the meta object for the containment reference '{@link tosca.Argument#getArgument_value <em>Argument value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Argument value</em>'.
+     * @see tosca.Argument#getArgument_value()
+     * @see #getArgument()
+     * @generated
+     */
+    EReference getArgument_Argument_value();
+
+    /**
+     * Returns the meta object for class '{@link tosca.Expression <em>Expression</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Expression</em>'.
+     * @see tosca.Expression
+     * @generated
+     */
+    EClass getExpression();
+
+    /**
+     * Returns the meta object for class '{@link tosca.Value <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Value</em>'.
+     * @see tosca.Value
+     * @generated
+     */
+    EClass getValue();
+
+    /**
+     * Returns the meta object for class '{@link tosca.SimpleValue <em>Simple Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Simple Value</em>'.
+     * @see tosca.SimpleValue
+     * @generated
+     */
+    EClass getSimpleValue();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.SimpleValue#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see tosca.SimpleValue#getValue()
+     * @see #getSimpleValue()
+     * @generated
+     */
+    EAttribute getSimpleValue_Value();
+
+    /**
+     * Returns the meta object for class '{@link tosca.GetAttribute <em>Get Attribute</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Get Attribute</em>'.
+     * @see tosca.GetAttribute
+     * @generated
+     */
+    EClass getGetAttribute();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.GetAttribute#getNode <em>Node</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Node</em>'.
+     * @see tosca.GetAttribute#getNode()
+     * @see #getGetAttribute()
+     * @generated
+     */
+    EAttribute getGetAttribute_Node();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.GetAttribute#getAttribute <em>Attribute</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Attribute</em>'.
+     * @see tosca.GetAttribute#getAttribute()
+     * @see #getGetAttribute()
+     * @generated
+     */
+    EAttribute getGetAttribute_Attribute();
+
+    /**
+     * Returns the meta object for class '{@link tosca.FirewallRule <em>Firewall Rule</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Firewall Rule</em>'.
+     * @see tosca.FirewallRule
+     * @generated
+     */
+    EClass getFirewallRule();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.FirewallRule#getRemote_ip_prefix <em>Remote ip prefix</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Remote ip prefix</em>'.
+     * @see tosca.FirewallRule#getRemote_ip_prefix()
+     * @see #getFirewallRule()
+     * @generated
+     */
+    EAttribute getFirewallRule_Remote_ip_prefix();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.FirewallRule#getPort <em>Port</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Port</em>'.
+     * @see tosca.FirewallRule#getPort()
+     * @see #getFirewallRule()
+     * @generated
+     */
+    EAttribute getFirewallRule_Port();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2081,12 +2413,20 @@ public interface ToscaPackage extends EPackage {
         EReference NODE_TEMPLATE__PROPERTIES = eINSTANCE.getNodeTemplate_Properties();
 
         /**
-         * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+         * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference NODE_TEMPLATE__ATTRIBUTES = eINSTANCE.getNodeTemplate_Attributes();
+        EReference NODE_TEMPLATE__ARGUMENTS = eINSTANCE.getNodeTemplate_Arguments();
+
+        /**
+         * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__RULES = eINSTANCE.getNodeTemplate_Rules();
 
         /**
          * The meta object literal for the '<em><b>Requirements</b></em>' containment reference list feature.
@@ -2127,6 +2467,14 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EReference NODE_TEMPLATE__CONFIGURATIONS = eINSTANCE.getNodeTemplate_Configurations();
+
+        /**
+         * The meta object literal for the '<em><b>Resources</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute NODE_TEMPLATE__RESOURCES = eINSTANCE.getNodeTemplate_Resources();
 
         /**
          * The meta object literal for the '{@link tosca.impl.InterfaceImpl <em>Interface</em>}' class.
@@ -2205,14 +2553,6 @@ public interface ToscaPackage extends EPackage {
         EReference RELATIONSHIP__PROPERTIES = eINSTANCE.getRelationship_Properties();
 
         /**
-         * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference RELATIONSHIP__ATTRIBUTES = eINSTANCE.getRelationship_Attributes();
-
-        /**
          * The meta object literal for the '<em><b>Source interfaces</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -2269,24 +2609,6 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute PROPERTY__VALUE = eINSTANCE.getProperty_Value();
-
-        /**
-         * The meta object literal for the '{@link tosca.impl.AttributeImpl <em>Attribute</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see tosca.impl.AttributeImpl
-         * @see tosca.impl.ToscaPackageImpl#getAttribute()
-         * @generated
-         */
-        EClass ATTRIBUTE = eINSTANCE.getAttribute();
-
-        /**
-         * The meta object literal for the '<em><b>Attribute name</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute ATTRIBUTE__ATTRIBUTE_NAME = eINSTANCE.getAttribute_Attribute_name();
 
         /**
          * The meta object literal for the '{@link tosca.impl.RequirementImpl <em>Requirement</em>}' class.
@@ -2623,14 +2945,6 @@ public interface ToscaPackage extends EPackage {
         EReference CAPABILITY__PROPERTIES = eINSTANCE.getCapability_Properties();
 
         /**
-         * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference CAPABILITY__ATTRIBUTES = eINSTANCE.getCapability_Attributes();
-
-        /**
          * The meta object literal for the '<em><b>Capability name</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -2655,6 +2969,14 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute PARAMETER__PARAMETER_NAME = eINSTANCE.getParameter_Parameter_name();
+
+        /**
+         * The meta object literal for the '<em><b>Parameter value</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PARAMETER__PARAMETER_VALUE = eINSTANCE.getParameter_Parameter_value();
 
         /**
          * The meta object literal for the '{@link tosca.impl.ArtifactImpl <em>Artifact</em>}' class.
@@ -2725,6 +3047,122 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute CONFIGURATION__VALUE = eINSTANCE.getConfiguration_Value();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.ArgumentImpl <em>Argument</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.ArgumentImpl
+         * @see tosca.impl.ToscaPackageImpl#getArgument()
+         * @generated
+         */
+        EClass ARGUMENT = eINSTANCE.getArgument();
+
+        /**
+         * The meta object literal for the '<em><b>Argument name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute ARGUMENT__ARGUMENT_NAME = eINSTANCE.getArgument_Argument_name();
+
+        /**
+         * The meta object literal for the '<em><b>Argument value</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference ARGUMENT__ARGUMENT_VALUE = eINSTANCE.getArgument_Argument_value();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.ExpressionImpl <em>Expression</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.ExpressionImpl
+         * @see tosca.impl.ToscaPackageImpl#getExpression()
+         * @generated
+         */
+        EClass EXPRESSION = eINSTANCE.getExpression();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.ValueImpl <em>Value</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.ValueImpl
+         * @see tosca.impl.ToscaPackageImpl#getValue()
+         * @generated
+         */
+        EClass VALUE = eINSTANCE.getValue();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.SimpleValueImpl <em>Simple Value</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.SimpleValueImpl
+         * @see tosca.impl.ToscaPackageImpl#getSimpleValue()
+         * @generated
+         */
+        EClass SIMPLE_VALUE = eINSTANCE.getSimpleValue();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SIMPLE_VALUE__VALUE = eINSTANCE.getSimpleValue_Value();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.GetAttributeImpl <em>Get Attribute</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.GetAttributeImpl
+         * @see tosca.impl.ToscaPackageImpl#getGetAttribute()
+         * @generated
+         */
+        EClass GET_ATTRIBUTE = eINSTANCE.getGetAttribute();
+
+        /**
+         * The meta object literal for the '<em><b>Node</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute GET_ATTRIBUTE__NODE = eINSTANCE.getGetAttribute_Node();
+
+        /**
+         * The meta object literal for the '<em><b>Attribute</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute GET_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getGetAttribute_Attribute();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.FirewallRuleImpl <em>Firewall Rule</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.FirewallRuleImpl
+         * @see tosca.impl.ToscaPackageImpl#getFirewallRule()
+         * @generated
+         */
+        EClass FIREWALL_RULE = eINSTANCE.getFirewallRule();
+
+        /**
+         * The meta object literal for the '<em><b>Remote ip prefix</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIREWALL_RULE__REMOTE_IP_PREFIX = eINSTANCE.getFirewallRule_Remote_ip_prefix();
+
+        /**
+         * The meta object literal for the '<em><b>Port</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIREWALL_RULE__PORT = eINSTANCE.getFirewallRule_Port();
 
     }
 

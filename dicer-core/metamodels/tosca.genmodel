@@ -12,12 +12,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/interfaces"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//NodeTemplate/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/requirements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/relationships"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/capabilities"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/instances"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/configurations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//NodeTemplate/resources"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/arguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/rules"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Interface">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Interface/interface_name"/>
@@ -29,7 +31,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Relationship/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Relationship/interfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Relationship/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Relationship/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Relationship/source_interfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Relationship/target_interfaces"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Relationship/target"/>
@@ -38,9 +39,6 @@
     <genClasses ecoreClass="tosca.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Property/property_name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Property/value"/>
-    </genClasses>
-    <genClasses ecoreClass="tosca.ecore#//Attribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Attribute/attribute_name"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Requirement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Requirement/requirement_name"/>
@@ -88,11 +86,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Capability/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Capability/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Capability/properties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Capability/attributes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Capability/capability_name"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Parameter/parameter_name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tosca.ecore#//Parameter/parameter_value"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Artifact">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Artifact/name"/>
@@ -104,6 +102,23 @@
     <genClasses ecoreClass="tosca.ecore#//Configuration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Configuration/property_name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Configuration/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//Argument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Argument/argument_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//Argument/argument_value"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//Expression"/>
+    <genClasses ecoreClass="tosca.ecore#//Value"/>
+    <genClasses ecoreClass="tosca.ecore#//SimpleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//SimpleValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//GetAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//GetAttribute/node"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//GetAttribute/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//FirewallRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//FirewallRule/remote_ip_prefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//FirewallRule/port"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

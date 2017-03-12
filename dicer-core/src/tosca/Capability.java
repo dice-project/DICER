@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.Capability#getType <em>Type</em>}</li>
  *   <li>{@link tosca.Capability#getDescription <em>Description</em>}</li>
  *   <li>{@link tosca.Capability#getProperties <em>Properties</em>}</li>
- *   <li>{@link tosca.Capability#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link tosca.Capability#getCapability_name <em>Capability name</em>}</li>
  * </ul>
  *
@@ -94,22 +93,6 @@ public interface Capability extends EObject {
      * @generated
      */
     EList<Property> getProperties();
-
-    /**
-     * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Attribute}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Attributes</em>' containment reference list.
-     * @see tosca.ToscaPackage#getCapability_Attributes()
-     * @model containment="true"
-     * @generated
-     */
-    EList<Attribute> getAttributes();
 
     /**
      * Returns the value of the '<em><b>Capability name</b></em>' attribute.
