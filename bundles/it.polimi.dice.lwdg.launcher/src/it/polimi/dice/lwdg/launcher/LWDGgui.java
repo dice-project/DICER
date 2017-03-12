@@ -66,7 +66,7 @@ public class LWDGgui {
                 FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
                 fileDialog.setText("Choose xmi file");
                 fileDialog.setFilterExtensions(new String[] {
-                    "*.xmi"
+                    "*.xmi", ".uml"
                 });
                 choseinFilepath = fileDialog.open();
                 if (choseinFilepath != null) {
