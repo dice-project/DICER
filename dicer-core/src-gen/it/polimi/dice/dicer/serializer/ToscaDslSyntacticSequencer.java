@@ -64,18 +64,6 @@ public class ToscaDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *         (ambiguity) 
 	 *         '}' 
 	 *         ',
-	 *         "attributes" :' 
-	 *         '{' 
-	 *         attributes+=Attribute
-	 *     )
-	 *     (
-	 *         description=STRING 
-	 *         ',
-	 *         "properties" :' 
-	 *         '{' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         ',
 	 *         "capabilities" :' 
 	 *         '{' 
 	 *         capabilities+=Capability
@@ -111,19 +99,6 @@ public class ToscaDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *         (ambiguity) 
 	 *         '}' 
 	 *         ',
-	 *         "attributes" :' 
-	 *         '{' 
-	 *         attributes+=Attribute
-	 *     )
-	 *     (
-	 *         instances=Instances 
-	 *         '}' 
-	 *         ',
-	 *         "properties" :' 
-	 *         '{' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         ',
 	 *         "capabilities" :' 
 	 *         '{' 
 	 *         capabilities+=Capability
@@ -151,19 +126,6 @@ public class ToscaDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *         '}' 
 	 *         '}' 
 	 *         (rule end)
-	 *     )
-	 *     (
-	 *         interfaces+=Interface 
-	 *         '}' 
-	 *         ',
-	 *         "properties" :' 
-	 *         '{' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         ',
-	 *         "attributes" :' 
-	 *         '{' 
-	 *         attributes+=Attribute
 	 *     )
 	 *     (
 	 *         interfaces+=Interface 
@@ -211,19 +173,6 @@ public class ToscaDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *         (ambiguity) 
 	 *         '}' 
 	 *         ',
-	 *         "attributes" :' 
-	 *         '{' 
-	 *         attributes+=Attribute
-	 *     )
-	 *     (
-	 *         relationships+=Relationship 
-	 *         ']' 
-	 *         ',
-	 *         "properties" :' 
-	 *         '{' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         ',
 	 *         "capabilities" :' 
 	 *         '{' 
 	 *         capabilities+=Capability
@@ -251,18 +200,6 @@ public class ToscaDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *         '}' 
 	 *         '}' 
 	 *         (rule end)
-	 *     )
-	 *     (
-	 *         type=STRING 
-	 *         ',
-	 *         "properties" :' 
-	 *         '{' 
-	 *         (ambiguity) 
-	 *         '}' 
-	 *         ',
-	 *         "attributes" :' 
-	 *         '{' 
-	 *         attributes+=Attribute
 	 *     )
 	 *     (
 	 *         type=STRING 
