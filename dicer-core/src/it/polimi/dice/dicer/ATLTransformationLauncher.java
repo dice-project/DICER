@@ -21,17 +21,28 @@ import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
 import org.eclipse.m2m.atl.emftvm.util.ModuleResolver;
 import org.eclipse.m2m.atl.emftvm.util.TimingData;
+import org.eclipse.ocl.internal.helper.PluginFinder;
+import org.eclipse.uml2.uml.UMLPlugin;
+import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import es.unizar.disco.dice.DDSM.DDSMPackage;
 
 public class ATLTransformationLauncher {
 
+    private static final Logger logger = LoggerFactory.getLogger(ATLTransformationLauncher.class);
+
     // The input and output metamodel nsURIs are resolved using lazy registration of metamodels, see below.
     private String inputMetamodelNsURI;
+    private String diceProfilePath;
     private String outputMetamodelNsURI;
     
     //Main transformation launch method
-    public void launch(String inModelPath, String inMetaModelName,
+    public void launch(boolean uml, String inModelPath, String inMetaModelName,
             String outModelPath, String outMetaModelName, String transformationDir, String transformationModule){
         
+        logger.info("Launching the model-to-model transformation.");
+
         /* 
          * Creates the execution environment where the transformation is going to be executed,
          * you could use an execution pool if you want to run multiple transformations in parallel,
@@ -39,6 +50,7 @@ public class ATLTransformationLauncher {
          */
         ExecEnv env = EmftvmFactory.eINSTANCE.createExecEnv();
         ResourceSet rs = new ResourceSetImpl();
+
 
         /*
          * Load meta-models in the resource set we just created, the idea here is to make the meta-models
@@ -50,7 +62,7 @@ public class ATLTransformationLauncher {
         Metamodel inMetamodel = EmftvmFactory.eINSTANCE.createMetamodel();
         inMetamodel.setResource(rs.getResource(URI.createURI(inputMetamodelNsURI), true));
         env.registerMetaModel(inMetaModelName, inMetamodel);
-        
+
         Metamodel outMetamodel = EmftvmFactory.eINSTANCE.createMetamodel();
         outMetamodel.setResource(rs.getResource(URI.createURI(outputMetamodelNsURI), true));
         env.registerMetaModel(outMetaModelName, outMetamodel);
@@ -62,14 +74,20 @@ public class ATLTransformationLauncher {
          */
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emftvm", new EMFTVMResourceFactoryImpl());
-        
+
+        if(uml){
+            UMLResourcesUtil.init(rs);
+            UMLPlugin.getEPackageNsURIToProfileLocationMap().put(DDSMPackage.eINSTANCE.getNsURI(), URI.createURI("pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"));
+            rs.getURIConverter().getURIMap().put(URI.createURI("pathmap://DICE_PROFILES/DICE.profile.uml"), URI.createURI(diceProfilePath));
+        }
+
         // Load models
         Model inModel = EmftvmFactory.eINSTANCE.createModel();
-        inModel.setResource(rs.getResource(URI.createURI(inModelPath, true), true));
-        env.registerInputModel("ddsm", inModel);
-        
+        inModel.setResource(rs.getResource(URI.createFileURI(new java.io.File(inModelPath).getAbsolutePath()), true));
+        env.registerInputModel("uml", inModel);
+    
         Model outModel = EmftvmFactory.eINSTANCE.createModel();
-        outModel.setResource(rs.createResource(URI.createURI(outModelPath)));
+        outModel.setResource(rs.createResource(URI.createFileURI(new java.io.File(outModelPath).getAbsolutePath())));
         env.registerOutputModel("tosca", outModel);
         
         /*
@@ -92,6 +110,14 @@ public class ATLTransformationLauncher {
         }
     }
     
+    public String getDiceProfilePath() {
+        return diceProfilePath;
+    }
+
+    public void setDiceProfilePath(String diceProfilePath) {
+        this.diceProfilePath = diceProfilePath;
+    }
+
     /*
      * I seriously hate relying on the eclipse facilities, and if you're not building an eclipse plugin
      * you can't rely on eclipse's registry (let's say you're building a stand-alone tool that needs to run ATL
@@ -108,7 +134,7 @@ public class ATLTransformationLauncher {
         final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(EPackage.Registry.INSTANCE);
         rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
     
-        Resource r = rs.getResource(URI.createFileURI(metamodelPath), true);
+        Resource r = rs.getResource(URI.createFileURI(new java.io.File(metamodelPath).getAbsolutePath()), true);
         EObject eObject = r.getContents().get(0);
         // A meta-model might have multiple packages we assume the main package is the first one listed
         if (eObject instanceof EPackage) {
@@ -130,8 +156,28 @@ public class ATLTransformationLauncher {
         inputMetamodelNsURI = lazyMetamodelRegistration(inputMetamodelPath);
     }
 
+    public String getInputMetamodelNsURI() {
+        return inputMetamodelNsURI;
+    }
+
+    public void setInputMetamodelNsURI(String inputMetamodelNsURI) {
+        this.inputMetamodelNsURI = inputMetamodelNsURI;
+    }
+
+    public String getOutputMetamodelNsURI() {
+        return outputMetamodelNsURI;
+    }
+
+    public void setOutputMetamodelNsURI(String outputMetamodelNsURI) {
+        this.outputMetamodelNsURI = outputMetamodelNsURI;
+    }
+
     public void registerOutputMetamodel(String outputMetamodelPath){
         outputMetamodelNsURI = lazyMetamodelRegistration(outputMetamodelPath);
+    }
+    
+    public void registerMetamodel(String metamodelPath){
+       lazyMetamodelRegistration(metamodelPath);
     }
 
 }

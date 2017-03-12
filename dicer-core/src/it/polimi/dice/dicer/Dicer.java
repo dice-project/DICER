@@ -1,11 +1,14 @@
 package it.polimi.dice.dicer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Scanner;
 
 import tosca.*;
 
@@ -13,6 +16,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.uml2.uml.UMLPackage;
+
 import it.polimi.dice.dicer.ToscaDslStandaloneSetup;
 import org.yaml.snakeyaml.Yaml;
 
@@ -28,24 +33,29 @@ import com.beust.jcommander.Parameter;
 public class Dicer {
 	private static final Logger logger = LoggerFactory.getLogger(Dicer.class);
 
-	public final static String IN_METAMODEL_NAME = "DDSM";
+	public final static String DDSM_METAMODEL_NAME = "DDSM";
+	public final static String UML_METAMODEL_NAME = "MMUML";
 	public final static String OUT_METAMODEL_NAME = "TOSCA";
 	public final static String TRANSFORMATION_MODULE = "ddsm2tosca";
+    public final static String UML_TRANSFORMATION_MODULE = "uml2tosca";
 
 	@Parameter(names = { "-h", "--help", "-help" }, help = true, description = "Shows this help")
 	private boolean help = false;
 
 	@Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-	public String inModelPath = "./models/default.xmi";
+	public String inModelPath = "/Users/michele/workspace/DICER/dicer-core/models-uml/cassandra.uml";
 
 	@Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-	public String outModelPath = "./models/default_tosca";
+	public String outModelPath = "/Users/michele/workspace/DICER/dicer-core/models-uml/cassandra_tosca";
 
 	@Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
-	public String inMetamodelPath = "./metamodels/ddsm.ecore";
+	public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
 
 	@Parameter(names = "-outMetamodel", description = "The path for the TOSCA metamodel.")
 	public String outMetamodelPath = "./metamodels/tosca.ecore";
+	
+	@Parameter(names = "-umlMetamodel", description = "The path for the UML metamodel.")
+	public String umlMetamodelPath = "./metamodels/DICE.profile.uml";
 
 	@Parameter(names = "-transformationDir", description = "The path for the directory containing the ddsm2tosca ATL transformation.")
 	public String transformationDir = "./transformations/";
@@ -64,28 +74,51 @@ public class Dicer {
 			System.exit(0);
 		} else {
 			logger.info("Running DICER on input model: " + dicer.inModelPath);
-			dicer.runme(dicer.inModelPath, dicer.outModelPath, dicer.inMetamodelPath, dicer.outMetamodelPath,
+			dicer.runme(dicer.inModelPath, dicer.outModelPath, dicer.ddsmMetamodelPath, dicer.umlMetamodelPath, dicer.outMetamodelPath,
 					dicer.transformationDir, dicer.runInTextMode);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public void runme(String inputXMIModelPath, String outModelPath, String inMetamodelPath, String outMetamodelPath,
+	public void runme(String inputXMIModelPath, String outModelPath, String ddsmMetamodelPath, String umlMetamodelPath, String outMetamodelPath,
 			String transformationDir, int runInTextMode) {
 
 		if(runInTextMode == 0){
 			ATLTransformationLauncher l = new ATLTransformationLauncher();
 			logger.info("Running the ATL transformation.");
 
-			logger.info("Registering the input DDSM metamodel.");
-			l.registerInputMetamodel(inMetamodelPath);
-
 			logger.info("Registering the output TOSCA metamodel.");
 			l.registerOutputMetamodel(outMetamodelPath);
+			
+			File file = new File(inputXMIModelPath);
+            boolean isUml = false;
 
-			logger.info("Launching the model-to-model transformation.");
-			l.launch(inputXMIModelPath, IN_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, transformationDir,
+			try {
+			    Scanner scanner = new Scanner(file);
+
+			    while (scanner.hasNextLine()) {
+			        String line = scanner.nextLine();
+			        if(line.toLowerCase().contains("uml")) { 
+			            isUml = true;
+			        }
+			    }
+			} catch(FileNotFoundException e) { 
+	            e.printStackTrace();
+			}
+			
+			if(isUml) {
+		         logger.info("Registering the input UML metamodel.");
+                 l.setInputMetamodelNsURI(UMLPackage.eINSTANCE.getNsURI());
+                 l.setDiceProfilePath(umlMetamodelPath);
+		         l.launch(true, inputXMIModelPath, UML_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, transformationDir,
+	                     UML_TRANSFORMATION_MODULE);
+			}
+			else {
+		        logger.info("Registering the input DDSM metamodel.");
+		        l.registerInputMetamodel(ddsmMetamodelPath);
+			    l.launch(false, inputXMIModelPath, DDSM_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, transformationDir,
 					TRANSFORMATION_MODULE);
+			}
 		}
 
 		logger.info("Running the Xtext grammar to serialize the output TOSCA model.");

@@ -12,8 +12,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<main.class>it.polimi.dice.dicer.Dicer</main.class>
-		<atl.version>3.6.0-SNAPSHOT</atl.version>
-		<emf.version>2.10.0-v20140514-1158</emf.version>
+		<atl.version>3.8.0-SNAPSHOT</atl.version>
+		<emf.version>2.3.0-v200706262000</emf.version>
 	</properties>
 
 	<repositories>
@@ -21,6 +21,10 @@
 			<id>atl</id>
 			<name>ATL Repository</name>
 			<url>https://repo.eclipse.org/content/groups/atl</url>
+		</repository>
+		<repository>
+			<id>local-maven-repo</id>
+			<url>file:///${project.basedir}/local-maven-repo/</url>
 		</repository>
 	</repositories>
 
@@ -178,9 +182,9 @@
 
 	<dependencies>
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-simple</artifactId>
-		    <version>1.7.21</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.21</version>
 		</dependency>
 		<dependency>
 			<groupId>com.beust</groupId>
@@ -263,6 +267,56 @@
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
 			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>umlmodel</artifactId>
+			<version>5.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>types</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>common</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.unizar.disco.dice.static</groupId>
+			<artifactId>profile</artifactId>
+			<version>0.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.masdes.dam.static</groupId>
+			<artifactId>profile</artifactId>
+			<version>0.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.papyrus.marte.static</groupId>
+			<artifactId>profile</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2.uml</groupId>
+			<artifactId>resources</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2.uml.profile</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.0.100</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf.mapping</groupId>
+			<artifactId>ecore2xml</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>ocl</artifactId>
+			<version>3.4.2</version>
 		</dependency>
 	</dependencies>
 </project>
