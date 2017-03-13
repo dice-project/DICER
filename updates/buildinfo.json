@@ -1,17 +1,17 @@
 {
-    "timestamp" : 1483977666642,
+    "timestamp" : 1489516811371,
     "revision" : {
-        "HEAD" : "10f12d7fd3b9cf2db0e52940f79d49edc4ef46bc",
+        "HEAD" : "ade811e896f906ace7ffba84835a4fb89710f87b",
         "currentBranch" : "refs/heads/master",
         "knownReferences" : [
             {
                 "name" : "origin",
-                "url" : "https://github.com/dice-project/DICER.git",
+                "url" : "https://github.com/dice-project/DICER",
                 "ref" : "HEAD"
             },
             {
                 "name" : "origin",
-                "url" : "https://github.com/dice-project/DICER.git",
+                "url" : "https://github.com/dice-project/DICER",
                 "ref" : "master"
             }
         ]
