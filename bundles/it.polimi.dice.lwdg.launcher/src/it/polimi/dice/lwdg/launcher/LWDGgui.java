@@ -64,10 +64,12 @@ public class LWDGgui {
             Override
             public void widgetSelected(SelectionEvent inEvent) {
                 FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
-                fileDialog.setText("Choose xmi file");
+                fileDialog.setText("Choose xmi/uml file");
+                /*
                 fileDialog.setFilterExtensions(new String[] {
-                    "*.xmi", ".uml"
+                    "*.xmi", "*.uml"
                 });
+                */
                 choseinFilepath = fileDialog.open();
                 if (choseinFilepath != null) {
                     inputFile.setText(Path.fromOSString(choseinFilepath).makeAbsolute().toOSString());
