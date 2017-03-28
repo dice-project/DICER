@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.NodeTemplate#getResources <em>Resources</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getArguments <em>Arguments</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getRules <em>Rules</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getMonitoring <em>Monitoring</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getNodeTemplate()
@@ -176,6 +177,32 @@ public interface NodeTemplate extends EObject {
      * @generated
      */
     EList<FirewallRule> getRules();
+
+    /**
+     * Returns the value of the '<em><b>Monitoring</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Monitoring</em>' containment reference isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Monitoring</em>' containment reference.
+     * @see #setMonitoring(MonitoringProperty)
+     * @see tosca.ToscaPackage#getNodeTemplate_Monitoring()
+     * @model containment="true"
+     * @generated
+     */
+    MonitoringProperty getMonitoring();
+
+    /**
+     * Sets the value of the '{@link tosca.NodeTemplate#getMonitoring <em>Monitoring</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Monitoring</em>' containment reference.
+     * @see #getMonitoring()
+     * @generated
+     */
+    void setMonitoring(MonitoringProperty value);
 
     /**
      * Returns the value of the '<em><b>Requirements</b></em>' containment reference list.

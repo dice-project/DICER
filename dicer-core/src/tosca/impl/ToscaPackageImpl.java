@@ -19,6 +19,7 @@ import tosca.Group;
 import tosca.Import;
 import tosca.Instances;
 import tosca.Interface;
+import tosca.MonitoringProperty;
 import tosca.NodeTemplate;
 import tosca.Operation;
 import tosca.Parameter;
@@ -187,6 +188,13 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
     private EClass firewallRuleEClass = null;
 
     /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass monitoringPropertyEClass = null;
+
+    /**
      * Creates an instance of the model <b>Package</b>, registered with
      * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
      * package URI value.
@@ -317,6 +325,15 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      */
     public EReference getNodeTemplate_Rules() {
         return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(12);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getNodeTemplate_Monitoring() {
+        return (EReference)nodeTemplateEClass.getEStructuralFeatures().get(13);
     }
 
     /**
@@ -1107,6 +1124,33 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getMonitoringProperty() {
+        return monitoringPropertyEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMonitoringProperty_Enabled() {
+        return (EAttribute)monitoringPropertyEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMonitoringProperty_Roles() {
+        return (EAttribute)monitoringPropertyEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public ToscaFactory getToscaFactory() {
         return (ToscaFactory)getEFactoryInstance();
     }
@@ -1144,6 +1188,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         createEAttribute(nodeTemplateEClass, NODE_TEMPLATE__RESOURCES);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__ARGUMENTS);
         createEReference(nodeTemplateEClass, NODE_TEMPLATE__RULES);
+        createEReference(nodeTemplateEClass, NODE_TEMPLATE__MONITORING);
 
         interfaceEClass = createEClass(INTERFACE);
         createEAttribute(interfaceEClass, INTERFACE__INTERFACE_NAME);
@@ -1245,6 +1290,10 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         firewallRuleEClass = createEClass(FIREWALL_RULE);
         createEAttribute(firewallRuleEClass, FIREWALL_RULE__REMOTE_IP_PREFIX);
         createEAttribute(firewallRuleEClass, FIREWALL_RULE__PORT);
+
+        monitoringPropertyEClass = createEClass(MONITORING_PROPERTY);
+        createEAttribute(monitoringPropertyEClass, MONITORING_PROPERTY__ENABLED);
+        createEAttribute(monitoringPropertyEClass, MONITORING_PROPERTY__ROLES);
     }
 
     /**
@@ -1294,6 +1343,7 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEAttribute(getNodeTemplate_Resources(), ecorePackage.getEString(), "resources", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNodeTemplate_Rules(), this.getFirewallRule(), null, "rules", null, 0, -1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNodeTemplate_Monitoring(), this.getMonitoringProperty(), null, "monitoring", null, 0, 1, NodeTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(interfaceEClass, Interface.class, "Interface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getInterface_Interface_name(), ecorePackage.getEString(), "interface_name", null, 0, 1, Interface.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1395,6 +1445,10 @@ public class ToscaPackageImpl extends EPackageImpl implements ToscaPackage {
         initEClass(firewallRuleEClass, FirewallRule.class, "FirewallRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getFirewallRule_Remote_ip_prefix(), ecorePackage.getEString(), "remote_ip_prefix", null, 1, 1, FirewallRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getFirewallRule_Port(), ecorePackage.getEString(), "port", null, 1, 1, FirewallRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(monitoringPropertyEClass, MonitoringProperty.class, "MonitoringProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getMonitoringProperty_Enabled(), ecorePackage.getEBoolean(), "enabled", null, 1, 1, MonitoringProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getMonitoringProperty_Roles(), ecorePackage.getEString(), "roles", null, 0, -1, MonitoringProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);

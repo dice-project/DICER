@@ -24,6 +24,7 @@ import tosca.Configuration;
 import tosca.FirewallRule;
 import tosca.Instances;
 import tosca.Interface;
+import tosca.MonitoringProperty;
 import tosca.NodeTemplate;
 import tosca.Property;
 import tosca.Relationship;
@@ -51,6 +52,7 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.NodeTemplateImpl#getResources <em>Resources</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getMonitoring <em>Monitoring</em>}</li>
  * </ul>
  *
  * @generated
@@ -217,6 +219,16 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
     protected EList<FirewallRule> rules;
 
     /**
+     * The cached value of the '{@link #getMonitoring() <em>Monitoring</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getMonitoring()
+     * @generated
+     * @ordered
+     */
+    protected MonitoringProperty monitoring;
+
+    /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -351,6 +363,49 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
+    public MonitoringProperty getMonitoring() {
+        return monitoring;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain basicSetMonitoring(MonitoringProperty newMonitoring, NotificationChain msgs) {
+        MonitoringProperty oldMonitoring = monitoring;
+        monitoring = newMonitoring;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ToscaPackage.NODE_TEMPLATE__MONITORING, oldMonitoring, newMonitoring);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setMonitoring(MonitoringProperty newMonitoring) {
+        if (newMonitoring != monitoring) {
+            NotificationChain msgs = null;
+            if (monitoring != null)
+                msgs = ((InternalEObject)monitoring).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ToscaPackage.NODE_TEMPLATE__MONITORING, null, msgs);
+            if (newMonitoring != null)
+                msgs = ((InternalEObject)newMonitoring).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ToscaPackage.NODE_TEMPLATE__MONITORING, null, msgs);
+            msgs = basicSetMonitoring(newMonitoring, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.NODE_TEMPLATE__MONITORING, newMonitoring, newMonitoring));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EList<Requirement> getRequirements() {
         if (requirements == null) {
             requirements = new EObjectContainmentEList<Requirement>(Requirement.class, this, ToscaPackage.NODE_TEMPLATE__REQUIREMENTS);
@@ -475,6 +530,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__RULES:
                 return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
+            case ToscaPackage.NODE_TEMPLATE__MONITORING:
+                return basicSetMonitoring(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -513,6 +570,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getArguments();
             case ToscaPackage.NODE_TEMPLATE__RULES:
                 return getRules();
+            case ToscaPackage.NODE_TEMPLATE__MONITORING:
+                return getMonitoring();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -574,6 +633,9 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 getRules().clear();
                 getRules().addAll((Collection<? extends FirewallRule>)newValue);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__MONITORING:
+                setMonitoring((MonitoringProperty)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -625,6 +687,9 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__RULES:
                 getRules().clear();
                 return;
+            case ToscaPackage.NODE_TEMPLATE__MONITORING:
+                setMonitoring((MonitoringProperty)null);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -663,6 +728,8 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return arguments != null && !arguments.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__RULES:
                 return rules != null && !rules.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__MONITORING:
+                return monitoring != null;
         }
         return super.eIsSet(featureID);
     }

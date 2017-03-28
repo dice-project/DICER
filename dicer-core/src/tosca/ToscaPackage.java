@@ -184,13 +184,22 @@ public interface ToscaPackage extends EPackage {
     int NODE_TEMPLATE__RULES = 12;
 
     /**
+     * The feature id for the '<em><b>Monitoring</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__MONITORING = 13;
+
+    /**
      * The number of structural features of the '<em>Node Template</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE_FEATURE_COUNT = 13;
+    int NODE_TEMPLATE_FEATURE_COUNT = 14;
 
     /**
      * The number of operations of the '<em>Node Template</em>' class.
@@ -1316,6 +1325,53 @@ public interface ToscaPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link tosca.impl.MonitoringPropertyImpl <em>Monitoring Property</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.MonitoringPropertyImpl
+     * @see tosca.impl.ToscaPackageImpl#getMonitoringProperty()
+     * @generated
+     */
+    int MONITORING_PROPERTY = 21;
+
+    /**
+     * The feature id for the '<em><b>Enabled</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MONITORING_PROPERTY__ENABLED = 0;
+
+    /**
+     * The feature id for the '<em><b>Roles</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MONITORING_PROPERTY__ROLES = 1;
+
+    /**
+     * The number of structural features of the '<em>Monitoring Property</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MONITORING_PROPERTY_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>Monitoring Property</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MONITORING_PROPERTY_OPERATION_COUNT = 0;
+
+
+    /**
      * Returns the meta object for class '{@link tosca.NodeTemplate <em>Node Template</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1401,6 +1457,17 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EReference getNodeTemplate_Rules();
+
+    /**
+     * Returns the meta object for the containment reference '{@link tosca.NodeTemplate#getMonitoring <em>Monitoring</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Monitoring</em>'.
+     * @see tosca.NodeTemplate#getMonitoring()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_Monitoring();
 
     /**
      * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getRequirements <em>Requirements</em>}'.
@@ -2340,6 +2407,38 @@ public interface ToscaPackage extends EPackage {
     EAttribute getFirewallRule_Port();
 
     /**
+     * Returns the meta object for class '{@link tosca.MonitoringProperty <em>Monitoring Property</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Monitoring Property</em>'.
+     * @see tosca.MonitoringProperty
+     * @generated
+     */
+    EClass getMonitoringProperty();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.MonitoringProperty#isEnabled <em>Enabled</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Enabled</em>'.
+     * @see tosca.MonitoringProperty#isEnabled()
+     * @see #getMonitoringProperty()
+     * @generated
+     */
+    EAttribute getMonitoringProperty_Enabled();
+
+    /**
+     * Returns the meta object for the attribute list '{@link tosca.MonitoringProperty#getRoles <em>Roles</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Roles</em>'.
+     * @see tosca.MonitoringProperty#getRoles()
+     * @see #getMonitoringProperty()
+     * @generated
+     */
+    EAttribute getMonitoringProperty_Roles();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2427,6 +2526,14 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EReference NODE_TEMPLATE__RULES = eINSTANCE.getNodeTemplate_Rules();
+
+        /**
+         * The meta object literal for the '<em><b>Monitoring</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__MONITORING = eINSTANCE.getNodeTemplate_Monitoring();
 
         /**
          * The meta object literal for the '<em><b>Requirements</b></em>' containment reference list feature.
@@ -3163,6 +3270,32 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute FIREWALL_RULE__PORT = eINSTANCE.getFirewallRule_Port();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.MonitoringPropertyImpl <em>Monitoring Property</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.MonitoringPropertyImpl
+         * @see tosca.impl.ToscaPackageImpl#getMonitoringProperty()
+         * @generated
+         */
+        EClass MONITORING_PROPERTY = eINSTANCE.getMonitoringProperty();
+
+        /**
+         * The meta object literal for the '<em><b>Enabled</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MONITORING_PROPERTY__ENABLED = eINSTANCE.getMonitoringProperty_Enabled();
+
+        /**
+         * The meta object literal for the '<em><b>Roles</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MONITORING_PROPERTY__ROLES = eINSTANCE.getMonitoringProperty_Roles();
 
     }
 
