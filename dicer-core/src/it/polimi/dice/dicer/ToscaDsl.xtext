@@ -49,21 +49,27 @@ NodeTemplate returns NodeTemplate:
 		(',\n"description" :' description=STRING )?
 		(',\n"relationships" :' '['relationships+=Relationship ( ","  relationships+=Relationship )* ']' )?
 		(',\n"interfaces" :' '{' interfaces+=Interface ( "," interfaces+=Interface)* '}' )?
-		',\n"properties" :' '{' 
-		('\n"configuration" : {' 
-			(configurations+=Configuration ( "," configurations+=Configuration)*)? '}' 
+		',\n"properties" :' '{' (
+			('\n"monitoring" : {' monitoring=MonitoringProperty '}')? 
+			(',\n"configuration" : {' configurations+=Configuration ( "," configurations+=Configuration)* '}' )? 
 			(',\n"resources" :' '[' resources+=STRING ( ',' resources+=STRING)* ']' )? 
-			(',\n"rules" :' '[' rules+=FirewallRule ( ',' rules+=FirewallRule)* ']' )? 
+			('\n"rules" :' '[' rules+=FirewallRule ( ',' rules+=FirewallRule)* ']' )? 
 			(',\n"arguments" :' '[' arguments+=Argument ( ',' arguments+=Argument)* ']')? 
 			(',' properties+=Property ( "," properties+=Property)* )?
-		)?
-	    '}'
+		)'}'
+	    
 		//(',\n"arguments" :' '{' arguments+=Argument ( "," arguments+=Argument)* '}' )?
 		//(',\n"configuration" : {' configurations+=Configuration ( "," configurations+=Configuration)* '}' )? 
 		(',\n"requirements" :' '{' requirements+=Requirement ( "," requirements+=Requirement)* '}' )?
 		(',\n"capabilities" :' '{' capabilities+=Capability ( "," capabilities+=Capability)* '}' )?
 	'}';
-	
+
+MonitoringProperty returns MonitoringProperty:
+	{MonitoringProperty}
+	(enabled?= '\n "enabled": true' | '\n "enabled": false')
+	(',\n"roles" :' '[' roles+=STRING ( "," roles+=STRING)* ']' )?
+	;	
+
 FirewallRule returns FirewallRule:
 	//'FirewallRule'
 	{FirewallRule}
@@ -184,7 +190,7 @@ SimpleValue returns SimpleValue:
 	//'SimpleValue'
 	//'{'
 		//'value' 
-		value=EString
+		value=STRING
 	//'}'
 	;
 

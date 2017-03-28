@@ -694,12 +694,12 @@
             </defaultValue>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_T9-_IANQEeeNS8hZS_VTiQ" name="firewallRules">
-            <type xmi:type="uml:DataType" href="DICE_Library.uml#_YKdksAAxEee5FrQsk8AM1w"/>
+            <type xmi:type="uml:DataType" href="DICE_Library.uml#_37SOMBQKEeerG-qiQF7PAA"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VidCkANQEeeNS8hZS_VTiQ"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VigF4ANQEeeNS8hZS_VTiQ" value="*"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_a17MkBOREeeqarsdcU2oLw" name="requiredAttributes">
-            <type xmi:type="uml:DataType" href="DICE_Library.uml#_MlUfoBOPEeeqarsdcU2oLw"/>
+            <type xmi:type="uml:DataType" href="DICE_Library.uml#_mT3EgBQKEeerG-qiQF7PAA"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hqfQoBOREeeqarsdcU2oLw"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hql-UBOREeeqarsdcU2oLw" value="*"/>
           </ownedAttribute>

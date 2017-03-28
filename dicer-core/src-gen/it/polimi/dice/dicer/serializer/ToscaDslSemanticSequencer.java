@@ -25,6 +25,7 @@ import tosca.Group;
 import tosca.Import;
 import tosca.Instances;
 import tosca.Interface;
+import tosca.MonitoringProperty;
 import tosca.NodeTemplate;
 import tosca.Operation;
 import tosca.Policy;
@@ -79,6 +80,9 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case ToscaPackage.INTERFACE:
 				sequence_Interface(context, (Interface) semanticObject); 
+				return; 
+			case ToscaPackage.MONITORING_PROPERTY:
+				sequence_MonitoringProperty(context, (MonitoringProperty) semanticObject); 
 				return; 
 			case ToscaPackage.NODE_TEMPLATE:
 				sequence_NodeTemplate(context, (NodeTemplate) semanticObject); 
@@ -285,6 +289,22 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	
 	/**
 	 * Contexts:
+	 *     MonitoringProperty returns MonitoringProperty
+	 *
+	 * Constraint:
+	 *     (
+	 *         enabled?='
+	 *          "enabled": true'? 
+	 *         (roles+=STRING roles+=STRING*)?
+	 *     )
+	 */
+	protected void sequence_MonitoringProperty(ISerializationContext context, MonitoringProperty semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     NodeTemplate returns NodeTemplate
 	 *
 	 * Constraint:
@@ -295,6 +315,7 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *         description=STRING? 
 	 *         (relationships+=Relationship relationships+=Relationship*)? 
 	 *         (interfaces+=Interface interfaces+=Interface*)? 
+	 *         monitoring=MonitoringProperty? 
 	 *         (configurations+=Configuration configurations+=Configuration*)? 
 	 *         (resources+=STRING resources+=STRING*)? 
 	 *         (rules+=FirewallRule rules+=FirewallRule*)? 
@@ -418,7 +439,7 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     SimpleValue returns SimpleValue
 	 *
 	 * Constraint:
-	 *     value=EString
+	 *     value=STRING
 	 */
 	protected void sequence_SimpleValue(ISerializationContext context, SimpleValue semanticObject) {
 		if (errorAcceptor != null) {
@@ -426,7 +447,7 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.SIMPLE_VALUE__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSimpleValueAccess().getValueEStringParserRuleCall_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getSimpleValueAccess().getValueSTRINGTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
