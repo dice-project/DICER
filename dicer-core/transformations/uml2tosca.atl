@@ -6,7 +6,7 @@
 module uml2tosca;
 create tosca: TOSCA from uml: MMUML;
 
-rule MMUML2TOSCA{
+rule MMUML2TOSCA {
 	from
 		s: MMUML!Model
 	to
@@ -55,12 +55,14 @@ rule MMUML2TOSCA{
 
 lazy rule getOutputIpFromVMsCluster {
 	from
-		s: MMUML!Device (s.hasStereotype('DdsmVMsCluster'))
+		s: MMUML!Device (
+			s.hasStereotype('DdsmVMsCluster')
+		)
 	to
 		t: TOSCA!Parameter (
 			parameter_name <- s.name + '_ip_output',
-			parameter_value <- thisModule.getGetAttributeExpression(s, 'ip')
-		)	
+			parameter_value <- thisModule.getAttributeExpression(s.name, 'ip')
+		)
 }
 
 lazy rule getDiaJobNodeTemplate {
@@ -77,19 +79,20 @@ lazy rule getDiaJobNodeTemplate {
 			node_template_name <- s.name,
 			type <- 'dice.components.' + s.getDiaJobType() + '.Topology',
 			properties <- thisModule.getProperty('application', s.
-					getStereotypeProperty('application', 'DdsmBigDataJob')).union(thisModule.
-					getProperty('topology_class', s.
+					getStereotypeProperty('application', 'DdsmBigDataJob')).
+					union(thisModule.getProperty('topology_class', s.
 					getStereotypeProperty('application_class', 'DdsmBigDataJob')).
 					union(thisModule.getProperty('topology_name', s.
 					getStereotypeProperty('application_name', 'DdsmBigDataJob')))),
 			--to replicate the arguments, configurations and resources generation for
 					-- each node
+			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
 			arguments <- MMUML!Dependency.allInstances() -> select(dep | dep.client.
 					first().name = s.name) -> collect(dep | thisModule.getArgument(dep.
-					supplier.first().name + '_ip', thisModule.
-					getGetAttributeExpression(dep.supplier.first(), 'ip'))).
-					union(arguments -> collect(arg | thisModule.getArgument(arguments.
-					indexOf(arg).toString(), thisModule.getSimpleValue(arg)))),
+					supplier.first().name + '_ip', thisModule.getAttributeExpression(dep.
+					supplier.first().name, 'ip'))).union(arguments -> collect(arg |
+					thisModule.getArgument(arguments.indexOf(arg).toString(), thisModule.
+					getSimpleValue(arg)))),
 			relationships <- thisModule.getDiaJobRelationship(s).union(MMUML!Dependency.
 					allInstances() -> select(dep | dep.client.first().name = s.name) ->
 					collect(dep | thisModule.getJobNeeds(dep.supplier.first().name))),
@@ -130,8 +133,9 @@ lazy rule getProviderImport {
 		p: String
 	to
 		i: TOSCA!Import (
-			file <- 'http://dice-project.github.io/DICE-Deployment-Cloudify/spec/' + p +
-					'/0.2.5/plugin.yaml'
+			file <- 'https://github.' +
+					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.2.' +
+					'7/' + p + '.yaml'
 		)
 }
 
@@ -147,8 +151,23 @@ lazy rule getVMsClusterToNodeTemplate {
 					'DdsmVMsCluster').toString().replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(s.
 					getStereotypeProperty('instances', 'DdsmVMsCluster')),
-			relationships <- s.nestedNode.union(s.nestedClassifier) -> select(nested | nested.
-					getAppliedStereotypes() -> exists(ster | nested.
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmVMsCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmVMsCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
+			properties <- if not s.getStereotypeProperty('imageId', 'DdsmVMsCluster').
+					oclIsUndefined() then
+					thisModule.getProperty('image', s.getStereotypeProperty('imageId',
+							'DdsmVMsCluster')).union(thisModule.getProperty('user', s.
+							getStereotypeProperty('login', 'DdsmVMsCluster')))
+				else
+					Sequence{}
+				endif,
+			relationships <- s.nestedNode.union(s.nestedClassifier) -> select(nested |
+					nested.getAppliedStereotypes() -> exists(ster | nested.
 					stereotypeHasProperty('protected', ster.name) and nested.
 					getStereotypeProperty('protected', ster.name) = true)) ->
 					collect(protected | thisModule.
@@ -160,8 +179,19 @@ lazy rule getVMsClusterToNodeTemplate {
 		)
 	do {
 		Sequence{t,
-					vm_ip};
+					vm_ip}; 
 	}
+}
+
+lazy rule getMonitoringProperty {
+	from
+		enabled: Boolean,
+		roles: Sequence(String)
+	to
+		t: TOSCA!MonitoringProperty (
+			enabled <- enabled,
+			roles <- roles
+		)
 }
 
 lazy rule getIpAvailableFromRelationship {
@@ -219,6 +249,14 @@ lazy rule cassandraToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_worker',
 			type <- 'dice.components.cassandra.Worker',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmCassandraCluster')
+					= true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmCassandraCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.
 					getCassandraWorkerRelationshipForCassandraCluster(s)
 		),
@@ -227,29 +265,28 @@ lazy rule cassandraToTosca {
 			type <- 'dice.firewall_rules.cassandra.Common'
 		)
 	do {
-			if seedHost.oclIsUndefined() then
+		if seedHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmCassandraCluster') = true
- 				then 
+						then
 					Sequence{worker,
-						seed,
-						firewall,
-						thisModule.generateSeedVm(s)}.flatten()
-				else 				
+								seed,
+								firewall,
+								thisModule.generateSeedVm(s)}.flatten()
+				else
 					Sequence{worker,
-						seed,
-						thisModule.generateSeedVm(s)} .flatten()
+								seed,
+								thisModule.generateSeedVm(s)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmCassandraCluster') = true
- 				then 
+						then
 					Sequence{worker,
 							seed,
 							firewall}
-				else 				
-				Sequence{worker,
-						seed}
+				else
+					Sequence{worker,
+							seed}
 				endif
-
 			endif; 
 	}
 }
@@ -266,14 +303,13 @@ lazy rule generateSeedVm {
 					getStereotypeProperty('genericSize', 'DdsmVMsCluster').toString().
 					replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(1),
-			relationships <- 
-				if s.getStereotypeProperty('protected', 'DdsmCassandraCluster') = true 
-				then 
-				Sequence{thisModule.getClusterRelationshipWithFirewall(s)} 
-				else 
-				Sequence{} 
-				endif.
-				union(thisModule.getIpAvailableFromRelationship(s.name + '_seed_vm'))
+			relationships <- if s.getStereotypeProperty('protected',
+					'DdsmCassandraCluster') = true then
+						Sequence{thisModule.getClusterRelationshipWithFirewall(s)}
+					else
+						Sequence{}
+					endif.union(thisModule.getIpAvailableFromRelationship(s.name +
+							'_seed_vm'))
 		),
 		seed_vm_ip: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_seed_vm' + '_ip',
@@ -316,8 +352,7 @@ lazy rule getContainedInRelationshipForCassandraClusterSeed {
 	}
 	to
 		t: TOSCA!Relationship (
-			target <- 
-			if seedHost.oclIsUndefined() then
+			target <- if seedHost.oclIsUndefined() then
 					cassandraCluster.name + '_seed_vm'
 				else
 					seedHost.base_Device.name
@@ -340,6 +375,14 @@ lazy rule zookeeperToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.zookeeper.Server',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmZookeeperCluster')
+					= true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmZookeeperCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.
 					getZookeeperWorkerRelationshipForZookeeperCluster(s)
 		),
@@ -353,15 +396,14 @@ lazy rule zookeeperToTosca {
 			type <- 'dice.firewall_rules.zookeeper.Server'
 		)
 	do {
-		if s.getStereotypeProperty('protected', 'DdsmZookeeperCluster') = true
-		then 		
-			Sequence{worker,
-					firewall,
-					quorum} 
-		else 
-			Sequence{worker,
-					quorum} 
-		endif;
+		if s.getStereotypeProperty('protected', 'DdsmZookeeperCluster') = true then
+				Sequence{worker,
+						firewall,
+						quorum}
+			else
+				Sequence{worker,
+						quorum}
+			endif; 
 	}
 }
 
@@ -416,11 +458,25 @@ lazy rule stormToTosca {
 					getStereotypeProperty('taskTimeout', 'DdsmStormCluster')).
 					union(thisModule.getConfigurationFromAttribute('supervisorFrequency',
 					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))),
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmStormCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getStormMasterRelationshipForStormCluster(s)
 		),
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.storm.Worker',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmStormCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getStormWorkerRelationshipForStormCluster(s)
 		),
 		master_firewall: TOSCA!NodeTemplate (
@@ -433,30 +489,28 @@ lazy rule stormToTosca {
 		)
 	do {
 		if masterHost.oclIsUndefined() then
-			if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall,
-						thisModule.generateMasterVm(s)}
-			else 
-				Sequence{master,
-						worker,
-						thisModule.generateMasterVm(s)}
-			endif
-		else
-			if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall}
-			else 
-				Sequence{master,
-						worker}
-			endif
-		endif; 
+				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall,
+							thisModule.generateMasterVm(s)}
+				else
+					Sequence{master,
+							worker,
+							thisModule.generateMasterVm(s)}
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall}
+				else
+					Sequence{master,
+							worker}
+				endif
+			endif; 
 	}
 }
 
@@ -514,7 +568,6 @@ lazy rule getStormWorkerRelationshipForStormCluster {
 }
 
 -------------- STORM ---------------
-
 -------------- SPARK ---------------
 lazy rule sparkToTosca {
 	from
@@ -529,11 +582,25 @@ lazy rule sparkToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.spark.Master',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getSparkMasterRelationshipForSparkCluster(s)
 		),
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.spark.Worker',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getSparkWorkerRelationshipForSparkCluster(s)
 		),
 		master_firewall: TOSCA!NodeTemplate (
@@ -546,30 +613,28 @@ lazy rule sparkToTosca {
 		)
 	do {
 		if masterHost.oclIsUndefined() then
-			if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall,
-						thisModule.generateMasterVm(s)}
-			else 
-				Sequence{master,
-						worker,
-						thisModule.generateMasterVm(s)}
-			endif
-		else
-			if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall}
-			else 
-				Sequence{master,
-						worker}
-			endif
-		endif; 
+				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall,
+							thisModule.generateMasterVm(s)}
+				else
+					Sequence{master,
+							worker,
+							thisModule.generateMasterVm(s)}
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall}
+				else
+					Sequence{master,
+							worker}
+				endif
+			endif; 
 	}
 }
 
@@ -617,7 +682,6 @@ lazy rule getSparkWorkerRelationshipForSparkCluster {
 }
 
 -------------- SPARK ---------------
-
 -------------- YARN ---------------
 lazy rule YARNToTosca {
 	from
@@ -632,11 +696,25 @@ lazy rule YARNToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.ResourceManager',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmYarnCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getYarnMasterRelationshipForYarnCluster(s)
 		),
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.NodeManager',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmYarnCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getYarnWorkerRelationshipForYarnCluster(s)
 		),
 		master_firewall: TOSCA!NodeTemplate (
@@ -649,30 +727,28 @@ lazy rule YARNToTosca {
 		)
 	do {
 		if masterHost.oclIsUndefined() then
-			if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall,
-						thisModule.generateMasterVm(s)}
-			else 
-				Sequence{master,
-						worker,
-						thisModule.generateMasterVm(s)}
-			endif
-		else
-			if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall}
-			else 
-				Sequence{master,
-						worker}
-			endif
-		endif; 
+				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall,
+							thisModule.generateMasterVm(s)}
+				else
+					Sequence{master,
+							worker,
+							thisModule.generateMasterVm(s)}
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall}
+				else
+					Sequence{master,
+							worker}
+				endif
+			endif; 
 	}
 }
 
@@ -720,7 +796,6 @@ lazy rule getYarnWorkerRelationshipForYarnCluster {
 }
 
 -------------- YARN ---------------
-
 -------------- HDFS ---------------
 lazy rule HdfsToTosca {
 	from
@@ -735,11 +810,25 @@ lazy rule HdfsToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.NameNode',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmHdfsCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getHdfsMasterRelationshipForHdfsCluster(s)
 		),
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.DataNode',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
+					true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles', 'DdsmHdfsCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
 			relationships <- thisModule.getHdfsWorkerRelationshipForHdfsCluster(s)
 		),
 		master_firewall: TOSCA!NodeTemplate (
@@ -752,30 +841,28 @@ lazy rule HdfsToTosca {
 		)
 	do {
 		if masterHost.oclIsUndefined() then
-			if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall,
-						thisModule.generateMasterVm(s)}
-			else 
-				Sequence{master,
-						worker,
-						thisModule.generateMasterVm(s)}
-			endif
-		else
-			if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true
-			then 		
-				Sequence{master,
-						worker,
-						master_firewall,
-						worker_firewall}
-			else 
-				Sequence{master,
-						worker}
-			endif
-		endif; 
+				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall,
+							thisModule.generateMasterVm(s)}
+				else
+					Sequence{master,
+							worker,
+							thisModule.generateMasterVm(s)}
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
+					Sequence{master,
+							worker,
+							master_firewall,
+							worker_firewall}
+				else
+					Sequence{master,
+							worker}
+				endif
+			endif; 
 	}
 }
 
@@ -823,13 +910,18 @@ lazy rule getHdfsWorkerRelationshipForHdfsCluster {
 }
 
 -------------- HDFS ---------------
-
 -------------- CUSTOM SCRIPT ---------------
 lazy rule internalComponentToTosca {
 	from
 		s: MMUML!Node (
 			s.hasStereotype('DdsmInternalComponent')
 		)
+	using {
+		arguments: Sequence(TOSCA!SimpleValue) = s.
+				getStereotypeProperty('propertiesList', 'DdsmInternalComponent');
+		requiredAttributes: Sequence(MMUML!DataType) = s.
+				getStereotypeProperty('requiredAttributes', 'DdsmInternalComponent');
+	}
 	to
 		custom_node: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
@@ -838,29 +930,50 @@ lazy rule internalComponentToTosca {
 					first().name = s.name) -> collect(dep | thisModule.
 					getGenericNeedRelationship(dep.supplier.first())).union(thisModule.getGenericContainedInRelationship(s)),
 			resources <- s.nestedClassifier -> collect(res | res.fileName),
-			properties <- if not s.getStereotypeProperty('launch_script', 'DdsmInternalComponent').oclIsUndefined()
-						  then thisModule.getProperty('script', s.getStereotypeProperty('launch_script', 'DdsmInternalComponent')) 
-						  else Sequence{} 
-						  endif.union(
-						  if not s.getStereotypeProperty('language', 'DdsmInternalComponent').toString().replaceAll('#', '').oclIsUndefined()
-						  then thisModule.getProperty('language', s.getStereotypeProperty('language', 'DdsmInternalComponent').toString().replaceAll('#', '')) 
-						  else Sequence{} 
-						  endif	
-						  )
+			monitoring <- if s.getStereotypeProperty('monitored',
+					'DdsmInternalComponent') = true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmInternalComponent'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
+			arguments <- arguments -> collect(arg | thisModule.getArgument(arguments.
+					indexOf(arg).toString(), thisModule.getSimpleValue(arg))).
+					union(requiredAttributes -> collect(attr | thisModule.
+					getArgument(requiredAttributes.indexOf(attr).toString(), thisModule.
+					getAttributeExpression(attr.referenceNode, attr.attributeName)))),
+			properties <- if not s.getStereotypeProperty('launch_script',
+					'DdsmInternalComponent').oclIsUndefined() then
+						thisModule.getProperty('script', s.
+								getStereotypeProperty('launch_script',
+								'DdsmInternalComponent'))
+					else
+						Sequence{}
+					endif.union(if not s.getStereotypeProperty('language',
+							'DdsmInternalComponent').toString().replaceAll('#', '').
+							oclIsUndefined() then
+						thisModule.getProperty('language', s.
+								getStereotypeProperty('language',
+								'DdsmInternalComponent').toString().replaceAll('#', ''))
+					else
+						Sequence{}
+					endif)
 		),
 		custom_node_firewall: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_firewall',
 			type <- 'dice.firewall_rules.Base',
-			rules <- s.getStereotypeProperty('firewallRules', 'DdsmInternalComponent') -> collect(r | thisModule.getToscaFirewallRule(r.allowedIpPrefix.toString(), r.port.toString()))
+			rules <- s.getStereotypeProperty('firewallRules', 'DdsmInternalComponent') ->
+					collect(r | thisModule.getToscaFirewallRule(r.allowedIpPrefix.
+					toString(), r.port.toString()))
 		)
 	do {
-		if s.getStereotypeProperty('protected', 'DdsmInternalComponent') = true
-		then 		
-			Sequence{custom_node,
-					custom_node_firewall}
-		else 
-			Sequence{custom_node}	 
-		endif;
+		if s.getStereotypeProperty('protected', 'DdsmInternalComponent') = true then
+				Sequence{custom_node,
+						custom_node_firewall}
+			else
+				Sequence{custom_node}
+			endif; 
 	}
 }
 
@@ -872,7 +985,7 @@ rule getToscaFirewallRule(ipPrefix: String, port: String) {
 		)
 		
 	do {
-		t;
+		t; 
 	}
 }
 
@@ -885,8 +998,8 @@ helper context MMUML!Element def: getDiaJobType(): String =
 	MMUML!Deployment.allInstances() -> select(depl | depl.deployedArtifact.first().name =
 			self.name and depl.client.first().oclIsTypeOf(MMUML!ExecutionEnvironment) and
 			depl.client.first().getAppliedStereotypes().size() > 0).first().client.
-			first().getAppliedStereotypes().first().name.replaceAll('Cluster', '').replaceAll('Ddsm', '').
-			toLowerCase();
+			first().getAppliedStereotypes().first().name.replaceAll('Cluster', '').
+			replaceAll('Ddsm', '').toLowerCase();
 
 helper context MMUML!Element def: getDiaJobExEnv(): MMUML!ExecutionEnvironment =
 	MMUML!Deployment.allInstances() -> select(depl | depl.deployedArtifact.first().name =
@@ -949,7 +1062,7 @@ lazy rule getGenericNeedRelationship {
 	to
 		need: TOSCA!Relationship (
 			target <- s.name,
-			type <- 'dice.relationships.Need'
+			type <- 'dice.relationships.Needs'
 		)
 }
 
@@ -973,13 +1086,13 @@ lazy rule getSimpleValue {
 		)
 }
 
-lazy rule getGetAttributeExpression {
+lazy rule getAttributeExpression {
 	from
-		s: MMUML!Node,
+		s: String,
 		a: String
 	to
 		t: TOSCA!GetAttribute (
-			node <- s.name,
+			node <- s,
 			attribute <- a
 		)
 }
