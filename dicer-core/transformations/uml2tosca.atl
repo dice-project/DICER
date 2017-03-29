@@ -135,7 +135,7 @@ lazy rule getProviderImport {
 		i: TOSCA!Import (
 			file <- 'https://github.' +
 					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.2.' +
-					'7/' + p + '.yaml'
+					'8/' + p + '.yaml'
 		)
 }
 
