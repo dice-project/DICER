@@ -43,10 +43,10 @@ public class Dicer {
 	private boolean help = false;
 
 	@Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-	public String inModelPath = "/Users/michele/workspace/DICE-WikiStats/model/model.uml";
+	public String inModelPath = "/Users/michele/Downloads/prodevelop-case-study/posidonia.uml";
 
 	@Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-	public String outModelPath = "/Users/michele/workspace/DICE-WikiStats/model/model_tosca";
+	public String outModelPath = "/Users/michele/Downloads/prodevelop-case-study/posidonia.yaml";
 
 	@Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
 	public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
