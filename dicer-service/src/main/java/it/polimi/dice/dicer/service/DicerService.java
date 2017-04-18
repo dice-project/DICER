@@ -62,7 +62,11 @@ public class DicerService {
     @Path("/generateToscaBlueprint")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public String generateMonitoringInfo(String inputXmiModel) {
+    public String generateToscaBlueprint(String inputXmiModel) {
+        
+        log.info("Received new request for generating TOSCA blueprint.");
+        
+        long startTime = System.nanoTime();
         
         try (PrintWriter out = new PrintWriter("./temp/temp_input_model.xmi")) {
             out.println(inputXmiModel);
@@ -80,6 +84,10 @@ public class DicerService {
         } catch (IOException e) {
             log.error(e.getMessage(), e.getCause());
         }
+        
+        long endTime = System.nanoTime();
+        
+        log.info("Request execution time: " + (endTime - startTime));
         
         return blueprint;
     }
