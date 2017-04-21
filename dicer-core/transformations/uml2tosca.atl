@@ -40,6 +40,17 @@ rule MMUML2TOSCA {
 					stormToTosca(storm))).flatten()).union(s.packagedElement ->
 					select(element | element.oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | element.
+					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmHdfsCluster')) -> collect(hdfs | thisModule.
+					HdfsToTosca(hdfs))).flatten()).union(s.packagedElement ->
+					select(element | element.oclIsTypeOf(MMUML!Device) and element.
+					hasStereotype('DdsmVMsCluster')) -> collect(element | element.
+					nestedNode -> select(nested | nested.
+					oclIsTypeOf(MMUML!ExecutionEnvironment) and nested.
+					hasStereotype('DdsmSparkCluster')) -> collect(spark | thisModule.
+					sparkToTosca(spark))).flatten()).union(s.packagedElement ->
+					select(element | element.oclIsTypeOf(MMUML!Device) and element.
+					hasStereotype('DdsmVMsCluster')) -> collect(element | element.
 					nestedClassifier -> select(nested | nested.
 					hasStereotype('DdsmInternalComponent')) -> collect(comp | thisModule.
 					internalComponentToTosca(comp))).flatten()).union(s.packagedElement
@@ -494,11 +505,11 @@ lazy rule stormToTosca {
 							worker,
 							master_firewall,
 							worker_firewall,
-							thisModule.generateMasterVm(s)}
+							thisModule.generateMasterVm(s)}.flatten()
 				else
 					Sequence{master,
 							worker,
-							thisModule.generateMasterVm(s)}
+							thisModule.generateMasterVm(s)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
@@ -615,14 +626,14 @@ lazy rule sparkToTosca {
 		if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
 					Sequence{master,
-							worker,
-							master_firewall,
-							worker_firewall,
-							thisModule.generateMasterVm(s)}
+								worker,
+								master_firewall,
+								worker_firewall,
+								thisModule.generateMasterVm(s)}.flatten()
 				else
 					Sequence{master,
-							worker,
-							thisModule.generateMasterVm(s)}
+								worker,
+								thisModule.generateMasterVm(s)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
@@ -729,14 +740,14 @@ lazy rule YARNToTosca {
 		if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
 					Sequence{master,
-							worker,
-							master_firewall,
-							worker_firewall,
-							thisModule.generateMasterVm(s)}
+								worker,
+								master_firewall,
+								worker_firewall,
+								thisModule.generateMasterVm(s)}.flatten()
 				else
 					Sequence{master,
-							worker,
-							thisModule.generateMasterVm(s)}
+								worker,
+								thisModule.generateMasterVm(s)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
@@ -843,14 +854,14 @@ lazy rule HdfsToTosca {
 		if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
 					Sequence{master,
-							worker,
-							master_firewall,
-							worker_firewall,
-							thisModule.generateMasterVm(s)}
+								worker,
+								master_firewall,
+								worker_firewall,
+								thisModule.generateMasterVm(s)}.flatten()
 				else
 					Sequence{master,
-							worker,
-							thisModule.generateMasterVm(s)}
+								worker,
+								thisModule.generateMasterVm(s)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
