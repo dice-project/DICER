@@ -45,6 +45,11 @@ rule MMUML2TOSCA {
 					HdfsToTosca(hdfs))).flatten()).union(s.packagedElement ->
 					select(element | element.oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | element.
+					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmYarnCluster')) -> collect(yarn | thisModule.
+					YARNToTosca(yarn))).flatten()).union(s.packagedElement ->
+					select(element | element.oclIsTypeOf(MMUML!Device) and element.
+					hasStereotype('DdsmVMsCluster')) -> collect(element | element.
 					nestedNode -> select(nested | nested.
 					oclIsTypeOf(MMUML!ExecutionEnvironment) and nested.
 					hasStereotype('DdsmSparkCluster')) -> collect(spark | thisModule.
