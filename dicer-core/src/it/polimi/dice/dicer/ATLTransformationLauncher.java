@@ -35,6 +35,7 @@ public class ATLTransformationLauncher {
     // The input and output metamodel nsURIs are resolved using lazy registration of metamodels, see below.
     private String inputMetamodelNsURI;
     private String diceProfilePath;
+    private String secureUMLProfilePath;
     private String outputMetamodelNsURI;
     
     //Main transformation launch method
@@ -51,14 +52,6 @@ public class ATLTransformationLauncher {
         ExecEnv env = EmftvmFactory.eINSTANCE.createExecEnv();
         ResourceSet rs = new ResourceSetImpl();
 
-
-        /*
-         * Load meta-models in the resource set we just created, the idea here is to make the meta-models
-         * available in the context of the execution environment, the ResourceSet is later passed to the
-         * ModuleResolver that is the actual class that will run the transformation.
-         * Notice that we use the nsUris to locate the metamodels in the package registry, we initialize them 
-         * from Ecore files that we registered lazily as shown below in e.g. registerInputMetamodel(...) 
-         */
         Metamodel inMetamodel = EmftvmFactory.eINSTANCE.createMetamodel();
         inMetamodel.setResource(rs.getResource(URI.createURI(inputMetamodelNsURI), true));
         env.registerMetaModel(inMetaModelName, inMetamodel);
@@ -67,21 +60,18 @@ public class ATLTransformationLauncher {
         outMetamodel.setResource(rs.getResource(URI.createURI(outputMetamodelNsURI), true));
         env.registerMetaModel(outMetaModelName, outMetamodel);
         
-        /*
-         * Create and register resource factories to read/parse .xmi and .emftvm files,
-         * we need an .xmi parser because our in/output models are .xmi and our transformations are
-         * compiled using the ATL-EMFTV compiler that generates .emftvm files
-         */
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emftvm", new EMFTVMResourceFactoryImpl());
 
         if(uml){
             UMLResourcesUtil.init(rs);
             UMLPlugin.getEPackageNsURIToProfileLocationMap().put(DDSMPackage.eINSTANCE.getNsURI(), URI.createURI("pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"));
+            UMLPlugin.getEPackageNsURIToProfileLocationMap().put("http://RootElement/schemas/SecureUML/_zVWe83m5Eeae1LmHHETvPg/99", URI.createURI("pathmap://SECUREUML_PROFILES/SecureUML.profile.uml#_K-t40DIwEeaCqKWE88ztuQ"));
+
             rs.getURIConverter().getURIMap().put(URI.createURI("pathmap://DICE_PROFILES/DICE.profile.uml"), URI.createURI(diceProfilePath));
+            rs.getURIConverter().getURIMap().put(URI.createURI("pathmap://SECUREUML_PROFILES/SecureUML.profile.uml"), URI.createURI(secureUMLProfilePath));
         }
 
-        // Load models
         Model inModel = EmftvmFactory.eINSTANCE.createModel();
         inModel.setResource(rs.getResource(URI.createFileURI(new java.io.File(inModelPath).getAbsolutePath()), true));
         env.registerInputModel("uml", inModel);
@@ -90,11 +80,6 @@ public class ATLTransformationLauncher {
         outModel.setResource(rs.createResource(URI.createFileURI(new java.io.File(outModelPath).getAbsolutePath())));
         env.registerOutputModel("tosca", outModel);
         
-        /*
-         *  Load and run the transformation module
-         *  Point at the directory your transformations are stored, the ModuleResolver will 
-         *  look for the .emftvm file corresponding to the module you want to load and run
-         */
         ModuleResolver mr = new DefaultModuleResolver(transformationDir, rs);
         TimingData td = new TimingData();
         env.loadModule(mr, transformationModule);
@@ -102,7 +87,6 @@ public class ATLTransformationLauncher {
         env.run(td);
         td.finish();
             
-        // Save models
         try {
             outModel.getResource().save(Collections.emptyMap());
         } catch (IOException e) {
@@ -118,13 +102,14 @@ public class ATLTransformationLauncher {
         this.diceProfilePath = diceProfilePath;
     }
 
-    /*
-     * I seriously hate relying on the eclipse facilities, and if you're not building an eclipse plugin
-     * you can't rely on eclipse's registry (let's say you're building a stand-alone tool that needs to run ATL
-     * transformation, you need to 'manually' register your metamodels) 
-     * This method does two things, it initializes an Ecore parser and then programmatically looks for
-     * the package definition on it, obtains the NsUri and registers it.
-     */
+    public void setSecureUMLProfilePath(String secureUMLProfilePath) {
+        this.secureUMLProfilePath = secureUMLProfilePath;
+    }
+    
+    public String getSecureUMLProfilePath() {
+        return secureUMLProfilePath;
+    }
+
     private String lazyMetamodelRegistration(String metamodelPath){
         
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());

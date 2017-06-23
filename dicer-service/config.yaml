@@ -7,4 +7,5 @@ server:
 transformationDir: ${TRANSFORMATION_DIR}
 ddsmMetamodelPath: ${DDSM_METAMODEL_PATH}
 diceProfilePath: ${DICE_PROFILE_PATH}
+secureUmlProfilePath: ${SECUREUML_PROFILE_PATH}
 outMetamodelPath: ${OUT_METAMODEL_PATH}

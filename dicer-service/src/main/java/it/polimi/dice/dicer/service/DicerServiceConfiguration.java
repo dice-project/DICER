@@ -18,6 +18,9 @@ public class DicerServiceConfiguration extends Configuration {
     private String diceProfilePath;
     
     @NotEmpty
+    private String secureUmlProfilePath;
+    
+    @NotEmpty
     private String outMetamodelPath;
 
     @JsonProperty("transformationDir")
@@ -49,6 +52,17 @@ public class DicerServiceConfiguration extends Configuration {
     public void setDiceProfilePath(String diceProfilePath) {
         this.diceProfilePath = diceProfilePath;
     }
+    
+    @JsonProperty("secureUmlProfilePath")
+    public String getSecureUmlProfilePath() {
+        return secureUmlProfilePath;
+    }
+
+    @JsonProperty("secureUmlProfilePath")
+    public void setSecureUmlProfilePath(String secureUmlProfilePath) {
+        this.secureUmlProfilePath = secureUmlProfilePath;
+    }
+    
     
     @JsonProperty("outMetamodelPath")
     public String getOutMetamodelPath() {

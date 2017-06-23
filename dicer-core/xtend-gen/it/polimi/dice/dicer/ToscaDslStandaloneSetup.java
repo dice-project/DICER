@@ -11,6 +11,7 @@ import it.polimi.dice.dicer.ToscaDslStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class ToscaDslStandaloneSetup extends ToscaDslStandaloneSetupGenerated {
   public static void doSetup() {
-    new ToscaDslStandaloneSetup().createInjectorAndDoEMFRegistration();
+    ToscaDslStandaloneSetup _toscaDslStandaloneSetup = new ToscaDslStandaloneSetup();
+    _toscaDslStandaloneSetup.createInjectorAndDoEMFRegistration();
   }
 }

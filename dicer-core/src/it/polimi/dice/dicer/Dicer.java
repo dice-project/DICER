@@ -43,10 +43,10 @@ public class Dicer {
 	private boolean help = false;
 
 	@Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-	public String inModelPath = "/Users/michele/Downloads/prodevelop-case-study/posidonia.uml";
+	public String inModelPath = "/Users/michele/workspace/DICE-WikiStats/model/cassandra.uml";
 
 	@Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-	public String outModelPath = "/Users/michele/Downloads/prodevelop-case-study/posidonia.yaml";
+	public String outModelPath = "/Users/michele/workspace/DICE-WikiStats/model/cassandra_tosca";
 
 	@Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
 	public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
@@ -56,6 +56,9 @@ public class Dicer {
 	
 	@Parameter(names = "-umlMetamodel", description = "The path for the UML metamodel.")
 	public String umlMetamodelPath = "./metamodels/DICE.profile.uml";
+	
+	@Parameter(names = "-secureUmlMetamodel", description = "The path for the SecureUML metamodel.")
+	public String secureUmlProfilePath = "./metamodels/SecureUML.profile.uml";
 
 	@Parameter(names = "-transformationDir", description = "The path for the directory containing the ddsm2tosca ATL transformation.")
 	public String transformationDir = "./transformations/";
@@ -74,13 +77,13 @@ public class Dicer {
 			System.exit(0);
 		} else {
 			logger.info("Running DICER on input model: " + dicer.inModelPath);
-			dicer.runme(dicer.inModelPath, dicer.outModelPath, dicer.ddsmMetamodelPath, dicer.umlMetamodelPath, dicer.outMetamodelPath,
+			dicer.runme(dicer.inModelPath, dicer.outModelPath, dicer.ddsmMetamodelPath, dicer.umlMetamodelPath, dicer.secureUmlProfilePath, dicer.outMetamodelPath,
 					dicer.transformationDir, dicer.runInTextMode);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public void runme(String inputXMIModelPath, String outModelPath, String ddsmMetamodelPath, String umlMetamodelPath, String outMetamodelPath,
+	public void runme(String inputXMIModelPath, String outModelPath, String ddsmMetamodelPath, String umlMetamodelPath, String secureUmlProfilePath, String outMetamodelPath,
 			String transformationDir, int runInTextMode) {
 
 		if(runInTextMode == 0){
@@ -110,6 +113,7 @@ public class Dicer {
 		         logger.info("Registering the input UML metamodel.");
                  l.setInputMetamodelNsURI(UMLPackage.eINSTANCE.getNsURI());
                  l.setDiceProfilePath(umlMetamodelPath);
+                 l.setSecureUMLProfilePath(secureUmlProfilePath);
 		         l.launch(true, inputXMIModelPath, UML_METAMODEL_NAME, outModelPath + ".xmi", OUT_METAMODEL_NAME, transformationDir,
 	                     UML_TRANSFORMATION_MODULE);
 			}
