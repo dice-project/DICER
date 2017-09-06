@@ -11,11 +11,7 @@ rule MMUML2TOSCA {
 	to
 		t: TOSCA!TopologyTemplate (
 			tosca_definitions_version <- 'cloudify_dsl_1_3',
-			imports <- MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(cluster | cluster.
-					getStereotypeProperty('provider', 'DdsmVMsCluster').toString().
-					replaceAll('#', '')) -> asSet() -> collect(provider | thisModule.
-					getProviderImport(provider)),
+			imports <- thisModule.getProviderImport(),
 			nodeTemplates <- MMUML!Device.allInstances() -> select(device | device.
 					hasStereotype('DdsmVMsCluster')) -> collect(cluster | thisModule.
 					getVMsClusterToNodeTemplate(cluster)).flatten().union(MMUML!Device.
@@ -159,15 +155,16 @@ lazy rule getDiaJobRelationship {
 	}
 }
 
-lazy rule getProviderImport {
-	from
-		p: String
+rule getProviderImport() {
 	to
 		i: TOSCA!Import (
 			file <- 'https://github.' +
-					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.2.' +
-					'8/' + p + '.yaml'
+					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.' +
+					'0/full.yaml'
 		)
+	do {
+		Sequence{i}; 
+	}
 }
 
 lazy rule getVMsClusterToNodeTemplate {
@@ -178,7 +175,7 @@ lazy rule getVMsClusterToNodeTemplate {
 	to
 		t: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
-			type <- 'dice.hosts.' + s.getStereotypeProperty('genericSize',
+			type <- 'dice.hosts.ubuntu.' + s.getStereotypeProperty('genericSize',
 					'DdsmVMsCluster').toString().replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(s.
 					getStereotypeProperty('instances', 'DdsmVMsCluster')),
@@ -274,7 +271,6 @@ lazy rule databaseToTosca {
 			node_template_name <- s.name,
 			type <- 'dice.components.DB',
 			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
-			
 			properties <- thisModule.getProperty('name', s.name),
 			relationships <- if MMUML!Class.allInstances() -> select(class | class.
 					hasStereotype('DpimStorageNode')) -> exists(class | class.
@@ -324,7 +320,8 @@ lazy rule getHasRightToUseRelationship {
 		target: String
 	to
 		rel: TOSCA!Relationship (
-			target <- target.substring(1, 1).toUpper().concat(target.substring(2, target.size())),
+			target <- target.substring(1, 1).toUpper().concat(target.substring(2, target.
+					size())),
 			type <- 'dice.relationships.HasRightsToUse'
 		)
 }
@@ -400,7 +397,7 @@ lazy rule generateSeedVm {
 	to
 		seed_vm: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_seed_vm',
-			type <- 'dice.hosts.' + s.refImmediateComposite().
+			type <- 'dice.hosts.ubuntu.' + s.refImmediateComposite().
 					getStereotypeProperty('genericSize', 'DdsmVMsCluster').toString().
 					replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(1),
@@ -595,11 +592,11 @@ lazy rule stormToTosca {
 								worker,
 								master_firewall,
 								worker_firewall,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, true)}.flatten()
 				else
 					Sequence{master,
 								worker,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, false)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
@@ -719,11 +716,11 @@ lazy rule sparkToTosca {
 								worker,
 								master_firewall,
 								worker_firewall,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, true)}.flatten()
 				else
 					Sequence{master,
 								worker,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, false)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
@@ -833,11 +830,11 @@ lazy rule YARNToTosca {
 								worker,
 								master_firewall,
 								worker_firewall,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, true)}.flatten()
 				else
 					Sequence{master,
 								worker,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, false)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
@@ -1002,7 +999,7 @@ lazy rule generateRouterVm {
 	to
 		router_vm: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_router_vm',
-			type <- 'dice.hosts.' + s.refImmediateComposite().
+			type <- 'dice.hosts.ubuntu' + s.refImmediateComposite().
 					getStereotypeProperty('genericSize', 'DdsmVMsCluster').toString().
 					replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(1),
@@ -1194,11 +1191,11 @@ lazy rule HdfsToTosca {
 								worker,
 								master_firewall,
 								worker_firewall,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, true)}.flatten()
 				else
 					Sequence{master,
 								worker,
-								thisModule.generateMasterVm(s)}.flatten()
+								thisModule.generateMasterVm(s, false)}.flatten()
 				endif
 			else
 				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
@@ -1454,18 +1451,20 @@ rule getProperty(name: String, value: String){
 	}	
 }
 
-lazy rule generateMasterVm {
-	from
-		s: MMUML!Node
+rule generateMasterVm(s: MMUML!Node, p: Boolean) {
 	to
 		master_vm: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master_vm',
-			type <- 'dice.hosts.' + s.refImmediateComposite().
+			type <- 'dice.hosts.ubuntu' + s.refImmediateComposite().
 					getStereotypeProperty('genericSize', 'DdsmVMsCluster').toString().
 					replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(1),
-			relationships <- thisModule.getMasterVmFirewall(s).union(thisModule.
-					getIpAvailableFromRelationship(s.name + '_master_vm'))
+			relationships <- if p then
+					thisModule.getMasterVmFirewall(s).union(thisModule.
+							getIpAvailableFromRelationship(s.name + '_master_vm'))
+				else
+					thisModule.getIpAvailableFromRelationship(s.name + '_master_vm')
+				endif
 		),
 		master_vm_ip: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master_vm' + '_ip',
