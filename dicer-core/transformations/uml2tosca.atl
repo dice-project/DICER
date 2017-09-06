@@ -347,6 +347,20 @@ lazy rule cassandraToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_worker',
 			type <- 'dice.components.cassandra.Worker',
+			configurations <- thisModule.getConfigurationFromAttribute('key_chache_keys_to_save', s.
+					getStereotypeProperty('key_cache_keys_to_save', 'DdsmCassandraCluster')).
+					union(thisModule.getConfigurationFromAttribute('key_cache_save_period',
+					s.getStereotypeProperty('key_cache_save_period', 'DdsmCassandraCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memtable_cleanup_threshold',
+					s.getStereotypeProperty('memtable_cleanup_threshold', 'DdsmCassandraCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memtable_flush_writers',
+					s.getStereotypeProperty('memtable_flush_writers', 'DdsmCassandraCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('authenticator_enabled',
+					s.getStereotypeProperty('authenticator_enabled', 'DdsmCassandraCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('authorizer_enabled',
+					s.getStereotypeProperty('authorizer_enabled', 'DdsmCassandraCluster'))).
+					union(thisModule.getConfigurationFromAttribute('permission_validity_in_ms',
+					s.getStereotypeProperty('permission_validity_in_ms', 'DdsmCassandraCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmCassandraCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
@@ -473,6 +487,12 @@ lazy rule zookeeperToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.zookeeper.Server',
+			configurations <- thisModule.getConfigurationFromAttribute('tickTime', s.
+					getStereotypeProperty('tickTime', 'DdsmZookeeperCluster')).
+					union(thisModule.getConfigurationFromAttribute('syncLimit',
+					s.getStereotypeProperty('syncLimit', 'DdsmZookeeperCluster'))).
+					union(thisModule.getConfigurationFromAttribute('initLimit',
+					s.getStereotypeProperty('initLimit', 'DdsmZookeeperCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmZookeeperCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
@@ -555,7 +575,23 @@ lazy rule stormToTosca {
 			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', s.
 					getStereotypeProperty('taskTimeout', 'DdsmStormCluster')).
 					union(thisModule.getConfigurationFromAttribute('supervisorFrequency',
-					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))),
+					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('queueSize',
+					s.getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('monitorFrequency',
+					s.getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryTimes',
+					s.getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryInterval',
+					s.getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('workerStartTimeout',
+					s.getStereotypeProperty('workerStartTimeout', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('cpuCapacity',
+					s.getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memoryCapacity',
+					s.getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('heartbeatFrequency',
+					s.getStereotypeProperty('heartbeatFrequency', 'DdsmStormCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -568,6 +604,26 @@ lazy rule stormToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.storm.Worker',
+			configurations <- thisModule.getConfigurationFromAttribute('taskTimeout', s.
+					getStereotypeProperty('taskTimeout', 'DdsmStormCluster')).
+					union(thisModule.getConfigurationFromAttribute('supervisorFrequency',
+					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('queueSize',
+					s.getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('monitorFrequency',
+					s.getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryTimes',
+					s.getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryInterval',
+					s.getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('workerStartTimeout',
+					s.getStereotypeProperty('workerStartTimeout', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('cpuCapacity',
+					s.getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memoryCapacity',
+					s.getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('heartbeatFrequency',
+					s.getStereotypeProperty('heartbeatFrequency', 'DdsmStormCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -794,6 +850,18 @@ lazy rule YARNToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.ResourceManager',
+			configurations <- thisModule.getConfigurationFromBooleanAttribute('enable_acl', s.
+					getStereotypeProperty('enable_acl', 'DdsmYarnCluster')).
+					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_mem_mb',
+					s.getStereotypeProperty('scheduler_min_container_mem_mb', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_mem_mb',
+					s.getStereotypeProperty('scheduler_max_container_mem_mb', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_core_num',
+					s.getStereotypeProperty('scheduler_min_container_core_num', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_core_num',
+					s.getStereotypeProperty('scheduler_max_container_core_num', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('nodemanager_available_mem',
+					s.getStereotypeProperty('nodemanager_available_mem', 'DdsmYarnCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -806,6 +874,18 @@ lazy rule YARNToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.NodeManager',
+			configurations <- thisModule.getConfigurationFromBooleanAttribute('enable_acl', s.
+					getStereotypeProperty('enable_acl', 'DdsmYarnCluster')).
+					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_mem_mb',
+					s.getStereotypeProperty('scheduler_min_container_mem_mb', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_mem_mb',
+					s.getStereotypeProperty('scheduler_max_container_mem_mb', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_core_num',
+					s.getStereotypeProperty('scheduler_min_container_core_num', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_core_num',
+					s.getStereotypeProperty('scheduler_max_container_core_num', 'DdsmYarnCluster'))).
+					union(thisModule.getConfigurationFromAttribute('nodemanager_available_mem',
+					s.getStereotypeProperty('nodemanager_available_mem', 'DdsmYarnCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -1155,6 +1235,24 @@ lazy rule HdfsToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.NameNode',
+			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize',
+					s.getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
+					union(thisModule.getConfigurationFromAttribute('namenode_handler_count',
+					s.getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('datanode_handler_count',
+					s.getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
+					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('permission_enabled',
+					s.getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_replication',
+					s.getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('blocksize_bytes',
+					s.getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_write_retries',
+					s.getStereotypeProperty('block_write_retries', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
+					s.getStereotypeProperty('resource_manager_recovery_enabled', 'DdsmHdfsCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -1167,6 +1265,24 @@ lazy rule HdfsToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.DataNode',
+			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize',
+					s.getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
+					union(thisModule.getConfigurationFromAttribute('namenode_handler_count',
+					s.getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('datanode_handler_count',
+					s.getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
+					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('permission_enabled',
+					s.getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_replication',
+					s.getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('blocksize_bytes',
+					s.getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_write_retries',
+					s.getStereotypeProperty('block_write_retries', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
+					s.getStereotypeProperty('resource_manager_recovery_enabled', 'DdsmHdfsCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -1376,6 +1492,17 @@ helper context MMUML!Node def: getZookeeperConnectedToStorm: Boolean =
 			first().name + '_quorum';
 
 rule getConfigurationFromAttribute(name: String, value: Integer){
+	to
+		t: TOSCA!Configuration (
+			property_name <- name,
+			value <- value.toString()
+		)
+	do {
+		Sequence{t}; 
+	}	
+}
+
+rule getConfigurationFromBooleanAttribute(name: String, value: Boolean){
 	to
 		t: TOSCA!Configuration (
 			property_name <- name,
