@@ -309,9 +309,9 @@ lazy rule userToTosca {
 			relationships <- MMUML!AssociationClass.allInstances() -> select(class |
 					class.hasStereotype('Permission')) -> select(permission |
 					MMUML!Dependency.allInstances() -> exists(dep | dep.client.first().
-					name = s.name and dep.supplier.first().name.toLower() = permission.
-					member.at(2).name)) -> collect(p | thisModule.
-					getHasRightToUseRelationship(p.member.at(3).name))
+					name = s.name and dep.supplier.first().name.toLower().debug() = permission.
+					member.debug().at(1).name.debug())) -> collect(p | thisModule.
+					getHasRightToUseRelationship(p.member.at(2).name))
 		)
 }
 

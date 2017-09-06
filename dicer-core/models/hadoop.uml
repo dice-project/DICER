@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_CraH4JMKEeeIVYpeYaVS7g" name="RootElement">
+    <packagedElement xmi:type="uml:Device" xmi:id="_YpVXwJMKEeeIVYpeYaVS7g" name="cluster1">
+      <nestedNode xmi:type="uml:Node" xmi:id="_dHPGcJMKEeeIVYpeYaVS7g" name="hdfs1"/>
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_d2uCoJMKEeeIVYpeYaVS7g" name="yarn1">
+        <deployment xmi:type="uml:Deployment" xmi:id="_WYzqIJMLEeeIVYpeYaVS7g" client="_d2uCoJMKEeeIVYpeYaVS7g" supplier="_yWzbgJMKEeeIVYpeYaVS7g" deployedArtifact="_yWzbgJMKEeeIVYpeYaVS7g"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_yWzbgJMKEeeIVYpeYaVS7g" name="hadoopSampleApp"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_V6ldEJMLEeeIVYpeYaVS7g" client="_yWzbgJMKEeeIVYpeYaVS7g" supplier="_dHPGcJMKEeeIVYpeYaVS7g"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_c4V5YJMLEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_c4YVoJMLEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmHdfsCluster xmi:id="_eb7zEJMLEeeIVYpeYaVS7g" base_Node="_dHPGcJMKEeeIVYpeYaVS7g" protected="true"/>
+  <DDSM:DdsmYarnCluster xmi:id="_f82MMJMLEeeIVYpeYaVS7g" base_Node="_d2uCoJMKEeeIVYpeYaVS7g" protected="true" base_ExecutionEnvironment="_d2uCoJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmBigDataJob xmi:id="_1oMeUJMLEeeIVYpeYaVS7g" application="hadoopSampleApp" application_class="org.hadoop.sampleapp.Main" base_Artifact="_yWzbgJMKEeeIVYpeYaVS7g" application_name="hadoopSampleApp"/>
+  <DDSM:DdsmJobSubmission xmi:id="_BnhXEJMMEeeIVYpeYaVS7g" base_Deployment="_WYzqIJMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_DezBwJMMEeeIVYpeYaVS7g" base_Device="_YpVXwJMKEeeIVYpeYaVS7g"/>
+</xmi:XMI>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_21HZ4JMKEeeIVYpeYaVS7g" name="RootElement">
+    <packagedElement xmi:type="uml:Device" xmi:id="_3l_dMJMKEeeIVYpeYaVS7g" name="cluster1">
+      <nestedNode xmi:type="uml:Node" xmi:id="_4xsbUJMKEeeIVYpeYaVS7g" name="hdfs1"/>
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_6N4sgJMKEeeIVYpeYaVS7g" name="spark1">
+        <deployment xmi:type="uml:Deployment" xmi:id="_PjszgJMLEeeIVYpeYaVS7g" client="_6N4sgJMKEeeIVYpeYaVS7g" supplier="_AHNQUJMLEeeIVYpeYaVS7g" deployedArtifact="_AHNQUJMLEeeIVYpeYaVS7g"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_79HOcJMKEeeIVYpeYaVS7g" name="cluster2">
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_-9sqkJMKEeeIVYpeYaVS7g" name="storm1">
+        <deployment xmi:type="uml:Deployment" xmi:id="_OjXX4JMLEeeIVYpeYaVS7g" client="_-9sqkJMKEeeIVYpeYaVS7g" supplier="_CODoEJMLEeeIVYpeYaVS7g" deployedArtifact="_CODoEJMLEeeIVYpeYaVS7g"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_9H3xYJMKEeeIVYpeYaVS7g" name="cluster3">
+      <nestedNode xmi:type="uml:Node" xmi:id="_-FDyYJMKEeeIVYpeYaVS7g" name="zookeeper1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_AHNQUJMLEeeIVYpeYaVS7g" name="lambdaBatchJob"/>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_CODoEJMLEeeIVYpeYaVS7g" name="lambdaStreamingJob"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_QMWH4JMLEeeIVYpeYaVS7g" client="_AHNQUJMLEeeIVYpeYaVS7g" supplier="_4xsbUJMKEeeIVYpeYaVS7g"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Q6xUIJMLEeeIVYpeYaVS7g" client="_-9sqkJMKEeeIVYpeYaVS7g" supplier="_-FDyYJMKEeeIVYpeYaVS7g"/>
+    <packagedElement xmi:type="uml:Device" xmi:id="_lmMaUJMLEeeIVYpeYaVS7g" name="cluster5">
+      <nestedNode xmi:type="uml:Node" xmi:id="_mwWgUJMLEeeIVYpeYaVS7g" name="kafka1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_o1bWcJMLEeeIVYpeYaVS7g" client="_CODoEJMLEeeIVYpeYaVS7g" supplier="_mwWgUJMLEeeIVYpeYaVS7g"/>
+    <packagedElement xmi:type="uml:Device" xmi:id="_AcfR4JMNEeeIVYpeYaVS7g" name="cluster4">
+      <nestedNode xmi:type="uml:Node" xmi:id="_Br65cJMNEeeIVYpeYaVS7g" name="cassandra1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Dk1i4JMNEeeIVYpeYaVS7g" client="_CODoEJMLEeeIVYpeYaVS7g" supplier="_Br65cJMNEeeIVYpeYaVS7g"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_FwVxIJMNEeeIVYpeYaVS7g" client="_AHNQUJMLEeeIVYpeYaVS7g" supplier="_Br65cJMNEeeIVYpeYaVS7g"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_svydwJMMEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_svzE0JMMEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmBigDataJob xmi:id="_vWmH8JMMEeeIVYpeYaVS7g" application="lambdaBatchJob&#xA;" application_class="org.lambda.lambdabatchjob.Main" base_Artifact="_AHNQUJMLEeeIVYpeYaVS7g" application_name="lambdaBatchJob"/>
+  <DDSM:DdsmBigDataJob xmi:id="_wPb0cJMMEeeIVYpeYaVS7g" application="lambdaStreamingJob" application_class="org.lambda.lambdastreamingjob.Main" base_Artifact="_CODoEJMLEeeIVYpeYaVS7g" application_name="lambdaStreamingJob"/>
+  <DDSM:DdsmVMsCluster xmi:id="_xMrf0JMMEeeIVYpeYaVS7g" base_Device="_lmMaUJMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_yIUBoJMMEeeIVYpeYaVS7g" base_Device="_79HOcJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_zLgkAJMMEeeIVYpeYaVS7g" base_Device="_9H3xYJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_06IB8JMMEeeIVYpeYaVS7g" base_Device="_3l_dMJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmSparkCluster xmi:id="_2H2ZUJMMEeeIVYpeYaVS7g" base_Node="_6N4sgJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmStormCluster xmi:id="_2-xaQJMMEeeIVYpeYaVS7g" base_Node="_-9sqkJMKEeeIVYpeYaVS7g" base_ExecutionEnvironment="_-9sqkJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmZookeeperCluster xmi:id="_3yhycJMMEeeIVYpeYaVS7g" base_Node="_-FDyYJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmHdfsCluster xmi:id="_49QgMJMMEeeIVYpeYaVS7g" base_Node="_4xsbUJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmKafkaCluster xmi:id="_6mjZQJMMEeeIVYpeYaVS7g" base_Node="_mwWgUJMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmJobSubmission xmi:id="_9IPS4JMMEeeIVYpeYaVS7g" base_Deployment="_OjXX4JMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmJobSubmission xmi:id="_-WMTwJMMEeeIVYpeYaVS7g" base_Deployment="_PjszgJMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_HXYncJMNEeeIVYpeYaVS7g" base_Device="_AcfR4JMNEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmCassandraCluster xmi:id="_IfT40JMNEeeIVYpeYaVS7g" base_Node="_Br65cJMNEeeIVYpeYaVS7g"/>
+</xmi:XMI>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_FqVXIJMKEeeIVYpeYaVS7g" name="RootElement">
+    <packagedElement xmi:type="uml:Device" xmi:id="_gOqKYJMKEeeIVYpeYaVS7g" name="cluster1">
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_ki4_sJMKEeeIVYpeYaVS7g" name="spark1">
+        <deployment xmi:type="uml:Deployment" xmi:id="_-Hfl4JMLEeeIVYpeYaVS7g" client="_ki4_sJMKEeeIVYpeYaVS7g" supplier="_xS-nAJMKEeeIVYpeYaVS7g" deployedArtifact="_xS-nAJMKEeeIVYpeYaVS7g"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_xS-nAJMKEeeIVYpeYaVS7g" name="sparkSampleApp"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_9SdbUJMLEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9SeCYJMLEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmJobSubmission xmi:id="__ft9EJMLEeeIVYpeYaVS7g" base_Deployment="_-Hfl4JMLEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmSparkCluster xmi:id="_FZcwkJMMEeeIVYpeYaVS7g" base_Node="_ki4_sJMKEeeIVYpeYaVS7g" protected="true"/>
+  <DDSM:DdsmBigDataJob xmi:id="_GOCPMJMMEeeIVYpeYaVS7g" application="sparkSampleApp" application_class="org.spark.sampleapp.Main" base_Artifact="_xS-nAJMKEeeIVYpeYaVS7g" application_name="sparkSampleApp"/>
+  <DDSM:DdsmVMsCluster xmi:id="_HI3fwJMMEeeIVYpeYaVS7g" base_Device="_gOqKYJMKEeeIVYpeYaVS7g"/>
+</xmi:XMI>

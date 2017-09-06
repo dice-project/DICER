@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:SecureUML="http://RootElement/schemas/SecureUML/_zVWe83m5Eeae1LmHHETvPg/99" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM http://es.unizar.disco.dice/profiles/DPIM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM http://RootElement/schemas/SecureUML/_zVWe83m5Eeae1LmHHETvPg/99 pathmap://SECUREUML_PROFILES/SecureUML.profile.uml#_zVWe9Hm5Eeae1LmHHETvPg">
+  <uml:Model xmi:id="_It4AoJMKEeeIVYpeYaVS7g" name="RootElement">
+    <packagedElement xmi:type="uml:Device" xmi:id="_ltntcJMKEeeIVYpeYaVS7g" name="cluster1">
+      <nestedNode xmi:type="uml:Node" xmi:id="_mqeXQJMKEeeIVYpeYaVS7g" name="mongodb1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_X9EJ0JMZEeeIVYpeYaVS7g" name="mongodb1">
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_StMoIJMYEeeIVYpeYaVS7g" name="db1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DRIwgJMdEeeIVYpeYaVS7g" name="user1"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_EJJ9oJMdEeeIVYpeYaVS7g" name="role1">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_39XpAJSXEeeQEPkduTqM6A" name="db1" type="_StMoIJMYEeeIVYpeYaVS7g" association="_39OfEJSXEeeQEPkduTqM6A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Fh88kJMdEeeIVYpeYaVS7g" client="_DRIwgJMdEeeIVYpeYaVS7g" supplier="_EJJ9oJMdEeeIVYpeYaVS7g"/>
+    <packagedElement xmi:type="uml:AssociationClass" xmi:id="_39OfEJSXEeeQEPkduTqM6A" name="AssociationClass1" memberEnd="_39XpAJSXEeeQEPkduTqM6A _39XpAZSXEeeQEPkduTqM6A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_39VMwJSXEeeQEPkduTqM6A" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_39Vz0JSXEeeQEPkduTqM6A" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_39XpAZSXEeeQEPkduTqM6A" name="role1" type="_EJJ9oJMdEeeIVYpeYaVS7g" association="_39OfEJSXEeeQEPkduTqM6A"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_KveaEJMMEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Kvg2UJMMEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OhrC4JMYEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OhvUUJMYEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_bmEtUJMYEeeIVYpeYaVS7g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bmF7cJMYEeeIVYpeYaVS7g" source="PapyrusVersion">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bmF7cZMYEeeIVYpeYaVS7g" key="Version" value="0.0.100"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bmF7cpMYEeeIVYpeYaVS7g" key="Comment" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bmF7c5MYEeeIVYpeYaVS7g" key="Copyright" value=""/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bmF7dJMYEeeIVYpeYaVS7g" key="Date" value="2016-09-13"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bmF7dZMYEeeIVYpeYaVS7g" key="Author" value=""/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bmFUYJMYEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://SECUREUML_PROFILES/SecureUML.profile.uml#_zVWe9Hm5Eeae1LmHHETvPg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SECUREUML_PROFILES/SecureUML.profile.uml#_K-t40DIwEeaCqKWE88ztuQ"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmMongoDBCluster xmi:id="_MQLX0JMMEeeIVYpeYaVS7g" base_Node="_mqeXQJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_NNc4YJMMEeeIVYpeYaVS7g" base_Device="_ltntcJMKEeeIVYpeYaVS7g"/>
+  <SecureUML:Resource xmi:id="_dpU-gJMYEeeIVYpeYaVS7g" base_Classifier="_StMoIJMYEeeIVYpeYaVS7g"/>
+  <DPIM:DpimStorageNode xmi:id="_aKXu4JMZEeeIVYpeYaVS7g" base_Classifier="_X9EJ0JMZEeeIVYpeYaVS7g"/>
+  <SecureUML:User xmi:id="_IQSyIJMdEeeIVYpeYaVS7g" base_Classifier="_DRIwgJMdEeeIVYpeYaVS7g"/>
+  <SecureUML:Role xmi:id="_JFCo0JMdEeeIVYpeYaVS7g" base_Classifier="_EJJ9oJMdEeeIVYpeYaVS7g"/>
+  <SecureUML:SubjectAssignment xmi:id="_Ljm9AJMdEeeIVYpeYaVS7g" base_Dependency="_Fh88kJMdEeeIVYpeYaVS7g"/>
+  <SecureUML:Permission xmi:id="_5dD6IJSXEeeQEPkduTqM6A" base_AssociationClass="_39OfEJSXEeeQEPkduTqM6A" base_Association="_39OfEJSXEeeQEPkduTqM6A" base_Classifier="_39OfEJSXEeeQEPkduTqM6A"/>
+</xmi:XMI>

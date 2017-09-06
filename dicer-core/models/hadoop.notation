@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/viewpoints/policy/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_CrluEJMKEeeIVYpeYaVS7g" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_YpehsJMKEeeIVYpeYaVS7g" type="Device_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_Ypfv0JMKEeeIVYpeYaVS7g" type="Device_NameLabel"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_YpgW4JMKEeeIVYpeYaVS7g" type="Device_NestedNodeCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_dHV0IJMKEeeIVYpeYaVS7g" type="Node_Shape_CCN">
+        <children xmi:type="notation:DecorationNode" xmi:id="_dHWbMJMKEeeIVYpeYaVS7g" type="Node_NameLabel_CCN"/>
+        <element xmi:type="uml:Node" href="hadoop.uml#_dHPGcJMKEeeIVYpeYaVS7g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dHV0IZMKEeeIVYpeYaVS7g" x="36" y="28"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_d22lgJMKEeeIVYpeYaVS7g" type="ExecutionEnvironment_Shape_CCN">
+        <children xmi:type="notation:DecorationNode" xmi:id="_d22lgpMKEeeIVYpeYaVS7g" type="ExecutionEnvironment_NameLabel_CCN"/>
+        <element xmi:type="uml:ExecutionEnvironment" href="hadoop.uml#_d2uCoJMKEeeIVYpeYaVS7g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_d22lgZMKEeeIVYpeYaVS7g" x="208" y="25" width="222" height="157"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_edHe0JMLEeeIVYpeYaVS7g" type="StereotypeComment">
+        <styles xmi:type="notation:TitleStyle" xmi:id="_edHe0ZMLEeeIVYpeYaVS7g"/>
+        <styles xmi:type="notation:EObjectValueStyle" xmi:id="_edHe05MLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+          <eObjectValue xmi:type="uml:Node" href="hadoop.uml#_dHPGcJMKEeeIVYpeYaVS7g"/>
+        </styles>
+        <element xsi:nil="true"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_edHe0pMLEeeIVYpeYaVS7g" x="236" y="28"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_f9oPUJMLEeeIVYpeYaVS7g" type="StereotypeComment">
+        <styles xmi:type="notation:TitleStyle" xmi:id="_f9oPUZMLEeeIVYpeYaVS7g"/>
+        <styles xmi:type="notation:EObjectValueStyle" xmi:id="_f9oPU5MLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+          <eObjectValue xmi:type="uml:ExecutionEnvironment" href="hadoop.uml#_d2uCoJMKEeeIVYpeYaVS7g"/>
+        </styles>
+        <element xsi:nil="true"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f9oPUpMLEeeIVYpeYaVS7g" x="408" y="25"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_YpgW4ZMKEeeIVYpeYaVS7g"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YpgW4pMKEeeIVYpeYaVS7g"/>
+    </children>
+    <element xmi:type="uml:Device" href="hadoop.uml#_YpVXwJMKEeeIVYpeYaVS7g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YpehsZMKEeeIVYpeYaVS7g" x="254" y="105" width="460" height="299"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_yW2e0JMKEeeIVYpeYaVS7g" type="Artifact_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_yW2e0pMKEeeIVYpeYaVS7g" type="Artifact_NameLabel"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_yW2e05MKEeeIVYpeYaVS7g" type="Artifact_FloatingNameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_yW2e1JMKEeeIVYpeYaVS7g" x="25"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_yW3F4JMKEeeIVYpeYaVS7g" type="Artifact_NestedArtifactCompartment">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_yW3F4ZMKEeeIVYpeYaVS7g"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yW3F4pMKEeeIVYpeYaVS7g"/>
+    </children>
+    <element xmi:type="uml:Artifact" href="hadoop.uml#_yWzbgJMKEeeIVYpeYaVS7g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yW2e0ZMKEeeIVYpeYaVS7g" x="475" y="471"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_1opxUJMLEeeIVYpeYaVS7g" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_1opxUZMLEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_1opxU5MLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Artifact" href="hadoop.uml#_yWzbgJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1opxUpMLEeeIVYpeYaVS7g" x="675" y="471"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_Bn6YoJMMEeeIVYpeYaVS7g" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_Bn6YoZMMEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_Bn6_sJMMEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Deployment" href="hadoop.uml#_WYzqIJMLEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bn6YopMMEeeIVYpeYaVS7g" x="675" y="371"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_DfSJ9JMMEeeIVYpeYaVS7g" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_DfSJ9ZMMEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_DfSJ95MMEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="hadoop.uml#_YpVXwJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DfSJ9pMMEeeIVYpeYaVS7g" x="454" y="105"/>
+  </children>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_CrluEZMKEeeIVYpeYaVS7g" name="diagram_compatibility_version" stringValue="1.2.0"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_CrluEpMKEeeIVYpeYaVS7g"/>
+  <styles xmi:type="style:PapyrusViewStyle" xmi:id="_CrluE5MKEeeIVYpeYaVS7g">
+    <owner xmi:type="uml:Model" href="hadoop.uml#_CraH4JMKEeeIVYpeYaVS7g"/>
+  </styles>
+  <element xmi:type="uml:Model" href="hadoop.uml#_CraH4JMKEeeIVYpeYaVS7g"/>
+  <edges xmi:type="notation:Connector" xmi:id="_V6ogYJMLEeeIVYpeYaVS7g" type="Dependency_Edge" source="_yW2e0JMKEeeIVYpeYaVS7g" target="_dHV0IJMKEeeIVYpeYaVS7g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_V6ogY5MLEeeIVYpeYaVS7g" type="Dependency_NameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_V6ogZJMLEeeIVYpeYaVS7g" y="40"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_V6ogZZMLEeeIVYpeYaVS7g" type="Dependency_StereotypeLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_V6pHcJMLEeeIVYpeYaVS7g" y="60"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_V6ogYZMLEeeIVYpeYaVS7g"/>
+    <element xmi:type="uml:Dependency" href="hadoop.uml#_V6ldEJMLEeeIVYpeYaVS7g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_V6ogYpMLEeeIVYpeYaVS7g" points="[499, 471, -643984, -643984]$[403, 335, -643984, -643984]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_V61UsJMLEeeIVYpeYaVS7g" id="(0.16,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_V617wJMLEeeIVYpeYaVS7g" id="(0.7248210922787196,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WY7l8JMLEeeIVYpeYaVS7g" type="Deployment_Edge" source="_yW2e0JMKEeeIVYpeYaVS7g" target="_d22lgJMKEeeIVYpeYaVS7g">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WY7l85MLEeeIVYpeYaVS7g" type="Deployment_NameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WY7l9JMLEeeIVYpeYaVS7g" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WY8NAJMLEeeIVYpeYaVS7g" type="Deployment_StereotypeLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WY8NAZMLEeeIVYpeYaVS7g" x="27" y="7"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WY7l8ZMLEeeIVYpeYaVS7g"/>
+    <element xmi:type="uml:Deployment" href="hadoop.uml#_WYzqIJMLEeeIVYpeYaVS7g"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WY7l8pMLEeeIVYpeYaVS7g" points="[569, 471, -643984, -643984]$[572, 339, -643984, -643984]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WZNSwJMLEeeIVYpeYaVS7g" id="(0.6266666666666667,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WZNSwZMLEeeIVYpeYaVS7g" id="(0.47527314548591143,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_edIF4JMLEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_dHV0IJMKEeeIVYpeYaVS7g" target="_edHe0JMLEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_edIF4ZMLEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_edIF5ZMLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Node" href="hadoop.uml#_dHPGcJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_edIF4pMLEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_edIF45MLEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_edIF5JMLEeeIVYpeYaVS7g"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_f9oPVJMLEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_d22lgJMKEeeIVYpeYaVS7g" target="_f9oPUJMLEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_f9oPVZMLEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_f9o2YJMLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:ExecutionEnvironment" href="hadoop.uml#_d2uCoJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_f9oPVpMLEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f9oPV5MLEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f9oPWJMLEeeIVYpeYaVS7g"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_1opxVJMLEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_yW2e0JMKEeeIVYpeYaVS7g" target="_1opxUJMLEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_1opxVZMLEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_1opxWZMLEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Artifact" href="hadoop.uml#_yWzbgJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1opxVpMLEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1opxV5MLEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_1opxWJMLEeeIVYpeYaVS7g"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_Bn6_sZMMEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_WY7l8JMLEeeIVYpeYaVS7g" target="_Bn6YoJMMEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_Bn6_spMMEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_Bn6_tpMMEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Deployment" href="hadoop.uml#_WYzqIJMLEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Bn6_s5MMEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bn6_tJMMEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bn6_tZMMEeeIVYpeYaVS7g"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_DfSxAJMMEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_YpehsJMKEeeIVYpeYaVS7g" target="_DfSJ9JMMEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_DfSxAZMMEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_DfSxBZMMEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="hadoop.uml#_YpVXwJMKEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DfSxApMMEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DfSxA5MMEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DfSxBJMMEeeIVYpeYaVS7g"/>
+  </edges>
+</notation:Diagram>

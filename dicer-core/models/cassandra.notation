@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/viewpoints/policy/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PBTKsJMDEeeIVYpeYaVS7g" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_Qmx6wJMDEeeIVYpeYaVS7g" type="Device_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_QnDAgJMDEeeIVYpeYaVS7g" type="Device_NameLabel"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_QnGD0JMDEeeIVYpeYaVS7g" type="Device_NestedNodeCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_SV350JMDEeeIVYpeYaVS7g" type="Node_Shape_CCN">
+        <children xmi:type="notation:DecorationNode" xmi:id="_SV4g4JMDEeeIVYpeYaVS7g" type="Node_NameLabel_CCN"/>
+        <element xmi:type="uml:Node" href="cassandra.uml#_SVnbIJMDEeeIVYpeYaVS7g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SV350ZMDEeeIVYpeYaVS7g" x="45" y="8" width="96" height="96"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_Xq42sJMDEeeIVYpeYaVS7g" type="StereotypeComment">
+        <styles xmi:type="notation:TitleStyle" xmi:id="_Xq42sZMDEeeIVYpeYaVS7g"/>
+        <styles xmi:type="notation:EObjectValueStyle" xmi:id="_Xq5dwJMDEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+          <eObjectValue xmi:type="uml:Node" href="cassandra.uml#_SVnbIJMDEeeIVYpeYaVS7g"/>
+        </styles>
+        <element xsi:nil="true"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Xq42spMDEeeIVYpeYaVS7g" x="245" y="8"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_QnGD0ZMDEeeIVYpeYaVS7g"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QnGD0pMDEeeIVYpeYaVS7g"/>
+    </children>
+    <element xmi:type="uml:Device" href="cassandra.uml#_QmaHUJMDEeeIVYpeYaVS7g"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qmx6wZMDEeeIVYpeYaVS7g" x="185" y="57" width="233" height="174"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_W3Y9MJMDEeeIVYpeYaVS7g" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_W3Y9MZMDEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_W3Y9M5MDEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="cassandra.uml#_QmaHUJMDEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W3Y9MpMDEeeIVYpeYaVS7g" x="385" y="57"/>
+  </children>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_PBTKsZMDEeeIVYpeYaVS7g" name="diagram_compatibility_version" stringValue="1.2.0"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_PBTKspMDEeeIVYpeYaVS7g"/>
+  <styles xmi:type="style:PapyrusViewStyle" xmi:id="_PBTKs5MDEeeIVYpeYaVS7g">
+    <owner xmi:type="uml:Model" href="cassandra.uml#_O6q-QJMDEeeIVYpeYaVS7g"/>
+  </styles>
+  <element xmi:type="uml:Model" href="cassandra.uml#_O6q-QJMDEeeIVYpeYaVS7g"/>
+  <edges xmi:type="notation:Connector" xmi:id="_W3aLUJMDEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_Qmx6wJMDEeeIVYpeYaVS7g" target="_W3Y9MJMDEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_W3aLUZMDEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_W3bZcJMDEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="cassandra.uml#_QmaHUJMDEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_W3aLUpMDEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_W3ayYJMDEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_W3ayYZMDEeeIVYpeYaVS7g"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_Xq5dwZMDEeeIVYpeYaVS7g" type="StereotypeCommentLink" source="_SV350JMDEeeIVYpeYaVS7g" target="_Xq42sJMDEeeIVYpeYaVS7g">
+    <styles xmi:type="notation:FontStyle" xmi:id="_Xq5dwpMDEeeIVYpeYaVS7g"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_Xq6E0JMDEeeIVYpeYaVS7g" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Node" href="cassandra.uml#_SVnbIJMDEeeIVYpeYaVS7g"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Xq5dw5MDEeeIVYpeYaVS7g" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Xq5dxJMDEeeIVYpeYaVS7g"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Xq5dxZMDEeeIVYpeYaVS7g"/>
+  </edges>
+</notation:Diagram>
