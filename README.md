@@ -1,47 +1,39 @@
 # DICER
 
-DICER is a tool developed in the context of the DICE H2020 European Project with the goal of supporting the deployment and management of Big Data applications. 
-Main goal of DICER is to exploit deployment models specified in accordance with the DICE Deployment Specific metamodel, in order to speed up the deployment process.
+DICER is a tool developed in the context of the DICE H2020 European Project enabling the model-driven deployment of data-intensive applications (DIAs) leveraging the Infrastructure-as-Code (IaC) paradigm. More specifically, DICER adopt the OASIS Topology and Orchestration Specification for Cloud Applications ([TOSCA](https://www.oasis-open.org/committees/tosca/)) standard and is able to automatically generate IaC for DIAs in the form of TOSCA blueprints from stereotypes UML models. To this aim, DICER exploits the [DICE-Profiles](https://github.com/dice-project/DICE-Profiles) applied on UML [Deployment Diagrams](http://www.uml-diagrams.org/deployment-diagrams.html) as well as the DIA-specific [TOSCA library](https://github.com/dice-project/DICE-Deployment-Cloudify), both defined and developed in the scope of the DICE project.
 
-# Requirement
+### Feature
 
-DICER leverages the DICE Deployment Specific Metamodel (DDSM), which can be directly used to create DICER-processable models. The metamodel is included in the DICER project. Right now DICER does not provide its own GUI and operates as a simple java tool, runnable from the command line. To create the input models, you can use the Eclipse Reflective Ecore Model Diagram Editor, available at the following url:
+* A modeling method to describe the deployment and configuration of Big Data infrastructures and DIAs by means of stereotypes UML Deployment Diagrams
 
-http://dynamicgmf.sourceforge.net
+* Automatic TOSCA code generation
 
-You can download the 0.2.1 version (direct binary download url ()). Unzip the downloaded file and copy and paste extracted .jar into the "dropins" folder of your Eclipse installation.
+* Support both many popular Big Data technologies
 
-The plugin requires the following additional Eclipse plugins:
+* Pre-defined UML models to simplify and speed up the design of Big Data infrastructures
 
-3. [Ecore Tools](http://www.eclipse.org/ecoretools/): from the download tab, choose the 3.1.x Nightly update site. You can install just the Ecore Diagram Editor and the Ecore Diargam Editor SDK items. 
+* Eclipse integration (provided Eclipse plugin)
 
-1. [GMF](http://www.eclipse.org/modeling/gmp/): use this [update site](http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/) to install just the necessary GMF Runtime plugin.
+### Installation
 
-2. [EMF](https://eclipse.org/modeling/emf/): use this [update site] (http://download.eclipse.org/modeling/emf/updates/releases/). You can install just one of the available EMF SDK items (suggested version 2.4.2).
+The DICER tool runs as a service which is called via the provided Eclipse plugin, which acts as the client. In order to create DICER models you have to install the DICE-Profiles ([update site](http://dice-project.github.io/DICE-Profiles/updates)) too.
+The DICER Eclipse plugin can be installed via the following Eclipse update site https://dice-project.github.io/DICER/updates. Alternatively one can directly download the [DICE-Platform](https://github.com/dice-project/DICE-Platform), an Eclipse-based IDE, which includes the DICER plugin. 
+The DICER service realise the TOSCA code generation and can be deployed using the released deployment scripts.
 
-At this step the required environment for creating EMF models from an Ecore metamodel is ready and the "Reflective Ecore Diagram Editor" option from the "New" wizard should be now available, as shown in the following screenshot:
 
-![alt text](https://github.com/DICERs/DICER/blob/master/doc/images/creating-dicer-model-1.png "New wizar with Reflective Ecore Diagram Editor option.")
+### Creating DICER Models
 
-# Installation
+The DICER tool defines a modeling method to be followed which is based on UML Deployment Diagram to be annotated with sterotypes provided by the DDSM package of the DICE-Profiles. In particular, the DDSM package provides stereotypes to model the deployment of data-intensive technologies on top of Cloud platforms and of DIAs on top of the resulting infrastructure. In the following we are going to define a sample DICER model in Eclipse Papyrus step by step with the aim of illustrating the DICER modeling method.
 
-If you want to use the DICER you can checkout this repository and compile it with maven.
-Make sure to put the compiled artifact in the same folder in which the metamodels/ and transformations/ folders are located ( the root folder in the case you checkout the source code). You may using the following commands:
+First, one should model the necessary Cloud resources. Data-intensive technologies are tipically distributed systems running on clusters of nodes (virtual machines or containers). To model such aspect it is possible to use the DdsmVMsCluster stereotype to be applied on a UML Device element. 
 
-    git clone https://github.com/dice-project/DICER.git
-    cd DICER
-    mvn clean package
-    cd dicer-core
-    cp target/dicer-core-0.1.0.jar .
 
-Then you can just import the DICER project into Eclipse to start using the DDSM metamodel to create new models.
+Data-intensive technologies are then just software platforms running on the available clusters in a distributed fashion. Some of them are responsible to actually executing DIAs and are called execution engines. The DDSM package of the DICE-Profiles provides specific stereotypes for the various supported technologies (such as Spark, Storm or Cassandra). Such stereotypes have to be applied on UML Node elements that are placed within the previously instantiated DdsmVMsCluster Devices. Execution engines, e.g. Spark or Storm, should be model as UML ExecutionEnvironment with applied the corresponding stereotype.
 
-If you directly download the released dicer-full.zip archive, everything you need is already packaged withint it and you just have to import it as an archive into an Eclipse project. At this step you can create a new "Reflective Ecore Diagram Editor", pointing at the ddsm.ecore metamodel contained into the metamodels/ folder. 
+Finally DIA running on top of the resulting infrastructure can be represented as UML Artifacts annotated with the DdsmBigDataJob stereotype with a UML Deployment Dependency connecting them to the ExecutionEnvironment which is supposed to execute them. If a DIA needs other data-intensive platforms in order to operate, a UML Dependency can be used to model such aspect.
 
-# Usage
+All the provided stereotypes provide attributes to configure each data-intensive platform as well as the way DIAs are deployed.
 
-In order to run DICER, assuming that you already created a DDSM model using the provided metamodel and with the help of the Ecore Reflective Diagram Editor, you just need to run the compiler .jar artifact giving as input the path to the input DDSM model and the path to the output TOSCA models. If youMake sure the dicer-core-0.1.0.jar is in the same directory of the transformation/ and metamodels/ folders. In order to run DICER against one o the available models you can execute following command:
+### Generating TOSCA Bleuprints using the DICER plugin
 
-    java -jar dicer-core-0.1.0.jar -inModel models/storm_cluster.xmi -outModel models/storm_cluster_tosca
-
-Make sure that the -outModel argument is a path to a file with no extention. DICER will create also an xmi and a json version of the generated deployment blueprint.
+Once a valid DICER model has been built, the corresponding TOSCA blueprint can be obtained by calling the DICER service (which must be run in advance to serve as the backend) via the provided Eclipse plugin. The plugin provides a simple Eclipse Run Configuration to contact the DICER service and get back the generated blueprint.
