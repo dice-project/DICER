@@ -5,4 +5,4 @@ export SECUREUML_PROFILE_PATH=${DICER_HOME}/DICER/dicer-core/metamodels/SecureUM
 export OUT_METAMODEL_PATH=${DICER_HOME}/DICER/dicer-core/metamodels/tosca.ecore
 
 cd ${DICER_HOME}/DICER/dicer-service/target/
-nohup java -jar dicer-service-0.2.0.jar server ../config.yaml > dicer-service.log 2>&1 & echo $! > PID.pid
+nohup java -jar dicer-service-0.2.1.jar server ../config.yaml > dicer-service.log 2>&1 & echo $! > PID.pid

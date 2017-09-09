@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>dicer</groupId>
 		<artifactId>dicer.parent</artifactId>
-		<version>0.2.0</version>
+		<version>0.2.1</version>
 	</parent>
 	<artifactId>dicer-service</artifactId>
 	<name>dicer-service</name>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>dicer</groupId>
 			<artifactId>dicer-core</artifactId>
-			<version>0.2.0</version>
+			<version>0.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
