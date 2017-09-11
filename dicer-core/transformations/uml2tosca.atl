@@ -269,7 +269,7 @@ lazy rule databaseToTosca {
 	to
 		database: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
-			type <- 'dice.components.DB',
+			type <- 'dice.components.mongo.DB', -- right now there is support only for mongo, but should be generalized
 			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
 			properties <- thisModule.getProperty('name', s.name),
 			relationships <- if MMUML!Class.allInstances() -> select(class | class.
