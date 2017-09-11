@@ -1582,7 +1582,7 @@ rule generateMasterVm(s: MMUML!Node, p: Boolean) {
 	to
 		master_vm: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master_vm',
-			type <- 'dice.hosts.ubuntu' + s.refImmediateComposite().
+			type <- 'dice.hosts.ubuntu.' + s.refImmediateComposite().
 					getStereotypeProperty('genericSize', 'DdsmVMsCluster').toString().
 					replaceAll('#', ''),
 			instances <- thisModule.getInstancesElement(1),
