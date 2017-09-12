@@ -67,12 +67,14 @@ rule MMUML2TOSCA {
 					-> collect(mongo | thisModule.mongoShardedToTosca(mongo))).flatten()).
 					union(MMUML!Device.allInstances() -> select(device | device.
 					hasStereotype('DdsmHeterogeneousCluster')) -> collect(hetero |
-					thisModule.getCrossCloudReplicaSet(hetero)).flatten()).
-					union(MMUML!Class.allInstances() -> select(class | class.
-					hasStereotype('Resource')) -> collect(resource | thisModule.
-					databaseToTosca(resource)).flatten()).union(MMUML!Class.
-					allInstances() -> select(class | class.hasStereotype('User')) ->
-					collect(user | thisModule.userToTosca(user)).flatten()),
+					thisModule.getCrossCloudReplicaSet(hetero)).flatten())
+--					.
+--					union(MMUML!Class.allInstances() -> select(class | class.
+--					hasStereotype('Resource')) -> collect(resource | thisModule.
+--					databaseToTosca(resource)).flatten()).union(MMUML!Class.
+--					allInstances() -> select(class | class.hasStereotype('User')) ->
+--					collect(user | thisModule.userToTosca(user)).flatten())
+					,
 			outputs <- s.packagedElement -> select(element | element.
 					oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | thisModule.
@@ -194,7 +196,7 @@ lazy rule getVMsClusterToNodeTemplate {
 								getStereotypeProperty('login', 'DdsmVMsCluster')))
 					else
 						Sequence{}
-					endif.union(thisModule.getProperty('provider', s.
+					endif.union(thisModule.getProperty('platform', s.
 							getStereotypeProperty('provider', 'DdsmVMsCluster').
 							toString().replaceAll('#', ''))),
 			relationships <- s.nestedNode.union(s.nestedClassifier) -> select(nested |
@@ -260,73 +262,73 @@ lazy rule getClusterRelationshipWithFirewall {
 		)
 }
 
--------------- DATA SECURITY -----------
-lazy rule databaseToTosca {
-	from
-		s: MMUML!Class (
-			s.hasStereotype('Resource')
-		)
-	to
-		database: TOSCA!NodeTemplate (
-			node_template_name <- s.name,
-			type <- 'dice.components.mongo.DB', -- right now there is support only for mongo, but should be generalized
-			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
-			properties <- thisModule.getProperty('name', s.name),
-			relationships <- if MMUML!Class.allInstances() -> select(class | class.
-					hasStereotype('DpimStorageNode')) -> exists(class | class.
-					nestedClassifier.includes(s)) then
-					thisModule.getDatabaseContainedInRelationship(s.refImmediateComposite().refGetValue('name'))
-				else
-					Sequence{}
-				endif
-		)
-}
-
-lazy rule getDatabaseContainedInRelationship {
-	from
-		storage: String
-	to
-		containedInRel: TOSCA!Relationship (
-			target <- storage,
-			type <- 'dice.relationships.ContainedIn'
-		)
-	do {
-		Sequence{containedInRel}; 
-	}
-}
-
-lazy rule userToTosca {
-	from
-		s: MMUML!Class (
-			s.hasStereotype('User')
-		)
-	to
-		user: TOSCA!NodeTemplate (
-			node_template_name <- s.name,
-			type <- 'dice.components.User',
-			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
-			properties <- thisModule.getProperty('username', s.name),
-			relationships <- MMUML!AssociationClass.allInstances() -> select(class |
-					class.hasStereotype('Permission')) -> select(permission |
-					MMUML!Dependency.allInstances() -> exists(dep | dep.client.first().
-					name = s.name and dep.supplier.first().name.toLower().debug() = permission.
-					member.debug().at(1).name.debug())) -> collect(p | thisModule.
-					getHasRightToUseRelationship(p.member.at(2).name))
-		)
-}
-
-lazy rule getHasRightToUseRelationship {
-	from
-		target: String
-	to
-		rel: TOSCA!Relationship (
-			target <- target.substring(1, 1).toUpper().concat(target.substring(2, target.
-					size())),
-			type <- 'dice.relationships.HasRightsToUse'
-		)
-}
-
--------------- DATA SECURITY -----------
+---------------- DATA SECURITY -----------
+--lazy rule databaseToTosca {
+--	from
+--		s: MMUML!Class (
+--			s.hasStereotype('Resource')
+--		)
+--	to
+--		database: TOSCA!NodeTemplate (
+--			node_template_name <- s.name,
+--			type <- 'dice.components.mongo.DB', -- right now there is support only for mongo, but should be generalized
+--			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
+--			properties <- thisModule.getProperty('name', s.name),
+--			relationships <- if (MMUML!Class.allInstances() -> select(class | class.
+--					hasStereotype('DpimStorageNode')) -> exists(class | class.
+--					nestedClassifier.includes(s))).debug() then
+--					thisModule.getDatabaseContainedInRelationship(s.refImmediateComposite().refGetValue('name'))
+--				else
+--					Sequence{}
+--				endif
+--		)
+--}
+--
+--lazy rule getDatabaseContainedInRelationship {
+--	from
+--		storage: String
+--	to
+--		containedInRel: TOSCA!Relationship (
+--			target <- storage,
+--			type <- 'dice.relationships.ContainedIn'
+--		)
+--	do {
+--		Sequence{containedInRel}; 
+--	}
+--}
+--
+--lazy rule userToTosca {
+--	from
+--		s: MMUML!Class (
+--			s.hasStereotype('User')
+--		)
+--	to
+--		user: TOSCA!NodeTemplate (
+--			node_template_name <- s.name,
+--			type <- 'dice.components.mongo.User', -- right now there is support only for mongo, but should be generalized
+--			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
+--			properties <- thisModule.getProperty('username', s.name),
+--			relationships <- MMUML!AssociationClass.allInstances() -> select(class |
+--					class.hasStereotype('Permission')) -> select(permission |
+--					MMUML!Dependency.allInstances() -> exists(dep | dep.client.first().
+--					name = s.name and dep.supplier.first().name.toLower() = permission.
+--					member.at(1).name)) -> collect(p | thisModule.
+--					getHasRightToUseRelationship(p.member.at(2).name))
+--		)
+--}
+--
+--lazy rule getHasRightToUseRelationship {
+--	from
+--		target: String
+--	to
+--		rel: TOSCA!Relationship (
+--			target <- target.substring(1, 1).toUpper().concat(target.substring(2, target.
+--					size())),
+--			type <- 'dice.relationships.HasRightsToUse'
+--		)
+--}
+--
+---------------- DATA SECURITY -----------
 -------------- CASSANDRA ---------------
 lazy rule cassandraToTosca {
 	from
@@ -339,13 +341,13 @@ lazy rule cassandraToTosca {
 	}
 	to
 		seed: TOSCA!NodeTemplate (
-			node_template_name <- s.name,
+			node_template_name <- s.name + '_seed',
 			type <- 'dice.components.cassandra.Seed',
 			relationships <- thisModule.
 					getContainedInRelationshipForCassandraClusterSeed(s)
 		),
 		worker: TOSCA!NodeTemplate (
-			node_template_name <- s.name + '_worker',
+			node_template_name <- s.name,
 			type <- 'dice.components.cassandra.Worker',
 			configurations <- thisModule.getConfigurationFromAttribute('key_chache_keys_to_save', s.
 					getStereotypeProperty('key_cache_keys_to_save', 'DdsmCassandraCluster')).
@@ -444,7 +446,7 @@ lazy rule getCassandraWorkerRelationshipForCassandraCluster {
 			type <- 'dice.relationships.ContainedIn'
 		),
 		worker_to_seed: TOSCA!Relationship (
-			target <- cassandraCluster.name,
+			target <- cassandraCluster.name + '_seed',
 			type <- 'dice.relationships.cassandra.ConnectedToSeed'
 		)
 	do {
