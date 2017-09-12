@@ -162,7 +162,7 @@ rule getProviderImport() {
 		i: TOSCA!Import (
 			file <- 'https://github.' +
 					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.' +
-					'0/full.yaml'
+					'1/full.yaml'
 		)
 	do {
 		Sequence{i}; 
