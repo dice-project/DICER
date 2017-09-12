@@ -166,7 +166,7 @@ public class Dicer {
                     Entry<String, Object> attribute = it2.next();
                     if (attribute.getKey().equals("type")) {
                         String type = (String) attribute.getValue();
-                        if (type.contains("dice.hosts")) {
+                        if (type.contains("dice.hosts") || type.contains("User")) {
                             Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
                             for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
                                     .hasNext();) {

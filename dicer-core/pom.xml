@@ -286,7 +286,7 @@
 		<dependency>
 			<groupId>es.unizar.disco.dice.static</groupId>
 			<artifactId>profile</artifactId>
-			<version>0.12.5</version>
+			<version>0.12.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.masdes.dam.static</groupId>
