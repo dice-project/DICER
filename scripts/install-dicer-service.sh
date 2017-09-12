@@ -1,3 +1,5 @@
+export DICER_HOME=/home/ubuntu
+
 cd ${DICER_HOME}
 
 git clone https://github.com/dice-project/DICER
