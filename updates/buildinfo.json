@@ -1,20 +1,9 @@
 {
-    "timestamp" : 1489516811371,
+    "timestamp" : 1505309994739,
     "revision" : {
-        "HEAD" : "ade811e896f906ace7ffba84835a4fb89710f87b",
+        "HEAD" : "a05e73686b582db3d54a8b1c2ac2b458ee14bf7c",
         "currentBranch" : "refs/heads/master",
-        "knownReferences" : [
-            {
-                "name" : "origin",
-                "url" : "https://github.com/dice-project/DICER",
-                "ref" : "HEAD"
-            },
-            {
-                "name" : "origin",
-                "url" : "https://github.com/dice-project/DICER",
-                "ref" : "master"
-            }
-        ]
+        "knownReferences" : null
     },
     "properties" : {
         "TARGET_PLATFORM_VERSION_MAXIMUM" : "null",
@@ -24,7 +13,7 @@
         "RELEASE" : "null",
         "BUILD_ALIAS" : "null",
         "JOB_NAME" : "null",
-        "os.version" : "10.10.5",
+        "os.version" : "10.12.4",
         "BUILD_NUMBER" : "null",
         "TARGET_PLATFORM_VERSION" : "null",
         "NODE_NAME" : "null",
