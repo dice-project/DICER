@@ -4,9 +4,9 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+            locationURI="menu:org.dice.menu.tools">
          <menu
-               label="DICE-LWDG"
+               label="DICER"
                id="it.polimi.dice.lwdg.loadDemo.menus.lwdgMenu">
             <command
                   commandId="it.polimi.dice.lwdg.loadDemo.commands.loaddemo"

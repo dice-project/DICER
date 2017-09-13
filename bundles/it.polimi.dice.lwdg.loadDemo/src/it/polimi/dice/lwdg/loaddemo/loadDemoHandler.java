@@ -155,7 +155,7 @@ public class loadDemoHandler extends AbstractHandler {
         dialog.open();
 
         boolean confirm = MessageDialog.openConfirm(
-            window.getShell(), "DICE-LWDG",
+            window.getShell(), "DICER Plugin",
             "A sample DICER project will be created\n" + "This will take a while...");
 
         if (confirm) {
@@ -178,11 +178,11 @@ public class loadDemoHandler extends AbstractHandler {
                     registerEcore(dicerEcore);
 
                     MessageDialog.openInformation(window.getShell(),
-                	    "DICE-LWDG",
+                	    "DICER Plugin",
                 	    "Ready to go!");                    
                 }else {
                     MessageDialog.openInformation(window.getShell(),
-                	    "DICE-LWDG",
+                	    "DICER Plugin",
                 	    "A project with name Dicer_demo_project already exists");
                 }
                   

@@ -36,7 +36,7 @@ public class getRepoPreference extends Dialog {
      * Disable "cancel" button
      */
     protected void createButtonsForButtonBar(Composite parent) {
-        createButton(parent, IDialogConstants.OK_ID, "Ok", true);
+        createButton(parent, IDialogConstants.OK_ID, "OK", true);
     }
     
     /**
@@ -57,12 +57,12 @@ public class getRepoPreference extends Dialog {
         Label modelsLabel = new Label(comp, SWT.RIGHT);
         modelsLabel.setText("URL for models: ");
         modelsField = new Text(comp, SWT.SINGLE | SWT.BORDER);
-        modelsField.setText("https://github.com/dice-project/DICER/releases/download/v0.1.0/models.zip");
+        modelsField.setText("https://github.com/dice-project/DICER/releases/download/v0.2.1/models.zip");
 
         Label metamodelsLabel = new Label(comp, SWT.RIGHT);
         metamodelsLabel.setText("URL for metamodels: ");
         metamodelsField = new Text(comp, SWT.SINGLE | SWT.BORDER);
-        metamodelsField.setText("https://github.com/dice-project/DICER/releases/download/v0.1.0/metamodels.zip");
+        metamodelsField.setText("https://github.com/dice-project/DICER/releases/download/v0.2.1/metamodels.zip");
 
 
         GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false);

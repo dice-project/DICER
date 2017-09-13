@@ -8,7 +8,7 @@
             delegate="it.polimi.dice.lwdg.launcher.LWDGLaunchConfigurationDelegate"
             id="it.polimi.dice.lwdg.launcher.launchConfigurationType"
             modes="run"
-            name="DICE-LWDG Launcher">
+            name="DICER">
       </launchConfigurationType>
    </extension>
 <!--extension point for launch configuration tabs -->  
