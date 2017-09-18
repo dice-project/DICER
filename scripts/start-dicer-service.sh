@@ -1,5 +1,3 @@
-export DICER_HOME=/home/ubuntu
-
 export TRANSFORMATION_DIR=${DICER_HOME}/DICER/dicer-core/transformations/
 export DDSM_METAMODEL_PATH=${DICER_HOME}/DICER/dicer-core/metamodels/ddsm.ecore
 export DICE_PROFILE_PATH=${DICER_HOME}/DICER/dicer-core/metamodels/DICE.profile.uml
