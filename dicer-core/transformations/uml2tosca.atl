@@ -78,9 +78,7 @@ rule MMUML2TOSCA {
 			outputs <- s.packagedElement -> select(element | element.
 					oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | thisModule.
-					getOutputIpFromVMsCluster(element)).union(
-					s.packagedElement -> select(element | element.oclIsTypeOf(MMUML!ExecutionEnvironment))
-					-> collect(element | thisModule.getMasterIpOutputFromExecEnv(element)))
+					getOutputIpFromVMsCluster(element))
 		)
 }
 
@@ -361,20 +359,12 @@ lazy rule cassandraToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.cassandra.Worker',
-			configurations <- thisModule.getConfigurationFromAttribute('key_chache_keys_to_save', s.
-					getStereotypeProperty('key_cache_keys_to_save', 'DdsmCassandraCluster')).
-					union(thisModule.getConfigurationFromAttribute('key_cache_save_period',
-					s.getStereotypeProperty('key_cache_save_period', 'DdsmCassandraCluster'))).
-					union(thisModule.getConfigurationFromAttribute('memtable_cleanup_threshold',
-					s.getStereotypeProperty('memtable_cleanup_threshold', 'DdsmCassandraCluster'))).
+			configurations <- thisModule.getConfigurationFromAttribute('key_cache_save_period',
+					s.getStereotypeProperty('key_cache_save_period', 'DdsmCassandraCluster')).
+--					union(thisModule.getConfigurationFromAttribute('memtable_cleanup_threshold',
+--					s.getStereotypeProperty('memtable_cleanup_threshold', 'DdsmCassandraCluster'))).
 					union(thisModule.getConfigurationFromAttribute('memtable_flush_writers',
-					s.getStereotypeProperty('memtable_flush_writers', 'DdsmCassandraCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('authenticator_enabled',
-					s.getStereotypeProperty('authenticator_enabled', 'DdsmCassandraCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('authorizer_enabled',
-					s.getStereotypeProperty('authorizer_enabled', 'DdsmCassandraCluster'))).
-					union(thisModule.getConfigurationFromAttribute('permission_validity_in_ms',
-					s.getStereotypeProperty('permission_validity_in_ms', 'DdsmCassandraCluster'))),
+					s.getStereotypeProperty('memtable_flush_writers', 'DdsmCassandraCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmCassandraCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
