@@ -78,7 +78,19 @@ rule MMUML2TOSCA {
 			outputs <- s.packagedElement -> select(element | element.
 					oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | thisModule.
-					getOutputIpFromVMsCluster(element))
+					getOutputIpFromVMsCluster(element)).union(
+					s.packagedElement -> select(element | element.oclIsTypeOf(MMUML!ExecutionEnvironment))
+					-> collect(element | thisModule.getMasterIpOutputFromExecEnv(element)))
+		)
+}
+
+lazy rule getMasterIpOutputFromExecEnv {
+	from
+		s: MMUML!ExecutionEnvironment
+	to
+		t: TOSCA!Parameter (
+			parameter_name <- s.name + '_master_ip_output',
+			parameter_value <- thisModule.getAttributeExpression(s.name + '_master', 'ip')
 		)
 }
 
