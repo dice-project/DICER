@@ -125,7 +125,7 @@ lazy rule getDiaJobNodeTemplate {
 					getStereotypeProperty('application_name', 'DdsmBigDataJob')))),
 			--to replicate the arguments, configurations and resources generation for
 					-- each node
-			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
+			monitoring <- thisModule.getMonitoringProperty(true, Sequence{}),
 			arguments <- MMUML!Dependency.allInstances() -> select(dep | dep.client.
 					first().name = s.name) -> collect(dep | thisModule.getArgument(dep.
 					supplier.first().name + '_ip', thisModule.getAttributeExpression(dep.

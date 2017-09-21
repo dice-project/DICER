@@ -47,10 +47,10 @@ public class Dicer {
     private boolean help = false;
 
     @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-    public String inModelPath = "/Users/michele/workspace/DICE-WikiStats/model/wikistats.uml";
+    public String inModelPath = "/Users/michele/workspace/DICE-WikiStats/spark-wikistats/model/wikistats-ddsm.uml";
 
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-    public String outModelPath = "/Users/michele/workspace/DICE-WikiStats/model/wikistats_tosca";
+    public String outModelPath = "/Users/michele/workspace/DICE-WikiStats/spark-wikistats/model/wikistats-ddsm";
 
     @Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
     public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
@@ -174,6 +174,45 @@ public class Dicer {
                                     it3.remove();
                                 }
                             }
+                        }
+                        
+                        if(type.equals("dice.components.spark.Topology")){
+                            type = "dice.components.spark.Application";
+                            Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
+                            Object arguments = null;
+                            String application = "";
+                            String topology_class = "";
+                            String topology_name = "";
+                            for (Map.Entry<String, Object> p : properties.entrySet()) {
+                                if(p.getKey().equals("arguments")) {
+                                    arguments = p.getValue();
+                                }
+                                if(p.getKey().equals("application")) {
+                                    application = (String) p.getValue();
+                                }
+                                if(p.getKey().equals("topology_class")) {
+                                    topology_class = (String) p.getValue();
+                                }
+                                if(p.getKey().equals("topology_name")) {
+                                    topology_name = (String) p.getValue();
+                                }
+                            }
+                            for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
+                                    .hasNext();) {
+                                String tmpProp = it3.next().getKey();
+                                if (tmpProp.equals("arguments")
+                                        | tmpProp.equals("application")
+                                        | tmpProp.equals("topology_class")
+                                        | tmpProp.equals("topology_name")) {
+                                    it3.remove();
+                                }
+                            }
+                            
+                            properties.put("args", arguments);
+                            properties.put("jar", application);
+                            properties.put("class", topology_class);
+                            properties.put("name", topology_name);
+
                         }
                     }
                 }
