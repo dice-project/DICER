@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link tosca.FirewallRule#getRemote_ip_prefix <em>Remote ip prefix</em>}</li>
  *   <li>{@link tosca.FirewallRule#getPort <em>Port</em>}</li>
+ *   <li>{@link tosca.FirewallRule#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getFirewallRule()
@@ -73,5 +74,32 @@ public interface FirewallRule extends EObject {
      * @generated
      */
 	void setPort(String value);
+
+    /**
+     * Returns the value of the '<em><b>Protocol</b></em>' attribute.
+     * The default value is <code>""</code>.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Protocol</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Protocol</em>' attribute.
+     * @see #setProtocol(String)
+     * @see tosca.ToscaPackage#getFirewallRule_Protocol()
+     * @model default="" required="true"
+     * @generated
+     */
+    String getProtocol();
+
+    /**
+     * Sets the value of the '{@link tosca.FirewallRule#getProtocol <em>Protocol</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Protocol</em>' attribute.
+     * @see #getProtocol()
+     * @generated
+     */
+    void setProtocol(String value);
 
 } // FirewallRule

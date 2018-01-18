@@ -21,11 +21,12 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalToscaDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'\"tosca_definitions_version\" :'", "',\\n\"description\" :'", "',\\n\"imports\" :'", "'['", "','", "']'", "',\\n\"outputs\" :'", "'}'", "',\\n\"inputs\" :'", "',\\n\"node_templates\" :'", "',\\n\"realtionships\" :'", "',\\n\"groups\" :'", "',\\n\"policies\" :'", "':'", "'\\n\"value\": '", "'\"type\" :'", "',\\n\"instances\" : {'", "',\\n\"relationships\" :'", "',\\n\"interfaces\" :'", "',\\n\"properties\" :'", "'\\n\"monitoring\" : {'", "',\\n\"configuration\" : {'", "',\\n\"resources\" :'", "'\\n\"rules\" :'", "',\\n\"arguments\" :'", "',\\n\"requirements\" :'", "',\\n\"capabilities\" :'", "'\\n \"enabled\": true'", "'\\n \"enabled\": false'", "',\\n\"roles\" :'", "'\"remote_ip_prefix\": '", "'\"port\": '", "'\\n'", "'\"deploy\" :'", "',\\n\"target\" :'", "',\\n\"source_interfaces\" :'", "',\\n\"target_iterfaces\" :'", "',\\n\"targets\" :'", "'\"capabiity\" :'", "',\\n\"node\" :'", "'\\n\"inputs\" :'", "', '", "'Value'", "'Expression'", "'\"get_attribute\":'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'\"tosca_definitions_version\" :'", "',\\n\"description\" :'", "',\\n\"imports\" :'", "'['", "','", "']'", "',\\n\"outputs\" :'", "'}'", "',\\n\"inputs\" :'", "',\\n\"node_templates\" :'", "',\\n\"realtionships\" :'", "',\\n\"groups\" :'", "',\\n\"policies\" :'", "':'", "'\\n\"value\": '", "'\"type\" :'", "',\\n\"instances\" : {'", "',\\n\"relationships\" :'", "',\\n\"interfaces\" :'", "',\\n\"properties\" :'", "'\\n\"monitoring\" : {'", "',\\n\"configuration\" : {'", "',\\n\"resources\" :'", "',\\n\"port_mapping\" :'", "'\\n\"rules\" :'", "',\\n\"arguments\" :'", "',\\n\"environment\" :'", "',\\n\"requirements\" :'", "',\\n\"capabilities\" :'", "'\\n \"enabled\": true'", "'\\n \"enabled\": false'", "',\\n\"roles\" :'", "'\"ip_prefix\": '", "'\"protocol\": '", "'\"port\": '", "'\\n'", "'\"deploy\" :'", "',\\n\"target\" :'", "',\\n\"source_interfaces\" :'", "',\\n\"target_iterfaces\" :'", "',\\n\"targets\" :'", "'\"capabiity\" :'", "',\\n\"node\" :'", "'\\n\"inputs\" :'", "', '", "'Value'", "'Expression'", "'\"get_attribute\":'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
     public static final int T__15=15;
+    public static final int T__59=59;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
@@ -34,7 +35,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
     public static final int T__12=12;
     public static final int T__56=56;
     public static final int T__13=13;
+    public static final int T__57=57;
     public static final int T__14=14;
+    public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__52=52;
     public static final int T__53=53;
@@ -1612,7 +1615,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNodeTemplate"
-    // InternalToscaDsl.g:707:1: ruleNodeTemplate returns [EObject current=null] : ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? ) otherlv_55= '}' (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )? (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )? otherlv_68= '}' ) ;
+    // InternalToscaDsl.g:707:1: ruleNodeTemplate returns [EObject current=null] : ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? ) otherlv_67= '}' (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )? (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )? otherlv_80= '}' ) ;
     public final EObject ruleNodeTemplate() throws RecognitionException {
         EObject current = null;
 
@@ -1655,17 +1658,25 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         Token otherlv_48=null;
         Token otherlv_50=null;
         Token otherlv_51=null;
-        Token otherlv_53=null;
-        Token otherlv_55=null;
+        Token otherlv_52=null;
+        Token otherlv_54=null;
         Token otherlv_56=null;
         Token otherlv_57=null;
-        Token otherlv_59=null;
-        Token otherlv_61=null;
+        Token otherlv_58=null;
+        Token otherlv_60=null;
         Token otherlv_62=null;
         Token otherlv_63=null;
         Token otherlv_65=null;
         Token otherlv_67=null;
         Token otherlv_68=null;
+        Token otherlv_69=null;
+        Token otherlv_71=null;
+        Token otherlv_73=null;
+        Token otherlv_74=null;
+        Token otherlv_75=null;
+        Token otherlv_77=null;
+        Token otherlv_79=null;
+        Token otherlv_80=null;
         EObject lv_instances_7_0 = null;
 
         EObject lv_relationships_13_0 = null;
@@ -1682,36 +1693,44 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
         EObject lv_configurations_31_0 = null;
 
-        EObject lv_rules_41_0 = null;
+        EObject lv_portMapping_41_0 = null;
 
-        EObject lv_rules_43_0 = null;
+        EObject lv_portMapping_43_0 = null;
 
-        EObject lv_arguments_47_0 = null;
+        EObject lv_rules_47_0 = null;
 
-        EObject lv_arguments_49_0 = null;
+        EObject lv_rules_49_0 = null;
 
-        EObject lv_properties_52_0 = null;
+        EObject lv_arguments_53_0 = null;
 
-        EObject lv_properties_54_0 = null;
+        EObject lv_arguments_55_0 = null;
 
-        EObject lv_requirements_58_0 = null;
+        EObject lv_environment_59_0 = null;
 
-        EObject lv_requirements_60_0 = null;
+        EObject lv_environment_61_0 = null;
 
-        EObject lv_capabilities_64_0 = null;
+        EObject lv_properties_64_0 = null;
 
-        EObject lv_capabilities_66_0 = null;
+        EObject lv_properties_66_0 = null;
+
+        EObject lv_requirements_70_0 = null;
+
+        EObject lv_requirements_72_0 = null;
+
+        EObject lv_capabilities_76_0 = null;
+
+        EObject lv_capabilities_78_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:713:2: ( ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? ) otherlv_55= '}' (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )? (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )? otherlv_68= '}' ) )
-            // InternalToscaDsl.g:714:2: ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? ) otherlv_55= '}' (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )? (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )? otherlv_68= '}' )
+            // InternalToscaDsl.g:713:2: ( ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? ) otherlv_67= '}' (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )? (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )? otherlv_80= '}' ) )
+            // InternalToscaDsl.g:714:2: ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? ) otherlv_67= '}' (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )? (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )? otherlv_80= '}' )
             {
-            // InternalToscaDsl.g:714:2: ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? ) otherlv_55= '}' (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )? (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )? otherlv_68= '}' )
-            // InternalToscaDsl.g:715:3: () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? ) otherlv_55= '}' (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )? (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )? otherlv_68= '}'
+            // InternalToscaDsl.g:714:2: ( () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? ) otherlv_67= '}' (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )? (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )? otherlv_80= '}' )
+            // InternalToscaDsl.g:715:3: () ( (lv_node_template_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"instances\" : {' ( (lv_instances_7_0= ruleInstances ) ) otherlv_8= '}' )? (otherlv_9= ',\\n\"description\" :' ( (lv_description_10_0= RULE_STRING ) ) )? (otherlv_11= ',\\n\"relationships\" :' otherlv_12= '[' ( (lv_relationships_13_0= ruleRelationship ) ) (otherlv_14= ',' ( (lv_relationships_15_0= ruleRelationship ) ) )* otherlv_16= ']' )? (otherlv_17= ',\\n\"interfaces\" :' otherlv_18= '{' ( (lv_interfaces_19_0= ruleInterface ) ) (otherlv_20= ',' ( (lv_interfaces_21_0= ruleInterface ) ) )* otherlv_22= '}' )? otherlv_23= ',\\n\"properties\" :' otherlv_24= '{' ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? ) otherlv_67= '}' (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )? (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )? otherlv_80= '}'
             {
             // InternalToscaDsl.g:715:3: ()
             // InternalToscaDsl.g:716:4: 
@@ -2137,8 +2156,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_24, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_11());
             		
-            // InternalToscaDsl.g:947:3: ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )? )
-            // InternalToscaDsl.g:948:4: (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )? (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )? (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )?
+            // InternalToscaDsl.g:947:3: ( (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )? )
+            // InternalToscaDsl.g:948:4: (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )? (otherlv_28= ',\\n\"configuration\" : {' ( (lv_configurations_29_0= ruleConfiguration ) ) (otherlv_30= ',' ( (lv_configurations_31_0= ruleConfiguration ) ) )* otherlv_32= '}' )? (otherlv_33= ',\\n\"resources\" :' otherlv_34= '[' ( (lv_resources_35_0= RULE_STRING ) ) (otherlv_36= ',' ( (lv_resources_37_0= RULE_STRING ) ) )* otherlv_38= ']' )? (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )? (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )? (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )? (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )? (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )?
             {
             // InternalToscaDsl.g:948:4: (otherlv_25= '\\n\"monitoring\" : {' ( (lv_monitoring_26_0= ruleMonitoringProperty ) ) otherlv_27= '}' )?
             int alt24=2;
@@ -2420,7 +2439,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1087:4: (otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']' )?
+            // InternalToscaDsl.g:1087:4: (otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}' )?
             int alt30=2;
             int LA30_0 = input.LA(1);
 
@@ -2429,27 +2448,27 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt30) {
                 case 1 :
-                    // InternalToscaDsl.g:1088:5: otherlv_39= '\\n\"rules\" :' otherlv_40= '[' ( (lv_rules_41_0= ruleFirewallRule ) ) (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )* otherlv_44= ']'
+                    // InternalToscaDsl.g:1088:5: otherlv_39= ',\\n\"port_mapping\" :' otherlv_40= '{' ( (lv_portMapping_41_0= ruleProperty ) ) (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )* otherlv_44= '}'
                     {
-                    otherlv_39=(Token)match(input,35,FOLLOW_7); 
+                    otherlv_39=(Token)match(input,35,FOLLOW_11); 
 
-                    					newLeafNode(otherlv_39, grammarAccess.getNodeTemplateAccess().getRulesKeyword_12_3_0());
+                    					newLeafNode(otherlv_39, grammarAccess.getNodeTemplateAccess().getPort_mappingKeyword_12_3_0());
                     				
-                    otherlv_40=(Token)match(input,15,FOLLOW_11); 
+                    otherlv_40=(Token)match(input,11,FOLLOW_32); 
 
-                    					newLeafNode(otherlv_40, grammarAccess.getNodeTemplateAccess().getLeftSquareBracketKeyword_12_3_1());
+                    					newLeafNode(otherlv_40, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_12_3_1());
                     				
-                    // InternalToscaDsl.g:1096:5: ( (lv_rules_41_0= ruleFirewallRule ) )
-                    // InternalToscaDsl.g:1097:6: (lv_rules_41_0= ruleFirewallRule )
+                    // InternalToscaDsl.g:1096:5: ( (lv_portMapping_41_0= ruleProperty ) )
+                    // InternalToscaDsl.g:1097:6: (lv_portMapping_41_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:1097:6: (lv_rules_41_0= ruleFirewallRule )
-                    // InternalToscaDsl.g:1098:7: lv_rules_41_0= ruleFirewallRule
+                    // InternalToscaDsl.g:1097:6: (lv_portMapping_41_0= ruleProperty )
+                    // InternalToscaDsl.g:1098:7: lv_portMapping_41_0= ruleProperty
                     {
 
-                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getRulesFirewallRuleParserRuleCall_12_3_2_0());
+                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getPortMappingPropertyParserRuleCall_12_3_2_0());
                     						
-                    pushFollow(FOLLOW_9);
-                    lv_rules_41_0=ruleFirewallRule();
+                    pushFollow(FOLLOW_12);
+                    lv_portMapping_41_0=ruleProperty();
 
                     state._fsp--;
 
@@ -2459,9 +2478,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     							}
                     							add(
                     								current,
-                    								"rules",
-                    								lv_rules_41_0,
-                    								"it.polimi.dice.dicer.ToscaDsl.FirewallRule");
+                    								"portMapping",
+                    								lv_portMapping_41_0,
+                    								"it.polimi.dice.dicer.ToscaDsl.Property");
                     							afterParserOrEnumRuleCall();
                     						
 
@@ -2470,7 +2489,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1115:5: (otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) ) )*
+                    // InternalToscaDsl.g:1115:5: (otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) ) )*
                     loop29:
                     do {
                         int alt29=2;
@@ -2483,23 +2502,23 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt29) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1116:6: otherlv_42= ',' ( (lv_rules_43_0= ruleFirewallRule ) )
+                    	    // InternalToscaDsl.g:1116:6: otherlv_42= ',' ( (lv_portMapping_43_0= ruleProperty ) )
                     	    {
-                    	    otherlv_42=(Token)match(input,16,FOLLOW_11); 
+                    	    otherlv_42=(Token)match(input,16,FOLLOW_32); 
 
                     	    						newLeafNode(otherlv_42, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_3_3_0());
                     	    					
-                    	    // InternalToscaDsl.g:1120:6: ( (lv_rules_43_0= ruleFirewallRule ) )
-                    	    // InternalToscaDsl.g:1121:7: (lv_rules_43_0= ruleFirewallRule )
+                    	    // InternalToscaDsl.g:1120:6: ( (lv_portMapping_43_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:1121:7: (lv_portMapping_43_0= ruleProperty )
                     	    {
-                    	    // InternalToscaDsl.g:1121:7: (lv_rules_43_0= ruleFirewallRule )
-                    	    // InternalToscaDsl.g:1122:8: lv_rules_43_0= ruleFirewallRule
+                    	    // InternalToscaDsl.g:1121:7: (lv_portMapping_43_0= ruleProperty )
+                    	    // InternalToscaDsl.g:1122:8: lv_portMapping_43_0= ruleProperty
                     	    {
 
-                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getRulesFirewallRuleParserRuleCall_12_3_3_1_0());
+                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getPortMappingPropertyParserRuleCall_12_3_3_1_0());
                     	    							
-                    	    pushFollow(FOLLOW_9);
-                    	    lv_rules_43_0=ruleFirewallRule();
+                    	    pushFollow(FOLLOW_12);
+                    	    lv_portMapping_43_0=ruleProperty();
 
                     	    state._fsp--;
 
@@ -2509,9 +2528,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    								}
                     	    								add(
                     	    									current,
-                    	    									"rules",
-                    	    									lv_rules_43_0,
-                    	    									"it.polimi.dice.dicer.ToscaDsl.FirewallRule");
+                    	    									"portMapping",
+                    	    									lv_portMapping_43_0,
+                    	    									"it.polimi.dice.dicer.ToscaDsl.Property");
                     	    								afterParserOrEnumRuleCall();
                     	    							
 
@@ -2529,9 +2548,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_44=(Token)match(input,17,FOLLOW_35); 
+                    otherlv_44=(Token)match(input,19,FOLLOW_35); 
 
-                    					newLeafNode(otherlv_44, grammarAccess.getNodeTemplateAccess().getRightSquareBracketKeyword_12_3_4());
+                    					newLeafNode(otherlv_44, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_12_3_4());
                     				
 
                     }
@@ -2539,7 +2558,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1145:4: (otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']' )?
+            // InternalToscaDsl.g:1145:4: (otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -2548,27 +2567,27 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt32) {
                 case 1 :
-                    // InternalToscaDsl.g:1146:5: otherlv_45= ',\\n\"arguments\" :' otherlv_46= '[' ( (lv_arguments_47_0= ruleArgument ) ) (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )* otherlv_50= ']'
+                    // InternalToscaDsl.g:1146:5: otherlv_45= '\\n\"rules\" :' otherlv_46= '[' ( (lv_rules_47_0= ruleFirewallRule ) ) (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )* otherlv_50= ']'
                     {
                     otherlv_45=(Token)match(input,36,FOLLOW_7); 
 
-                    					newLeafNode(otherlv_45, grammarAccess.getNodeTemplateAccess().getArgumentsKeyword_12_4_0());
+                    					newLeafNode(otherlv_45, grammarAccess.getNodeTemplateAccess().getRulesKeyword_12_4_0());
                     				
-                    otherlv_46=(Token)match(input,15,FOLLOW_21); 
+                    otherlv_46=(Token)match(input,15,FOLLOW_11); 
 
                     					newLeafNode(otherlv_46, grammarAccess.getNodeTemplateAccess().getLeftSquareBracketKeyword_12_4_1());
                     				
-                    // InternalToscaDsl.g:1154:5: ( (lv_arguments_47_0= ruleArgument ) )
-                    // InternalToscaDsl.g:1155:6: (lv_arguments_47_0= ruleArgument )
+                    // InternalToscaDsl.g:1154:5: ( (lv_rules_47_0= ruleFirewallRule ) )
+                    // InternalToscaDsl.g:1155:6: (lv_rules_47_0= ruleFirewallRule )
                     {
-                    // InternalToscaDsl.g:1155:6: (lv_arguments_47_0= ruleArgument )
-                    // InternalToscaDsl.g:1156:7: lv_arguments_47_0= ruleArgument
+                    // InternalToscaDsl.g:1155:6: (lv_rules_47_0= ruleFirewallRule )
+                    // InternalToscaDsl.g:1156:7: lv_rules_47_0= ruleFirewallRule
                     {
 
-                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getArgumentsArgumentParserRuleCall_12_4_2_0());
+                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getRulesFirewallRuleParserRuleCall_12_4_2_0());
                     						
                     pushFollow(FOLLOW_9);
-                    lv_arguments_47_0=ruleArgument();
+                    lv_rules_47_0=ruleFirewallRule();
 
                     state._fsp--;
 
@@ -2578,9 +2597,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     							}
                     							add(
                     								current,
-                    								"arguments",
-                    								lv_arguments_47_0,
-                    								"it.polimi.dice.dicer.ToscaDsl.Argument");
+                    								"rules",
+                    								lv_rules_47_0,
+                    								"it.polimi.dice.dicer.ToscaDsl.FirewallRule");
                     							afterParserOrEnumRuleCall();
                     						
 
@@ -2589,7 +2608,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1173:5: (otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) ) )*
+                    // InternalToscaDsl.g:1173:5: (otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) ) )*
                     loop31:
                     do {
                         int alt31=2;
@@ -2602,23 +2621,23 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt31) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1174:6: otherlv_48= ',' ( (lv_arguments_49_0= ruleArgument ) )
+                    	    // InternalToscaDsl.g:1174:6: otherlv_48= ',' ( (lv_rules_49_0= ruleFirewallRule ) )
                     	    {
-                    	    otherlv_48=(Token)match(input,16,FOLLOW_21); 
+                    	    otherlv_48=(Token)match(input,16,FOLLOW_11); 
 
                     	    						newLeafNode(otherlv_48, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_4_3_0());
                     	    					
-                    	    // InternalToscaDsl.g:1178:6: ( (lv_arguments_49_0= ruleArgument ) )
-                    	    // InternalToscaDsl.g:1179:7: (lv_arguments_49_0= ruleArgument )
+                    	    // InternalToscaDsl.g:1178:6: ( (lv_rules_49_0= ruleFirewallRule ) )
+                    	    // InternalToscaDsl.g:1179:7: (lv_rules_49_0= ruleFirewallRule )
                     	    {
-                    	    // InternalToscaDsl.g:1179:7: (lv_arguments_49_0= ruleArgument )
-                    	    // InternalToscaDsl.g:1180:8: lv_arguments_49_0= ruleArgument
+                    	    // InternalToscaDsl.g:1179:7: (lv_rules_49_0= ruleFirewallRule )
+                    	    // InternalToscaDsl.g:1180:8: lv_rules_49_0= ruleFirewallRule
                     	    {
 
-                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getArgumentsArgumentParserRuleCall_12_4_3_1_0());
+                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getRulesFirewallRuleParserRuleCall_12_4_3_1_0());
                     	    							
                     	    pushFollow(FOLLOW_9);
-                    	    lv_arguments_49_0=ruleArgument();
+                    	    lv_rules_49_0=ruleFirewallRule();
 
                     	    state._fsp--;
 
@@ -2628,9 +2647,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    								}
                     	    								add(
                     	    									current,
-                    	    									"arguments",
-                    	    									lv_arguments_49_0,
-                    	    									"it.polimi.dice.dicer.ToscaDsl.Argument");
+                    	    									"rules",
+                    	    									lv_rules_49_0,
+                    	    									"it.polimi.dice.dicer.ToscaDsl.FirewallRule");
                     	    								afterParserOrEnumRuleCall();
                     	    							
 
@@ -2648,7 +2667,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_50=(Token)match(input,17,FOLLOW_12); 
+                    otherlv_50=(Token)match(input,17,FOLLOW_36); 
 
                     					newLeafNode(otherlv_50, grammarAccess.getNodeTemplateAccess().getRightSquareBracketKeyword_12_4_4());
                     				
@@ -2658,32 +2677,36 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1203:4: (otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )* )?
+            // InternalToscaDsl.g:1203:4: (otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']' )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
-            if ( (LA34_0==16) ) {
+            if ( (LA34_0==37) ) {
                 alt34=1;
             }
             switch (alt34) {
                 case 1 :
-                    // InternalToscaDsl.g:1204:5: otherlv_51= ',' ( (lv_properties_52_0= ruleProperty ) ) (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )*
+                    // InternalToscaDsl.g:1204:5: otherlv_51= ',\\n\"arguments\" :' otherlv_52= '[' ( (lv_arguments_53_0= ruleArgument ) ) (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )* otherlv_56= ']'
                     {
-                    otherlv_51=(Token)match(input,16,FOLLOW_32); 
+                    otherlv_51=(Token)match(input,37,FOLLOW_7); 
 
-                    					newLeafNode(otherlv_51, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_5_0());
+                    					newLeafNode(otherlv_51, grammarAccess.getNodeTemplateAccess().getArgumentsKeyword_12_5_0());
                     				
-                    // InternalToscaDsl.g:1208:5: ( (lv_properties_52_0= ruleProperty ) )
-                    // InternalToscaDsl.g:1209:6: (lv_properties_52_0= ruleProperty )
+                    otherlv_52=(Token)match(input,15,FOLLOW_21); 
+
+                    					newLeafNode(otherlv_52, grammarAccess.getNodeTemplateAccess().getLeftSquareBracketKeyword_12_5_1());
+                    				
+                    // InternalToscaDsl.g:1212:5: ( (lv_arguments_53_0= ruleArgument ) )
+                    // InternalToscaDsl.g:1213:6: (lv_arguments_53_0= ruleArgument )
                     {
-                    // InternalToscaDsl.g:1209:6: (lv_properties_52_0= ruleProperty )
-                    // InternalToscaDsl.g:1210:7: lv_properties_52_0= ruleProperty
+                    // InternalToscaDsl.g:1213:6: (lv_arguments_53_0= ruleArgument )
+                    // InternalToscaDsl.g:1214:7: lv_arguments_53_0= ruleArgument
                     {
 
-                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getPropertiesPropertyParserRuleCall_12_5_1_0());
+                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getArgumentsArgumentParserRuleCall_12_5_2_0());
                     						
-                    pushFollow(FOLLOW_12);
-                    lv_properties_52_0=ruleProperty();
+                    pushFollow(FOLLOW_9);
+                    lv_arguments_53_0=ruleArgument();
 
                     state._fsp--;
 
@@ -2693,9 +2716,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     							}
                     							add(
                     								current,
-                    								"properties",
-                    								lv_properties_52_0,
-                    								"it.polimi.dice.dicer.ToscaDsl.Property");
+                    								"arguments",
+                    								lv_arguments_53_0,
+                    								"it.polimi.dice.dicer.ToscaDsl.Argument");
                     							afterParserOrEnumRuleCall();
                     						
 
@@ -2704,7 +2727,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1227:5: (otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) ) )*
+                    // InternalToscaDsl.g:1231:5: (otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) ) )*
                     loop33:
                     do {
                         int alt33=2;
@@ -2717,23 +2740,23 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt33) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1228:6: otherlv_53= ',' ( (lv_properties_54_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:1232:6: otherlv_54= ',' ( (lv_arguments_55_0= ruleArgument ) )
                     	    {
-                    	    otherlv_53=(Token)match(input,16,FOLLOW_32); 
+                    	    otherlv_54=(Token)match(input,16,FOLLOW_21); 
 
-                    	    						newLeafNode(otherlv_53, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_5_2_0());
+                    	    						newLeafNode(otherlv_54, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_5_3_0());
                     	    					
-                    	    // InternalToscaDsl.g:1232:6: ( (lv_properties_54_0= ruleProperty ) )
-                    	    // InternalToscaDsl.g:1233:7: (lv_properties_54_0= ruleProperty )
+                    	    // InternalToscaDsl.g:1236:6: ( (lv_arguments_55_0= ruleArgument ) )
+                    	    // InternalToscaDsl.g:1237:7: (lv_arguments_55_0= ruleArgument )
                     	    {
-                    	    // InternalToscaDsl.g:1233:7: (lv_properties_54_0= ruleProperty )
-                    	    // InternalToscaDsl.g:1234:8: lv_properties_54_0= ruleProperty
+                    	    // InternalToscaDsl.g:1237:7: (lv_arguments_55_0= ruleArgument )
+                    	    // InternalToscaDsl.g:1238:8: lv_arguments_55_0= ruleArgument
                     	    {
 
-                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getPropertiesPropertyParserRuleCall_12_5_2_1_0());
+                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getArgumentsArgumentParserRuleCall_12_5_3_1_0());
                     	    							
-                    	    pushFollow(FOLLOW_12);
-                    	    lv_properties_54_0=ruleProperty();
+                    	    pushFollow(FOLLOW_9);
+                    	    lv_arguments_55_0=ruleArgument();
 
                     	    state._fsp--;
 
@@ -2743,9 +2766,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    								}
                     	    								add(
                     	    									current,
-                    	    									"properties",
-                    	    									lv_properties_54_0,
-                    	    									"it.polimi.dice.dicer.ToscaDsl.Property");
+                    	    									"arguments",
+                    	    									lv_arguments_55_0,
+                    	    									"it.polimi.dice.dicer.ToscaDsl.Argument");
                     	    								afterParserOrEnumRuleCall();
                     	    							
 
@@ -2763,70 +2786,67 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
+                    otherlv_56=(Token)match(input,17,FOLLOW_37); 
+
+                    					newLeafNode(otherlv_56, grammarAccess.getNodeTemplateAccess().getRightSquareBracketKeyword_12_5_4());
+                    				
 
                     }
                     break;
 
             }
 
-
-            }
-
-            otherlv_55=(Token)match(input,19,FOLLOW_36); 
-
-            			newLeafNode(otherlv_55, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_13());
-            		
-            // InternalToscaDsl.g:1258:3: (otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}' )?
+            // InternalToscaDsl.g:1261:4: (otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}' )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
-            if ( (LA36_0==37) ) {
+            if ( (LA36_0==38) ) {
                 alt36=1;
             }
             switch (alt36) {
                 case 1 :
-                    // InternalToscaDsl.g:1259:4: otherlv_56= ',\\n\"requirements\" :' otherlv_57= '{' ( (lv_requirements_58_0= ruleRequirement ) ) (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )* otherlv_61= '}'
+                    // InternalToscaDsl.g:1262:5: otherlv_57= ',\\n\"environment\" :' otherlv_58= '{' ( (lv_environment_59_0= ruleEnvironmentVariable ) ) (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )* otherlv_62= '}'
                     {
-                    otherlv_56=(Token)match(input,37,FOLLOW_11); 
+                    otherlv_57=(Token)match(input,38,FOLLOW_11); 
 
-                    				newLeafNode(otherlv_56, grammarAccess.getNodeTemplateAccess().getRequirementsKeyword_14_0());
-                    			
-                    otherlv_57=(Token)match(input,11,FOLLOW_4); 
+                    					newLeafNode(otherlv_57, grammarAccess.getNodeTemplateAccess().getEnvironmentKeyword_12_6_0());
+                    				
+                    otherlv_58=(Token)match(input,11,FOLLOW_32); 
 
-                    				newLeafNode(otherlv_57, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_14_1());
-                    			
-                    // InternalToscaDsl.g:1267:4: ( (lv_requirements_58_0= ruleRequirement ) )
-                    // InternalToscaDsl.g:1268:5: (lv_requirements_58_0= ruleRequirement )
+                    					newLeafNode(otherlv_58, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_12_6_1());
+                    				
+                    // InternalToscaDsl.g:1270:5: ( (lv_environment_59_0= ruleEnvironmentVariable ) )
+                    // InternalToscaDsl.g:1271:6: (lv_environment_59_0= ruleEnvironmentVariable )
                     {
-                    // InternalToscaDsl.g:1268:5: (lv_requirements_58_0= ruleRequirement )
-                    // InternalToscaDsl.g:1269:6: lv_requirements_58_0= ruleRequirement
+                    // InternalToscaDsl.g:1271:6: (lv_environment_59_0= ruleEnvironmentVariable )
+                    // InternalToscaDsl.g:1272:7: lv_environment_59_0= ruleEnvironmentVariable
                     {
 
-                    						newCompositeNode(grammarAccess.getNodeTemplateAccess().getRequirementsRequirementParserRuleCall_14_2_0());
-                    					
+                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getEnvironmentEnvironmentVariableParserRuleCall_12_6_2_0());
+                    						
                     pushFollow(FOLLOW_12);
-                    lv_requirements_58_0=ruleRequirement();
+                    lv_environment_59_0=ruleEnvironmentVariable();
 
                     state._fsp--;
 
 
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
-                    						}
-                    						add(
-                    							current,
-                    							"requirements",
-                    							lv_requirements_58_0,
-                    							"it.polimi.dice.dicer.ToscaDsl.Requirement");
-                    						afterParserOrEnumRuleCall();
-                    					
+                    							if (current==null) {
+                    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    							}
+                    							add(
+                    								current,
+                    								"environment",
+                    								lv_environment_59_0,
+                    								"it.polimi.dice.dicer.ToscaDsl.EnvironmentVariable");
+                    							afterParserOrEnumRuleCall();
+                    						
 
                     }
 
 
                     }
 
-                    // InternalToscaDsl.g:1286:4: (otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) ) )*
+                    // InternalToscaDsl.g:1289:5: (otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) ) )*
                     loop35:
                     do {
                         int alt35=2;
@@ -2839,37 +2859,37 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt35) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1287:5: otherlv_59= ',' ( (lv_requirements_60_0= ruleRequirement ) )
+                    	    // InternalToscaDsl.g:1290:6: otherlv_60= ',' ( (lv_environment_61_0= ruleEnvironmentVariable ) )
                     	    {
-                    	    otherlv_59=(Token)match(input,16,FOLLOW_4); 
+                    	    otherlv_60=(Token)match(input,16,FOLLOW_32); 
 
-                    	    					newLeafNode(otherlv_59, grammarAccess.getNodeTemplateAccess().getCommaKeyword_14_3_0());
-                    	    				
-                    	    // InternalToscaDsl.g:1291:5: ( (lv_requirements_60_0= ruleRequirement ) )
-                    	    // InternalToscaDsl.g:1292:6: (lv_requirements_60_0= ruleRequirement )
+                    	    						newLeafNode(otherlv_60, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_6_3_0());
+                    	    					
+                    	    // InternalToscaDsl.g:1294:6: ( (lv_environment_61_0= ruleEnvironmentVariable ) )
+                    	    // InternalToscaDsl.g:1295:7: (lv_environment_61_0= ruleEnvironmentVariable )
                     	    {
-                    	    // InternalToscaDsl.g:1292:6: (lv_requirements_60_0= ruleRequirement )
-                    	    // InternalToscaDsl.g:1293:7: lv_requirements_60_0= ruleRequirement
+                    	    // InternalToscaDsl.g:1295:7: (lv_environment_61_0= ruleEnvironmentVariable )
+                    	    // InternalToscaDsl.g:1296:8: lv_environment_61_0= ruleEnvironmentVariable
                     	    {
 
-                    	    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getRequirementsRequirementParserRuleCall_14_3_1_0());
-                    	    						
+                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getEnvironmentEnvironmentVariableParserRuleCall_12_6_3_1_0());
+                    	    							
                     	    pushFollow(FOLLOW_12);
-                    	    lv_requirements_60_0=ruleRequirement();
+                    	    lv_environment_61_0=ruleEnvironmentVariable();
 
                     	    state._fsp--;
 
 
-                    	    							if (current==null) {
-                    	    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
-                    	    							}
-                    	    							add(
-                    	    								current,
-                    	    								"requirements",
-                    	    								lv_requirements_60_0,
-                    	    								"it.polimi.dice.dicer.ToscaDsl.Requirement");
-                    	    							afterParserOrEnumRuleCall();
-                    	    						
+                    	    								if (current==null) {
+                    	    									current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    	    								}
+                    	    								add(
+                    	    									current,
+                    	    									"environment",
+                    	    									lv_environment_61_0,
+                    	    									"it.polimi.dice.dicer.ToscaDsl.EnvironmentVariable");
+                    	    								afterParserOrEnumRuleCall();
+                    	    							
 
                     	    }
 
@@ -2885,67 +2905,63 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_61=(Token)match(input,19,FOLLOW_37); 
+                    otherlv_62=(Token)match(input,19,FOLLOW_12); 
 
-                    				newLeafNode(otherlv_61, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_14_4());
-                    			
+                    					newLeafNode(otherlv_62, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_12_6_4());
+                    				
 
                     }
                     break;
 
             }
 
-            // InternalToscaDsl.g:1316:3: (otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}' )?
+            // InternalToscaDsl.g:1319:4: (otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )* )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
-            if ( (LA38_0==38) ) {
+            if ( (LA38_0==16) ) {
                 alt38=1;
             }
             switch (alt38) {
                 case 1 :
-                    // InternalToscaDsl.g:1317:4: otherlv_62= ',\\n\"capabilities\" :' otherlv_63= '{' ( (lv_capabilities_64_0= ruleCapability ) ) (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )* otherlv_67= '}'
+                    // InternalToscaDsl.g:1320:5: otherlv_63= ',' ( (lv_properties_64_0= ruleProperty ) ) (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )*
                     {
-                    otherlv_62=(Token)match(input,38,FOLLOW_11); 
+                    otherlv_63=(Token)match(input,16,FOLLOW_32); 
 
-                    				newLeafNode(otherlv_62, grammarAccess.getNodeTemplateAccess().getCapabilitiesKeyword_15_0());
-                    			
-                    otherlv_63=(Token)match(input,11,FOLLOW_4); 
-
-                    				newLeafNode(otherlv_63, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_15_1());
-                    			
-                    // InternalToscaDsl.g:1325:4: ( (lv_capabilities_64_0= ruleCapability ) )
-                    // InternalToscaDsl.g:1326:5: (lv_capabilities_64_0= ruleCapability )
+                    					newLeafNode(otherlv_63, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_7_0());
+                    				
+                    // InternalToscaDsl.g:1324:5: ( (lv_properties_64_0= ruleProperty ) )
+                    // InternalToscaDsl.g:1325:6: (lv_properties_64_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:1326:5: (lv_capabilities_64_0= ruleCapability )
-                    // InternalToscaDsl.g:1327:6: lv_capabilities_64_0= ruleCapability
+                    // InternalToscaDsl.g:1325:6: (lv_properties_64_0= ruleProperty )
+                    // InternalToscaDsl.g:1326:7: lv_properties_64_0= ruleProperty
                     {
 
-                    						newCompositeNode(grammarAccess.getNodeTemplateAccess().getCapabilitiesCapabilityParserRuleCall_15_2_0());
-                    					
+                    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getPropertiesPropertyParserRuleCall_12_7_1_0());
+                    						
                     pushFollow(FOLLOW_12);
-                    lv_capabilities_64_0=ruleCapability();
+                    lv_properties_64_0=ruleProperty();
 
                     state._fsp--;
 
 
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
-                    						}
-                    						add(
-                    							current,
-                    							"capabilities",
-                    							lv_capabilities_64_0,
-                    							"it.polimi.dice.dicer.ToscaDsl.Capability");
-                    						afterParserOrEnumRuleCall();
-                    					
+                    							if (current==null) {
+                    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    							}
+                    							add(
+                    								current,
+                    								"properties",
+                    								lv_properties_64_0,
+                    								"it.polimi.dice.dicer.ToscaDsl.Property");
+                    							afterParserOrEnumRuleCall();
+                    						
 
                     }
 
 
                     }
 
-                    // InternalToscaDsl.g:1344:4: (otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) ) )*
+                    // InternalToscaDsl.g:1343:5: (otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) ) )*
                     loop37:
                     do {
                         int alt37=2;
@@ -2958,37 +2974,37 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt37) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1345:5: otherlv_65= ',' ( (lv_capabilities_66_0= ruleCapability ) )
+                    	    // InternalToscaDsl.g:1344:6: otherlv_65= ',' ( (lv_properties_66_0= ruleProperty ) )
                     	    {
-                    	    otherlv_65=(Token)match(input,16,FOLLOW_4); 
+                    	    otherlv_65=(Token)match(input,16,FOLLOW_32); 
 
-                    	    					newLeafNode(otherlv_65, grammarAccess.getNodeTemplateAccess().getCommaKeyword_15_3_0());
-                    	    				
-                    	    // InternalToscaDsl.g:1349:5: ( (lv_capabilities_66_0= ruleCapability ) )
-                    	    // InternalToscaDsl.g:1350:6: (lv_capabilities_66_0= ruleCapability )
+                    	    						newLeafNode(otherlv_65, grammarAccess.getNodeTemplateAccess().getCommaKeyword_12_7_2_0());
+                    	    					
+                    	    // InternalToscaDsl.g:1348:6: ( (lv_properties_66_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:1349:7: (lv_properties_66_0= ruleProperty )
                     	    {
-                    	    // InternalToscaDsl.g:1350:6: (lv_capabilities_66_0= ruleCapability )
-                    	    // InternalToscaDsl.g:1351:7: lv_capabilities_66_0= ruleCapability
+                    	    // InternalToscaDsl.g:1349:7: (lv_properties_66_0= ruleProperty )
+                    	    // InternalToscaDsl.g:1350:8: lv_properties_66_0= ruleProperty
                     	    {
 
-                    	    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getCapabilitiesCapabilityParserRuleCall_15_3_1_0());
-                    	    						
+                    	    								newCompositeNode(grammarAccess.getNodeTemplateAccess().getPropertiesPropertyParserRuleCall_12_7_2_1_0());
+                    	    							
                     	    pushFollow(FOLLOW_12);
-                    	    lv_capabilities_66_0=ruleCapability();
+                    	    lv_properties_66_0=ruleProperty();
 
                     	    state._fsp--;
 
 
-                    	    							if (current==null) {
-                    	    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
-                    	    							}
-                    	    							add(
-                    	    								current,
-                    	    								"capabilities",
-                    	    								lv_capabilities_66_0,
-                    	    								"it.polimi.dice.dicer.ToscaDsl.Capability");
-                    	    							afterParserOrEnumRuleCall();
-                    	    						
+                    	    								if (current==null) {
+                    	    									current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    	    								}
+                    	    								add(
+                    	    									current,
+                    	    									"properties",
+                    	    									lv_properties_66_0,
+                    	    									"it.polimi.dice.dicer.ToscaDsl.Property");
+                    	    								afterParserOrEnumRuleCall();
+                    	    							
 
                     	    }
 
@@ -3004,9 +3020,131 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_67=(Token)match(input,19,FOLLOW_18); 
 
-                    				newLeafNode(otherlv_67, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_15_4());
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            otherlv_67=(Token)match(input,19,FOLLOW_38); 
+
+            			newLeafNode(otherlv_67, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_13());
+            		
+            // InternalToscaDsl.g:1374:3: (otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}' )?
+            int alt40=2;
+            int LA40_0 = input.LA(1);
+
+            if ( (LA40_0==39) ) {
+                alt40=1;
+            }
+            switch (alt40) {
+                case 1 :
+                    // InternalToscaDsl.g:1375:4: otherlv_68= ',\\n\"requirements\" :' otherlv_69= '{' ( (lv_requirements_70_0= ruleRequirement ) ) (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )* otherlv_73= '}'
+                    {
+                    otherlv_68=(Token)match(input,39,FOLLOW_11); 
+
+                    				newLeafNode(otherlv_68, grammarAccess.getNodeTemplateAccess().getRequirementsKeyword_14_0());
+                    			
+                    otherlv_69=(Token)match(input,11,FOLLOW_4); 
+
+                    				newLeafNode(otherlv_69, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_14_1());
+                    			
+                    // InternalToscaDsl.g:1383:4: ( (lv_requirements_70_0= ruleRequirement ) )
+                    // InternalToscaDsl.g:1384:5: (lv_requirements_70_0= ruleRequirement )
+                    {
+                    // InternalToscaDsl.g:1384:5: (lv_requirements_70_0= ruleRequirement )
+                    // InternalToscaDsl.g:1385:6: lv_requirements_70_0= ruleRequirement
+                    {
+
+                    						newCompositeNode(grammarAccess.getNodeTemplateAccess().getRequirementsRequirementParserRuleCall_14_2_0());
+                    					
+                    pushFollow(FOLLOW_12);
+                    lv_requirements_70_0=ruleRequirement();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    						}
+                    						add(
+                    							current,
+                    							"requirements",
+                    							lv_requirements_70_0,
+                    							"it.polimi.dice.dicer.ToscaDsl.Requirement");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    // InternalToscaDsl.g:1402:4: (otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) ) )*
+                    loop39:
+                    do {
+                        int alt39=2;
+                        int LA39_0 = input.LA(1);
+
+                        if ( (LA39_0==16) ) {
+                            alt39=1;
+                        }
+
+
+                        switch (alt39) {
+                    	case 1 :
+                    	    // InternalToscaDsl.g:1403:5: otherlv_71= ',' ( (lv_requirements_72_0= ruleRequirement ) )
+                    	    {
+                    	    otherlv_71=(Token)match(input,16,FOLLOW_4); 
+
+                    	    					newLeafNode(otherlv_71, grammarAccess.getNodeTemplateAccess().getCommaKeyword_14_3_0());
+                    	    				
+                    	    // InternalToscaDsl.g:1407:5: ( (lv_requirements_72_0= ruleRequirement ) )
+                    	    // InternalToscaDsl.g:1408:6: (lv_requirements_72_0= ruleRequirement )
+                    	    {
+                    	    // InternalToscaDsl.g:1408:6: (lv_requirements_72_0= ruleRequirement )
+                    	    // InternalToscaDsl.g:1409:7: lv_requirements_72_0= ruleRequirement
+                    	    {
+
+                    	    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getRequirementsRequirementParserRuleCall_14_3_1_0());
+                    	    						
+                    	    pushFollow(FOLLOW_12);
+                    	    lv_requirements_72_0=ruleRequirement();
+
+                    	    state._fsp--;
+
+
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"requirements",
+                    	    								lv_requirements_72_0,
+                    	    								"it.polimi.dice.dicer.ToscaDsl.Requirement");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop39;
+                        }
+                    } while (true);
+
+                    otherlv_73=(Token)match(input,19,FOLLOW_39); 
+
+                    				newLeafNode(otherlv_73, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_14_4());
                     			
 
                     }
@@ -3014,9 +3152,128 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_68=(Token)match(input,19,FOLLOW_2); 
+            // InternalToscaDsl.g:1432:3: (otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}' )?
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            			newLeafNode(otherlv_68, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_16());
+            if ( (LA42_0==40) ) {
+                alt42=1;
+            }
+            switch (alt42) {
+                case 1 :
+                    // InternalToscaDsl.g:1433:4: otherlv_74= ',\\n\"capabilities\" :' otherlv_75= '{' ( (lv_capabilities_76_0= ruleCapability ) ) (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )* otherlv_79= '}'
+                    {
+                    otherlv_74=(Token)match(input,40,FOLLOW_11); 
+
+                    				newLeafNode(otherlv_74, grammarAccess.getNodeTemplateAccess().getCapabilitiesKeyword_15_0());
+                    			
+                    otherlv_75=(Token)match(input,11,FOLLOW_4); 
+
+                    				newLeafNode(otherlv_75, grammarAccess.getNodeTemplateAccess().getLeftCurlyBracketKeyword_15_1());
+                    			
+                    // InternalToscaDsl.g:1441:4: ( (lv_capabilities_76_0= ruleCapability ) )
+                    // InternalToscaDsl.g:1442:5: (lv_capabilities_76_0= ruleCapability )
+                    {
+                    // InternalToscaDsl.g:1442:5: (lv_capabilities_76_0= ruleCapability )
+                    // InternalToscaDsl.g:1443:6: lv_capabilities_76_0= ruleCapability
+                    {
+
+                    						newCompositeNode(grammarAccess.getNodeTemplateAccess().getCapabilitiesCapabilityParserRuleCall_15_2_0());
+                    					
+                    pushFollow(FOLLOW_12);
+                    lv_capabilities_76_0=ruleCapability();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    						}
+                    						add(
+                    							current,
+                    							"capabilities",
+                    							lv_capabilities_76_0,
+                    							"it.polimi.dice.dicer.ToscaDsl.Capability");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    // InternalToscaDsl.g:1460:4: (otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) ) )*
+                    loop41:
+                    do {
+                        int alt41=2;
+                        int LA41_0 = input.LA(1);
+
+                        if ( (LA41_0==16) ) {
+                            alt41=1;
+                        }
+
+
+                        switch (alt41) {
+                    	case 1 :
+                    	    // InternalToscaDsl.g:1461:5: otherlv_77= ',' ( (lv_capabilities_78_0= ruleCapability ) )
+                    	    {
+                    	    otherlv_77=(Token)match(input,16,FOLLOW_4); 
+
+                    	    					newLeafNode(otherlv_77, grammarAccess.getNodeTemplateAccess().getCommaKeyword_15_3_0());
+                    	    				
+                    	    // InternalToscaDsl.g:1465:5: ( (lv_capabilities_78_0= ruleCapability ) )
+                    	    // InternalToscaDsl.g:1466:6: (lv_capabilities_78_0= ruleCapability )
+                    	    {
+                    	    // InternalToscaDsl.g:1466:6: (lv_capabilities_78_0= ruleCapability )
+                    	    // InternalToscaDsl.g:1467:7: lv_capabilities_78_0= ruleCapability
+                    	    {
+
+                    	    							newCompositeNode(grammarAccess.getNodeTemplateAccess().getCapabilitiesCapabilityParserRuleCall_15_3_1_0());
+                    	    						
+                    	    pushFollow(FOLLOW_12);
+                    	    lv_capabilities_78_0=ruleCapability();
+
+                    	    state._fsp--;
+
+
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getNodeTemplateRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"capabilities",
+                    	    								lv_capabilities_78_0,
+                    	    								"it.polimi.dice.dicer.ToscaDsl.Capability");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop41;
+                        }
+                    } while (true);
+
+                    otherlv_79=(Token)match(input,19,FOLLOW_18); 
+
+                    				newLeafNode(otherlv_79, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_15_4());
+                    			
+
+                    }
+                    break;
+
+            }
+
+            otherlv_80=(Token)match(input,19,FOLLOW_2); 
+
+            			newLeafNode(otherlv_80, grammarAccess.getNodeTemplateAccess().getRightCurlyBracketKeyword_16());
             		
 
             }
@@ -3041,7 +3298,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMonitoringProperty"
-    // InternalToscaDsl.g:1382:1: entryRuleMonitoringProperty returns [EObject current=null] : iv_ruleMonitoringProperty= ruleMonitoringProperty EOF ;
+    // InternalToscaDsl.g:1498:1: entryRuleMonitoringProperty returns [EObject current=null] : iv_ruleMonitoringProperty= ruleMonitoringProperty EOF ;
     public final EObject entryRuleMonitoringProperty() throws RecognitionException {
         EObject current = null;
 
@@ -3049,8 +3306,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1382:59: (iv_ruleMonitoringProperty= ruleMonitoringProperty EOF )
-            // InternalToscaDsl.g:1383:2: iv_ruleMonitoringProperty= ruleMonitoringProperty EOF
+            // InternalToscaDsl.g:1498:59: (iv_ruleMonitoringProperty= ruleMonitoringProperty EOF )
+            // InternalToscaDsl.g:1499:2: iv_ruleMonitoringProperty= ruleMonitoringProperty EOF
             {
              newCompositeNode(grammarAccess.getMonitoringPropertyRule()); 
             pushFollow(FOLLOW_1);
@@ -3077,7 +3334,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMonitoringProperty"
-    // InternalToscaDsl.g:1389:1: ruleMonitoringProperty returns [EObject current=null] : ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? ) ;
+    // InternalToscaDsl.g:1505:1: ruleMonitoringProperty returns [EObject current=null] : ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? ) ;
     public final EObject ruleMonitoringProperty() throws RecognitionException {
         EObject current = null;
 
@@ -3094,14 +3351,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:1395:2: ( ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? ) )
-            // InternalToscaDsl.g:1396:2: ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? )
+            // InternalToscaDsl.g:1511:2: ( ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? ) )
+            // InternalToscaDsl.g:1512:2: ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? )
             {
-            // InternalToscaDsl.g:1396:2: ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? )
-            // InternalToscaDsl.g:1397:3: () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )?
+            // InternalToscaDsl.g:1512:2: ( () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )? )
+            // InternalToscaDsl.g:1513:3: () ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' ) (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )?
             {
-            // InternalToscaDsl.g:1397:3: ()
-            // InternalToscaDsl.g:1398:4: 
+            // InternalToscaDsl.g:1513:3: ()
+            // InternalToscaDsl.g:1514:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3111,33 +3368,33 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1404:3: ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' )
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            // InternalToscaDsl.g:1520:3: ( ( (lv_enabled_1_0= '\\n \"enabled\": true' ) ) | otherlv_2= '\\n \"enabled\": false' )
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA39_0==39) ) {
-                alt39=1;
+            if ( (LA43_0==41) ) {
+                alt43=1;
             }
-            else if ( (LA39_0==40) ) {
-                alt39=2;
+            else if ( (LA43_0==42) ) {
+                alt43=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 39, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
-            switch (alt39) {
+            switch (alt43) {
                 case 1 :
-                    // InternalToscaDsl.g:1405:4: ( (lv_enabled_1_0= '\\n \"enabled\": true' ) )
+                    // InternalToscaDsl.g:1521:4: ( (lv_enabled_1_0= '\\n \"enabled\": true' ) )
                     {
-                    // InternalToscaDsl.g:1405:4: ( (lv_enabled_1_0= '\\n \"enabled\": true' ) )
-                    // InternalToscaDsl.g:1406:5: (lv_enabled_1_0= '\\n \"enabled\": true' )
+                    // InternalToscaDsl.g:1521:4: ( (lv_enabled_1_0= '\\n \"enabled\": true' ) )
+                    // InternalToscaDsl.g:1522:5: (lv_enabled_1_0= '\\n \"enabled\": true' )
                     {
-                    // InternalToscaDsl.g:1406:5: (lv_enabled_1_0= '\\n \"enabled\": true' )
-                    // InternalToscaDsl.g:1407:6: lv_enabled_1_0= '\\n \"enabled\": true'
+                    // InternalToscaDsl.g:1522:5: (lv_enabled_1_0= '\\n \"enabled\": true' )
+                    // InternalToscaDsl.g:1523:6: lv_enabled_1_0= '\\n \"enabled\": true'
                     {
-                    lv_enabled_1_0=(Token)match(input,39,FOLLOW_38); 
+                    lv_enabled_1_0=(Token)match(input,41,FOLLOW_40); 
 
                     						newLeafNode(lv_enabled_1_0, grammarAccess.getMonitoringPropertyAccess().getEnabledEnabledTrueKeyword_1_0_0());
                     					
@@ -3157,9 +3414,9 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalToscaDsl.g:1420:4: otherlv_2= '\\n \"enabled\": false'
+                    // InternalToscaDsl.g:1536:4: otherlv_2= '\\n \"enabled\": false'
                     {
-                    otherlv_2=(Token)match(input,40,FOLLOW_38); 
+                    otherlv_2=(Token)match(input,42,FOLLOW_40); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getMonitoringPropertyAccess().getEnabledFalseKeyword_1_1());
                     			
@@ -3169,18 +3426,18 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1425:3: (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )?
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            // InternalToscaDsl.g:1541:3: (otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']' )?
+            int alt45=2;
+            int LA45_0 = input.LA(1);
 
-            if ( (LA41_0==41) ) {
-                alt41=1;
+            if ( (LA45_0==43) ) {
+                alt45=1;
             }
-            switch (alt41) {
+            switch (alt45) {
                 case 1 :
-                    // InternalToscaDsl.g:1426:4: otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']'
+                    // InternalToscaDsl.g:1542:4: otherlv_3= ',\\n\"roles\" :' otherlv_4= '[' ( (lv_roles_5_0= RULE_STRING ) ) (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )* otherlv_8= ']'
                     {
-                    otherlv_3=(Token)match(input,41,FOLLOW_7); 
+                    otherlv_3=(Token)match(input,43,FOLLOW_7); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getMonitoringPropertyAccess().getRolesKeyword_2_0());
                     			
@@ -3188,11 +3445,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_4, grammarAccess.getMonitoringPropertyAccess().getLeftSquareBracketKeyword_2_1());
                     			
-                    // InternalToscaDsl.g:1434:4: ( (lv_roles_5_0= RULE_STRING ) )
-                    // InternalToscaDsl.g:1435:5: (lv_roles_5_0= RULE_STRING )
+                    // InternalToscaDsl.g:1550:4: ( (lv_roles_5_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:1551:5: (lv_roles_5_0= RULE_STRING )
                     {
-                    // InternalToscaDsl.g:1435:5: (lv_roles_5_0= RULE_STRING )
-                    // InternalToscaDsl.g:1436:6: lv_roles_5_0= RULE_STRING
+                    // InternalToscaDsl.g:1551:5: (lv_roles_5_0= RULE_STRING )
+                    // InternalToscaDsl.g:1552:6: lv_roles_5_0= RULE_STRING
                     {
                     lv_roles_5_0=(Token)match(input,RULE_STRING,FOLLOW_9); 
 
@@ -3214,30 +3471,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1452:4: (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )*
-                    loop40:
+                    // InternalToscaDsl.g:1568:4: (otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) ) )*
+                    loop44:
                     do {
-                        int alt40=2;
-                        int LA40_0 = input.LA(1);
+                        int alt44=2;
+                        int LA44_0 = input.LA(1);
 
-                        if ( (LA40_0==16) ) {
-                            alt40=1;
+                        if ( (LA44_0==16) ) {
+                            alt44=1;
                         }
 
 
-                        switch (alt40) {
+                        switch (alt44) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1453:5: otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) )
+                    	    // InternalToscaDsl.g:1569:5: otherlv_6= ',' ( (lv_roles_7_0= RULE_STRING ) )
                     	    {
                     	    otherlv_6=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_6, grammarAccess.getMonitoringPropertyAccess().getCommaKeyword_2_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:1457:5: ( (lv_roles_7_0= RULE_STRING ) )
-                    	    // InternalToscaDsl.g:1458:6: (lv_roles_7_0= RULE_STRING )
+                    	    // InternalToscaDsl.g:1573:5: ( (lv_roles_7_0= RULE_STRING ) )
+                    	    // InternalToscaDsl.g:1574:6: (lv_roles_7_0= RULE_STRING )
                     	    {
-                    	    // InternalToscaDsl.g:1458:6: (lv_roles_7_0= RULE_STRING )
-                    	    // InternalToscaDsl.g:1459:7: lv_roles_7_0= RULE_STRING
+                    	    // InternalToscaDsl.g:1574:6: (lv_roles_7_0= RULE_STRING )
+                    	    // InternalToscaDsl.g:1575:7: lv_roles_7_0= RULE_STRING
                     	    {
                     	    lv_roles_7_0=(Token)match(input,RULE_STRING,FOLLOW_9); 
 
@@ -3264,7 +3521,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop40;
+                    	    break loop44;
                         }
                     } while (true);
 
@@ -3301,7 +3558,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFirewallRule"
-    // InternalToscaDsl.g:1485:1: entryRuleFirewallRule returns [EObject current=null] : iv_ruleFirewallRule= ruleFirewallRule EOF ;
+    // InternalToscaDsl.g:1601:1: entryRuleFirewallRule returns [EObject current=null] : iv_ruleFirewallRule= ruleFirewallRule EOF ;
     public final EObject entryRuleFirewallRule() throws RecognitionException {
         EObject current = null;
 
@@ -3309,8 +3566,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1485:53: (iv_ruleFirewallRule= ruleFirewallRule EOF )
-            // InternalToscaDsl.g:1486:2: iv_ruleFirewallRule= ruleFirewallRule EOF
+            // InternalToscaDsl.g:1601:53: (iv_ruleFirewallRule= ruleFirewallRule EOF )
+            // InternalToscaDsl.g:1602:2: iv_ruleFirewallRule= ruleFirewallRule EOF
             {
              newCompositeNode(grammarAccess.getFirewallRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3337,7 +3594,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFirewallRule"
-    // InternalToscaDsl.g:1492:1: ruleFirewallRule returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"remote_ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"port\": ' ( (lv_port_6_0= RULE_STRING ) ) otherlv_7= '}' ) ;
+    // InternalToscaDsl.g:1608:1: ruleFirewallRule returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"protocol\": ' ( (lv_protocol_6_0= RULE_STRING ) ) otherlv_7= ',' otherlv_8= '\"port\": ' ( (lv_port_9_0= RULE_STRING ) ) otherlv_10= '}' ) ;
     public final EObject ruleFirewallRule() throws RecognitionException {
         EObject current = null;
 
@@ -3346,21 +3603,24 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         Token lv_remote_ip_prefix_3_0=null;
         Token otherlv_4=null;
         Token otherlv_5=null;
-        Token lv_port_6_0=null;
+        Token lv_protocol_6_0=null;
         Token otherlv_7=null;
+        Token otherlv_8=null;
+        Token lv_port_9_0=null;
+        Token otherlv_10=null;
 
 
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:1498:2: ( ( () otherlv_1= '{' otherlv_2= '\"remote_ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"port\": ' ( (lv_port_6_0= RULE_STRING ) ) otherlv_7= '}' ) )
-            // InternalToscaDsl.g:1499:2: ( () otherlv_1= '{' otherlv_2= '\"remote_ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"port\": ' ( (lv_port_6_0= RULE_STRING ) ) otherlv_7= '}' )
+            // InternalToscaDsl.g:1614:2: ( ( () otherlv_1= '{' otherlv_2= '\"ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"protocol\": ' ( (lv_protocol_6_0= RULE_STRING ) ) otherlv_7= ',' otherlv_8= '\"port\": ' ( (lv_port_9_0= RULE_STRING ) ) otherlv_10= '}' ) )
+            // InternalToscaDsl.g:1615:2: ( () otherlv_1= '{' otherlv_2= '\"ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"protocol\": ' ( (lv_protocol_6_0= RULE_STRING ) ) otherlv_7= ',' otherlv_8= '\"port\": ' ( (lv_port_9_0= RULE_STRING ) ) otherlv_10= '}' )
             {
-            // InternalToscaDsl.g:1499:2: ( () otherlv_1= '{' otherlv_2= '\"remote_ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"port\": ' ( (lv_port_6_0= RULE_STRING ) ) otherlv_7= '}' )
-            // InternalToscaDsl.g:1500:3: () otherlv_1= '{' otherlv_2= '\"remote_ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"port\": ' ( (lv_port_6_0= RULE_STRING ) ) otherlv_7= '}'
+            // InternalToscaDsl.g:1615:2: ( () otherlv_1= '{' otherlv_2= '\"ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"protocol\": ' ( (lv_protocol_6_0= RULE_STRING ) ) otherlv_7= ',' otherlv_8= '\"port\": ' ( (lv_port_9_0= RULE_STRING ) ) otherlv_10= '}' )
+            // InternalToscaDsl.g:1616:3: () otherlv_1= '{' otherlv_2= '\"ip_prefix\": ' ( (lv_remote_ip_prefix_3_0= RULE_STRING ) ) otherlv_4= ',' otherlv_5= '\"protocol\": ' ( (lv_protocol_6_0= RULE_STRING ) ) otherlv_7= ',' otherlv_8= '\"port\": ' ( (lv_port_9_0= RULE_STRING ) ) otherlv_10= '}'
             {
-            // InternalToscaDsl.g:1500:3: ()
-            // InternalToscaDsl.g:1501:4: 
+            // InternalToscaDsl.g:1616:3: ()
+            // InternalToscaDsl.g:1617:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3370,21 +3630,21 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,11,FOLLOW_39); 
+            otherlv_1=(Token)match(input,11,FOLLOW_41); 
 
             			newLeafNode(otherlv_1, grammarAccess.getFirewallRuleAccess().getLeftCurlyBracketKeyword_1());
             		
-            otherlv_2=(Token)match(input,42,FOLLOW_4); 
+            otherlv_2=(Token)match(input,44,FOLLOW_4); 
 
-            			newLeafNode(otherlv_2, grammarAccess.getFirewallRuleAccess().getRemote_ip_prefixKeyword_2());
+            			newLeafNode(otherlv_2, grammarAccess.getFirewallRuleAccess().getIp_prefixKeyword_2());
             		
-            // InternalToscaDsl.g:1515:3: ( (lv_remote_ip_prefix_3_0= RULE_STRING ) )
-            // InternalToscaDsl.g:1516:4: (lv_remote_ip_prefix_3_0= RULE_STRING )
+            // InternalToscaDsl.g:1631:3: ( (lv_remote_ip_prefix_3_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1632:4: (lv_remote_ip_prefix_3_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:1516:4: (lv_remote_ip_prefix_3_0= RULE_STRING )
-            // InternalToscaDsl.g:1517:5: lv_remote_ip_prefix_3_0= RULE_STRING
+            // InternalToscaDsl.g:1632:4: (lv_remote_ip_prefix_3_0= RULE_STRING )
+            // InternalToscaDsl.g:1633:5: lv_remote_ip_prefix_3_0= RULE_STRING
             {
-            lv_remote_ip_prefix_3_0=(Token)match(input,RULE_STRING,FOLLOW_40); 
+            lv_remote_ip_prefix_3_0=(Token)match(input,RULE_STRING,FOLLOW_42); 
 
             					newLeafNode(lv_remote_ip_prefix_3_0, grammarAccess.getFirewallRuleAccess().getRemote_ip_prefixSTRINGTerminalRuleCall_3_0());
             				
@@ -3404,23 +3664,23 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_41); 
+            otherlv_4=(Token)match(input,16,FOLLOW_43); 
 
             			newLeafNode(otherlv_4, grammarAccess.getFirewallRuleAccess().getCommaKeyword_4());
             		
-            otherlv_5=(Token)match(input,43,FOLLOW_4); 
+            otherlv_5=(Token)match(input,45,FOLLOW_4); 
 
-            			newLeafNode(otherlv_5, grammarAccess.getFirewallRuleAccess().getPortKeyword_5());
+            			newLeafNode(otherlv_5, grammarAccess.getFirewallRuleAccess().getProtocolKeyword_5());
             		
-            // InternalToscaDsl.g:1541:3: ( (lv_port_6_0= RULE_STRING ) )
-            // InternalToscaDsl.g:1542:4: (lv_port_6_0= RULE_STRING )
+            // InternalToscaDsl.g:1657:3: ( (lv_protocol_6_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1658:4: (lv_protocol_6_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:1542:4: (lv_port_6_0= RULE_STRING )
-            // InternalToscaDsl.g:1543:5: lv_port_6_0= RULE_STRING
+            // InternalToscaDsl.g:1658:4: (lv_protocol_6_0= RULE_STRING )
+            // InternalToscaDsl.g:1659:5: lv_protocol_6_0= RULE_STRING
             {
-            lv_port_6_0=(Token)match(input,RULE_STRING,FOLLOW_18); 
+            lv_protocol_6_0=(Token)match(input,RULE_STRING,FOLLOW_42); 
 
-            					newLeafNode(lv_port_6_0, grammarAccess.getFirewallRuleAccess().getPortSTRINGTerminalRuleCall_6_0());
+            					newLeafNode(lv_protocol_6_0, grammarAccess.getFirewallRuleAccess().getProtocolSTRINGTerminalRuleCall_6_0());
             				
 
             					if (current==null) {
@@ -3428,8 +3688,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
             					}
             					setWithLastConsumed(
             						current,
-            						"port",
-            						lv_port_6_0,
+            						"protocol",
+            						lv_protocol_6_0,
             						"org.eclipse.xtext.common.Terminals.STRING");
             				
 
@@ -3438,9 +3698,43 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,19,FOLLOW_2); 
+            otherlv_7=(Token)match(input,16,FOLLOW_44); 
 
-            			newLeafNode(otherlv_7, grammarAccess.getFirewallRuleAccess().getRightCurlyBracketKeyword_7());
+            			newLeafNode(otherlv_7, grammarAccess.getFirewallRuleAccess().getCommaKeyword_7());
+            		
+            otherlv_8=(Token)match(input,46,FOLLOW_4); 
+
+            			newLeafNode(otherlv_8, grammarAccess.getFirewallRuleAccess().getPortKeyword_8());
+            		
+            // InternalToscaDsl.g:1683:3: ( (lv_port_9_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1684:4: (lv_port_9_0= RULE_STRING )
+            {
+            // InternalToscaDsl.g:1684:4: (lv_port_9_0= RULE_STRING )
+            // InternalToscaDsl.g:1685:5: lv_port_9_0= RULE_STRING
+            {
+            lv_port_9_0=(Token)match(input,RULE_STRING,FOLLOW_18); 
+
+            					newLeafNode(lv_port_9_0, grammarAccess.getFirewallRuleAccess().getPortSTRINGTerminalRuleCall_9_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getFirewallRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"port",
+            						lv_port_9_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
+
+            }
+
+
+            }
+
+            otherlv_10=(Token)match(input,19,FOLLOW_2); 
+
+            			newLeafNode(otherlv_10, grammarAccess.getFirewallRuleAccess().getRightCurlyBracketKeyword_10());
             		
 
             }
@@ -3465,7 +3759,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleConfiguration"
-    // InternalToscaDsl.g:1567:1: entryRuleConfiguration returns [EObject current=null] : iv_ruleConfiguration= ruleConfiguration EOF ;
+    // InternalToscaDsl.g:1709:1: entryRuleConfiguration returns [EObject current=null] : iv_ruleConfiguration= ruleConfiguration EOF ;
     public final EObject entryRuleConfiguration() throws RecognitionException {
         EObject current = null;
 
@@ -3473,8 +3767,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1567:54: (iv_ruleConfiguration= ruleConfiguration EOF )
-            // InternalToscaDsl.g:1568:2: iv_ruleConfiguration= ruleConfiguration EOF
+            // InternalToscaDsl.g:1709:54: (iv_ruleConfiguration= ruleConfiguration EOF )
+            // InternalToscaDsl.g:1710:2: iv_ruleConfiguration= ruleConfiguration EOF
             {
              newCompositeNode(grammarAccess.getConfigurationRule()); 
             pushFollow(FOLLOW_1);
@@ -3501,7 +3795,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConfiguration"
-    // InternalToscaDsl.g:1574:1: ruleConfiguration returns [EObject current=null] : ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) ;
+    // InternalToscaDsl.g:1716:1: ruleConfiguration returns [EObject current=null] : ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) ;
     public final EObject ruleConfiguration() throws RecognitionException {
         EObject current = null;
 
@@ -3514,14 +3808,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:1580:2: ( ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) )
-            // InternalToscaDsl.g:1581:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:1722:2: ( ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) )
+            // InternalToscaDsl.g:1723:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
             {
-            // InternalToscaDsl.g:1581:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
-            // InternalToscaDsl.g:1582:3: () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1723:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:1724:3: () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) )
             {
-            // InternalToscaDsl.g:1582:3: ()
-            // InternalToscaDsl.g:1583:4: 
+            // InternalToscaDsl.g:1724:3: ()
+            // InternalToscaDsl.g:1725:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3531,15 +3825,15 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,44,FOLLOW_4); 
+            otherlv_1=(Token)match(input,47,FOLLOW_4); 
 
             			newLeafNode(otherlv_1, grammarAccess.getConfigurationAccess().getControl000aKeyword_1());
             		
-            // InternalToscaDsl.g:1593:3: ( (lv_property_name_2_0= RULE_STRING ) )
-            // InternalToscaDsl.g:1594:4: (lv_property_name_2_0= RULE_STRING )
+            // InternalToscaDsl.g:1735:3: ( (lv_property_name_2_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1736:4: (lv_property_name_2_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:1594:4: (lv_property_name_2_0= RULE_STRING )
-            // InternalToscaDsl.g:1595:5: lv_property_name_2_0= RULE_STRING
+            // InternalToscaDsl.g:1736:4: (lv_property_name_2_0= RULE_STRING )
+            // InternalToscaDsl.g:1737:5: lv_property_name_2_0= RULE_STRING
             {
             lv_property_name_2_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -3565,11 +3859,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_3, grammarAccess.getConfigurationAccess().getColonKeyword_3());
             		
-            // InternalToscaDsl.g:1615:3: ( (lv_value_4_0= RULE_STRING ) )
-            // InternalToscaDsl.g:1616:4: (lv_value_4_0= RULE_STRING )
+            // InternalToscaDsl.g:1757:3: ( (lv_value_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1758:4: (lv_value_4_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:1616:4: (lv_value_4_0= RULE_STRING )
-            // InternalToscaDsl.g:1617:5: lv_value_4_0= RULE_STRING
+            // InternalToscaDsl.g:1758:4: (lv_value_4_0= RULE_STRING )
+            // InternalToscaDsl.g:1759:5: lv_value_4_0= RULE_STRING
             {
             lv_value_4_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -3614,7 +3908,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInstances"
-    // InternalToscaDsl.g:1637:1: entryRuleInstances returns [EObject current=null] : iv_ruleInstances= ruleInstances EOF ;
+    // InternalToscaDsl.g:1779:1: entryRuleInstances returns [EObject current=null] : iv_ruleInstances= ruleInstances EOF ;
     public final EObject entryRuleInstances() throws RecognitionException {
         EObject current = null;
 
@@ -3622,8 +3916,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1637:50: (iv_ruleInstances= ruleInstances EOF )
-            // InternalToscaDsl.g:1638:2: iv_ruleInstances= ruleInstances EOF
+            // InternalToscaDsl.g:1779:50: (iv_ruleInstances= ruleInstances EOF )
+            // InternalToscaDsl.g:1780:2: iv_ruleInstances= ruleInstances EOF
             {
              newCompositeNode(grammarAccess.getInstancesRule()); 
             pushFollow(FOLLOW_1);
@@ -3650,7 +3944,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInstances"
-    // InternalToscaDsl.g:1644:1: ruleInstances returns [EObject current=null] : ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) ) ;
+    // InternalToscaDsl.g:1786:1: ruleInstances returns [EObject current=null] : ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) ) ;
     public final EObject ruleInstances() throws RecognitionException {
         EObject current = null;
 
@@ -3661,14 +3955,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:1650:2: ( ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) ) )
-            // InternalToscaDsl.g:1651:2: ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) )
+            // InternalToscaDsl.g:1792:2: ( ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) ) )
+            // InternalToscaDsl.g:1793:2: ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) )
             {
-            // InternalToscaDsl.g:1651:2: ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) )
-            // InternalToscaDsl.g:1652:3: () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) )
+            // InternalToscaDsl.g:1793:2: ( () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) ) )
+            // InternalToscaDsl.g:1794:3: () otherlv_1= '\"deploy\" :' ( (lv_deploy_2_0= RULE_INT ) )
             {
-            // InternalToscaDsl.g:1652:3: ()
-            // InternalToscaDsl.g:1653:4: 
+            // InternalToscaDsl.g:1794:3: ()
+            // InternalToscaDsl.g:1795:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3678,15 +3972,15 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,45,FOLLOW_42); 
+            otherlv_1=(Token)match(input,48,FOLLOW_45); 
 
             			newLeafNode(otherlv_1, grammarAccess.getInstancesAccess().getDeployKeyword_1());
             		
-            // InternalToscaDsl.g:1663:3: ( (lv_deploy_2_0= RULE_INT ) )
-            // InternalToscaDsl.g:1664:4: (lv_deploy_2_0= RULE_INT )
+            // InternalToscaDsl.g:1805:3: ( (lv_deploy_2_0= RULE_INT ) )
+            // InternalToscaDsl.g:1806:4: (lv_deploy_2_0= RULE_INT )
             {
-            // InternalToscaDsl.g:1664:4: (lv_deploy_2_0= RULE_INT )
-            // InternalToscaDsl.g:1665:5: lv_deploy_2_0= RULE_INT
+            // InternalToscaDsl.g:1806:4: (lv_deploy_2_0= RULE_INT )
+            // InternalToscaDsl.g:1807:5: lv_deploy_2_0= RULE_INT
             {
             lv_deploy_2_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
@@ -3731,7 +4025,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRelationship"
-    // InternalToscaDsl.g:1685:1: entryRuleRelationship returns [EObject current=null] : iv_ruleRelationship= ruleRelationship EOF ;
+    // InternalToscaDsl.g:1827:1: entryRuleRelationship returns [EObject current=null] : iv_ruleRelationship= ruleRelationship EOF ;
     public final EObject entryRuleRelationship() throws RecognitionException {
         EObject current = null;
 
@@ -3739,8 +4033,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1685:53: (iv_ruleRelationship= ruleRelationship EOF )
-            // InternalToscaDsl.g:1686:2: iv_ruleRelationship= ruleRelationship EOF
+            // InternalToscaDsl.g:1827:53: (iv_ruleRelationship= ruleRelationship EOF )
+            // InternalToscaDsl.g:1828:2: iv_ruleRelationship= ruleRelationship EOF
             {
              newCompositeNode(grammarAccess.getRelationshipRule()); 
             pushFollow(FOLLOW_1);
@@ -3767,7 +4061,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRelationship"
-    // InternalToscaDsl.g:1692:1: ruleRelationship returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' ) ;
+    // InternalToscaDsl.g:1834:1: ruleRelationship returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' ) ;
     public final EObject ruleRelationship() throws RecognitionException {
         EObject current = null;
 
@@ -3814,14 +4108,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:1698:2: ( ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' ) )
-            // InternalToscaDsl.g:1699:2: ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' )
+            // InternalToscaDsl.g:1840:2: ( ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' ) )
+            // InternalToscaDsl.g:1841:2: ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' )
             {
-            // InternalToscaDsl.g:1699:2: ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' )
-            // InternalToscaDsl.g:1700:3: () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}'
+            // InternalToscaDsl.g:1841:2: ( () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}' )
+            // InternalToscaDsl.g:1842:3: () otherlv_1= '{' otherlv_2= '\"type\" :' ( (lv_type_3_0= RULE_STRING ) ) (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )? (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )? (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )? (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )? (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )? otherlv_30= '}'
             {
-            // InternalToscaDsl.g:1700:3: ()
-            // InternalToscaDsl.g:1701:4: 
+            // InternalToscaDsl.g:1842:3: ()
+            // InternalToscaDsl.g:1843:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3839,13 +4133,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getRelationshipAccess().getTypeKeyword_2());
             		
-            // InternalToscaDsl.g:1715:3: ( (lv_type_3_0= RULE_STRING ) )
-            // InternalToscaDsl.g:1716:4: (lv_type_3_0= RULE_STRING )
+            // InternalToscaDsl.g:1857:3: ( (lv_type_3_0= RULE_STRING ) )
+            // InternalToscaDsl.g:1858:4: (lv_type_3_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:1716:4: (lv_type_3_0= RULE_STRING )
-            // InternalToscaDsl.g:1717:5: lv_type_3_0= RULE_STRING
+            // InternalToscaDsl.g:1858:4: (lv_type_3_0= RULE_STRING )
+            // InternalToscaDsl.g:1859:5: lv_type_3_0= RULE_STRING
             {
-            lv_type_3_0=(Token)match(input,RULE_STRING,FOLLOW_43); 
+            lv_type_3_0=(Token)match(input,RULE_STRING,FOLLOW_46); 
 
             					newLeafNode(lv_type_3_0, grammarAccess.getRelationshipAccess().getTypeSTRINGTerminalRuleCall_3_0());
             				
@@ -3865,28 +4159,28 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1733:3: (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )?
-            int alt42=2;
-            int LA42_0 = input.LA(1);
+            // InternalToscaDsl.g:1875:3: (otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) ) )?
+            int alt46=2;
+            int LA46_0 = input.LA(1);
 
-            if ( (LA42_0==46) ) {
-                alt42=1;
+            if ( (LA46_0==49) ) {
+                alt46=1;
             }
-            switch (alt42) {
+            switch (alt46) {
                 case 1 :
-                    // InternalToscaDsl.g:1734:4: otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:1876:4: otherlv_4= ',\\n\"target\" :' ( (lv_target_5_0= RULE_STRING ) )
                     {
-                    otherlv_4=(Token)match(input,46,FOLLOW_4); 
+                    otherlv_4=(Token)match(input,49,FOLLOW_4); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getRelationshipAccess().getTargetKeyword_4_0());
                     			
-                    // InternalToscaDsl.g:1738:4: ( (lv_target_5_0= RULE_STRING ) )
-                    // InternalToscaDsl.g:1739:5: (lv_target_5_0= RULE_STRING )
+                    // InternalToscaDsl.g:1880:4: ( (lv_target_5_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:1881:5: (lv_target_5_0= RULE_STRING )
                     {
-                    // InternalToscaDsl.g:1739:5: (lv_target_5_0= RULE_STRING )
-                    // InternalToscaDsl.g:1740:6: lv_target_5_0= RULE_STRING
+                    // InternalToscaDsl.g:1881:5: (lv_target_5_0= RULE_STRING )
+                    // InternalToscaDsl.g:1882:6: lv_target_5_0= RULE_STRING
                     {
-                    lv_target_5_0=(Token)match(input,RULE_STRING,FOLLOW_44); 
+                    lv_target_5_0=(Token)match(input,RULE_STRING,FOLLOW_47); 
 
                     						newLeafNode(lv_target_5_0, grammarAccess.getRelationshipAccess().getTargetSTRINGTerminalRuleCall_4_1_0());
                     					
@@ -3912,16 +4206,16 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1757:3: (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )?
-            int alt44=2;
-            int LA44_0 = input.LA(1);
+            // InternalToscaDsl.g:1899:3: (otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}' )?
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( (LA44_0==30) ) {
-                alt44=1;
+            if ( (LA48_0==30) ) {
+                alt48=1;
             }
-            switch (alt44) {
+            switch (alt48) {
                 case 1 :
-                    // InternalToscaDsl.g:1758:4: otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}'
+                    // InternalToscaDsl.g:1900:4: otherlv_6= ',\\n\"interfaces\" :' otherlv_7= '{' ( (lv_interfaces_8_0= ruleInterface ) ) (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )* otherlv_11= '}'
                     {
                     otherlv_6=(Token)match(input,30,FOLLOW_11); 
 
@@ -3931,11 +4225,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_7, grammarAccess.getRelationshipAccess().getLeftCurlyBracketKeyword_5_1());
                     			
-                    // InternalToscaDsl.g:1766:4: ( (lv_interfaces_8_0= ruleInterface ) )
-                    // InternalToscaDsl.g:1767:5: (lv_interfaces_8_0= ruleInterface )
+                    // InternalToscaDsl.g:1908:4: ( (lv_interfaces_8_0= ruleInterface ) )
+                    // InternalToscaDsl.g:1909:5: (lv_interfaces_8_0= ruleInterface )
                     {
-                    // InternalToscaDsl.g:1767:5: (lv_interfaces_8_0= ruleInterface )
-                    // InternalToscaDsl.g:1768:6: lv_interfaces_8_0= ruleInterface
+                    // InternalToscaDsl.g:1909:5: (lv_interfaces_8_0= ruleInterface )
+                    // InternalToscaDsl.g:1910:6: lv_interfaces_8_0= ruleInterface
                     {
 
                     						newCompositeNode(grammarAccess.getRelationshipAccess().getInterfacesInterfaceParserRuleCall_5_2_0());
@@ -3962,30 +4256,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1785:4: (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )*
-                    loop43:
+                    // InternalToscaDsl.g:1927:4: (otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) ) )*
+                    loop47:
                     do {
-                        int alt43=2;
-                        int LA43_0 = input.LA(1);
+                        int alt47=2;
+                        int LA47_0 = input.LA(1);
 
-                        if ( (LA43_0==16) ) {
-                            alt43=1;
+                        if ( (LA47_0==16) ) {
+                            alt47=1;
                         }
 
 
-                        switch (alt43) {
+                        switch (alt47) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1786:5: otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:1928:5: otherlv_9= ',' ( (lv_interfaces_10_0= ruleInterface ) )
                     	    {
                     	    otherlv_9=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_9, grammarAccess.getRelationshipAccess().getCommaKeyword_5_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:1790:5: ( (lv_interfaces_10_0= ruleInterface ) )
-                    	    // InternalToscaDsl.g:1791:6: (lv_interfaces_10_0= ruleInterface )
+                    	    // InternalToscaDsl.g:1932:5: ( (lv_interfaces_10_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:1933:6: (lv_interfaces_10_0= ruleInterface )
                     	    {
-                    	    // InternalToscaDsl.g:1791:6: (lv_interfaces_10_0= ruleInterface )
-                    	    // InternalToscaDsl.g:1792:7: lv_interfaces_10_0= ruleInterface
+                    	    // InternalToscaDsl.g:1933:6: (lv_interfaces_10_0= ruleInterface )
+                    	    // InternalToscaDsl.g:1934:7: lv_interfaces_10_0= ruleInterface
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getRelationshipAccess().getInterfacesInterfaceParserRuleCall_5_3_1_0());
@@ -4017,11 +4311,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop43;
+                    	    break loop47;
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,19,FOLLOW_45); 
+                    otherlv_11=(Token)match(input,19,FOLLOW_48); 
 
                     				newLeafNode(otherlv_11, grammarAccess.getRelationshipAccess().getRightCurlyBracketKeyword_5_4());
                     			
@@ -4031,16 +4325,16 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1815:3: (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )?
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            // InternalToscaDsl.g:1957:3: (otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}' )?
+            int alt50=2;
+            int LA50_0 = input.LA(1);
 
-            if ( (LA46_0==31) ) {
-                alt46=1;
+            if ( (LA50_0==31) ) {
+                alt50=1;
             }
-            switch (alt46) {
+            switch (alt50) {
                 case 1 :
-                    // InternalToscaDsl.g:1816:4: otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}'
+                    // InternalToscaDsl.g:1958:4: otherlv_12= ',\\n\"properties\" :' otherlv_13= '{' ( (lv_properties_14_0= ruleProperty ) ) (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )* otherlv_17= '}'
                     {
                     otherlv_12=(Token)match(input,31,FOLLOW_11); 
 
@@ -4050,11 +4344,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_13, grammarAccess.getRelationshipAccess().getLeftCurlyBracketKeyword_6_1());
                     			
-                    // InternalToscaDsl.g:1824:4: ( (lv_properties_14_0= ruleProperty ) )
-                    // InternalToscaDsl.g:1825:5: (lv_properties_14_0= ruleProperty )
+                    // InternalToscaDsl.g:1966:4: ( (lv_properties_14_0= ruleProperty ) )
+                    // InternalToscaDsl.g:1967:5: (lv_properties_14_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:1825:5: (lv_properties_14_0= ruleProperty )
-                    // InternalToscaDsl.g:1826:6: lv_properties_14_0= ruleProperty
+                    // InternalToscaDsl.g:1967:5: (lv_properties_14_0= ruleProperty )
+                    // InternalToscaDsl.g:1968:6: lv_properties_14_0= ruleProperty
                     {
 
                     						newCompositeNode(grammarAccess.getRelationshipAccess().getPropertiesPropertyParserRuleCall_6_2_0());
@@ -4081,30 +4375,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1843:4: (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )*
-                    loop45:
+                    // InternalToscaDsl.g:1985:4: (otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) ) )*
+                    loop49:
                     do {
-                        int alt45=2;
-                        int LA45_0 = input.LA(1);
+                        int alt49=2;
+                        int LA49_0 = input.LA(1);
 
-                        if ( (LA45_0==16) ) {
-                            alt45=1;
+                        if ( (LA49_0==16) ) {
+                            alt49=1;
                         }
 
 
-                        switch (alt45) {
+                        switch (alt49) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1844:5: otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:1986:5: otherlv_15= ',' ( (lv_properties_16_0= ruleProperty ) )
                     	    {
                     	    otherlv_15=(Token)match(input,16,FOLLOW_32); 
 
                     	    					newLeafNode(otherlv_15, grammarAccess.getRelationshipAccess().getCommaKeyword_6_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:1848:5: ( (lv_properties_16_0= ruleProperty ) )
-                    	    // InternalToscaDsl.g:1849:6: (lv_properties_16_0= ruleProperty )
+                    	    // InternalToscaDsl.g:1990:5: ( (lv_properties_16_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:1991:6: (lv_properties_16_0= ruleProperty )
                     	    {
-                    	    // InternalToscaDsl.g:1849:6: (lv_properties_16_0= ruleProperty )
-                    	    // InternalToscaDsl.g:1850:7: lv_properties_16_0= ruleProperty
+                    	    // InternalToscaDsl.g:1991:6: (lv_properties_16_0= ruleProperty )
+                    	    // InternalToscaDsl.g:1992:7: lv_properties_16_0= ruleProperty
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getRelationshipAccess().getPropertiesPropertyParserRuleCall_6_3_1_0());
@@ -4136,11 +4430,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop45;
+                    	    break loop49;
                         }
                     } while (true);
 
-                    otherlv_17=(Token)match(input,19,FOLLOW_46); 
+                    otherlv_17=(Token)match(input,19,FOLLOW_49); 
 
                     				newLeafNode(otherlv_17, grammarAccess.getRelationshipAccess().getRightCurlyBracketKeyword_6_4());
                     			
@@ -4150,18 +4444,18 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1873:3: (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )?
-            int alt48=2;
-            int LA48_0 = input.LA(1);
+            // InternalToscaDsl.g:2015:3: (otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}' )?
+            int alt52=2;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA48_0==47) ) {
-                alt48=1;
+            if ( (LA52_0==50) ) {
+                alt52=1;
             }
-            switch (alt48) {
+            switch (alt52) {
                 case 1 :
-                    // InternalToscaDsl.g:1874:4: otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}'
+                    // InternalToscaDsl.g:2016:4: otherlv_18= ',\\n\"source_interfaces\" :' otherlv_19= '{' ( (lv_source_interfaces_20_0= ruleInterface ) ) (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )* otherlv_23= '}'
                     {
-                    otherlv_18=(Token)match(input,47,FOLLOW_11); 
+                    otherlv_18=(Token)match(input,50,FOLLOW_11); 
 
                     				newLeafNode(otherlv_18, grammarAccess.getRelationshipAccess().getSource_interfacesKeyword_7_0());
                     			
@@ -4169,11 +4463,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_19, grammarAccess.getRelationshipAccess().getLeftCurlyBracketKeyword_7_1());
                     			
-                    // InternalToscaDsl.g:1882:4: ( (lv_source_interfaces_20_0= ruleInterface ) )
-                    // InternalToscaDsl.g:1883:5: (lv_source_interfaces_20_0= ruleInterface )
+                    // InternalToscaDsl.g:2024:4: ( (lv_source_interfaces_20_0= ruleInterface ) )
+                    // InternalToscaDsl.g:2025:5: (lv_source_interfaces_20_0= ruleInterface )
                     {
-                    // InternalToscaDsl.g:1883:5: (lv_source_interfaces_20_0= ruleInterface )
-                    // InternalToscaDsl.g:1884:6: lv_source_interfaces_20_0= ruleInterface
+                    // InternalToscaDsl.g:2025:5: (lv_source_interfaces_20_0= ruleInterface )
+                    // InternalToscaDsl.g:2026:6: lv_source_interfaces_20_0= ruleInterface
                     {
 
                     						newCompositeNode(grammarAccess.getRelationshipAccess().getSource_interfacesInterfaceParserRuleCall_7_2_0());
@@ -4200,30 +4494,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1901:4: (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )*
-                    loop47:
+                    // InternalToscaDsl.g:2043:4: (otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) ) )*
+                    loop51:
                     do {
-                        int alt47=2;
-                        int LA47_0 = input.LA(1);
+                        int alt51=2;
+                        int LA51_0 = input.LA(1);
 
-                        if ( (LA47_0==16) ) {
-                            alt47=1;
+                        if ( (LA51_0==16) ) {
+                            alt51=1;
                         }
 
 
-                        switch (alt47) {
+                        switch (alt51) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1902:5: otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2044:5: otherlv_21= ',' ( (lv_source_interfaces_22_0= ruleInterface ) )
                     	    {
                     	    otherlv_21=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_21, grammarAccess.getRelationshipAccess().getCommaKeyword_7_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:1906:5: ( (lv_source_interfaces_22_0= ruleInterface ) )
-                    	    // InternalToscaDsl.g:1907:6: (lv_source_interfaces_22_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2048:5: ( (lv_source_interfaces_22_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2049:6: (lv_source_interfaces_22_0= ruleInterface )
                     	    {
-                    	    // InternalToscaDsl.g:1907:6: (lv_source_interfaces_22_0= ruleInterface )
-                    	    // InternalToscaDsl.g:1908:7: lv_source_interfaces_22_0= ruleInterface
+                    	    // InternalToscaDsl.g:2049:6: (lv_source_interfaces_22_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2050:7: lv_source_interfaces_22_0= ruleInterface
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getRelationshipAccess().getSource_interfacesInterfaceParserRuleCall_7_3_1_0());
@@ -4255,11 +4549,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop47;
+                    	    break loop51;
                         }
                     } while (true);
 
-                    otherlv_23=(Token)match(input,19,FOLLOW_47); 
+                    otherlv_23=(Token)match(input,19,FOLLOW_50); 
 
                     				newLeafNode(otherlv_23, grammarAccess.getRelationshipAccess().getRightCurlyBracketKeyword_7_4());
                     			
@@ -4269,18 +4563,18 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:1931:3: (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )?
-            int alt50=2;
-            int LA50_0 = input.LA(1);
+            // InternalToscaDsl.g:2073:3: (otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}' )?
+            int alt54=2;
+            int LA54_0 = input.LA(1);
 
-            if ( (LA50_0==48) ) {
-                alt50=1;
+            if ( (LA54_0==51) ) {
+                alt54=1;
             }
-            switch (alt50) {
+            switch (alt54) {
                 case 1 :
-                    // InternalToscaDsl.g:1932:4: otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}'
+                    // InternalToscaDsl.g:2074:4: otherlv_24= ',\\n\"target_iterfaces\" :' otherlv_25= '{' ( (lv_target_interfaces_26_0= ruleInterface ) ) (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )* otherlv_29= '}'
                     {
-                    otherlv_24=(Token)match(input,48,FOLLOW_11); 
+                    otherlv_24=(Token)match(input,51,FOLLOW_11); 
 
                     				newLeafNode(otherlv_24, grammarAccess.getRelationshipAccess().getTarget_iterfacesKeyword_8_0());
                     			
@@ -4288,11 +4582,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_25, grammarAccess.getRelationshipAccess().getLeftCurlyBracketKeyword_8_1());
                     			
-                    // InternalToscaDsl.g:1940:4: ( (lv_target_interfaces_26_0= ruleInterface ) )
-                    // InternalToscaDsl.g:1941:5: (lv_target_interfaces_26_0= ruleInterface )
+                    // InternalToscaDsl.g:2082:4: ( (lv_target_interfaces_26_0= ruleInterface ) )
+                    // InternalToscaDsl.g:2083:5: (lv_target_interfaces_26_0= ruleInterface )
                     {
-                    // InternalToscaDsl.g:1941:5: (lv_target_interfaces_26_0= ruleInterface )
-                    // InternalToscaDsl.g:1942:6: lv_target_interfaces_26_0= ruleInterface
+                    // InternalToscaDsl.g:2083:5: (lv_target_interfaces_26_0= ruleInterface )
+                    // InternalToscaDsl.g:2084:6: lv_target_interfaces_26_0= ruleInterface
                     {
 
                     						newCompositeNode(grammarAccess.getRelationshipAccess().getTarget_interfacesInterfaceParserRuleCall_8_2_0());
@@ -4319,30 +4613,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:1959:4: (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )*
-                    loop49:
+                    // InternalToscaDsl.g:2101:4: (otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) ) )*
+                    loop53:
                     do {
-                        int alt49=2;
-                        int LA49_0 = input.LA(1);
+                        int alt53=2;
+                        int LA53_0 = input.LA(1);
 
-                        if ( (LA49_0==16) ) {
-                            alt49=1;
+                        if ( (LA53_0==16) ) {
+                            alt53=1;
                         }
 
 
-                        switch (alt49) {
+                        switch (alt53) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:1960:5: otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2102:5: otherlv_27= ',' ( (lv_target_interfaces_28_0= ruleInterface ) )
                     	    {
                     	    otherlv_27=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_27, grammarAccess.getRelationshipAccess().getCommaKeyword_8_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:1964:5: ( (lv_target_interfaces_28_0= ruleInterface ) )
-                    	    // InternalToscaDsl.g:1965:6: (lv_target_interfaces_28_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2106:5: ( (lv_target_interfaces_28_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2107:6: (lv_target_interfaces_28_0= ruleInterface )
                     	    {
-                    	    // InternalToscaDsl.g:1965:6: (lv_target_interfaces_28_0= ruleInterface )
-                    	    // InternalToscaDsl.g:1966:7: lv_target_interfaces_28_0= ruleInterface
+                    	    // InternalToscaDsl.g:2107:6: (lv_target_interfaces_28_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2108:7: lv_target_interfaces_28_0= ruleInterface
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getRelationshipAccess().getTarget_interfacesInterfaceParserRuleCall_8_3_1_0());
@@ -4374,7 +4668,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop49;
+                    	    break loop53;
                         }
                     } while (true);
 
@@ -4415,7 +4709,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGroup"
-    // InternalToscaDsl.g:1997:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
+    // InternalToscaDsl.g:2139:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
     public final EObject entryRuleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -4423,8 +4717,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:1997:46: (iv_ruleGroup= ruleGroup EOF )
-            // InternalToscaDsl.g:1998:2: iv_ruleGroup= ruleGroup EOF
+            // InternalToscaDsl.g:2139:46: (iv_ruleGroup= ruleGroup EOF )
+            // InternalToscaDsl.g:2140:2: iv_ruleGroup= ruleGroup EOF
             {
              newCompositeNode(grammarAccess.getGroupRule()); 
             pushFollow(FOLLOW_1);
@@ -4451,7 +4745,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGroup"
-    // InternalToscaDsl.g:2004:1: ruleGroup returns [EObject current=null] : ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' ) ;
+    // InternalToscaDsl.g:2146:1: ruleGroup returns [EObject current=null] : ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' ) ;
     public final EObject ruleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -4486,14 +4780,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2010:2: ( ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' ) )
-            // InternalToscaDsl.g:2011:2: ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' )
+            // InternalToscaDsl.g:2152:2: ( ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' ) )
+            // InternalToscaDsl.g:2153:2: ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' )
             {
-            // InternalToscaDsl.g:2011:2: ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' )
-            // InternalToscaDsl.g:2012:3: () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}'
+            // InternalToscaDsl.g:2153:2: ( () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}' )
+            // InternalToscaDsl.g:2154:3: () ( (lv_group_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' otherlv_4= '\"type\" :' ( (lv_type_5_0= RULE_STRING ) ) (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )? (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )? (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )? (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )? otherlv_22= '}'
             {
-            // InternalToscaDsl.g:2012:3: ()
-            // InternalToscaDsl.g:2013:4: 
+            // InternalToscaDsl.g:2154:3: ()
+            // InternalToscaDsl.g:2155:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4503,11 +4797,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2019:3: ( (lv_group_name_1_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2020:4: (lv_group_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2161:3: ( (lv_group_name_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2162:4: (lv_group_name_1_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2020:4: (lv_group_name_1_0= RULE_STRING )
-            // InternalToscaDsl.g:2021:5: lv_group_name_1_0= RULE_STRING
+            // InternalToscaDsl.g:2162:4: (lv_group_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2163:5: lv_group_name_1_0= RULE_STRING
             {
             lv_group_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -4541,13 +4835,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_4, grammarAccess.getGroupAccess().getTypeKeyword_4());
             		
-            // InternalToscaDsl.g:2049:3: ( (lv_type_5_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2050:4: (lv_type_5_0= RULE_STRING )
+            // InternalToscaDsl.g:2191:3: ( (lv_type_5_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2192:4: (lv_type_5_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2050:4: (lv_type_5_0= RULE_STRING )
-            // InternalToscaDsl.g:2051:5: lv_type_5_0= RULE_STRING
+            // InternalToscaDsl.g:2192:4: (lv_type_5_0= RULE_STRING )
+            // InternalToscaDsl.g:2193:5: lv_type_5_0= RULE_STRING
             {
-            lv_type_5_0=(Token)match(input,RULE_STRING,FOLLOW_48); 
+            lv_type_5_0=(Token)match(input,RULE_STRING,FOLLOW_51); 
 
             					newLeafNode(lv_type_5_0, grammarAccess.getGroupAccess().getTypeSTRINGTerminalRuleCall_5_0());
             				
@@ -4567,28 +4861,28 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2067:3: (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )?
-            int alt51=2;
-            int LA51_0 = input.LA(1);
+            // InternalToscaDsl.g:2209:3: (otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) ) )?
+            int alt55=2;
+            int LA55_0 = input.LA(1);
 
-            if ( (LA51_0==13) ) {
-                alt51=1;
+            if ( (LA55_0==13) ) {
+                alt55=1;
             }
-            switch (alt51) {
+            switch (alt55) {
                 case 1 :
-                    // InternalToscaDsl.g:2068:4: otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2210:4: otherlv_6= ',\\n\"description\" :' ( (lv_description_7_0= RULE_STRING ) )
                     {
                     otherlv_6=(Token)match(input,13,FOLLOW_4); 
 
                     				newLeafNode(otherlv_6, grammarAccess.getGroupAccess().getDescriptionKeyword_6_0());
                     			
-                    // InternalToscaDsl.g:2072:4: ( (lv_description_7_0= RULE_STRING ) )
-                    // InternalToscaDsl.g:2073:5: (lv_description_7_0= RULE_STRING )
+                    // InternalToscaDsl.g:2214:4: ( (lv_description_7_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2215:5: (lv_description_7_0= RULE_STRING )
                     {
-                    // InternalToscaDsl.g:2073:5: (lv_description_7_0= RULE_STRING )
-                    // InternalToscaDsl.g:2074:6: lv_description_7_0= RULE_STRING
+                    // InternalToscaDsl.g:2215:5: (lv_description_7_0= RULE_STRING )
+                    // InternalToscaDsl.g:2216:6: lv_description_7_0= RULE_STRING
                     {
-                    lv_description_7_0=(Token)match(input,RULE_STRING,FOLLOW_49); 
+                    lv_description_7_0=(Token)match(input,RULE_STRING,FOLLOW_52); 
 
                     						newLeafNode(lv_description_7_0, grammarAccess.getGroupAccess().getDescriptionSTRINGTerminalRuleCall_6_1_0());
                     					
@@ -4614,30 +4908,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2091:3: (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            // InternalToscaDsl.g:2233:3: (otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}' )?
+            int alt57=2;
+            int LA57_0 = input.LA(1);
 
-            if ( (LA53_0==49) ) {
-                alt53=1;
+            if ( (LA57_0==52) ) {
+                alt57=1;
             }
-            switch (alt53) {
+            switch (alt57) {
                 case 1 :
-                    // InternalToscaDsl.g:2092:4: otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}'
+                    // InternalToscaDsl.g:2234:4: otherlv_8= ',\\n\"targets\" :' otherlv_9= '{' ( (lv_targets_10_0= ruleEString ) ) (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )* otherlv_13= '}'
                     {
-                    otherlv_8=(Token)match(input,49,FOLLOW_11); 
+                    otherlv_8=(Token)match(input,52,FOLLOW_11); 
 
                     				newLeafNode(otherlv_8, grammarAccess.getGroupAccess().getTargetsKeyword_7_0());
                     			
-                    otherlv_9=(Token)match(input,11,FOLLOW_50); 
+                    otherlv_9=(Token)match(input,11,FOLLOW_53); 
 
                     				newLeafNode(otherlv_9, grammarAccess.getGroupAccess().getLeftCurlyBracketKeyword_7_1());
                     			
-                    // InternalToscaDsl.g:2100:4: ( (lv_targets_10_0= ruleEString ) )
-                    // InternalToscaDsl.g:2101:5: (lv_targets_10_0= ruleEString )
+                    // InternalToscaDsl.g:2242:4: ( (lv_targets_10_0= ruleEString ) )
+                    // InternalToscaDsl.g:2243:5: (lv_targets_10_0= ruleEString )
                     {
-                    // InternalToscaDsl.g:2101:5: (lv_targets_10_0= ruleEString )
-                    // InternalToscaDsl.g:2102:6: lv_targets_10_0= ruleEString
+                    // InternalToscaDsl.g:2243:5: (lv_targets_10_0= ruleEString )
+                    // InternalToscaDsl.g:2244:6: lv_targets_10_0= ruleEString
                     {
 
                     						newCompositeNode(grammarAccess.getGroupAccess().getTargetsEStringParserRuleCall_7_2_0());
@@ -4664,30 +4958,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:2119:4: (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )*
-                    loop52:
+                    // InternalToscaDsl.g:2261:4: (otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) ) )*
+                    loop56:
                     do {
-                        int alt52=2;
-                        int LA52_0 = input.LA(1);
+                        int alt56=2;
+                        int LA56_0 = input.LA(1);
 
-                        if ( (LA52_0==16) ) {
-                            alt52=1;
+                        if ( (LA56_0==16) ) {
+                            alt56=1;
                         }
 
 
-                        switch (alt52) {
+                        switch (alt56) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2120:5: otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) )
+                    	    // InternalToscaDsl.g:2262:5: otherlv_11= ',' ( (lv_targets_12_0= RULE_STRING ) )
                     	    {
                     	    otherlv_11=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_11, grammarAccess.getGroupAccess().getCommaKeyword_7_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:2124:5: ( (lv_targets_12_0= RULE_STRING ) )
-                    	    // InternalToscaDsl.g:2125:6: (lv_targets_12_0= RULE_STRING )
+                    	    // InternalToscaDsl.g:2266:5: ( (lv_targets_12_0= RULE_STRING ) )
+                    	    // InternalToscaDsl.g:2267:6: (lv_targets_12_0= RULE_STRING )
                     	    {
-                    	    // InternalToscaDsl.g:2125:6: (lv_targets_12_0= RULE_STRING )
-                    	    // InternalToscaDsl.g:2126:7: lv_targets_12_0= RULE_STRING
+                    	    // InternalToscaDsl.g:2267:6: (lv_targets_12_0= RULE_STRING )
+                    	    // InternalToscaDsl.g:2268:7: lv_targets_12_0= RULE_STRING
                     	    {
                     	    lv_targets_12_0=(Token)match(input,RULE_STRING,FOLLOW_12); 
 
@@ -4714,11 +5008,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop52;
+                    	    break loop56;
                         }
                     } while (true);
 
-                    otherlv_13=(Token)match(input,19,FOLLOW_51); 
+                    otherlv_13=(Token)match(input,19,FOLLOW_54); 
 
                     				newLeafNode(otherlv_13, grammarAccess.getGroupAccess().getRightCurlyBracketKeyword_7_4());
                     			
@@ -4728,31 +5022,31 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2148:3: (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            // InternalToscaDsl.g:2290:3: (otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) ) )?
+            int alt58=2;
+            int LA58_0 = input.LA(1);
 
-            if ( (LA54_0==31) ) {
-                alt54=1;
+            if ( (LA58_0==31) ) {
+                alt58=1;
             }
-            switch (alt54) {
+            switch (alt58) {
                 case 1 :
-                    // InternalToscaDsl.g:2149:4: otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) )
+                    // InternalToscaDsl.g:2291:4: otherlv_14= ',\\n\"properties\" :' ( (lv_properties_15_0= ruleProperty ) )
                     {
                     otherlv_14=(Token)match(input,31,FOLLOW_32); 
 
                     				newLeafNode(otherlv_14, grammarAccess.getGroupAccess().getPropertiesKeyword_8_0());
                     			
-                    // InternalToscaDsl.g:2153:4: ( (lv_properties_15_0= ruleProperty ) )
-                    // InternalToscaDsl.g:2154:5: (lv_properties_15_0= ruleProperty )
+                    // InternalToscaDsl.g:2295:4: ( (lv_properties_15_0= ruleProperty ) )
+                    // InternalToscaDsl.g:2296:5: (lv_properties_15_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:2154:5: (lv_properties_15_0= ruleProperty )
-                    // InternalToscaDsl.g:2155:6: lv_properties_15_0= ruleProperty
+                    // InternalToscaDsl.g:2296:5: (lv_properties_15_0= ruleProperty )
+                    // InternalToscaDsl.g:2297:6: lv_properties_15_0= ruleProperty
                     {
 
                     						newCompositeNode(grammarAccess.getGroupAccess().getPropertiesPropertyParserRuleCall_8_1_0());
                     					
-                    pushFollow(FOLLOW_52);
+                    pushFollow(FOLLOW_55);
                     lv_properties_15_0=ruleProperty();
 
                     state._fsp--;
@@ -4780,16 +5074,16 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2173:3: (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            // InternalToscaDsl.g:2315:3: (otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}' )?
+            int alt60=2;
+            int LA60_0 = input.LA(1);
 
-            if ( (LA56_0==30) ) {
-                alt56=1;
+            if ( (LA60_0==30) ) {
+                alt60=1;
             }
-            switch (alt56) {
+            switch (alt60) {
                 case 1 :
-                    // InternalToscaDsl.g:2174:4: otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}'
+                    // InternalToscaDsl.g:2316:4: otherlv_16= ',\\n\"interfaces\" :' otherlv_17= '{' ( (lv_interfaces_18_0= ruleInterface ) ) (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )* otherlv_21= '}'
                     {
                     otherlv_16=(Token)match(input,30,FOLLOW_11); 
 
@@ -4799,11 +5093,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_17, grammarAccess.getGroupAccess().getLeftCurlyBracketKeyword_9_1());
                     			
-                    // InternalToscaDsl.g:2182:4: ( (lv_interfaces_18_0= ruleInterface ) )
-                    // InternalToscaDsl.g:2183:5: (lv_interfaces_18_0= ruleInterface )
+                    // InternalToscaDsl.g:2324:4: ( (lv_interfaces_18_0= ruleInterface ) )
+                    // InternalToscaDsl.g:2325:5: (lv_interfaces_18_0= ruleInterface )
                     {
-                    // InternalToscaDsl.g:2183:5: (lv_interfaces_18_0= ruleInterface )
-                    // InternalToscaDsl.g:2184:6: lv_interfaces_18_0= ruleInterface
+                    // InternalToscaDsl.g:2325:5: (lv_interfaces_18_0= ruleInterface )
+                    // InternalToscaDsl.g:2326:6: lv_interfaces_18_0= ruleInterface
                     {
 
                     						newCompositeNode(grammarAccess.getGroupAccess().getInterfacesInterfaceParserRuleCall_9_2_0());
@@ -4830,30 +5124,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:2201:4: (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )*
-                    loop55:
+                    // InternalToscaDsl.g:2343:4: (otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) ) )*
+                    loop59:
                     do {
-                        int alt55=2;
-                        int LA55_0 = input.LA(1);
+                        int alt59=2;
+                        int LA59_0 = input.LA(1);
 
-                        if ( (LA55_0==16) ) {
-                            alt55=1;
+                        if ( (LA59_0==16) ) {
+                            alt59=1;
                         }
 
 
-                        switch (alt55) {
+                        switch (alt59) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2202:5: otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2344:5: otherlv_19= ',' ( (lv_interfaces_20_0= ruleInterface ) )
                     	    {
                     	    otherlv_19=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_19, grammarAccess.getGroupAccess().getCommaKeyword_9_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:2206:5: ( (lv_interfaces_20_0= ruleInterface ) )
-                    	    // InternalToscaDsl.g:2207:6: (lv_interfaces_20_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2348:5: ( (lv_interfaces_20_0= ruleInterface ) )
+                    	    // InternalToscaDsl.g:2349:6: (lv_interfaces_20_0= ruleInterface )
                     	    {
-                    	    // InternalToscaDsl.g:2207:6: (lv_interfaces_20_0= ruleInterface )
-                    	    // InternalToscaDsl.g:2208:7: lv_interfaces_20_0= ruleInterface
+                    	    // InternalToscaDsl.g:2349:6: (lv_interfaces_20_0= ruleInterface )
+                    	    // InternalToscaDsl.g:2350:7: lv_interfaces_20_0= ruleInterface
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getGroupAccess().getInterfacesInterfaceParserRuleCall_9_3_1_0());
@@ -4885,7 +5179,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop55;
+                    	    break loop59;
                         }
                     } while (true);
 
@@ -4926,7 +5220,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePolicy"
-    // InternalToscaDsl.g:2239:1: entryRulePolicy returns [EObject current=null] : iv_rulePolicy= rulePolicy EOF ;
+    // InternalToscaDsl.g:2381:1: entryRulePolicy returns [EObject current=null] : iv_rulePolicy= rulePolicy EOF ;
     public final EObject entryRulePolicy() throws RecognitionException {
         EObject current = null;
 
@@ -4934,8 +5228,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2239:47: (iv_rulePolicy= rulePolicy EOF )
-            // InternalToscaDsl.g:2240:2: iv_rulePolicy= rulePolicy EOF
+            // InternalToscaDsl.g:2381:47: (iv_rulePolicy= rulePolicy EOF )
+            // InternalToscaDsl.g:2382:2: iv_rulePolicy= rulePolicy EOF
             {
              newCompositeNode(grammarAccess.getPolicyRule()); 
             pushFollow(FOLLOW_1);
@@ -4962,7 +5256,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePolicy"
-    // InternalToscaDsl.g:2246:1: rulePolicy returns [EObject current=null] : ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' ) ;
+    // InternalToscaDsl.g:2388:1: rulePolicy returns [EObject current=null] : ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' ) ;
     public final EObject rulePolicy() throws RecognitionException {
         EObject current = null;
 
@@ -4973,14 +5267,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2252:2: ( ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' ) )
-            // InternalToscaDsl.g:2253:2: ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' )
+            // InternalToscaDsl.g:2394:2: ( ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' ) )
+            // InternalToscaDsl.g:2395:2: ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' )
             {
-            // InternalToscaDsl.g:2253:2: ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' )
-            // InternalToscaDsl.g:2254:3: () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':'
+            // InternalToscaDsl.g:2395:2: ( () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':' )
+            // InternalToscaDsl.g:2396:3: () ( (lv_policy_name_1_0= RULE_STRING ) ) otherlv_2= ':'
             {
-            // InternalToscaDsl.g:2254:3: ()
-            // InternalToscaDsl.g:2255:4: 
+            // InternalToscaDsl.g:2396:3: ()
+            // InternalToscaDsl.g:2397:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4990,11 +5284,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2261:3: ( (lv_policy_name_1_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2262:4: (lv_policy_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2403:3: ( (lv_policy_name_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2404:4: (lv_policy_name_1_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2262:4: (lv_policy_name_1_0= RULE_STRING )
-            // InternalToscaDsl.g:2263:5: lv_policy_name_1_0= RULE_STRING
+            // InternalToscaDsl.g:2404:4: (lv_policy_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2405:5: lv_policy_name_1_0= RULE_STRING
             {
             lv_policy_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -5043,7 +5337,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterface"
-    // InternalToscaDsl.g:2287:1: entryRuleInterface returns [EObject current=null] : iv_ruleInterface= ruleInterface EOF ;
+    // InternalToscaDsl.g:2429:1: entryRuleInterface returns [EObject current=null] : iv_ruleInterface= ruleInterface EOF ;
     public final EObject entryRuleInterface() throws RecognitionException {
         EObject current = null;
 
@@ -5051,8 +5345,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2287:50: (iv_ruleInterface= ruleInterface EOF )
-            // InternalToscaDsl.g:2288:2: iv_ruleInterface= ruleInterface EOF
+            // InternalToscaDsl.g:2429:50: (iv_ruleInterface= ruleInterface EOF )
+            // InternalToscaDsl.g:2430:2: iv_ruleInterface= ruleInterface EOF
             {
              newCompositeNode(grammarAccess.getInterfaceRule()); 
             pushFollow(FOLLOW_1);
@@ -5079,7 +5373,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterface"
-    // InternalToscaDsl.g:2294:1: ruleInterface returns [EObject current=null] : ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' ) ;
+    // InternalToscaDsl.g:2436:1: ruleInterface returns [EObject current=null] : ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' ) ;
     public final EObject ruleInterface() throws RecognitionException {
         EObject current = null;
 
@@ -5097,14 +5391,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2300:2: ( ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' ) )
-            // InternalToscaDsl.g:2301:2: ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' )
+            // InternalToscaDsl.g:2442:2: ( ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' ) )
+            // InternalToscaDsl.g:2443:2: ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' )
             {
-            // InternalToscaDsl.g:2301:2: ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' )
-            // InternalToscaDsl.g:2302:3: () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}'
+            // InternalToscaDsl.g:2443:2: ( () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}' )
+            // InternalToscaDsl.g:2444:3: () ( (lv_type_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )? otherlv_7= '}'
             {
-            // InternalToscaDsl.g:2302:3: ()
-            // InternalToscaDsl.g:2303:4: 
+            // InternalToscaDsl.g:2444:3: ()
+            // InternalToscaDsl.g:2445:4: 
             {
 
             				current = forceCreateModelElement(
@@ -5114,11 +5408,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2309:3: ( (lv_type_1_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2310:4: (lv_type_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2451:3: ( (lv_type_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2452:4: (lv_type_1_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2310:4: (lv_type_1_0= RULE_STRING )
-            // InternalToscaDsl.g:2311:5: lv_type_1_0= RULE_STRING
+            // InternalToscaDsl.g:2452:4: (lv_type_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2453:5: lv_type_1_0= RULE_STRING
             {
             lv_type_1_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -5144,26 +5438,26 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getInterfaceAccess().getColonKeyword_2());
             		
-            otherlv_3=(Token)match(input,11,FOLLOW_53); 
+            otherlv_3=(Token)match(input,11,FOLLOW_56); 
 
             			newLeafNode(otherlv_3, grammarAccess.getInterfaceAccess().getLeftCurlyBracketKeyword_3());
             		
-            // InternalToscaDsl.g:2335:3: ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )?
-            int alt58=2;
-            int LA58_0 = input.LA(1);
+            // InternalToscaDsl.g:2477:3: ( ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )* )?
+            int alt62=2;
+            int LA62_0 = input.LA(1);
 
-            if ( (LA58_0==RULE_STRING) ) {
-                alt58=1;
+            if ( (LA62_0==RULE_STRING) ) {
+                alt62=1;
             }
-            switch (alt58) {
+            switch (alt62) {
                 case 1 :
-                    // InternalToscaDsl.g:2336:4: ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )*
+                    // InternalToscaDsl.g:2478:4: ( (lv_operations_4_0= ruleOperation ) ) (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )*
                     {
-                    // InternalToscaDsl.g:2336:4: ( (lv_operations_4_0= ruleOperation ) )
-                    // InternalToscaDsl.g:2337:5: (lv_operations_4_0= ruleOperation )
+                    // InternalToscaDsl.g:2478:4: ( (lv_operations_4_0= ruleOperation ) )
+                    // InternalToscaDsl.g:2479:5: (lv_operations_4_0= ruleOperation )
                     {
-                    // InternalToscaDsl.g:2337:5: (lv_operations_4_0= ruleOperation )
-                    // InternalToscaDsl.g:2338:6: lv_operations_4_0= ruleOperation
+                    // InternalToscaDsl.g:2479:5: (lv_operations_4_0= ruleOperation )
+                    // InternalToscaDsl.g:2480:6: lv_operations_4_0= ruleOperation
                     {
 
                     						newCompositeNode(grammarAccess.getInterfaceAccess().getOperationsOperationParserRuleCall_4_0_0());
@@ -5190,30 +5484,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:2355:4: (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )*
-                    loop57:
+                    // InternalToscaDsl.g:2497:4: (otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) ) )*
+                    loop61:
                     do {
-                        int alt57=2;
-                        int LA57_0 = input.LA(1);
+                        int alt61=2;
+                        int LA61_0 = input.LA(1);
 
-                        if ( (LA57_0==16) ) {
-                            alt57=1;
+                        if ( (LA61_0==16) ) {
+                            alt61=1;
                         }
 
 
-                        switch (alt57) {
+                        switch (alt61) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2356:5: otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) )
+                    	    // InternalToscaDsl.g:2498:5: otherlv_5= ',' ( (lv_operations_6_0= ruleOperation ) )
                     	    {
                     	    otherlv_5=(Token)match(input,16,FOLLOW_4); 
 
                     	    					newLeafNode(otherlv_5, grammarAccess.getInterfaceAccess().getCommaKeyword_4_1_0());
                     	    				
-                    	    // InternalToscaDsl.g:2360:5: ( (lv_operations_6_0= ruleOperation ) )
-                    	    // InternalToscaDsl.g:2361:6: (lv_operations_6_0= ruleOperation )
+                    	    // InternalToscaDsl.g:2502:5: ( (lv_operations_6_0= ruleOperation ) )
+                    	    // InternalToscaDsl.g:2503:6: (lv_operations_6_0= ruleOperation )
                     	    {
-                    	    // InternalToscaDsl.g:2361:6: (lv_operations_6_0= ruleOperation )
-                    	    // InternalToscaDsl.g:2362:7: lv_operations_6_0= ruleOperation
+                    	    // InternalToscaDsl.g:2503:6: (lv_operations_6_0= ruleOperation )
+                    	    // InternalToscaDsl.g:2504:7: lv_operations_6_0= ruleOperation
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getInterfaceAccess().getOperationsOperationParserRuleCall_4_1_1_0());
@@ -5245,7 +5539,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop57;
+                    	    break loop61;
                         }
                     } while (true);
 
@@ -5282,7 +5576,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleProperty"
-    // InternalToscaDsl.g:2389:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // InternalToscaDsl.g:2531:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -5290,8 +5584,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2389:49: (iv_ruleProperty= ruleProperty EOF )
-            // InternalToscaDsl.g:2390:2: iv_ruleProperty= ruleProperty EOF
+            // InternalToscaDsl.g:2531:49: (iv_ruleProperty= ruleProperty EOF )
+            // InternalToscaDsl.g:2532:2: iv_ruleProperty= ruleProperty EOF
             {
              newCompositeNode(grammarAccess.getPropertyRule()); 
             pushFollow(FOLLOW_1);
@@ -5318,7 +5612,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleProperty"
-    // InternalToscaDsl.g:2396:1: ruleProperty returns [EObject current=null] : ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) ;
+    // InternalToscaDsl.g:2538:1: ruleProperty returns [EObject current=null] : ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -5331,14 +5625,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2402:2: ( ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) )
-            // InternalToscaDsl.g:2403:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:2544:2: ( ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) ) )
+            // InternalToscaDsl.g:2545:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
             {
-            // InternalToscaDsl.g:2403:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
-            // InternalToscaDsl.g:2404:3: () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2545:2: ( () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:2546:3: () otherlv_1= '\\n' ( (lv_property_name_2_0= RULE_STRING ) ) otherlv_3= ':' ( (lv_value_4_0= RULE_STRING ) )
             {
-            // InternalToscaDsl.g:2404:3: ()
-            // InternalToscaDsl.g:2405:4: 
+            // InternalToscaDsl.g:2546:3: ()
+            // InternalToscaDsl.g:2547:4: 
             {
 
             				current = forceCreateModelElement(
@@ -5348,15 +5642,15 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,44,FOLLOW_4); 
+            otherlv_1=(Token)match(input,47,FOLLOW_4); 
 
             			newLeafNode(otherlv_1, grammarAccess.getPropertyAccess().getControl000aKeyword_1());
             		
-            // InternalToscaDsl.g:2415:3: ( (lv_property_name_2_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2416:4: (lv_property_name_2_0= RULE_STRING )
+            // InternalToscaDsl.g:2557:3: ( (lv_property_name_2_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2558:4: (lv_property_name_2_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2416:4: (lv_property_name_2_0= RULE_STRING )
-            // InternalToscaDsl.g:2417:5: lv_property_name_2_0= RULE_STRING
+            // InternalToscaDsl.g:2558:4: (lv_property_name_2_0= RULE_STRING )
+            // InternalToscaDsl.g:2559:5: lv_property_name_2_0= RULE_STRING
             {
             lv_property_name_2_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -5382,11 +5676,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_3, grammarAccess.getPropertyAccess().getColonKeyword_3());
             		
-            // InternalToscaDsl.g:2437:3: ( (lv_value_4_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2438:4: (lv_value_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2579:3: ( (lv_value_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2580:4: (lv_value_4_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2438:4: (lv_value_4_0= RULE_STRING )
-            // InternalToscaDsl.g:2439:5: lv_value_4_0= RULE_STRING
+            // InternalToscaDsl.g:2580:4: (lv_value_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2581:5: lv_value_4_0= RULE_STRING
             {
             lv_value_4_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -5431,7 +5725,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRequirement"
-    // InternalToscaDsl.g:2459:1: entryRuleRequirement returns [EObject current=null] : iv_ruleRequirement= ruleRequirement EOF ;
+    // InternalToscaDsl.g:2601:1: entryRuleRequirement returns [EObject current=null] : iv_ruleRequirement= ruleRequirement EOF ;
     public final EObject entryRuleRequirement() throws RecognitionException {
         EObject current = null;
 
@@ -5439,8 +5733,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2459:52: (iv_ruleRequirement= ruleRequirement EOF )
-            // InternalToscaDsl.g:2460:2: iv_ruleRequirement= ruleRequirement EOF
+            // InternalToscaDsl.g:2601:52: (iv_ruleRequirement= ruleRequirement EOF )
+            // InternalToscaDsl.g:2602:2: iv_ruleRequirement= ruleRequirement EOF
             {
              newCompositeNode(grammarAccess.getRequirementRule()); 
             pushFollow(FOLLOW_1);
@@ -5467,7 +5761,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRequirement"
-    // InternalToscaDsl.g:2466:1: ruleRequirement returns [EObject current=null] : ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' ) ;
+    // InternalToscaDsl.g:2608:1: ruleRequirement returns [EObject current=null] : ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' ) ;
     public final EObject ruleRequirement() throws RecognitionException {
         EObject current = null;
 
@@ -5484,17 +5778,17 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2472:2: ( ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' ) )
-            // InternalToscaDsl.g:2473:2: ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' )
+            // InternalToscaDsl.g:2614:2: ( ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' ) )
+            // InternalToscaDsl.g:2615:2: ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' )
             {
-            // InternalToscaDsl.g:2473:2: ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' )
-            // InternalToscaDsl.g:2474:3: ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}'
+            // InternalToscaDsl.g:2615:2: ( ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}' )
+            // InternalToscaDsl.g:2616:3: ( (lv_requirement_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"capabiity\" :' ( (lv_capabiity_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )? otherlv_7= '}'
             {
-            // InternalToscaDsl.g:2474:3: ( (lv_requirement_name_0_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2475:4: (lv_requirement_name_0_0= RULE_STRING )
+            // InternalToscaDsl.g:2616:3: ( (lv_requirement_name_0_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2617:4: (lv_requirement_name_0_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2475:4: (lv_requirement_name_0_0= RULE_STRING )
-            // InternalToscaDsl.g:2476:5: lv_requirement_name_0_0= RULE_STRING
+            // InternalToscaDsl.g:2617:4: (lv_requirement_name_0_0= RULE_STRING )
+            // InternalToscaDsl.g:2618:5: lv_requirement_name_0_0= RULE_STRING
             {
             lv_requirement_name_0_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -5520,21 +5814,21 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getRequirementAccess().getColonKeyword_1());
             		
-            otherlv_2=(Token)match(input,11,FOLLOW_54); 
+            otherlv_2=(Token)match(input,11,FOLLOW_57); 
 
             			newLeafNode(otherlv_2, grammarAccess.getRequirementAccess().getLeftCurlyBracketKeyword_2());
             		
-            otherlv_3=(Token)match(input,50,FOLLOW_4); 
+            otherlv_3=(Token)match(input,53,FOLLOW_4); 
 
             			newLeafNode(otherlv_3, grammarAccess.getRequirementAccess().getCapabiityKeyword_3());
             		
-            // InternalToscaDsl.g:2504:3: ( (lv_capabiity_4_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2505:4: (lv_capabiity_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2646:3: ( (lv_capabiity_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2647:4: (lv_capabiity_4_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2505:4: (lv_capabiity_4_0= RULE_STRING )
-            // InternalToscaDsl.g:2506:5: lv_capabiity_4_0= RULE_STRING
+            // InternalToscaDsl.g:2647:4: (lv_capabiity_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2648:5: lv_capabiity_4_0= RULE_STRING
             {
-            lv_capabiity_4_0=(Token)match(input,RULE_STRING,FOLLOW_55); 
+            lv_capabiity_4_0=(Token)match(input,RULE_STRING,FOLLOW_58); 
 
             					newLeafNode(lv_capabiity_4_0, grammarAccess.getRequirementAccess().getCapabiitySTRINGTerminalRuleCall_4_0());
             				
@@ -5554,26 +5848,26 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2522:3: (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )?
-            int alt59=2;
-            int LA59_0 = input.LA(1);
+            // InternalToscaDsl.g:2664:3: (otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) ) )?
+            int alt63=2;
+            int LA63_0 = input.LA(1);
 
-            if ( (LA59_0==51) ) {
-                alt59=1;
+            if ( (LA63_0==54) ) {
+                alt63=1;
             }
-            switch (alt59) {
+            switch (alt63) {
                 case 1 :
-                    // InternalToscaDsl.g:2523:4: otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2665:4: otherlv_5= ',\\n\"node\" :' ( (lv_node_6_0= RULE_STRING ) )
                     {
-                    otherlv_5=(Token)match(input,51,FOLLOW_4); 
+                    otherlv_5=(Token)match(input,54,FOLLOW_4); 
 
                     				newLeafNode(otherlv_5, grammarAccess.getRequirementAccess().getNodeKeyword_5_0());
                     			
-                    // InternalToscaDsl.g:2527:4: ( (lv_node_6_0= RULE_STRING ) )
-                    // InternalToscaDsl.g:2528:5: (lv_node_6_0= RULE_STRING )
+                    // InternalToscaDsl.g:2669:4: ( (lv_node_6_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2670:5: (lv_node_6_0= RULE_STRING )
                     {
-                    // InternalToscaDsl.g:2528:5: (lv_node_6_0= RULE_STRING )
-                    // InternalToscaDsl.g:2529:6: lv_node_6_0= RULE_STRING
+                    // InternalToscaDsl.g:2670:5: (lv_node_6_0= RULE_STRING )
+                    // InternalToscaDsl.g:2671:6: lv_node_6_0= RULE_STRING
                     {
                     lv_node_6_0=(Token)match(input,RULE_STRING,FOLLOW_18); 
 
@@ -5628,7 +5922,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCapability"
-    // InternalToscaDsl.g:2554:1: entryRuleCapability returns [EObject current=null] : iv_ruleCapability= ruleCapability EOF ;
+    // InternalToscaDsl.g:2696:1: entryRuleCapability returns [EObject current=null] : iv_ruleCapability= ruleCapability EOF ;
     public final EObject entryRuleCapability() throws RecognitionException {
         EObject current = null;
 
@@ -5636,8 +5930,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2554:51: (iv_ruleCapability= ruleCapability EOF )
-            // InternalToscaDsl.g:2555:2: iv_ruleCapability= ruleCapability EOF
+            // InternalToscaDsl.g:2696:51: (iv_ruleCapability= ruleCapability EOF )
+            // InternalToscaDsl.g:2697:2: iv_ruleCapability= ruleCapability EOF
             {
              newCompositeNode(grammarAccess.getCapabilityRule()); 
             pushFollow(FOLLOW_1);
@@ -5664,7 +5958,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCapability"
-    // InternalToscaDsl.g:2561:1: ruleCapability returns [EObject current=null] : ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' ) ;
+    // InternalToscaDsl.g:2703:1: ruleCapability returns [EObject current=null] : ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' ) ;
     public final EObject ruleCapability() throws RecognitionException {
         EObject current = null;
 
@@ -5689,17 +5983,17 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2567:2: ( ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' ) )
-            // InternalToscaDsl.g:2568:2: ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' )
+            // InternalToscaDsl.g:2709:2: ( ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' ) )
+            // InternalToscaDsl.g:2710:2: ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' )
             {
-            // InternalToscaDsl.g:2568:2: ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' )
-            // InternalToscaDsl.g:2569:3: ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}'
+            // InternalToscaDsl.g:2710:2: ( ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}' )
+            // InternalToscaDsl.g:2711:3: ( (lv_capability_name_0_0= RULE_STRING ) ) otherlv_1= ':' otherlv_2= '{' otherlv_3= '\"type\" :' ( (lv_type_4_0= RULE_STRING ) ) (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )? (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )? otherlv_13= '}'
             {
-            // InternalToscaDsl.g:2569:3: ( (lv_capability_name_0_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2570:4: (lv_capability_name_0_0= RULE_STRING )
+            // InternalToscaDsl.g:2711:3: ( (lv_capability_name_0_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2712:4: (lv_capability_name_0_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2570:4: (lv_capability_name_0_0= RULE_STRING )
-            // InternalToscaDsl.g:2571:5: lv_capability_name_0_0= RULE_STRING
+            // InternalToscaDsl.g:2712:4: (lv_capability_name_0_0= RULE_STRING )
+            // InternalToscaDsl.g:2713:5: lv_capability_name_0_0= RULE_STRING
             {
             lv_capability_name_0_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -5733,13 +6027,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_3, grammarAccess.getCapabilityAccess().getTypeKeyword_3());
             		
-            // InternalToscaDsl.g:2599:3: ( (lv_type_4_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2600:4: (lv_type_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2741:3: ( (lv_type_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2742:4: (lv_type_4_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2600:4: (lv_type_4_0= RULE_STRING )
-            // InternalToscaDsl.g:2601:5: lv_type_4_0= RULE_STRING
+            // InternalToscaDsl.g:2742:4: (lv_type_4_0= RULE_STRING )
+            // InternalToscaDsl.g:2743:5: lv_type_4_0= RULE_STRING
             {
-            lv_type_4_0=(Token)match(input,RULE_STRING,FOLLOW_56); 
+            lv_type_4_0=(Token)match(input,RULE_STRING,FOLLOW_59); 
 
             					newLeafNode(lv_type_4_0, grammarAccess.getCapabilityAccess().getTypeSTRINGTerminalRuleCall_4_0());
             				
@@ -5759,28 +6053,28 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2617:3: (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )?
-            int alt60=2;
-            int LA60_0 = input.LA(1);
+            // InternalToscaDsl.g:2759:3: (otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) ) )?
+            int alt64=2;
+            int LA64_0 = input.LA(1);
 
-            if ( (LA60_0==13) ) {
-                alt60=1;
+            if ( (LA64_0==13) ) {
+                alt64=1;
             }
-            switch (alt60) {
+            switch (alt64) {
                 case 1 :
-                    // InternalToscaDsl.g:2618:4: otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2760:4: otherlv_5= ',\\n\"description\" :' ( (lv_description_6_0= RULE_STRING ) )
                     {
                     otherlv_5=(Token)match(input,13,FOLLOW_4); 
 
                     				newLeafNode(otherlv_5, grammarAccess.getCapabilityAccess().getDescriptionKeyword_5_0());
                     			
-                    // InternalToscaDsl.g:2622:4: ( (lv_description_6_0= RULE_STRING ) )
-                    // InternalToscaDsl.g:2623:5: (lv_description_6_0= RULE_STRING )
+                    // InternalToscaDsl.g:2764:4: ( (lv_description_6_0= RULE_STRING ) )
+                    // InternalToscaDsl.g:2765:5: (lv_description_6_0= RULE_STRING )
                     {
-                    // InternalToscaDsl.g:2623:5: (lv_description_6_0= RULE_STRING )
-                    // InternalToscaDsl.g:2624:6: lv_description_6_0= RULE_STRING
+                    // InternalToscaDsl.g:2765:5: (lv_description_6_0= RULE_STRING )
+                    // InternalToscaDsl.g:2766:6: lv_description_6_0= RULE_STRING
                     {
-                    lv_description_6_0=(Token)match(input,RULE_STRING,FOLLOW_57); 
+                    lv_description_6_0=(Token)match(input,RULE_STRING,FOLLOW_60); 
 
                     						newLeafNode(lv_description_6_0, grammarAccess.getCapabilityAccess().getDescriptionSTRINGTerminalRuleCall_5_1_0());
                     					
@@ -5806,16 +6100,16 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2641:3: (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )?
-            int alt62=2;
-            int LA62_0 = input.LA(1);
+            // InternalToscaDsl.g:2783:3: (otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}' )?
+            int alt66=2;
+            int LA66_0 = input.LA(1);
 
-            if ( (LA62_0==31) ) {
-                alt62=1;
+            if ( (LA66_0==31) ) {
+                alt66=1;
             }
-            switch (alt62) {
+            switch (alt66) {
                 case 1 :
-                    // InternalToscaDsl.g:2642:4: otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}'
+                    // InternalToscaDsl.g:2784:4: otherlv_7= ',\\n\"properties\" :' otherlv_8= '{' ( (lv_properties_9_0= ruleProperty ) ) (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )* otherlv_12= '}'
                     {
                     otherlv_7=(Token)match(input,31,FOLLOW_11); 
 
@@ -5825,11 +6119,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_8, grammarAccess.getCapabilityAccess().getLeftCurlyBracketKeyword_6_1());
                     			
-                    // InternalToscaDsl.g:2650:4: ( (lv_properties_9_0= ruleProperty ) )
-                    // InternalToscaDsl.g:2651:5: (lv_properties_9_0= ruleProperty )
+                    // InternalToscaDsl.g:2792:4: ( (lv_properties_9_0= ruleProperty ) )
+                    // InternalToscaDsl.g:2793:5: (lv_properties_9_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:2651:5: (lv_properties_9_0= ruleProperty )
-                    // InternalToscaDsl.g:2652:6: lv_properties_9_0= ruleProperty
+                    // InternalToscaDsl.g:2793:5: (lv_properties_9_0= ruleProperty )
+                    // InternalToscaDsl.g:2794:6: lv_properties_9_0= ruleProperty
                     {
 
                     						newCompositeNode(grammarAccess.getCapabilityAccess().getPropertiesPropertyParserRuleCall_6_2_0());
@@ -5856,30 +6150,30 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:2669:4: (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )*
-                    loop61:
+                    // InternalToscaDsl.g:2811:4: (otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) ) )*
+                    loop65:
                     do {
-                        int alt61=2;
-                        int LA61_0 = input.LA(1);
+                        int alt65=2;
+                        int LA65_0 = input.LA(1);
 
-                        if ( (LA61_0==16) ) {
-                            alt61=1;
+                        if ( (LA65_0==16) ) {
+                            alt65=1;
                         }
 
 
-                        switch (alt61) {
+                        switch (alt65) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2670:5: otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:2812:5: otherlv_10= ',' ( (lv_properties_11_0= ruleProperty ) )
                     	    {
                     	    otherlv_10=(Token)match(input,16,FOLLOW_32); 
 
                     	    					newLeafNode(otherlv_10, grammarAccess.getCapabilityAccess().getCommaKeyword_6_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:2674:5: ( (lv_properties_11_0= ruleProperty ) )
-                    	    // InternalToscaDsl.g:2675:6: (lv_properties_11_0= ruleProperty )
+                    	    // InternalToscaDsl.g:2816:5: ( (lv_properties_11_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:2817:6: (lv_properties_11_0= ruleProperty )
                     	    {
-                    	    // InternalToscaDsl.g:2675:6: (lv_properties_11_0= ruleProperty )
-                    	    // InternalToscaDsl.g:2676:7: lv_properties_11_0= ruleProperty
+                    	    // InternalToscaDsl.g:2817:6: (lv_properties_11_0= ruleProperty )
+                    	    // InternalToscaDsl.g:2818:7: lv_properties_11_0= ruleProperty
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getCapabilityAccess().getPropertiesPropertyParserRuleCall_6_3_1_0());
@@ -5911,7 +6205,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop61;
+                    	    break loop65;
                         }
                     } while (true);
 
@@ -5952,7 +6246,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleOperation"
-    // InternalToscaDsl.g:2707:1: entryRuleOperation returns [EObject current=null] : iv_ruleOperation= ruleOperation EOF ;
+    // InternalToscaDsl.g:2849:1: entryRuleOperation returns [EObject current=null] : iv_ruleOperation= ruleOperation EOF ;
     public final EObject entryRuleOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5960,8 +6254,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2707:50: (iv_ruleOperation= ruleOperation EOF )
-            // InternalToscaDsl.g:2708:2: iv_ruleOperation= ruleOperation EOF
+            // InternalToscaDsl.g:2849:50: (iv_ruleOperation= ruleOperation EOF )
+            // InternalToscaDsl.g:2850:2: iv_ruleOperation= ruleOperation EOF
             {
              newCompositeNode(grammarAccess.getOperationRule()); 
             pushFollow(FOLLOW_1);
@@ -5988,7 +6282,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOperation"
-    // InternalToscaDsl.g:2714:1: ruleOperation returns [EObject current=null] : ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' ) ;
+    // InternalToscaDsl.g:2856:1: ruleOperation returns [EObject current=null] : ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' ) ;
     public final EObject ruleOperation() throws RecognitionException {
         EObject current = null;
 
@@ -6015,14 +6309,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2720:2: ( ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' ) )
-            // InternalToscaDsl.g:2721:2: ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' )
+            // InternalToscaDsl.g:2862:2: ( ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' ) )
+            // InternalToscaDsl.g:2863:2: ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' )
             {
-            // InternalToscaDsl.g:2721:2: ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' )
-            // InternalToscaDsl.g:2722:3: () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}'
+            // InternalToscaDsl.g:2863:2: ( () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}' )
+            // InternalToscaDsl.g:2864:3: () ( (lv_operation_name_1_0= RULE_STRING ) ) otherlv_2= ':' otherlv_3= '{' (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )? otherlv_16= '}'
             {
-            // InternalToscaDsl.g:2722:3: ()
-            // InternalToscaDsl.g:2723:4: 
+            // InternalToscaDsl.g:2864:3: ()
+            // InternalToscaDsl.g:2865:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6032,11 +6326,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:2729:3: ( (lv_operation_name_1_0= RULE_STRING ) )
-            // InternalToscaDsl.g:2730:4: (lv_operation_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2871:3: ( (lv_operation_name_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:2872:4: (lv_operation_name_1_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:2730:4: (lv_operation_name_1_0= RULE_STRING )
-            // InternalToscaDsl.g:2731:5: lv_operation_name_1_0= RULE_STRING
+            // InternalToscaDsl.g:2872:4: (lv_operation_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:2873:5: lv_operation_name_1_0= RULE_STRING
             {
             lv_operation_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
 
@@ -6062,22 +6356,22 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getOperationAccess().getColonKeyword_2());
             		
-            otherlv_3=(Token)match(input,11,FOLLOW_58); 
+            otherlv_3=(Token)match(input,11,FOLLOW_61); 
 
             			newLeafNode(otherlv_3, grammarAccess.getOperationAccess().getLeftCurlyBracketKeyword_3());
             		
-            // InternalToscaDsl.g:2755:3: (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )?
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            // InternalToscaDsl.g:2897:3: (otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}' )?
+            int alt70=2;
+            int LA70_0 = input.LA(1);
 
-            if ( (LA66_0==52) ) {
-                alt66=1;
+            if ( (LA70_0==55) ) {
+                alt70=1;
             }
-            switch (alt66) {
+            switch (alt70) {
                 case 1 :
-                    // InternalToscaDsl.g:2756:4: otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}'
+                    // InternalToscaDsl.g:2898:4: otherlv_4= '\\n\"inputs\" :' otherlv_5= '{' ( (lv_inputs_6_0= ruleProperty ) ) (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )* (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )? otherlv_15= '}'
                     {
-                    otherlv_4=(Token)match(input,52,FOLLOW_11); 
+                    otherlv_4=(Token)match(input,55,FOLLOW_11); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getOperationAccess().getInputsKeyword_4_0());
                     			
@@ -6085,16 +6379,16 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_5, grammarAccess.getOperationAccess().getLeftCurlyBracketKeyword_4_1());
                     			
-                    // InternalToscaDsl.g:2764:4: ( (lv_inputs_6_0= ruleProperty ) )
-                    // InternalToscaDsl.g:2765:5: (lv_inputs_6_0= ruleProperty )
+                    // InternalToscaDsl.g:2906:4: ( (lv_inputs_6_0= ruleProperty ) )
+                    // InternalToscaDsl.g:2907:5: (lv_inputs_6_0= ruleProperty )
                     {
-                    // InternalToscaDsl.g:2765:5: (lv_inputs_6_0= ruleProperty )
-                    // InternalToscaDsl.g:2766:6: lv_inputs_6_0= ruleProperty
+                    // InternalToscaDsl.g:2907:5: (lv_inputs_6_0= ruleProperty )
+                    // InternalToscaDsl.g:2908:6: lv_inputs_6_0= ruleProperty
                     {
 
                     						newCompositeNode(grammarAccess.getOperationAccess().getInputsPropertyParserRuleCall_4_2_0());
                     					
-                    pushFollow(FOLLOW_59);
+                    pushFollow(FOLLOW_62);
                     lv_inputs_6_0=ruleProperty();
 
                     state._fsp--;
@@ -6116,35 +6410,35 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalToscaDsl.g:2783:4: (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )*
-                    loop63:
+                    // InternalToscaDsl.g:2925:4: (otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) ) )*
+                    loop67:
                     do {
-                        int alt63=2;
-                        int LA63_0 = input.LA(1);
+                        int alt67=2;
+                        int LA67_0 = input.LA(1);
 
-                        if ( (LA63_0==16) ) {
-                            alt63=1;
+                        if ( (LA67_0==16) ) {
+                            alt67=1;
                         }
 
 
-                        switch (alt63) {
+                        switch (alt67) {
                     	case 1 :
-                    	    // InternalToscaDsl.g:2784:5: otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:2926:5: otherlv_7= ',' ( (lv_inputs_8_0= ruleProperty ) )
                     	    {
                     	    otherlv_7=(Token)match(input,16,FOLLOW_32); 
 
                     	    					newLeafNode(otherlv_7, grammarAccess.getOperationAccess().getCommaKeyword_4_3_0());
                     	    				
-                    	    // InternalToscaDsl.g:2788:5: ( (lv_inputs_8_0= ruleProperty ) )
-                    	    // InternalToscaDsl.g:2789:6: (lv_inputs_8_0= ruleProperty )
+                    	    // InternalToscaDsl.g:2930:5: ( (lv_inputs_8_0= ruleProperty ) )
+                    	    // InternalToscaDsl.g:2931:6: (lv_inputs_8_0= ruleProperty )
                     	    {
-                    	    // InternalToscaDsl.g:2789:6: (lv_inputs_8_0= ruleProperty )
-                    	    // InternalToscaDsl.g:2790:7: lv_inputs_8_0= ruleProperty
+                    	    // InternalToscaDsl.g:2931:6: (lv_inputs_8_0= ruleProperty )
+                    	    // InternalToscaDsl.g:2932:7: lv_inputs_8_0= ruleProperty
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getOperationAccess().getInputsPropertyParserRuleCall_4_3_1_0());
                     	    						
-                    	    pushFollow(FOLLOW_59);
+                    	    pushFollow(FOLLOW_62);
                     	    lv_inputs_8_0=ruleProperty();
 
                     	    state._fsp--;
@@ -6171,20 +6465,20 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop63;
+                    	    break loop67;
                         }
                     } while (true);
 
-                    // InternalToscaDsl.g:2808:4: (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )?
-                    int alt65=2;
-                    int LA65_0 = input.LA(1);
+                    // InternalToscaDsl.g:2950:4: (otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']' )?
+                    int alt69=2;
+                    int LA69_0 = input.LA(1);
 
-                    if ( (LA65_0==34) ) {
-                        alt65=1;
+                    if ( (LA69_0==34) ) {
+                        alt69=1;
                     }
-                    switch (alt65) {
+                    switch (alt69) {
                         case 1 :
-                            // InternalToscaDsl.g:2809:5: otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']'
+                            // InternalToscaDsl.g:2951:5: otherlv_9= ',\\n\"resources\" :' otherlv_10= '[' ( (lv_dependentArtifacts_11_0= RULE_STRING ) ) (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )* otherlv_14= ']'
                             {
                             otherlv_9=(Token)match(input,34,FOLLOW_7); 
 
@@ -6194,13 +6488,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                             					newLeafNode(otherlv_10, grammarAccess.getOperationAccess().getLeftSquareBracketKeyword_4_4_1());
                             				
-                            // InternalToscaDsl.g:2817:5: ( (lv_dependentArtifacts_11_0= RULE_STRING ) )
-                            // InternalToscaDsl.g:2818:6: (lv_dependentArtifacts_11_0= RULE_STRING )
+                            // InternalToscaDsl.g:2959:5: ( (lv_dependentArtifacts_11_0= RULE_STRING ) )
+                            // InternalToscaDsl.g:2960:6: (lv_dependentArtifacts_11_0= RULE_STRING )
                             {
-                            // InternalToscaDsl.g:2818:6: (lv_dependentArtifacts_11_0= RULE_STRING )
-                            // InternalToscaDsl.g:2819:7: lv_dependentArtifacts_11_0= RULE_STRING
+                            // InternalToscaDsl.g:2960:6: (lv_dependentArtifacts_11_0= RULE_STRING )
+                            // InternalToscaDsl.g:2961:7: lv_dependentArtifacts_11_0= RULE_STRING
                             {
-                            lv_dependentArtifacts_11_0=(Token)match(input,RULE_STRING,FOLLOW_60); 
+                            lv_dependentArtifacts_11_0=(Token)match(input,RULE_STRING,FOLLOW_63); 
 
                             							newLeafNode(lv_dependentArtifacts_11_0, grammarAccess.getOperationAccess().getDependentArtifactsSTRINGTerminalRuleCall_4_4_2_0());
                             						
@@ -6220,32 +6514,32 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // InternalToscaDsl.g:2835:5: (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )*
-                            loop64:
+                            // InternalToscaDsl.g:2977:5: (otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) ) )*
+                            loop68:
                             do {
-                                int alt64=2;
-                                int LA64_0 = input.LA(1);
+                                int alt68=2;
+                                int LA68_0 = input.LA(1);
 
-                                if ( (LA64_0==53) ) {
-                                    alt64=1;
+                                if ( (LA68_0==56) ) {
+                                    alt68=1;
                                 }
 
 
-                                switch (alt64) {
+                                switch (alt68) {
                             	case 1 :
-                            	    // InternalToscaDsl.g:2836:6: otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) )
+                            	    // InternalToscaDsl.g:2978:6: otherlv_12= ', ' ( (lv_dependentArtifacts_13_0= RULE_STRING ) )
                             	    {
-                            	    otherlv_12=(Token)match(input,53,FOLLOW_4); 
+                            	    otherlv_12=(Token)match(input,56,FOLLOW_4); 
 
                             	    						newLeafNode(otherlv_12, grammarAccess.getOperationAccess().getCommaSpaceKeyword_4_4_3_0());
                             	    					
-                            	    // InternalToscaDsl.g:2840:6: ( (lv_dependentArtifacts_13_0= RULE_STRING ) )
-                            	    // InternalToscaDsl.g:2841:7: (lv_dependentArtifacts_13_0= RULE_STRING )
+                            	    // InternalToscaDsl.g:2982:6: ( (lv_dependentArtifacts_13_0= RULE_STRING ) )
+                            	    // InternalToscaDsl.g:2983:7: (lv_dependentArtifacts_13_0= RULE_STRING )
                             	    {
-                            	    // InternalToscaDsl.g:2841:7: (lv_dependentArtifacts_13_0= RULE_STRING )
-                            	    // InternalToscaDsl.g:2842:8: lv_dependentArtifacts_13_0= RULE_STRING
+                            	    // InternalToscaDsl.g:2983:7: (lv_dependentArtifacts_13_0= RULE_STRING )
+                            	    // InternalToscaDsl.g:2984:8: lv_dependentArtifacts_13_0= RULE_STRING
                             	    {
-                            	    lv_dependentArtifacts_13_0=(Token)match(input,RULE_STRING,FOLLOW_60); 
+                            	    lv_dependentArtifacts_13_0=(Token)match(input,RULE_STRING,FOLLOW_63); 
 
                             	    								newLeafNode(lv_dependentArtifacts_13_0, grammarAccess.getOperationAccess().getDependentArtifactsSTRINGTerminalRuleCall_4_4_3_1_0());
                             	    							
@@ -6270,7 +6564,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                             	    break;
 
                             	default :
-                            	    break loop64;
+                            	    break loop68;
                                 }
                             } while (true);
 
@@ -6321,7 +6615,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleValue"
-    // InternalToscaDsl.g:2877:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
+    // InternalToscaDsl.g:3019:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
     public final EObject entryRuleValue() throws RecognitionException {
         EObject current = null;
 
@@ -6329,8 +6623,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2877:46: (iv_ruleValue= ruleValue EOF )
-            // InternalToscaDsl.g:2878:2: iv_ruleValue= ruleValue EOF
+            // InternalToscaDsl.g:3019:46: (iv_ruleValue= ruleValue EOF )
+            // InternalToscaDsl.g:3020:2: iv_ruleValue= ruleValue EOF
             {
              newCompositeNode(grammarAccess.getValueRule()); 
             pushFollow(FOLLOW_1);
@@ -6357,7 +6651,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValue"
-    // InternalToscaDsl.g:2884:1: ruleValue returns [EObject current=null] : (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute ) ;
+    // InternalToscaDsl.g:3026:1: ruleValue returns [EObject current=null] : (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute ) ;
     public final EObject ruleValue() throws RecognitionException {
         EObject current = null;
 
@@ -6374,42 +6668,42 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2890:2: ( (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute ) )
-            // InternalToscaDsl.g:2891:2: (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute )
+            // InternalToscaDsl.g:3032:2: ( (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute ) )
+            // InternalToscaDsl.g:3033:2: (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute )
             {
-            // InternalToscaDsl.g:2891:2: (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute )
-            int alt67=4;
+            // InternalToscaDsl.g:3033:2: (this_Value_Impl_0= ruleValue_Impl | this_Expression_Impl_1= ruleExpression_Impl | this_SimpleValue_2= ruleSimpleValue | this_GetAttribute_3= ruleGetAttribute )
+            int alt71=4;
             switch ( input.LA(1) ) {
-            case 54:
+            case 57:
                 {
-                alt67=1;
+                alt71=1;
                 }
                 break;
-            case 55:
+            case 58:
                 {
-                alt67=2;
+                alt71=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt67=3;
+                alt71=3;
                 }
                 break;
             case 11:
                 {
-                alt67=4;
+                alt71=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 67, 0, input);
+                    new NoViableAltException("", 71, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt67) {
+            switch (alt71) {
                 case 1 :
-                    // InternalToscaDsl.g:2892:3: this_Value_Impl_0= ruleValue_Impl
+                    // InternalToscaDsl.g:3034:3: this_Value_Impl_0= ruleValue_Impl
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getValue_ImplParserRuleCall_0());
@@ -6427,7 +6721,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalToscaDsl.g:2901:3: this_Expression_Impl_1= ruleExpression_Impl
+                    // InternalToscaDsl.g:3043:3: this_Expression_Impl_1= ruleExpression_Impl
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getExpression_ImplParserRuleCall_1());
@@ -6445,7 +6739,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalToscaDsl.g:2910:3: this_SimpleValue_2= ruleSimpleValue
+                    // InternalToscaDsl.g:3052:3: this_SimpleValue_2= ruleSimpleValue
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getSimpleValueParserRuleCall_2());
@@ -6463,7 +6757,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalToscaDsl.g:2919:3: this_GetAttribute_3= ruleGetAttribute
+                    // InternalToscaDsl.g:3061:3: this_GetAttribute_3= ruleGetAttribute
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getGetAttributeParserRuleCall_3());
@@ -6503,7 +6797,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleArgument"
-    // InternalToscaDsl.g:2931:1: entryRuleArgument returns [EObject current=null] : iv_ruleArgument= ruleArgument EOF ;
+    // InternalToscaDsl.g:3073:1: entryRuleArgument returns [EObject current=null] : iv_ruleArgument= ruleArgument EOF ;
     public final EObject entryRuleArgument() throws RecognitionException {
         EObject current = null;
 
@@ -6511,8 +6805,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2931:49: (iv_ruleArgument= ruleArgument EOF )
-            // InternalToscaDsl.g:2932:2: iv_ruleArgument= ruleArgument EOF
+            // InternalToscaDsl.g:3073:49: (iv_ruleArgument= ruleArgument EOF )
+            // InternalToscaDsl.g:3074:2: iv_ruleArgument= ruleArgument EOF
             {
              newCompositeNode(grammarAccess.getArgumentRule()); 
             pushFollow(FOLLOW_1);
@@ -6539,7 +6833,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleArgument"
-    // InternalToscaDsl.g:2938:1: ruleArgument returns [EObject current=null] : ( (lv_argument_value_0_0= ruleValue ) ) ;
+    // InternalToscaDsl.g:3080:1: ruleArgument returns [EObject current=null] : ( (lv_argument_value_0_0= ruleValue ) ) ;
     public final EObject ruleArgument() throws RecognitionException {
         EObject current = null;
 
@@ -6550,14 +6844,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2944:2: ( ( (lv_argument_value_0_0= ruleValue ) ) )
-            // InternalToscaDsl.g:2945:2: ( (lv_argument_value_0_0= ruleValue ) )
+            // InternalToscaDsl.g:3086:2: ( ( (lv_argument_value_0_0= ruleValue ) ) )
+            // InternalToscaDsl.g:3087:2: ( (lv_argument_value_0_0= ruleValue ) )
             {
-            // InternalToscaDsl.g:2945:2: ( (lv_argument_value_0_0= ruleValue ) )
-            // InternalToscaDsl.g:2946:3: (lv_argument_value_0_0= ruleValue )
+            // InternalToscaDsl.g:3087:2: ( (lv_argument_value_0_0= ruleValue ) )
+            // InternalToscaDsl.g:3088:3: (lv_argument_value_0_0= ruleValue )
             {
-            // InternalToscaDsl.g:2946:3: (lv_argument_value_0_0= ruleValue )
-            // InternalToscaDsl.g:2947:4: lv_argument_value_0_0= ruleValue
+            // InternalToscaDsl.g:3088:3: (lv_argument_value_0_0= ruleValue )
+            // InternalToscaDsl.g:3089:4: lv_argument_value_0_0= ruleValue
             {
 
             				newCompositeNode(grammarAccess.getArgumentAccess().getArgument_valueValueParserRuleCall_0());
@@ -6603,8 +6897,152 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleArgument"
 
 
+    // $ANTLR start "entryRuleEnvironmentVariable"
+    // InternalToscaDsl.g:3109:1: entryRuleEnvironmentVariable returns [EObject current=null] : iv_ruleEnvironmentVariable= ruleEnvironmentVariable EOF ;
+    public final EObject entryRuleEnvironmentVariable() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEnvironmentVariable = null;
+
+
+        try {
+            // InternalToscaDsl.g:3109:60: (iv_ruleEnvironmentVariable= ruleEnvironmentVariable EOF )
+            // InternalToscaDsl.g:3110:2: iv_ruleEnvironmentVariable= ruleEnvironmentVariable EOF
+            {
+             newCompositeNode(grammarAccess.getEnvironmentVariableRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEnvironmentVariable=ruleEnvironmentVariable();
+
+            state._fsp--;
+
+             current =iv_ruleEnvironmentVariable; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEnvironmentVariable"
+
+
+    // $ANTLR start "ruleEnvironmentVariable"
+    // InternalToscaDsl.g:3116:1: ruleEnvironmentVariable returns [EObject current=null] : (otherlv_0= '\\n' ( (lv_variable_name_1_0= RULE_STRING ) ) otherlv_2= ':' ( (lv_variable_value_3_0= ruleValue ) ) ) ;
+    public final EObject ruleEnvironmentVariable() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_variable_name_1_0=null;
+        Token otherlv_2=null;
+        EObject lv_variable_value_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalToscaDsl.g:3122:2: ( (otherlv_0= '\\n' ( (lv_variable_name_1_0= RULE_STRING ) ) otherlv_2= ':' ( (lv_variable_value_3_0= ruleValue ) ) ) )
+            // InternalToscaDsl.g:3123:2: (otherlv_0= '\\n' ( (lv_variable_name_1_0= RULE_STRING ) ) otherlv_2= ':' ( (lv_variable_value_3_0= ruleValue ) ) )
+            {
+            // InternalToscaDsl.g:3123:2: (otherlv_0= '\\n' ( (lv_variable_name_1_0= RULE_STRING ) ) otherlv_2= ':' ( (lv_variable_value_3_0= ruleValue ) ) )
+            // InternalToscaDsl.g:3124:3: otherlv_0= '\\n' ( (lv_variable_name_1_0= RULE_STRING ) ) otherlv_2= ':' ( (lv_variable_value_3_0= ruleValue ) )
+            {
+            otherlv_0=(Token)match(input,47,FOLLOW_4); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getEnvironmentVariableAccess().getControl000aKeyword_0());
+            		
+            // InternalToscaDsl.g:3128:3: ( (lv_variable_name_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:3129:4: (lv_variable_name_1_0= RULE_STRING )
+            {
+            // InternalToscaDsl.g:3129:4: (lv_variable_name_1_0= RULE_STRING )
+            // InternalToscaDsl.g:3130:5: lv_variable_name_1_0= RULE_STRING
+            {
+            lv_variable_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_19); 
+
+            					newLeafNode(lv_variable_name_1_0, grammarAccess.getEnvironmentVariableAccess().getVariable_nameSTRINGTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEnvironmentVariableRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"variable_name",
+            						lv_variable_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,25,FOLLOW_21); 
+
+            			newLeafNode(otherlv_2, grammarAccess.getEnvironmentVariableAccess().getColonKeyword_2());
+            		
+            // InternalToscaDsl.g:3150:3: ( (lv_variable_value_3_0= ruleValue ) )
+            // InternalToscaDsl.g:3151:4: (lv_variable_value_3_0= ruleValue )
+            {
+            // InternalToscaDsl.g:3151:4: (lv_variable_value_3_0= ruleValue )
+            // InternalToscaDsl.g:3152:5: lv_variable_value_3_0= ruleValue
+            {
+
+            					newCompositeNode(grammarAccess.getEnvironmentVariableAccess().getVariable_valueValueParserRuleCall_3_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_variable_value_3_0=ruleValue();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEnvironmentVariableRule());
+            					}
+            					set(
+            						current,
+            						"variable_value",
+            						lv_variable_value_3_0,
+            						"it.polimi.dice.dicer.ToscaDsl.Value");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEnvironmentVariable"
+
+
     // $ANTLR start "entryRuleValue_Impl"
-    // InternalToscaDsl.g:2967:1: entryRuleValue_Impl returns [EObject current=null] : iv_ruleValue_Impl= ruleValue_Impl EOF ;
+    // InternalToscaDsl.g:3173:1: entryRuleValue_Impl returns [EObject current=null] : iv_ruleValue_Impl= ruleValue_Impl EOF ;
     public final EObject entryRuleValue_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -6612,8 +7050,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2967:51: (iv_ruleValue_Impl= ruleValue_Impl EOF )
-            // InternalToscaDsl.g:2968:2: iv_ruleValue_Impl= ruleValue_Impl EOF
+            // InternalToscaDsl.g:3173:51: (iv_ruleValue_Impl= ruleValue_Impl EOF )
+            // InternalToscaDsl.g:3174:2: iv_ruleValue_Impl= ruleValue_Impl EOF
             {
              newCompositeNode(grammarAccess.getValue_ImplRule()); 
             pushFollow(FOLLOW_1);
@@ -6640,7 +7078,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValue_Impl"
-    // InternalToscaDsl.g:2974:1: ruleValue_Impl returns [EObject current=null] : ( () otherlv_1= 'Value' ) ;
+    // InternalToscaDsl.g:3180:1: ruleValue_Impl returns [EObject current=null] : ( () otherlv_1= 'Value' ) ;
     public final EObject ruleValue_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -6650,14 +7088,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:2980:2: ( ( () otherlv_1= 'Value' ) )
-            // InternalToscaDsl.g:2981:2: ( () otherlv_1= 'Value' )
+            // InternalToscaDsl.g:3186:2: ( ( () otherlv_1= 'Value' ) )
+            // InternalToscaDsl.g:3187:2: ( () otherlv_1= 'Value' )
             {
-            // InternalToscaDsl.g:2981:2: ( () otherlv_1= 'Value' )
-            // InternalToscaDsl.g:2982:3: () otherlv_1= 'Value'
+            // InternalToscaDsl.g:3187:2: ( () otherlv_1= 'Value' )
+            // InternalToscaDsl.g:3188:3: () otherlv_1= 'Value'
             {
-            // InternalToscaDsl.g:2982:3: ()
-            // InternalToscaDsl.g:2983:4: 
+            // InternalToscaDsl.g:3188:3: ()
+            // InternalToscaDsl.g:3189:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6667,7 +7105,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,54,FOLLOW_2); 
+            otherlv_1=(Token)match(input,57,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getValue_ImplAccess().getValueKeyword_1());
             		
@@ -6694,7 +7132,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpression_Impl"
-    // InternalToscaDsl.g:2997:1: entryRuleExpression_Impl returns [EObject current=null] : iv_ruleExpression_Impl= ruleExpression_Impl EOF ;
+    // InternalToscaDsl.g:3203:1: entryRuleExpression_Impl returns [EObject current=null] : iv_ruleExpression_Impl= ruleExpression_Impl EOF ;
     public final EObject entryRuleExpression_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -6702,8 +7140,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:2997:56: (iv_ruleExpression_Impl= ruleExpression_Impl EOF )
-            // InternalToscaDsl.g:2998:2: iv_ruleExpression_Impl= ruleExpression_Impl EOF
+            // InternalToscaDsl.g:3203:56: (iv_ruleExpression_Impl= ruleExpression_Impl EOF )
+            // InternalToscaDsl.g:3204:2: iv_ruleExpression_Impl= ruleExpression_Impl EOF
             {
              newCompositeNode(grammarAccess.getExpression_ImplRule()); 
             pushFollow(FOLLOW_1);
@@ -6730,7 +7168,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpression_Impl"
-    // InternalToscaDsl.g:3004:1: ruleExpression_Impl returns [EObject current=null] : ( () otherlv_1= 'Expression' ) ;
+    // InternalToscaDsl.g:3210:1: ruleExpression_Impl returns [EObject current=null] : ( () otherlv_1= 'Expression' ) ;
     public final EObject ruleExpression_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -6740,14 +7178,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:3010:2: ( ( () otherlv_1= 'Expression' ) )
-            // InternalToscaDsl.g:3011:2: ( () otherlv_1= 'Expression' )
+            // InternalToscaDsl.g:3216:2: ( ( () otherlv_1= 'Expression' ) )
+            // InternalToscaDsl.g:3217:2: ( () otherlv_1= 'Expression' )
             {
-            // InternalToscaDsl.g:3011:2: ( () otherlv_1= 'Expression' )
-            // InternalToscaDsl.g:3012:3: () otherlv_1= 'Expression'
+            // InternalToscaDsl.g:3217:2: ( () otherlv_1= 'Expression' )
+            // InternalToscaDsl.g:3218:3: () otherlv_1= 'Expression'
             {
-            // InternalToscaDsl.g:3012:3: ()
-            // InternalToscaDsl.g:3013:4: 
+            // InternalToscaDsl.g:3218:3: ()
+            // InternalToscaDsl.g:3219:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6757,7 +7195,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,55,FOLLOW_2); 
+            otherlv_1=(Token)match(input,58,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getExpression_ImplAccess().getExpressionKeyword_1());
             		
@@ -6784,7 +7222,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSimpleValue"
-    // InternalToscaDsl.g:3027:1: entryRuleSimpleValue returns [EObject current=null] : iv_ruleSimpleValue= ruleSimpleValue EOF ;
+    // InternalToscaDsl.g:3233:1: entryRuleSimpleValue returns [EObject current=null] : iv_ruleSimpleValue= ruleSimpleValue EOF ;
     public final EObject entryRuleSimpleValue() throws RecognitionException {
         EObject current = null;
 
@@ -6792,8 +7230,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:3027:52: (iv_ruleSimpleValue= ruleSimpleValue EOF )
-            // InternalToscaDsl.g:3028:2: iv_ruleSimpleValue= ruleSimpleValue EOF
+            // InternalToscaDsl.g:3233:52: (iv_ruleSimpleValue= ruleSimpleValue EOF )
+            // InternalToscaDsl.g:3234:2: iv_ruleSimpleValue= ruleSimpleValue EOF
             {
              newCompositeNode(grammarAccess.getSimpleValueRule()); 
             pushFollow(FOLLOW_1);
@@ -6820,7 +7258,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSimpleValue"
-    // InternalToscaDsl.g:3034:1: ruleSimpleValue returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // InternalToscaDsl.g:3240:1: ruleSimpleValue returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleSimpleValue() throws RecognitionException {
         EObject current = null;
 
@@ -6830,14 +7268,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:3040:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // InternalToscaDsl.g:3041:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:3246:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // InternalToscaDsl.g:3247:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // InternalToscaDsl.g:3041:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // InternalToscaDsl.g:3042:3: () ( (lv_value_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:3247:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalToscaDsl.g:3248:3: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // InternalToscaDsl.g:3042:3: ()
-            // InternalToscaDsl.g:3043:4: 
+            // InternalToscaDsl.g:3248:3: ()
+            // InternalToscaDsl.g:3249:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6847,11 +7285,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalToscaDsl.g:3049:3: ( (lv_value_1_0= RULE_STRING ) )
-            // InternalToscaDsl.g:3050:4: (lv_value_1_0= RULE_STRING )
+            // InternalToscaDsl.g:3255:3: ( (lv_value_1_0= RULE_STRING ) )
+            // InternalToscaDsl.g:3256:4: (lv_value_1_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:3050:4: (lv_value_1_0= RULE_STRING )
-            // InternalToscaDsl.g:3051:5: lv_value_1_0= RULE_STRING
+            // InternalToscaDsl.g:3256:4: (lv_value_1_0= RULE_STRING )
+            // InternalToscaDsl.g:3257:5: lv_value_1_0= RULE_STRING
             {
             lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -6896,7 +7334,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetAttribute"
-    // InternalToscaDsl.g:3071:1: entryRuleGetAttribute returns [EObject current=null] : iv_ruleGetAttribute= ruleGetAttribute EOF ;
+    // InternalToscaDsl.g:3277:1: entryRuleGetAttribute returns [EObject current=null] : iv_ruleGetAttribute= ruleGetAttribute EOF ;
     public final EObject entryRuleGetAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -6904,8 +7342,8 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalToscaDsl.g:3071:53: (iv_ruleGetAttribute= ruleGetAttribute EOF )
-            // InternalToscaDsl.g:3072:2: iv_ruleGetAttribute= ruleGetAttribute EOF
+            // InternalToscaDsl.g:3277:53: (iv_ruleGetAttribute= ruleGetAttribute EOF )
+            // InternalToscaDsl.g:3278:2: iv_ruleGetAttribute= ruleGetAttribute EOF
             {
              newCompositeNode(grammarAccess.getGetAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -6932,7 +7370,7 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetAttribute"
-    // InternalToscaDsl.g:3078:1: ruleGetAttribute returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' ) ;
+    // InternalToscaDsl.g:3284:1: ruleGetAttribute returns [EObject current=null] : ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' ) ;
     public final EObject ruleGetAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -6949,14 +7387,14 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalToscaDsl.g:3084:2: ( ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' ) )
-            // InternalToscaDsl.g:3085:2: ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' )
+            // InternalToscaDsl.g:3290:2: ( ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' ) )
+            // InternalToscaDsl.g:3291:2: ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' )
             {
-            // InternalToscaDsl.g:3085:2: ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' )
-            // InternalToscaDsl.g:3086:3: () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}'
+            // InternalToscaDsl.g:3291:2: ( () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}' )
+            // InternalToscaDsl.g:3292:3: () otherlv_1= '{' otherlv_2= '\"get_attribute\":' otherlv_3= '[' ( (lv_node_4_0= RULE_STRING ) ) otherlv_5= ',' ( (lv_attribute_6_0= RULE_STRING ) ) otherlv_7= ']' otherlv_8= '}'
             {
-            // InternalToscaDsl.g:3086:3: ()
-            // InternalToscaDsl.g:3087:4: 
+            // InternalToscaDsl.g:3292:3: ()
+            // InternalToscaDsl.g:3293:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6966,11 +7404,11 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,11,FOLLOW_61); 
+            otherlv_1=(Token)match(input,11,FOLLOW_64); 
 
             			newLeafNode(otherlv_1, grammarAccess.getGetAttributeAccess().getLeftCurlyBracketKeyword_1());
             		
-            otherlv_2=(Token)match(input,56,FOLLOW_7); 
+            otherlv_2=(Token)match(input,59,FOLLOW_7); 
 
             			newLeafNode(otherlv_2, grammarAccess.getGetAttributeAccess().getGet_attributeKeyword_2());
             		
@@ -6978,13 +7416,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_3, grammarAccess.getGetAttributeAccess().getLeftSquareBracketKeyword_3());
             		
-            // InternalToscaDsl.g:3105:3: ( (lv_node_4_0= RULE_STRING ) )
-            // InternalToscaDsl.g:3106:4: (lv_node_4_0= RULE_STRING )
+            // InternalToscaDsl.g:3311:3: ( (lv_node_4_0= RULE_STRING ) )
+            // InternalToscaDsl.g:3312:4: (lv_node_4_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:3106:4: (lv_node_4_0= RULE_STRING )
-            // InternalToscaDsl.g:3107:5: lv_node_4_0= RULE_STRING
+            // InternalToscaDsl.g:3312:4: (lv_node_4_0= RULE_STRING )
+            // InternalToscaDsl.g:3313:5: lv_node_4_0= RULE_STRING
             {
-            lv_node_4_0=(Token)match(input,RULE_STRING,FOLLOW_40); 
+            lv_node_4_0=(Token)match(input,RULE_STRING,FOLLOW_42); 
 
             					newLeafNode(lv_node_4_0, grammarAccess.getGetAttributeAccess().getNodeSTRINGTerminalRuleCall_4_0());
             				
@@ -7008,13 +7446,13 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_5, grammarAccess.getGetAttributeAccess().getCommaKeyword_5());
             		
-            // InternalToscaDsl.g:3127:3: ( (lv_attribute_6_0= RULE_STRING ) )
-            // InternalToscaDsl.g:3128:4: (lv_attribute_6_0= RULE_STRING )
+            // InternalToscaDsl.g:3333:3: ( (lv_attribute_6_0= RULE_STRING ) )
+            // InternalToscaDsl.g:3334:4: (lv_attribute_6_0= RULE_STRING )
             {
-            // InternalToscaDsl.g:3128:4: (lv_attribute_6_0= RULE_STRING )
-            // InternalToscaDsl.g:3129:5: lv_attribute_6_0= RULE_STRING
+            // InternalToscaDsl.g:3334:4: (lv_attribute_6_0= RULE_STRING )
+            // InternalToscaDsl.g:3335:5: lv_attribute_6_0= RULE_STRING
             {
-            lv_attribute_6_0=(Token)match(input,RULE_STRING,FOLLOW_62); 
+            lv_attribute_6_0=(Token)match(input,RULE_STRING,FOLLOW_65); 
 
             					newLeafNode(lv_attribute_6_0, grammarAccess.getGetAttributeAccess().getAttributeSTRINGTerminalRuleCall_6_0());
             				
@@ -7088,47 +7526,50 @@ public class InternalToscaDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000002000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x00C0000000000810L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0600000000000810L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000008000000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x00000000F0002000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x00000000E0002000L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00000000E0000000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x00000000C0000000L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000001F00090000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000018000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000001E00090000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000001C00090000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000001800090000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000001000090000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000006000080000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000004000080000L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000020000000002L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0001C000C0080000L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x00018000C0080000L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0001800080080000L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0001800000080000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0001000000080000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x00020000C0082000L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x00020000C0080000L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x00000000C0080000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000040080000L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000080010L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0008000000080000L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000000080082000L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000080080000L});
-    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0010000000080000L});
-    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000400090000L});
-    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0020000000020000L});
-    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000007F00090000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000060000000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000007E00090000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000007C00090000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000007800090000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000007000090000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000006000090000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000004000090000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000018000080000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000010000080000L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x000E0000C0080000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x000C0000C0080000L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x000C000080080000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x000C000000080000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0008000000080000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x00100000C0082000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x00100000C0080000L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x00000000C0080000L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000040080000L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000000000080010L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0040000000080000L});
+    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000080082000L});
+    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000080080000L});
+    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0080000000080000L});
+    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000400090000L});
+    public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0100000000020000L});
+    public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000000020000L});
 
 }

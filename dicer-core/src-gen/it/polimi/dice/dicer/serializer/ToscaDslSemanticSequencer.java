@@ -18,6 +18,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import tosca.Argument;
 import tosca.Capability;
 import tosca.Configuration;
+import tosca.EnvironmentVariable;
 import tosca.Expression;
 import tosca.FirewallRule;
 import tosca.GetAttribute;
@@ -59,6 +60,9 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case ToscaPackage.CONFIGURATION:
 				sequence_Configuration(context, (Configuration) semanticObject); 
+				return; 
+			case ToscaPackage.ENVIRONMENT_VARIABLE:
+				sequence_EnvironmentVariable(context, (EnvironmentVariable) semanticObject); 
 				return; 
 			case ToscaPackage.EXPRESSION:
 				sequence_Expression_Impl(context, (Expression) semanticObject); 
@@ -172,6 +176,27 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	
 	/**
 	 * Contexts:
+	 *     EnvironmentVariable returns EnvironmentVariable
+	 *
+	 * Constraint:
+	 *     (variable_name=STRING variable_value=Value)
+	 */
+	protected void sequence_EnvironmentVariable(ISerializationContext context, EnvironmentVariable semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.ENVIRONMENT_VARIABLE__VARIABLE_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.ENVIRONMENT_VARIABLE__VARIABLE_NAME));
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.ENVIRONMENT_VARIABLE__VARIABLE_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.ENVIRONMENT_VARIABLE__VARIABLE_VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEnvironmentVariableAccess().getVariable_nameSTRINGTerminalRuleCall_1_0(), semanticObject.getVariable_name());
+		feeder.accept(grammarAccess.getEnvironmentVariableAccess().getVariable_valueValueParserRuleCall_3_0(), semanticObject.getVariable_value());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Value returns Expression
 	 *     Expression_Impl returns Expression
 	 *
@@ -188,18 +213,21 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     FirewallRule returns FirewallRule
 	 *
 	 * Constraint:
-	 *     (remote_ip_prefix=STRING port=STRING)
+	 *     (remote_ip_prefix=STRING protocol=STRING port=STRING)
 	 */
 	protected void sequence_FirewallRule(ISerializationContext context, FirewallRule semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__REMOTE_IP_PREFIX) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__REMOTE_IP_PREFIX));
+			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__PROTOCOL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__PROTOCOL));
 			if (transientValues.isValueTransient(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__PORT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ToscaPackage.Literals.FIREWALL_RULE__PORT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getFirewallRuleAccess().getRemote_ip_prefixSTRINGTerminalRuleCall_3_0(), semanticObject.getRemote_ip_prefix());
-		feeder.accept(grammarAccess.getFirewallRuleAccess().getPortSTRINGTerminalRuleCall_6_0(), semanticObject.getPort());
+		feeder.accept(grammarAccess.getFirewallRuleAccess().getProtocolSTRINGTerminalRuleCall_6_0(), semanticObject.getProtocol());
+		feeder.accept(grammarAccess.getFirewallRuleAccess().getPortSTRINGTerminalRuleCall_9_0(), semanticObject.getPort());
 		feeder.finish();
 	}
 	
@@ -318,8 +346,10 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *         monitoring=MonitoringProperty? 
 	 *         (configurations+=Configuration configurations+=Configuration*)? 
 	 *         (resources+=STRING resources+=STRING*)? 
+	 *         (portMapping+=Property portMapping+=Property*)? 
 	 *         (rules+=FirewallRule rules+=FirewallRule*)? 
 	 *         (arguments+=Argument arguments+=Argument*)? 
+	 *         (environment+=EnvironmentVariable environment+=EnvironmentVariable*)? 
 	 *         (properties+=Property properties+=Property*)? 
 	 *         (requirements+=Requirement requirements+=Requirement*)? 
 	 *         (capabilities+=Capability capabilities+=Capability*)?

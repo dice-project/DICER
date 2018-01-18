@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import tosca.Argument;
 import tosca.Capability;
 import tosca.Configuration;
+import tosca.EnvironmentVariable;
 import tosca.FirewallRule;
 import tosca.Instances;
 import tosca.Interface;
@@ -53,6 +54,8 @@ import tosca.ToscaPackage;
  *   <li>{@link tosca.impl.NodeTemplateImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link tosca.impl.NodeTemplateImpl#getMonitoring <em>Monitoring</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getPortMapping <em>Port Mapping</em>}</li>
+ *   <li>{@link tosca.impl.NodeTemplateImpl#getEnvironment <em>Environment</em>}</li>
  * </ul>
  *
  * @generated
@@ -227,6 +230,26 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * @ordered
      */
     protected MonitoringProperty monitoring;
+
+    /**
+     * The cached value of the '{@link #getPortMapping() <em>Port Mapping</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getPortMapping()
+     * @generated
+     * @ordered
+     */
+    protected EList<Property> portMapping;
+
+    /**
+     * The cached value of the '{@link #getEnvironment() <em>Environment</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getEnvironment()
+     * @generated
+     * @ordered
+     */
+    protected EList<EnvironmentVariable> environment;
 
     /**
      * <!-- begin-user-doc -->
@@ -406,6 +429,30 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
      * <!-- end-user-doc -->
      * @generated
      */
+    public EList<Property> getPortMapping() {
+        if (portMapping == null) {
+            portMapping = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.NODE_TEMPLATE__PORT_MAPPING);
+        }
+        return portMapping;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EList<EnvironmentVariable> getEnvironment() {
+        if (environment == null) {
+            environment = new EObjectContainmentEList<EnvironmentVariable>(EnvironmentVariable.class, this, ToscaPackage.NODE_TEMPLATE__ENVIRONMENT);
+        }
+        return environment;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EList<Requirement> getRequirements() {
         if (requirements == null) {
             requirements = new EObjectContainmentEList<Requirement>(Requirement.class, this, ToscaPackage.NODE_TEMPLATE__REQUIREMENTS);
@@ -532,6 +579,10 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
             case ToscaPackage.NODE_TEMPLATE__MONITORING:
                 return basicSetMonitoring(null, msgs);
+            case ToscaPackage.NODE_TEMPLATE__PORT_MAPPING:
+                return ((InternalEList<?>)getPortMapping()).basicRemove(otherEnd, msgs);
+            case ToscaPackage.NODE_TEMPLATE__ENVIRONMENT:
+                return ((InternalEList<?>)getEnvironment()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -572,6 +623,10 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return getRules();
             case ToscaPackage.NODE_TEMPLATE__MONITORING:
                 return getMonitoring();
+            case ToscaPackage.NODE_TEMPLATE__PORT_MAPPING:
+                return getPortMapping();
+            case ToscaPackage.NODE_TEMPLATE__ENVIRONMENT:
+                return getEnvironment();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -636,6 +691,14 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__MONITORING:
                 setMonitoring((MonitoringProperty)newValue);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__PORT_MAPPING:
+                getPortMapping().clear();
+                getPortMapping().addAll((Collection<? extends Property>)newValue);
+                return;
+            case ToscaPackage.NODE_TEMPLATE__ENVIRONMENT:
+                getEnvironment().clear();
+                getEnvironment().addAll((Collection<? extends EnvironmentVariable>)newValue);
+                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -690,6 +753,12 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
             case ToscaPackage.NODE_TEMPLATE__MONITORING:
                 setMonitoring((MonitoringProperty)null);
                 return;
+            case ToscaPackage.NODE_TEMPLATE__PORT_MAPPING:
+                getPortMapping().clear();
+                return;
+            case ToscaPackage.NODE_TEMPLATE__ENVIRONMENT:
+                getEnvironment().clear();
+                return;
         }
         super.eUnset(featureID);
     }
@@ -730,6 +799,10 @@ public class NodeTemplateImpl extends MinimalEObjectImpl.Container implements No
                 return rules != null && !rules.isEmpty();
             case ToscaPackage.NODE_TEMPLATE__MONITORING:
                 return monitoring != null;
+            case ToscaPackage.NODE_TEMPLATE__PORT_MAPPING:
+                return portMapping != null && !portMapping.isEmpty();
+            case ToscaPackage.NODE_TEMPLATE__ENVIRONMENT:
+                return environment != null && !environment.isEmpty();
         }
         return super.eIsSet(featureID);
     }

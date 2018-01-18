@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
   <uml:Model xmi:id="_MEglQJMKEeeIVYpeYaVS7g" name="RootElement">
     <packagedElement xmi:type="uml:Device" xmi:id="_pnOcQJMKEeeIVYpeYaVS7g" name="cluster1">
       <nestedNode xmi:type="uml:Node" xmi:id="_sLcFcJMKEeeIVYpeYaVS7g" name="zookeeper1"/>
@@ -13,13 +13,13 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="_TwH7MJMMEeeIVYpeYaVS7g" client="_s60T8JMKEeeIVYpeYaVS7g" supplier="_sLcFcJMKEeeIVYpeYaVS7g"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_WGlcQJMMEeeIVYpeYaVS7g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_WGmqYJMMEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DDSM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
     </profileApplication>
   </uml:Model>
   <DDSM:DdsmVMsCluster xmi:id="_XPT-4JMMEeeIVYpeYaVS7g" base_Device="_pnOcQJMKEeeIVYpeYaVS7g"/>
-  <DDSM:DdsmVMsCluster xmi:id="_YL5i8JMMEeeIVYpeYaVS7g" base_Device="_qH9KwJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_YL5i8JMMEeeIVYpeYaVS7g" base_Device="_qH9KwJMKEeeIVYpeYaVS7g" instances="0"/>
   <DDSM:DdsmZookeeperCluster xmi:id="_ZIfuEJMMEeeIVYpeYaVS7g" base_Node="_sLcFcJMKEeeIVYpeYaVS7g" protected="true"/>
   <DDSM:DdsmStormCluster xmi:id="_a8y9QJMMEeeIVYpeYaVS7g" base_Node="_s60T8JMKEeeIVYpeYaVS7g" protected="true" base_ExecutionEnvironment="_s60T8JMKEeeIVYpeYaVS7g"/>
   <DDSM:DdsmBigDataJob xmi:id="_brxjIJMMEeeIVYpeYaVS7g" application="stormSampleApp" application_class="org.storm.sampleapp.Main" base_Artifact="_v8wa8JMKEeeIVYpeYaVS7g" application_name="stormSampleApp"/>

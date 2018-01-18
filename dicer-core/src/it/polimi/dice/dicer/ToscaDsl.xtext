@@ -53,8 +53,10 @@ NodeTemplate returns NodeTemplate:
 			('\n"monitoring" : {' monitoring=MonitoringProperty '}')? 
 			(',\n"configuration" : {' configurations+=Configuration ( "," configurations+=Configuration)* '}' )? 
 			(',\n"resources" :' '[' resources+=STRING ( ',' resources+=STRING)* ']' )? 
+			(',\n"port_mapping" :' '{' portMapping+=Property ( ',' portMapping+=Property)* '}' )? 
 			('\n"rules" :' '[' rules+=FirewallRule ( ',' rules+=FirewallRule)* ']' )? 
 			(',\n"arguments" :' '[' arguments+=Argument ( ',' arguments+=Argument)* ']')? 
+			(',\n"environment" :' '{' environment+=EnvironmentVariable ( ',' environment+=EnvironmentVariable)* '}')? 
 			(',' properties+=Property ( "," properties+=Property)* )?
 		)'}'
 	    
@@ -74,7 +76,8 @@ FirewallRule returns FirewallRule:
 	//'FirewallRule'
 	{FirewallRule}
 	'{'
-		'"remote_ip_prefix": ' remote_ip_prefix=STRING ','
+		'"ip_prefix": ' remote_ip_prefix=STRING ','
+		'"protocol": ' protocol=STRING ','
 		'"port": ' port=STRING
 	'}';
 	
@@ -170,6 +173,11 @@ Argument returns Argument:
 		//'argument_value' 
 		argument_value=Value
 	//'}'
+	;
+	
+EnvironmentVariable returns EnvironmentVariable:
+		"\n" variable_name=STRING ":"
+			variable_value=Value
 	;
 		
 EIntegerObject returns ecore::EIntegerObject:

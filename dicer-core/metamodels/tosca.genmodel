@@ -21,6 +21,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/arguments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/monitoring"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/portMapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//NodeTemplate/environment"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//Interface">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//Interface/interface_name"/>
@@ -120,10 +122,15 @@
     <genClasses ecoreClass="tosca.ecore#//FirewallRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//FirewallRule/remote_ip_prefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//FirewallRule/port"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//FirewallRule/protocol"/>
     </genClasses>
     <genClasses ecoreClass="tosca.ecore#//MonitoringProperty">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//MonitoringProperty/enabled"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//MonitoringProperty/roles"/>
+    </genClasses>
+    <genClasses ecoreClass="tosca.ecore#//EnvironmentVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tosca.ecore#//EnvironmentVariable/variable_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tosca.ecore#//EnvironmentVariable/variable_value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

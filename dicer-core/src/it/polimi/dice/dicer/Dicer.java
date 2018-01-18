@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -47,10 +48,10 @@ public class Dicer {
     private boolean help = false;
 
     @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-    public String inModelPath = "/Users/michele/workspace/DICE-WikiStats/spark-wikistats/model/wikistats-ddsm.uml";
+    public String inModelPath = "/Users/michele/workspace/DICER/dicer-core/models/posidonia.uml";
 
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-    public String outModelPath = "/Users/michele/workspace/DICE-WikiStats/spark-wikistats/model/wikistats-ddsm";
+    public String outModelPath = "/Users/michele/workspace/DICER/dicer-core/models/posidonia_out";
 
     @Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
     public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
@@ -158,64 +159,89 @@ public class Dicer {
             Map<String, Object> map = (Map<String, Object>) yaml.load(node.toString());
 
             Map<String, Object> nodeTemplates = (Map<String, Object>) map.get("node_templates");
+            Map<String, Object> tmpTemplates = new HashMap<String, Object>();
 
-            for (java.util.Iterator<Entry<String, Object>> it = nodeTemplates.entrySet().iterator(); it.hasNext();) {
-                Map<String, Object> nodeTemplate = (Map<String, Object>) it.next().getValue();
-                for (java.util.Iterator<Entry<String, Object>> it2 = nodeTemplate.entrySet().iterator(); it2
-                        .hasNext();) {
-                    Entry<String, Object> attribute = it2.next();
-                    if (attribute.getKey().equals("type")) {
-                        String type = (String) attribute.getValue();
-                        if (type.contains("dice.hosts") || type.contains("User")) {
-                            Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
-                            for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
-                                    .hasNext();) {
-                                if (it3.next().getKey().equals("monitoring")) {
-                                    it3.remove();
-                                }
+            if(nodeTemplates != null) {
+                for (java.util.Iterator<Entry<String, Object>> it = nodeTemplates.entrySet().iterator(); it.hasNext();) {
+                    Map<String, Object> nodeTemplate = (Map<String, Object>) it.next().getValue();
+                    for (java.util.Iterator<Entry<String, Object>> it2 = nodeTemplate.entrySet().iterator(); it2
+                            .hasNext();) {
+                        Entry<String, Object> attribute = it2.next();
+                        if (attribute.getKey().equals("type")) {
+                            String type = (String) attribute.getValue();
+                            if (type.contains("docker.Server") || type.contains("osv")) {
+                                Map<String, Object> fw_ephemeral = new HashMap<String, Object>();
+                                fw_ephemeral.put("type", "dice.firewall_rules.Base");
+                                Map<String, Object> rules = new HashMap<String, Object>();
+                                rules.put("ip_prefix", "0.0.0.0/0");
+                                rules.put("protocol", "tcp");
+                                rules.put("from_port", 32768);
+                                rules.put("to_port", 61000);
+                                Map<String, Object> properties = new HashMap<String, Object>();
+                                properties.put("rules", new ArrayList<Map<String,Object>>() {{ add(rules); }});
+                                fw_ephemeral.put("properties", properties);
+
+                                tmpTemplates.put("fw_ephemeral", fw_ephemeral);
                             }
-                        }
-                        
-                        if(type.equals("dice.components.spark.Topology")){
-                            type = "dice.components.spark.Application";
-                            Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
-                            Object arguments = null;
-                            String application = "";
-                            String topology_class = "";
-                            String topology_name = "";
-                            for (Map.Entry<String, Object> p : properties.entrySet()) {
-                                if(p.getKey().equals("arguments")) {
-                                    arguments = p.getValue();
-                                }
-                                if(p.getKey().equals("application")) {
-                                    application = (String) p.getValue();
-                                }
-                                if(p.getKey().equals("topology_class")) {
-                                    topology_class = (String) p.getValue();
-                                }
-                                if(p.getKey().equals("topology_name")) {
-                                    topology_name = (String) p.getValue();
-                                }
-                            }
-                            for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
-                                    .hasNext();) {
-                                String tmpProp = it3.next().getKey();
-                                if (tmpProp.equals("arguments")
-                                        | tmpProp.equals("application")
-                                        | tmpProp.equals("topology_class")
-                                        | tmpProp.equals("topology_name")) {
-                                    it3.remove();
+                            
+                            if (type.contains("dice.hosts") || type.contains("User") || type.contains("osv")) {
+                                Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
+                                for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
+                                        .hasNext();) {
+                                    if (it3.next().getKey().equals("monitoring")) {
+                                        it3.remove();
+                                    }
                                 }
                             }
                             
-                            properties.put("args", arguments);
-                            properties.put("jar", application);
-                            properties.put("class", topology_class);
-                            properties.put("name", topology_name);
+                            if(type.equals("dice.components.spark.Topology")){
+                                type = "dice.components.spark.Application";
+                                Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
+                                Object arguments = null;
+                                String application = "";
+                                String topology_class = "";
+                                String topology_name = "";
+                                for (Map.Entry<String, Object> p : properties.entrySet()) {
+                                    if(p.getKey().equals("arguments")) {
+                                        arguments = p.getValue();
+                                    }
+                                    if(p.getKey().equals("application")) {
+                                        application = (String) p.getValue();
+                                    }
+                                    if(p.getKey().equals("topology_class")) {
+                                        topology_class = (String) p.getValue();
+                                    }
+                                    if(p.getKey().equals("topology_name")) {
+                                        topology_name = (String) p.getValue();
+                                    }
+                                }
+                                for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
+                                        .hasNext();) {
+                                    String tmpProp = it3.next().getKey();
+                                    if (tmpProp.equals("arguments")
+                                            | tmpProp.equals("application")
+                                            | tmpProp.equals("topology_class")
+                                            | tmpProp.equals("topology_name")) {
+                                        it3.remove();
+                                    }
+                                }
+                                
+                                properties.put("args", arguments);
+                                properties.put("jar", application);
+                                properties.put("class", topology_class);
+                                properties.put("name", topology_name);
 
+                            }
                         }
                     }
                 }
+                
+                for (java.util.Iterator<Entry<String, Object>> it = tmpTemplates.entrySet().iterator(); it.hasNext();) {
+                    Entry<String, Object> n= it.next();
+                    nodeTemplates.put(n.getKey(), n.getValue());
+                }
+                
+                
             }
 
             try (PrintWriter out = new PrintWriter(outModelPath + ".yaml")) {

@@ -22,6 +22,7 @@ import tosca.ToscaPackage;
  * <ul>
  *   <li>{@link tosca.impl.FirewallRuleImpl#getRemote_ip_prefix <em>Remote ip prefix</em>}</li>
  *   <li>{@link tosca.impl.FirewallRuleImpl#getPort <em>Port</em>}</li>
+ *   <li>{@link tosca.impl.FirewallRuleImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,6 +69,26 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
 	protected String port = PORT_EDEFAULT;
 
 	/**
+     * The default value of the '{@link #getProtocol() <em>Protocol</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProtocol()
+     * @generated
+     * @ordered
+     */
+    protected static final String PROTOCOL_EDEFAULT = "";
+
+    /**
+     * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProtocol()
+     * @generated
+     * @ordered
+     */
+    protected String protocol = PROTOCOL_EDEFAULT;
+
+    /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
@@ -130,6 +151,27 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
 
 	/**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getProtocol() {
+        return protocol;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setProtocol(String newProtocol) {
+        String oldProtocol = protocol;
+        protocol = newProtocol;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.FIREWALL_RULE__PROTOCOL, oldProtocol, protocol));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -140,6 +182,8 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
                 return getRemote_ip_prefix();
             case ToscaPackage.FIREWALL_RULE__PORT:
                 return getPort();
+            case ToscaPackage.FIREWALL_RULE__PROTOCOL:
+                return getProtocol();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -157,6 +201,9 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
                 return;
             case ToscaPackage.FIREWALL_RULE__PORT:
                 setPort((String)newValue);
+                return;
+            case ToscaPackage.FIREWALL_RULE__PROTOCOL:
+                setProtocol((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -176,6 +223,9 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
             case ToscaPackage.FIREWALL_RULE__PORT:
                 setPort(PORT_EDEFAULT);
                 return;
+            case ToscaPackage.FIREWALL_RULE__PROTOCOL:
+                setProtocol(PROTOCOL_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -192,6 +242,8 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
                 return REMOTE_IP_PREFIX_EDEFAULT == null ? remote_ip_prefix != null : !REMOTE_IP_PREFIX_EDEFAULT.equals(remote_ip_prefix);
             case ToscaPackage.FIREWALL_RULE__PORT:
                 return PORT_EDEFAULT == null ? port != null : !PORT_EDEFAULT.equals(port);
+            case ToscaPackage.FIREWALL_RULE__PROTOCOL:
+                return PROTOCOL_EDEFAULT == null ? protocol != null : !PROTOCOL_EDEFAULT.equals(protocol);
         }
         return super.eIsSet(featureID);
     }
@@ -210,6 +262,8 @@ public class FirewallRuleImpl extends MinimalEObjectImpl.Container implements Fi
         result.append(remote_ip_prefix);
         result.append(", port: ");
         result.append(port);
+        result.append(", protocol: ");
+        result.append(protocol);
         result.append(')');
         return result.toString();
     }

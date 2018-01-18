@@ -193,13 +193,31 @@ public interface ToscaPackage extends EPackage {
     int NODE_TEMPLATE__MONITORING = 13;
 
     /**
+     * The feature id for the '<em><b>Port Mapping</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__PORT_MAPPING = 14;
+
+    /**
+     * The feature id for the '<em><b>Environment</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NODE_TEMPLATE__ENVIRONMENT = 15;
+
+    /**
      * The number of structural features of the '<em>Node Template</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int NODE_TEMPLATE_FEATURE_COUNT = 14;
+    int NODE_TEMPLATE_FEATURE_COUNT = 16;
 
     /**
      * The number of operations of the '<em>Node Template</em>' class.
@@ -1306,13 +1324,22 @@ public interface ToscaPackage extends EPackage {
     int FIREWALL_RULE__PORT = 1;
 
     /**
+     * The feature id for the '<em><b>Protocol</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIREWALL_RULE__PROTOCOL = 2;
+
+    /**
      * The number of structural features of the '<em>Firewall Rule</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int FIREWALL_RULE_FEATURE_COUNT = 2;
+    int FIREWALL_RULE_FEATURE_COUNT = 3;
 
     /**
      * The number of operations of the '<em>Firewall Rule</em>' class.
@@ -1369,6 +1396,53 @@ public interface ToscaPackage extends EPackage {
      * @ordered
      */
     int MONITORING_PROPERTY_OPERATION_COUNT = 0;
+
+
+    /**
+     * The meta object id for the '{@link tosca.impl.EnvironmentVariableImpl <em>Environment Variable</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see tosca.impl.EnvironmentVariableImpl
+     * @see tosca.impl.ToscaPackageImpl#getEnvironmentVariable()
+     * @generated
+     */
+    int ENVIRONMENT_VARIABLE = 22;
+
+    /**
+     * The feature id for the '<em><b>Variable name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT_VARIABLE__VARIABLE_NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Variable value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT_VARIABLE__VARIABLE_VALUE = 1;
+
+    /**
+     * The number of structural features of the '<em>Environment Variable</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT_VARIABLE_FEATURE_COUNT = 2;
+
+    /**
+     * The number of operations of the '<em>Environment Variable</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT_VARIABLE_OPERATION_COUNT = 0;
 
 
     /**
@@ -1468,6 +1542,28 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EReference getNodeTemplate_Monitoring();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getPortMapping <em>Port Mapping</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Port Mapping</em>'.
+     * @see tosca.NodeTemplate#getPortMapping()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_PortMapping();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getEnvironment <em>Environment</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Environment</em>'.
+     * @see tosca.NodeTemplate#getEnvironment()
+     * @see #getNodeTemplate()
+     * @generated
+     */
+    EReference getNodeTemplate_Environment();
 
     /**
      * Returns the meta object for the containment reference list '{@link tosca.NodeTemplate#getRequirements <em>Requirements</em>}'.
@@ -2407,6 +2503,17 @@ public interface ToscaPackage extends EPackage {
     EAttribute getFirewallRule_Port();
 
     /**
+     * Returns the meta object for the attribute '{@link tosca.FirewallRule#getProtocol <em>Protocol</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Protocol</em>'.
+     * @see tosca.FirewallRule#getProtocol()
+     * @see #getFirewallRule()
+     * @generated
+     */
+    EAttribute getFirewallRule_Protocol();
+
+    /**
      * Returns the meta object for class '{@link tosca.MonitoringProperty <em>Monitoring Property</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2437,6 +2544,38 @@ public interface ToscaPackage extends EPackage {
      * @generated
      */
     EAttribute getMonitoringProperty_Roles();
+
+    /**
+     * Returns the meta object for class '{@link tosca.EnvironmentVariable <em>Environment Variable</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Environment Variable</em>'.
+     * @see tosca.EnvironmentVariable
+     * @generated
+     */
+    EClass getEnvironmentVariable();
+
+    /**
+     * Returns the meta object for the attribute '{@link tosca.EnvironmentVariable#getVariable_name <em>Variable name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Variable name</em>'.
+     * @see tosca.EnvironmentVariable#getVariable_name()
+     * @see #getEnvironmentVariable()
+     * @generated
+     */
+    EAttribute getEnvironmentVariable_Variable_name();
+
+    /**
+     * Returns the meta object for the containment reference '{@link tosca.EnvironmentVariable#getVariable_value <em>Variable value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Variable value</em>'.
+     * @see tosca.EnvironmentVariable#getVariable_value()
+     * @see #getEnvironmentVariable()
+     * @generated
+     */
+    EReference getEnvironmentVariable_Variable_value();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -2534,6 +2673,22 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EReference NODE_TEMPLATE__MONITORING = eINSTANCE.getNodeTemplate_Monitoring();
+
+        /**
+         * The meta object literal for the '<em><b>Port Mapping</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__PORT_MAPPING = eINSTANCE.getNodeTemplate_PortMapping();
+
+        /**
+         * The meta object literal for the '<em><b>Environment</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NODE_TEMPLATE__ENVIRONMENT = eINSTANCE.getNodeTemplate_Environment();
 
         /**
          * The meta object literal for the '<em><b>Requirements</b></em>' containment reference list feature.
@@ -3272,6 +3427,14 @@ public interface ToscaPackage extends EPackage {
         EAttribute FIREWALL_RULE__PORT = eINSTANCE.getFirewallRule_Port();
 
         /**
+         * The meta object literal for the '<em><b>Protocol</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIREWALL_RULE__PROTOCOL = eINSTANCE.getFirewallRule_Protocol();
+
+        /**
          * The meta object literal for the '{@link tosca.impl.MonitoringPropertyImpl <em>Monitoring Property</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -3296,6 +3459,32 @@ public interface ToscaPackage extends EPackage {
          * @generated
          */
         EAttribute MONITORING_PROPERTY__ROLES = eINSTANCE.getMonitoringProperty_Roles();
+
+        /**
+         * The meta object literal for the '{@link tosca.impl.EnvironmentVariableImpl <em>Environment Variable</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see tosca.impl.EnvironmentVariableImpl
+         * @see tosca.impl.ToscaPackageImpl#getEnvironmentVariable()
+         * @generated
+         */
+        EClass ENVIRONMENT_VARIABLE = eINSTANCE.getEnvironmentVariable();
+
+        /**
+         * The meta object literal for the '<em><b>Variable name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute ENVIRONMENT_VARIABLE__VARIABLE_NAME = eINSTANCE.getEnvironmentVariable_Variable_name();
+
+        /**
+         * The meta object literal for the '<em><b>Variable value</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference ENVIRONMENT_VARIABLE__VARIABLE_VALUE = eINSTANCE.getEnvironmentVariable_Variable_value();
 
     }
 

@@ -529,7 +529,7 @@
               <type xmi:type="uml:Enumeration" href="DICE_Library.uml#_CC_MYP8iEeae0ceaALtJ7Q"/>
             </ownedAttribute>
           </packagedElement>
-          <packagedElement xmi:type="uml:Stereotype" xmi:id="_uVw9i_jzEeaT8NXWw3z-XA" name="SparkReduce">
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_uVw9i_jzEeaT8NXWw3z-XA" name="SparkAction">
             <generalization xmi:type="uml:Generalization" xmi:id="_DZ1IsAPyEee8MoBjXIybTQ" general="_uVw9fPjzEeaT8NXWw3z-XA"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_uVw9j_jzEeaT8NXWw3z-XA" name="ReduceType">
               <type xmi:type="uml:Enumeration" href="DICE_Library.uml#_zfUr4PdQEeauAqwbCM80KA"/>
@@ -537,7 +537,7 @@
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uVw9kfjzEeaT8NXWw3z-XA" value="1"/>
             </ownedAttribute>
           </packagedElement>
-          <packagedElement xmi:type="uml:Stereotype" xmi:id="_uVw9mfjzEeaT8NXWw3z-XA" name="SparkMap">
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_uVw9mfjzEeaT8NXWw3z-XA" name="SparkTransformation">
             <generalization xmi:type="uml:Generalization" xmi:id="_CwJSgAPyEee8MoBjXIybTQ" general="_uVw9fPjzEeaT8NXWw3z-XA"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_uVw9nvjzEeaT8NXWw3z-XA" name="MapType">
               <type xmi:type="uml:Enumeration" href="DICE_Library.uml#_zfVS8PdQEeauAqwbCM80KA"/>
@@ -555,8 +555,8 @@
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-78kd_j2EeacttGOxem79w" value="1"/>
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-78kePj2EeacttGOxem79w" value="1"/>
             </ownedAttribute>
-            <ownedAttribute xmi:type="uml:Property" xmi:id="_-78kefj2EeacttGOxem79w" name="Memory">
-              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_55fyMBFGEdyBd9q9NMDXUQ"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_-78kefj2EeacttGOxem79w" name="nMemory">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Stereotype" xmi:id="_QiYn8Pj9Eea1v7Z9o7wp1g" name="SparkWorkloadEvent">
@@ -570,6 +570,72 @@
             </ownedAttribute>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_IEbbUP8rEeae0ceaALtJ7Q" name="sparkExtDelay">
               <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_kMwX8BFREdyUJeMeN__D-A"/>
+            </ownedAttribute>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Profile" xmi:id="_CxT4QGYrEeeWJ7BBNSdFOw" name="Cassandra">
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_YOq-cGY7EeeWJ7BBNSdFOw" name="CassandraDB">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fpP5oGY7EeeWJ7BBNSdFOw" name="replicationFactor">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IaSqQGY8EeeWJ7BBNSdFOw"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IaSqQWY8EeeWJ7BBNSdFOw" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_RsrboGY8EeeWJ7BBNSdFOw" name="consistencyLevel">
+              <type xmi:type="uml:Enumeration" href="DICE_Library.uml#_dhj-8GY8EeeWJ7BBNSdFOw"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tgzp4GY8EeeWJ7BBNSdFOw"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tgzp4WY8EeeWJ7BBNSdFOw" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_rrHeImY9EeeWJ7BBNSdFOw" name="base_Node" association="_rrHeIGY9EeeWJ7BBNSdFOw">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Node"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Extension" xmi:id="_rrHeIGY9EeeWJ7BBNSdFOw" name="E_CassandraDB_Node1" memberEnd="_rrHeIWY9EeeWJ7BBNSdFOw _rrHeImY9EeeWJ7BBNSdFOw">
+            <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_rrHeIWY9EeeWJ7BBNSdFOw" name="extension_CassandraDB" type="_YOq-cGY7EeeWJ7BBNSdFOw" aggregation="composite" association="_rrHeIGY9EeeWJ7BBNSdFOw"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Profile" xmi:id="_nBY5MErOEeeMQoOjqcCpqg" name="Tez" URI="">
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_pqFYoEnwEeejV93_VexjFw" name="TezVertex">
+            <generalization xmi:type="uml:Generalization" xmi:id="_Ik98cEnxEeejV93_VexjFw" general="_8x7EQCluEeaibdPncpUwfA"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_r9F9EEnwEeejV93_VexjFw" name="taskInputSize">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_uY7tYEnwEeejV93_VexjFw" name="minSrcFraction">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_Yq-MQBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_xojrEEnwEeejV93_VexjFw" name="maxScrFraction">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_Yq-MQBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_Fx_ZEEqiEeexLMFFcxluzQ" name="virtualCores">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_KQVzsEqiEeexLMFFcxluzQ" name="memory">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_1jhr0EnwEeejV93_VexjFw" name="TezEdge">
+            <generalization xmi:type="uml:Generalization" xmi:id="_L5_XgEnxEeejV93_VexjFw">
+              <general xmi:type="uml:Stereotype" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_eXMtwBKZEdyGYuetzx6T5A"/>
+            </generalization>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_4d39EEnwEeejV93_VexjFw" name="dataMovementType">
+              <type xmi:type="uml:Enumeration" href="DICE_Library.uml#_89eU4EnwEeejV93_VexjFw"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Stereotype" xmi:id="_qwXJUEqiEeexLMFFcxluzQ" name="TezScenario">
+            <generalization xmi:type="uml:Generalization" xmi:id="_yQzb8EqiEeexLMFFcxluzQ" general="_2HB5kCluEeaibdPncpUwfA"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_zxi18EqiEeexLMFFcxluzQ" name="maxTaskParalellism">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_Ky-KMEqjEeexLMFFcxluzQ" name="amVirtualCores">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_PqeEoEqjEeexLMFFcxluzQ" name="amMemory">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_WwqEMEqjEeexLMFFcxluzQ" name="taskVirtualCores">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_ZmeawEqjEeexLMFFcxluzQ" name="taskMemory">
+              <type xmi:type="uml:DataType" href="pathmap://Papyrus_PROFILES/MARTE_Library.library.uml#_0KWSgBFQEdyUJeMeN__D-A"/>
             </ownedAttribute>
           </packagedElement>
         </packagedElement>
@@ -1222,6 +1288,34 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Stereotype" xmi:id="_QSJKIAKNEeeo9amVjAoIhA" name="DdsmSparkCluster">
           <generalization xmi:type="uml:Generalization" xmi:id="_SWr0wAKNEeeo9amVjAoIhA" general="_Q1XXcP5lEeastMYiWd95zQ"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_YEZ6INNSEeeaspqhclZI9g" name="driver_memory">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_0raaANNWEeeaspqhclZI9g" value="5"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_m1aQUNNSEeeaspqhclZI9g" name="driver_cores">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_G8vcUNNXEeeaspqhclZI9g" value="1"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_oJg8gNNSEeeaspqhclZI9g" name="max_result_size">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_LXZpwNNXEeeaspqhclZI9g" value="1"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_qBiOENNSEeeaspqhclZI9g" name="ui_port">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_RmEygNNXEeeaspqhclZI9g" value="4040"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_rcDEQNNSEeeaspqhclZI9g" name="executor_memory">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XjzVMNNXEeeaspqhclZI9g" value="1"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_uKpYgNNSEeeaspqhclZI9g" name="executor_cores">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_eI4LwNNXEeeaspqhclZI9g" value="1"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_xuujQNNSEeeaspqhclZI9g" name="num_executors">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_LggzkNOFEeeK2Pr_4Ko7iA" value="1"/>
+          </ownedAttribute>
         </packagedElement>
         <packagedElement xmi:type="uml:Stereotype" xmi:id="_3DR0EC8lEeeKwIxvoTP_kA" name="DdsmMongoDBCluster">
           <generalization xmi:type="uml:Generalization" xmi:id="_CRmtsC8mEeeKwIxvoTP_kA" general="_SIP7oP5lEeastMYiWd95zQ"/>
@@ -1239,6 +1333,42 @@
             <type xmi:type="uml:DataType" href="DICE_Library.uml#_QJiE0C88EeeKwIxvoTP_kA"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rnsDEC88EeeKwIxvoTP_kA"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rnwUgC88EeeKwIxvoTP_kA" value="*"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_Xs0O0NEIEee6_c7Jq87cFA" name="DdsmDockerHost">
+          <generalization xmi:type="uml:Generalization" xmi:id="_aSsr8NEIEee6_c7Jq87cFA" general="_VW6FIDx3EeaOH59TuV453g"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_Y2X34NEIEee6_c7Jq87cFA" name="DdsmDockerContainer">
+          <generalization xmi:type="uml:Generalization" xmi:id="_bkIeoNEIEee6_c7Jq87cFA" general="_VW6FIDx3EeaOH59TuV453g"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_cGVz0NEIEee6_c7Jq87cFA" name="image">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_dTEFoNEIEee6_c7Jq87cFA" name="tag">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_PfF9ANjrEeeOZvjPMfCSmw" name="portMappings">
+            <type xmi:type="uml:DataType" href="DICE_Library.uml#_GpIB4NjrEeeOZvjPMfCSmw"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RhIGMNjrEeeOZvjPMfCSmw"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RhMXoNjrEeeOZvjPMfCSmw" value="*"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_gaCTcPrSEeebDdUDo6LimA" name="network">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iNBUAPrSEeebDdUDo6LimA"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iNHaoPrSEeebDdUDo6LimA" value="1"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_EDoo4PtyEeetsuv0UpIu6Q" name="envVariables">
+            <type xmi:type="uml:DataType" href="DICE_Library.uml#_LABo8PrSEeebDdUDo6LimA"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ha8i8PtyEeetsuv0UpIu6Q"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HbNosPtyEeetsuv0UpIu6Q" value="*"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_VRqYkNjrEeeOZvjPMfCSmw" name="DdsmOSvContainer">
+          <generalization xmi:type="uml:Generalization" xmi:id="_XpVakNjrEeeOZvjPMfCSmw" general="_4GoMgDx3EeaOH59TuV453g"/>
+          <generalization xmi:type="uml:Generalization" xmi:id="_xxmPMNkzEeeOZvjPMfCSmw" general="_VW6FIDx3EeaOH59TuV453g"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_YYzIoNjrEeeOZvjPMfCSmw" name="user_data">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_akdH4NjrEeeOZvjPMfCSmw"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_akfkINjrEeeOZvjPMfCSmw" value="1"/>
           </ownedAttribute>
         </packagedElement>
         <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_iGZsADx2EeaOH59TuV453g">
@@ -1271,4 +1401,6 @@
   <Ecore:EPackage xmi:id="_0yQ4UC5LEeaF_sH3mLTVKg" base_Package="_lhjuYC5LEeaF_sH3mLTVKg" packageName="Hadoop" nsPrefix="Hadoop" nsURI="http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0" basePackage="es.unizar.disco.dice.DTSM"/>
   <Ecore:EPackage xmi:id="_jBv58Dx2EeaOH59TuV453g" base_Package="_aYmS0Dx2EeaOH59TuV453g" packageName="DDSM" nsPrefix="DDSM" nsURI="http://es.unizar.disco.dice/profiles/DDSM/1.0" basePackage="es.unizar.disco.dice"/>
   <Ecore:EPackage xmi:id="_0QZvIPjzEeaT8NXWw3z-XA" base_Package="_uVw8sPjzEeaT8NXWw3z-XA" packageName="Spark" nsPrefix="Spark" nsURI="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" basePackage="es.unizar.disco.dice.DTSM"/>
+  <Ecore:EPackage xmi:id="_GJ5KYGY7EeeWJ7BBNSdFOw" base_Package="_CxT4QGYrEeeWJ7BBNSdFOw" packageName="Cassandra" nsPrefix="Cassandra" nsURI="http://es.unizar.disco.dice/profiles/DTSM/Cassandra/1.0" basePackage="es.unizar.disco.dice.DTSM"/>
+  <Ecore:EPackage xmi:id="_0QZvIPjzEeaT8NXWw3z-XE" base_Package="_nBY5MErOEeeMQoOjqcCpqg" packageName="Tez" nsPrefix="Tez" nsURI="http://es.unizar.disco.dice/profiles/DTSM/Tez/1.0" basePackage="es.unizar.disco.dice.DTSM"/>
 </xmi:XMI>

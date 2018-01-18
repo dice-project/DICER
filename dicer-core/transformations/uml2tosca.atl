@@ -2,6 +2,7 @@
 -- @nsURI TOSCA=/testuml/tosca.ecore
 -- @atlcompiler emftvm
 
+
 module uml2tosca;
 create tosca: TOSCA from uml: MMUML;
 
@@ -12,69 +13,115 @@ rule MMUML2TOSCA {
 		t: TOSCA!TopologyTemplate (
 			tosca_definitions_version <- 'cloudify_dsl_1_3',
 			imports <- thisModule.getProviderImport(),
-			nodeTemplates <- MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(cluster | thisModule.
-					getVMsClusterToNodeTemplate(cluster)).flatten().union(MMUML!Device.
-					allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!Node) and
-					nested.hasStereotype('DdsmCassandraCluster')) -> collect(cassandra |
-					thisModule.cassandraToTosca(cassandra))).flatten()).
-					union(MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!Node) and
-					nested.hasStereotype('DdsmZookeeperCluster')) -> collect(zookeeper |
-					thisModule.zookeeperToTosca(zookeeper))).flatten()).
-					union(MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.
-					oclIsTypeOf(MMUML!ExecutionEnvironment) and nested.
-					hasStereotype('DdsmStormCluster')) -> collect(storm | thisModule.
-					stormToTosca(storm))).flatten()).union(MMUML!Device.allInstances() ->
-					select(device | device.hasStereotype('DdsmVMsCluster')) ->
-					collect(device | device.nestedNode -> select(nested | nested.
-					oclIsTypeOf(MMUML!Node) and nested.hasStereotype('DdsmHdfsCluster'))
-					-> collect(hdfs | thisModule.HdfsToTosca(hdfs))).flatten()).
-					union(MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.
-					oclIsTypeOf(MMUML!ExecutionEnvironment) and nested.
-					hasStereotype('DdsmYarnCluster')) -> collect(yarn | thisModule.
-					YARNToTosca(yarn))).flatten()).union(MMUML!Device.allInstances() ->
-					select(device | device.hasStereotype('DdsmVMsCluster')) ->
-					collect(device | device.nestedNode -> select(nested | nested.
-					oclIsTypeOf(MMUML!ExecutionEnvironment) and nested.
-					hasStereotype('DdsmSparkCluster')) -> collect(spark | thisModule.
-					sparkToTosca(spark))).flatten()).union(MMUML!Device.allInstances() ->
-					select(device | device.hasStereotype('DdsmVMsCluster')) ->
-					collect(device | device.nestedClassifier -> select(nested | nested.
-					hasStereotype('DdsmInternalComponent')) -> collect(comp | thisModule.
-					internalComponentToTosca(comp))).flatten()).union(s.packagedElement
-					-> select(element | element.oclIsTypeOf(MMUML!Artifact) and element.
-					hasStereotype('DdsmBigDataJob')) -> collect(job | thisModule.
-					getDiaJobNodeTemplate(job)).flatten()).union(MMUML!Device.
-					allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!Node) and
-					nested.hasStereotype('DdsmMongoDBCluster') and nested.
-					getStereotypeProperty('shardingMode', 'DdsmMongoDBCluster') = false)
-					-> collect(mongo | thisModule.mongoToTosca(mongo))).flatten()).
-					union(MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmVMsCluster')) -> collect(device | device.
-					nestedNode -> select(nested | nested.oclIsTypeOf(MMUML!Node) and
-					nested.hasStereotype('DdsmMongoDBCluster') and nested.
-					getStereotypeProperty('shardingMode', 'DdsmMongoDBCluster') = true)
-					-> collect(mongo | thisModule.mongoShardedToTosca(mongo))).flatten()).
-					union(MMUML!Device.allInstances() -> select(device | device.
-					hasStereotype('DdsmHeterogeneousCluster')) -> collect(hetero |
-					thisModule.getCrossCloudReplicaSet(hetero)).flatten())
---					.
+			nodeTemplates <- MMUML!Device.allInstances() -> select(device
+					| device.hasStereotype('DdsmVMsCluster')) ->
+					collect(cluster |
+					thisModule.getVMsClusterToNodeTemplate(cluster)).flatten().union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmCassandraCluster')) ->
+					collect(cassandra |
+					thisModule.cassandraToTosca(cassandra))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmZookeeperCluster')) ->
+					collect(zookeeper |
+					thisModule.zookeeperToTosca(zookeeper))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmStormCluster')) ->
+					collect(storm |
+					thisModule.stormToTosca(storm))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmHdfsCluster')) ->
+					collect(hdfs |
+					thisModule.HdfsToTosca(hdfs))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmYarnCluster')) ->
+					collect(yarn |
+					thisModule.YARNToTosca(yarn))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmSparkCluster')) ->
+					collect(spark |
+					thisModule.sparkToTosca(spark))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedClassifier ->
+					select(nested |
+					nested.hasStereotype('DdsmInternalComponent')) ->
+					collect(comp |
+					thisModule.internalComponentToTosca(comp))).flatten()).union(s.packagedElement
+					-> select(element |
+					element.oclIsTypeOf(MMUML!Artifact) and
+					element.hasStereotype('DdsmBigDataJob')) ->
+					collect(job |
+					thisModule.getDiaJobNodeTemplate(job)).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmMongoDBCluster') and
+					nested.getStereotypeProperty('shardingMode',
+					'DdsmMongoDBCluster') = false) -> collect(mongo |
+					thisModule.mongoToTosca(mongo))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!Node) and
+					nested.hasStereotype('DdsmMongoDBCluster') and
+					nested.getStereotypeProperty('shardingMode',
+					'DdsmMongoDBCluster') = true) -> collect(mongo |
+					thisModule.mongoShardedToTosca(mongo))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmHeterogeneousCluster')) ->
+					collect(hetero |
+					thisModule.getCrossCloudReplicaSet(hetero)).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedClassifier ->
+					select(nested | nested.hasStereotype('DdsmDockerHost')) ->
+					collect(dockerHost |
+					thisModule.getDockerHostTemplate(dockerHost))).flatten()).union(MMUML!Node.allInstances()
+					-> select(node |
+					node.hasStereotype('DdsmDockerHost')) ->
+					collect(dockerHost | dockerHost.nestedClassifier ->
+					select(nested |
+					nested.hasStereotype('DdsmDockerContainer')) ->
+					collect(dockerContainer |
+					thisModule.getDockerContainerTemplate(dockerContainer))).flatten()).union(MMUML!Node.allInstances()
+					-> select(node |
+					node.hasStereotype('DdsmDockerHost')) ->
+					collect(dockerHost | dockerHost.nestedNode ->
+					select(nested |
+					nested.hasStereotype('DdsmDockerContainer')) ->
+					collect(dockerContainer |
+					thisModule.getDockerContainerTemplate(dockerContainer))).flatten())
+					.union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmOSvContainer')) ->
+					collect(osv | thisModule.getOSvContainerTemplate(osv)).flatten())
+					--					.
 --					union(MMUML!Class.allInstances() -> select(class | class.
 --					hasStereotype('Resource')) -> collect(resource | thisModule.
 --					databaseToTosca(resource)).flatten()).union(MMUML!Class.
 --					allInstances() -> select(class | class.hasStereotype('User')) ->
 --					collect(user | thisModule.userToTosca(user)).flatten())
-					,
+			,
 			outputs <- s.packagedElement -> select(element | element.
 					oclIsTypeOf(MMUML!Device) and element.
 					hasStereotype('DdsmVMsCluster')) -> collect(element | thisModule.
@@ -172,7 +219,7 @@ rule getProviderImport() {
 		i: TOSCA!Import (
 			file <- 'https://github.' +
 					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.' +
-					'2/full.yaml'
+					'10/full.yaml'
 		)
 	do {
 		Sequence{i}; 
@@ -214,15 +261,14 @@ lazy rule getVMsClusterToNodeTemplate {
 					stereotypeHasProperty('protected', ster.name) and nested.
 					getStereotypeProperty('protected', ster.name) = true)) ->
 					collect(protected | thisModule.
-					getClusterRelationshipWithFirewall(protected)).union(thisModule.getIpAvailableFromRelationship(s.name))
+					getClusterRelationshipWithFirewall(protected)).flatten().union(thisModule.getIpAvailableFromRelationship(s.name))
 		),
 		vm_ip: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_ip',
 			type <- 'dice.VirtualIP'
 		)
 	do {
-		Sequence{t,
-					vm_ip}; 
+		if s.getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then Sequence{} else Sequence{t, vm_ip} endif;
 	}
 }
 
@@ -265,13 +311,197 @@ lazy rule getInstancesElement {
 lazy rule getClusterRelationshipWithFirewall {
 	from
 		s: MMUML!Node
+	using {
+		toReturn: Sequence(TOSCA!Relationship) = Sequence{};
+	}
 	to
 		t: TOSCA!Relationship (
+			type <- 'dice.relationships.ProtectedBy',
+			target <- s.name + '_firewall'
+		),
+		fw_ephemeral_protection: TOSCA!Relationship (
+			type <- 'dice.relationships.ProtectedBy',
+			target <- 'fw_ephemeral'
+		)
+	do {
+		if (s.hasStereotype('DdsmDockerHost') = true) {
+			toReturn <- Sequence{fw_ephemeral_protection, t};
+		} else if(s.hasStereotype('DdsmOSvContainer')){
+			toReturn <- Sequence{fw_ephemeral_protection};
+		} else {
+			toReturn <- Sequence{t};
+		}
+		
+		toReturn;
+	}
+}
+
+lazy rule getOSvFirewallRelationship {
+	from
+		s: MMUML!Node
+	to
+		osv_firewall: TOSCA!Relationship (
 			type <- 'dice.relationships.ProtectedBy',
 			target <- s.name + '_firewall'
 		)
 }
 
+---------------- OSV -----------
+lazy rule getOSvContainerTemplate {
+	from
+		s: MMUML!Device (
+			s.hasStereotype('DdsmOSvContainer')
+		)
+	to
+		t: TOSCA!NodeTemplate (
+			node_template_name <- s.name,
+			type <- 'dice.components.osv.Application.' + s.getStereotypeProperty('genericSize', 'DdsmOSvContainer').toString().replaceAll('#', ''),
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmOSvContainer')
+					= true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmOSvContainer'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
+			properties <- thisModule.getProperty('image', s.
+					getStereotypeProperty('imageId', 'DdsmOSvContainer').toString()).union(thisModule.
+					getProperty('user_data', s.getStereotypeProperty('user_data',
+					'DdsmOSvContainer'))),
+			relationships <- if s.getStereotypeProperty('protected', 'DdsmOSvContainer') = true 
+			then thisModule.
+					getClusterRelationshipWithFirewall(s).union(
+						MMUML!Dependency.allInstances() -> select(dep | dep.client.
+						first().name = s.name) -> collect(dep | thisModule.
+						getOSvFirewallRelationship(dep.supplier.first()))		
+					)
+			else Sequence{} 
+			endif.union(
+					MMUML!Dependency.allInstances() -> select(dep | dep.client.
+					first().name = s.name) -> collect(dep | thisModule.
+					getGenericNeedRelationship(dep.supplier.first()))	
+			)
+		)	
+	do {
+			Sequence{t};
+	}
+}
+---------------- OSV -----------
+
+
+---------------- DOCKER -----------
+lazy rule getDockerHostTemplate {
+	from
+		s: MMUML!Node (
+			s.hasStereotype('DdsmDockerHost')
+		)
+	to
+		t: TOSCA!NodeTemplate (
+			node_template_name <- s.name,
+			type <- 'dice.components.docker.Server',
+			relationships <- thisModule.getDockerHostRelationship(s)
+		),
+		firewall: TOSCA!NodeTemplate (
+			node_template_name <- s.name + '_firewall',
+			type <- 'dice.firewall_rules.docker.Server'
+		)
+	do {
+		if s.getStereotypeProperty('protected', 'DdsmDockerHost') = true then
+			Sequence{t,
+					firewall}
+		else
+			Sequence{t}
+		endif;
+	}
+}
+
+lazy rule getDockerContainerTemplate {
+	from
+		s: MMUML!Node (
+			s.hasStereotype('DdsmDockerContainer')
+		)
+	to
+		t: TOSCA!NodeTemplate (
+			node_template_name <- s.name,
+			type <- 'dice.components.docker.Container',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmDockerContainer')
+					= true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmDockerContainer'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
+			portMapping <- s.getStereotypeProperty('portMappings', 'DdsmDockerContainer')
+				-> collect(p | thisModule.
+					getProperty(p.inPort.toString() + '/tcp', p.outPort.toString())).flatten(),
+				
+			properties <- thisModule.getProperty('image', s.
+					getStereotypeProperty('image', 'DdsmDockerContainer')).union(thisModule.
+					getProperty('tag', s.getStereotypeProperty('tag',
+					'DdsmDockerContainer'))).union(
+					thisModule.getProperty('network', 
+						s.getStereotypeProperty('network', 'DdsmDockerContainer'))).union(
+					if s.refImmediateComposite().hasStereotype('DdsmExternalComponent') then
+					thisModule.getProperty('host', s.refImmediateComposite()
+						.getStereotypeProperty('location', 'DdsmExternalComponent'))
+					else
+						Sequence{}
+					endif),
+			environment <- s.getStereotypeProperty('envVariables', 'DdsmDockerContainer') ->
+						collect(var | 
+							if not var.defaultValue.oclIsUndefined() then 
+								thisModule.getSimpleEnvVar(var.variableName ,var.defaultValue)
+							else 
+								thisModule.getAttributeEnvVar(var.variableName ,var.variableDefinition.referenceNode, var.variableDefinition.attributeName.toString())
+							endif	
+						).flatten(),
+			relationships <- 
+					if not s.refImmediateComposite().hasStereotype('DdsmExternalComponent') then
+						thisModule.getDockerContainerRelationship(s)
+					else
+						Sequence{}
+					endif.union(
+					MMUML!Dependency.allInstances() -> select(dep | dep.client.
+					first().name = s.name) -> collect(dep | thisModule.
+					getGenericNeedRelationship(dep.supplier.first()))	
+					)
+			
+		)
+}
+
+
+lazy rule getDockerHostRelationship {
+	from
+		dockerHost: MMUML!Node (
+			dockerHost.hasStereotype('DdsmDockerHost')
+		)
+	to
+		dockerHost_to_host: TOSCA!Relationship (
+			target <- dockerHost.refImmediateComposite().name,
+			type <- 'dice.relationships.ContainedIn'
+		)
+	do {
+		Sequence{dockerHost_to_host}; 
+	}
+}
+
+lazy rule getDockerContainerRelationship {
+	from
+		dockerContainer: MMUML!Node (
+			dockerContainer.hasStereotype('DdsmDockerContainer')
+		)
+	to
+		dockerContainer_to_host: TOSCA!Relationship (
+			target <- dockerContainer.refImmediateComposite().name,
+			type <- 'dice.relationships.docker.HostedOn'
+		)
+	do {
+		Sequence{dockerContainer_to_host}; 
+	}
+}
+
+---------------- DOCKER -----------
 ---------------- DATA SECURITY -----------
 --lazy rule databaseToTosca {
 --	from
@@ -281,7 +511,8 @@ lazy rule getClusterRelationshipWithFirewall {
 --	to
 --		database: TOSCA!NodeTemplate (
 --			node_template_name <- s.name,
---			type <- 'dice.components.mongo.DB', -- right now there is support only for mongo, but should be generalized
+--			type <- 'dice.components.mongo.DB', -- right now there is support only for
+--- mongo, but should be generalized
 --			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
 --			properties <- thisModule.getProperty('name', s.name),
 --			relationships <- if (MMUML!Class.allInstances() -> select(class | class.
@@ -293,6 +524,7 @@ lazy rule getClusterRelationshipWithFirewall {
 --				endif
 --		)
 --}
+
 --
 --lazy rule getDatabaseContainedInRelationship {
 --	from
@@ -303,9 +535,10 @@ lazy rule getClusterRelationshipWithFirewall {
 --			type <- 'dice.relationships.ContainedIn'
 --		)
 --	do {
---		Sequence{containedInRel}; 
+--		Sequence{containedInRel};
 --	}
 --}
+
 --
 --lazy rule userToTosca {
 --	from
@@ -315,7 +548,8 @@ lazy rule getClusterRelationshipWithFirewall {
 --	to
 --		user: TOSCA!NodeTemplate (
 --			node_template_name <- s.name,
---			type <- 'dice.components.mongo.User', -- right now there is support only for mongo, but should be generalized
+--			type <- 'dice.components.mongo.User', -- right now there is support only
+--- for mongo, but should be generalized
 --			monitoring <- thisModule.getMonitoringProperty(false, Sequence{}),
 --			properties <- thisModule.getProperty('username', s.name),
 --			relationships <- MMUML!AssociationClass.allInstances() -> select(class |
@@ -326,17 +560,20 @@ lazy rule getClusterRelationshipWithFirewall {
 --					getHasRightToUseRelationship(p.member.at(2).name))
 --		)
 --}
+
 --
 --lazy rule getHasRightToUseRelationship {
 --	from
 --		target: String
 --	to
 --		rel: TOSCA!Relationship (
---			target <- target.substring(1, 1).toUpper().concat(target.substring(2, target.
+--			target <- target.substring(1, 1).toUpper().concat(target.substring(2,
+-- target.
 --					size())),
 --			type <- 'dice.relationships.HasRightsToUse'
 --		)
 --}
+
 --
 ---------------- DATA SECURITY -----------
 -------------- CASSANDRA ---------------
@@ -359,12 +596,17 @@ lazy rule cassandraToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.cassandra.Worker',
-			configurations <- thisModule.getConfigurationFromAttribute('key_cache_save_period',
-					s.getStereotypeProperty('key_cache_save_period', 'DdsmCassandraCluster')).
+			configurations <- thisModule.
+					getConfigurationFromAttribute('key_cache_save_period', s.
+					getStereotypeProperty('key_cache_save_period',
+					'DdsmCassandraCluster')).
 --					union(thisModule.getConfigurationFromAttribute('memtable_cleanup_threshold',
---					s.getStereotypeProperty('memtable_cleanup_threshold', 'DdsmCassandraCluster'))).
-					union(thisModule.getConfigurationFromAttribute('memtable_flush_writers',
-					s.getStereotypeProperty('memtable_flush_writers', 'DdsmCassandraCluster'))),
+--					s.getStereotypeProperty('memtable_cleanup_threshold',
+		-- 'DdsmCassandraCluster'))).
+					union(thisModule.
+							getConfigurationFromAttribute('memtable_flush_writers', s.
+							getStereotypeProperty('memtable_flush_writers',
+							'DdsmCassandraCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmCassandraCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
@@ -493,10 +735,10 @@ lazy rule zookeeperToTosca {
 			type <- 'dice.components.zookeeper.Server',
 			configurations <- thisModule.getConfigurationFromAttribute('tickTime', s.
 					getStereotypeProperty('tickTime', 'DdsmZookeeperCluster')).
-					union(thisModule.getConfigurationFromAttribute('syncLimit',
-					s.getStereotypeProperty('syncLimit', 'DdsmZookeeperCluster'))).
-					union(thisModule.getConfigurationFromAttribute('initLimit',
-					s.getStereotypeProperty('initLimit', 'DdsmZookeeperCluster'))),
+					union(thisModule.getConfigurationFromAttribute('syncLimit', s.
+					getStereotypeProperty('syncLimit', 'DdsmZookeeperCluster'))).
+					union(thisModule.getConfigurationFromAttribute('initLimit', s.
+					getStereotypeProperty('initLimit', 'DdsmZookeeperCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmZookeeperCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
@@ -580,20 +822,20 @@ lazy rule stormToTosca {
 					getStereotypeProperty('taskTimeout', 'DdsmStormCluster')).
 					union(thisModule.getConfigurationFromAttribute('supervisorFrequency',
 					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('queueSize',
-					s.getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('monitorFrequency',
-					s.getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('retryTimes',
-					s.getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('retryInterval',
-					s.getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('queueSize', s.
+					getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('monitorFrequency', s.
+					getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryTimes', s.
+					getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryInterval', s.
+					getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
 					union(thisModule.getConfigurationFromAttribute('workerStartTimeout',
 					s.getStereotypeProperty('workerStartTimeout', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('cpuCapacity',
-					s.getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('memoryCapacity',
-					s.getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('cpuCapacity', s.
+					getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memoryCapacity', s.
+					getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
 					union(thisModule.getConfigurationFromAttribute('heartbeatFrequency',
 					s.getStereotypeProperty('heartbeatFrequency', 'DdsmStormCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
@@ -612,20 +854,20 @@ lazy rule stormToTosca {
 					getStereotypeProperty('taskTimeout', 'DdsmStormCluster')).
 					union(thisModule.getConfigurationFromAttribute('supervisorFrequency',
 					s.getStereotypeProperty('supervisorFrequency', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('queueSize',
-					s.getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('monitorFrequency',
-					s.getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('retryTimes',
-					s.getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('retryInterval',
-					s.getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('queueSize', s.
+					getStereotypeProperty('queueSize', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('monitorFrequency', s.
+					getStereotypeProperty('monitorFrequency', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryTimes', s.
+					getStereotypeProperty('retryTimes', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('retryInterval', s.
+					getStereotypeProperty('retryInterval', 'DdsmStormCluster'))).
 					union(thisModule.getConfigurationFromAttribute('workerStartTimeout',
 					s.getStereotypeProperty('workerStartTimeout', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('cpuCapacity',
-					s.getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
-					union(thisModule.getConfigurationFromAttribute('memoryCapacity',
-					s.getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('cpuCapacity', s.
+					getStereotypeProperty('cpuCapacity', 'DdsmStormCluster'))).
+					union(thisModule.getConfigurationFromAttribute('memoryCapacity', s.
+					getStereotypeProperty('memoryCapacity', 'DdsmStormCluster'))).
 					union(thisModule.getConfigurationFromAttribute('heartbeatFrequency',
 					s.getStereotypeProperty('heartbeatFrequency', 'DdsmStormCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmStormCluster') =
@@ -646,7 +888,27 @@ lazy rule stormToTosca {
 			type <- 'dice.firewall_rules.storm.Worker'
 		)
 	do {
-		if masterHost.oclIsUndefined() then
+		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+			if masterHost.oclIsUndefined() then
+				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
+					Sequence{master,
+								master_firewall,
+								thisModule.generateMasterVm(s, true)}.flatten()
+				else
+					Sequence{master,
+								worker,
+								thisModule.generateMasterVm(s, false)}.flatten()
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
+					Sequence{master,
+							master_firewall}
+				else
+					Sequence{master}
+				endif
+			endif 
+		else 
+			if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmStormCluster') = true then
 					Sequence{master,
 								worker,
@@ -668,7 +930,8 @@ lazy rule stormToTosca {
 					Sequence{master,
 							worker}
 				endif
-			endif; 
+			endif
+		endif; 
 	}
 }
 
@@ -770,7 +1033,26 @@ lazy rule sparkToTosca {
 			type <- 'dice.firewall_rules.spark.Worker'
 		)
 	do {
-		if masterHost.oclIsUndefined() then
+		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+			if masterHost.oclIsUndefined() then
+				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+					Sequence{master,
+								master_firewall,
+								thisModule.generateMasterVm(s, true)}.flatten()
+				else
+					Sequence{master,
+								thisModule.generateMasterVm(s, false)}.flatten()
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+					Sequence{master,
+							master_firewall}
+				else
+					Sequence{master}
+				endif
+			endif
+		else
+			if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
 					Sequence{master,
 								worker,
@@ -792,7 +1074,9 @@ lazy rule sparkToTosca {
 					Sequence{master,
 							worker}
 				endif
-			endif; 
+			endif
+		endif;
+
 	}
 }
 
@@ -854,18 +1138,25 @@ lazy rule YARNToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.ResourceManager',
-			configurations <- thisModule.getConfigurationFromBooleanAttribute('enable_acl', s.
+			configurations <- thisModule.
+					getConfigurationFromBooleanAttribute('enable_acl', s.
 					getStereotypeProperty('enable_acl', 'DdsmYarnCluster')).
-					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_mem_mb',
-					s.getStereotypeProperty('scheduler_min_container_mem_mb', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_mem_mb',
-					s.getStereotypeProperty('scheduler_max_container_mem_mb', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_core_num',
-					s.getStereotypeProperty('scheduler_min_container_core_num', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_core_num',
-					s.getStereotypeProperty('scheduler_max_container_core_num', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('nodemanager_available_mem',
-					s.getStereotypeProperty('nodemanager_available_mem', 'DdsmYarnCluster'))),
+					union(thisModule.
+					getConfigurationFromAttribute('scheduler_min_container_mem_mb', s.
+					getStereotypeProperty('scheduler_min_container_mem_mb',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_max_container_mem_mb', s.
+					getStereotypeProperty('scheduler_max_container_mem_mb',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_min_container_core_num', s.
+					getStereotypeProperty('scheduler_min_container_core_num',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_max_container_core_num', s.
+					getStereotypeProperty('scheduler_max_container_core_num',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('nodemanager_available_mem', s.
+					getStereotypeProperty('nodemanager_available_mem',
+					'DdsmYarnCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -878,18 +1169,25 @@ lazy rule YARNToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.NodeManager',
-			configurations <- thisModule.getConfigurationFromBooleanAttribute('enable_acl', s.
+			configurations <- thisModule.
+					getConfigurationFromBooleanAttribute('enable_acl', s.
 					getStereotypeProperty('enable_acl', 'DdsmYarnCluster')).
-					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_mem_mb',
-					s.getStereotypeProperty('scheduler_min_container_mem_mb', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_mem_mb',
-					s.getStereotypeProperty('scheduler_max_container_mem_mb', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_min_container_core_num',
-					s.getStereotypeProperty('scheduler_min_container_core_num', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('scheduler_max_container_core_num',
-					s.getStereotypeProperty('scheduler_max_container_core_num', 'DdsmYarnCluster'))).
-					union(thisModule.getConfigurationFromAttribute('nodemanager_available_mem',
-					s.getStereotypeProperty('nodemanager_available_mem', 'DdsmYarnCluster'))),
+					union(thisModule.
+					getConfigurationFromAttribute('scheduler_min_container_mem_mb', s.
+					getStereotypeProperty('scheduler_min_container_mem_mb',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_max_container_mem_mb', s.
+					getStereotypeProperty('scheduler_max_container_mem_mb',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_min_container_core_num', s.
+					getStereotypeProperty('scheduler_min_container_core_num',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('scheduler_max_container_core_num', s.
+					getStereotypeProperty('scheduler_max_container_core_num',
+					'DdsmYarnCluster'))).union(thisModule.
+					getConfigurationFromAttribute('nodemanager_available_mem', s.
+					getStereotypeProperty('nodemanager_available_mem',
+					'DdsmYarnCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmYarnCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -908,7 +1206,26 @@ lazy rule YARNToTosca {
 			type <- 'dice.firewall_rules.hadoop.NodeManager'
 		)
 	do {
-		if masterHost.oclIsUndefined() then
+		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+			if masterHost.oclIsUndefined() then
+				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
+					Sequence{master,
+								master_firewall,
+								thisModule.generateMasterVm(s, true)}.flatten()
+				else
+					Sequence{master,
+								thisModule.generateMasterVm(s, false)}.flatten()
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
+					Sequence{master,
+							master_firewall}
+				else
+					Sequence{master}
+				endif
+			endif
+		else
+			if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmYarnCluster') = true then
 					Sequence{master,
 								worker,
@@ -930,7 +1247,8 @@ lazy rule YARNToTosca {
 					Sequence{master,
 							worker}
 				endif
-			endif; 
+			endif
+		endif;
 	}
 }
 
@@ -1239,24 +1557,30 @@ lazy rule HdfsToTosca {
 		master: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_master',
 			type <- 'dice.components.hadoop.NameNode',
-			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize',
-					s.getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
-					union(thisModule.getConfigurationFromAttribute('namenode_handler_count',
-					s.getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('datanode_handler_count',
-					s.getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
-					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('permission_enabled',
-					s.getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('block_replication',
-					s.getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('blocksize_bytes',
-					s.getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
+			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize', s.
+					getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
+					union(thisModule.
+					getConfigurationFromAttribute('namenode_handler_count', s.
+					getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.
+					getConfigurationFromAttribute('datanode_handler_count', s.
+					getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.
+					getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
+					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms',
+					'DdsmHdfsCluster'))).union(thisModule.
+					getConfigurationFromBooleanAttribute('permission_enabled', s.
+					getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_replication', s.
+					getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('blocksize_bytes', s.
+					getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
 					union(thisModule.getConfigurationFromAttribute('block_write_retries',
 					s.getStereotypeProperty('block_write_retries', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
-					s.getStereotypeProperty('resource_manager_recovery_enabled', 'DdsmHdfsCluster'))),
+					union(thisModule.
+					getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
+					s.getStereotypeProperty('resource_manager_recovery_enabled',
+					'DdsmHdfsCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -1269,24 +1593,30 @@ lazy rule HdfsToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.hadoop.DataNode',
-			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize',
-					s.getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
-					union(thisModule.getConfigurationFromAttribute('namenode_handler_count',
-					s.getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('datanode_handler_count',
-					s.getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
-					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('permission_enabled',
-					s.getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('block_replication',
-					s.getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromAttribute('blocksize_bytes',
-					s.getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
+			configurations <- thisModule.getConfigurationFromAttribute('dfs_blocksize', s.
+					getStereotypeProperty('dfs_blocksize', 'DdsmHdfsCluster')).
+					union(thisModule.
+					getConfigurationFromAttribute('namenode_handler_count', s.
+					getStereotypeProperty('namenode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.
+					getConfigurationFromAttribute('datanode_handler_count', s.
+					getStereotypeProperty('datanode_handler_count', 'DdsmHdfsCluster'))).
+					union(thisModule.
+					getConfigurationFromAttribute('namenode_heartbeat_recheck_interval_ms',
+					s.getStereotypeProperty('namenode_heartbeat_recheck_interval_ms',
+					'DdsmHdfsCluster'))).union(thisModule.
+					getConfigurationFromBooleanAttribute('permission_enabled', s.
+					getStereotypeProperty('permission_enabled', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('block_replication', s.
+					getStereotypeProperty('block_replication', 'DdsmHdfsCluster'))).
+					union(thisModule.getConfigurationFromAttribute('blocksize_bytes', s.
+					getStereotypeProperty('blocksize_bytes', 'DdsmHdfsCluster'))).
 					union(thisModule.getConfigurationFromAttribute('block_write_retries',
 					s.getStereotypeProperty('block_write_retries', 'DdsmHdfsCluster'))).
-					union(thisModule.getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
-					s.getStereotypeProperty('resource_manager_recovery_enabled', 'DdsmHdfsCluster'))),
+					union(thisModule.
+					getConfigurationFromBooleanAttribute('resource_manager_recovery_enabled',
+					s.getStereotypeProperty('resource_manager_recovery_enabled',
+					'DdsmHdfsCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmHdfsCluster') =
 					true then
 					thisModule.getMonitoringProperty(true, s.
@@ -1305,7 +1635,26 @@ lazy rule HdfsToTosca {
 			type <- 'dice.firewall_rules.hadoop.DataNode'
 		)
 	do {
-		if masterHost.oclIsUndefined() then
+		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+			if masterHost.oclIsUndefined() then
+				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
+					Sequence{master,
+								master_firewall,
+								thisModule.generateMasterVm(s, true)}.flatten()
+				else
+					Sequence{master,
+								thisModule.generateMasterVm(s, false)}.flatten()
+				endif
+			else
+				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
+					Sequence{master,
+							master_firewall}
+				else
+					Sequence{master}
+				endif
+			endif
+		else
+			if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmHdfsCluster') = true then
 					Sequence{master,
 								worker,
@@ -1327,7 +1676,9 @@ lazy rule HdfsToTosca {
 					Sequence{master,
 							worker}
 				endif
-			endif; 
+			endif
+		endif;
+
 	}
 }
 
@@ -1430,7 +1781,7 @@ lazy rule internalComponentToTosca {
 			type <- 'dice.firewall_rules.Base',
 			rules <- s.getStereotypeProperty('firewallRules', 'DdsmInternalComponent') ->
 					collect(r | thisModule.getToscaFirewallRule(r.allowedIpPrefix.
-					toString(), r.port.toString()))
+					toString(), r.port.toString(), r.protocol.toString()))
 		)
 	do {
 		if s.getStereotypeProperty('protected', 'DdsmInternalComponent') = true then
@@ -1442,10 +1793,11 @@ lazy rule internalComponentToTosca {
 	}
 }
 
-rule getToscaFirewallRule(ipPrefix: String, port: String) {
+rule getToscaFirewallRule(ipPrefix: String, port: String, protocol: String) {
 	to
 		t: TOSCA!FirewallRule (
 			remote_ip_prefix <- ipPrefix,
+			protocol <- protocol,
 			port <- port
 		)
 		
@@ -1549,6 +1901,30 @@ lazy rule getArgument {
 			argument_name <- name,
 			argument_value <- value
 		)
+}
+
+lazy rule getSimpleEnvVar {
+	from
+		varName: String,
+		value: String
+	to
+		envVar: TOSCA!EnvironmentVariable (
+			variable_name <- varName,
+			variable_value <- thisModule.getSimpleValue(value)
+		)
+}
+
+rule getAttributeEnvVar(varName: String,
+		referenceNode: String,
+		attributeName: String) {		
+	to
+		envVar: TOSCA!EnvironmentVariable (
+			variable_name <- varName,
+			variable_value <- thisModule.getAttributeExpression(referenceNode, attributeName)
+		)
+	do{
+		Sequence{envVar};
+	}
 }
 
 lazy rule getSimpleValue {

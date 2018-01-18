@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:Complex_Data_Types="http://es.unizar.disco.dice/libraries/Complex_Data_Types/1.0" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_SN9WQNEEEee6_c7Jq87cFA" name="CustomComponen">
+    <packagedElement xmi:type="uml:Device" xmi:id="_V4OokNEEEee6_c7Jq87cFA" name="vm1">
+      <nestedClassifier xmi:type="uml:Node" xmi:id="_9hJeENEFEee6_c7Jq87cFA" name="comp1">
+        <nestedClassifier xmi:type="uml:Artifact" xmi:id="_-Xf3QNEFEee6_c7Jq87cFA" name="res1" fileName="scripts/res1.sh"/>
+      </nestedClassifier>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_VazswNEEEee6_c7Jq87cFA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VbHOwNEEEee6_c7Jq87cFA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DDSM/1.0#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmVMsCluster xmi:id="_DYYXMNEGEee6_c7Jq87cFA" base_Device="_V4OokNEEEee6_c7Jq87cFA"/>
+  <DDSM:DdsmInternalComponent xmi:id="_E-8sYNEGEee6_c7Jq87cFA" monitored="true" base_Node="_9hJeENEFEee6_c7Jq87cFA" protected="true" launch_script="scripts/start.sh">
+    <monitoringRoles>role1</monitoringRoles>
+    <firewallRules xmi:type="Complex_Data_Types:FirewallRule" xmi:id="_yIXyoPtwEee_TOCHLnZHUQ" port="8080"/>
+  </DDSM:DdsmInternalComponent>
+</xmi:XMI>

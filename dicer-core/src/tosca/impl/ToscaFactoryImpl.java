@@ -78,6 +78,7 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
             case ToscaPackage.GET_ATTRIBUTE: return createGetAttribute();
             case ToscaPackage.FIREWALL_RULE: return createFirewallRule();
             case ToscaPackage.MONITORING_PROPERTY: return createMonitoringProperty();
+            case ToscaPackage.ENVIRONMENT_VARIABLE: return createEnvironmentVariable();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -301,6 +302,16 @@ public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
     public MonitoringProperty createMonitoringProperty() {
         MonitoringPropertyImpl monitoringProperty = new MonitoringPropertyImpl();
         return monitoringProperty;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EnvironmentVariable createEnvironmentVariable() {
+        EnvironmentVariableImpl environmentVariable = new EnvironmentVariableImpl();
+        return environmentVariable;
     }
 
     /**

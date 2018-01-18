@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link tosca.NodeTemplate#getArguments <em>Arguments</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getRules <em>Rules</em>}</li>
  *   <li>{@link tosca.NodeTemplate#getMonitoring <em>Monitoring</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getPortMapping <em>Port Mapping</em>}</li>
+ *   <li>{@link tosca.NodeTemplate#getEnvironment <em>Environment</em>}</li>
  * </ul>
  *
  * @see tosca.ToscaPackage#getNodeTemplate()
@@ -203,6 +205,38 @@ public interface NodeTemplate extends EObject {
      * @generated
      */
     void setMonitoring(MonitoringProperty value);
+
+    /**
+     * Returns the value of the '<em><b>Port Mapping</b></em>' containment reference list.
+     * The list contents are of type {@link tosca.Property}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Port Mapping</em>' attribute list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Port Mapping</em>' containment reference list.
+     * @see tosca.ToscaPackage#getNodeTemplate_PortMapping()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Property> getPortMapping();
+
+    /**
+     * Returns the value of the '<em><b>Environment</b></em>' containment reference list.
+     * The list contents are of type {@link tosca.EnvironmentVariable}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Environment</em>' containment reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Environment</em>' containment reference list.
+     * @see tosca.ToscaPackage#getNodeTemplate_Environment()
+     * @model containment="true"
+     * @generated
+     */
+    EList<EnvironmentVariable> getEnvironment();
 
     /**
      * Returns the value of the '<em><b>Requirements</b></em>' containment reference list.

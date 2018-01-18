@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
   <uml:Model xmi:id="_FqVXIJMKEeeIVYpeYaVS7g" name="RootElement">
     <packagedElement xmi:type="uml:Device" xmi:id="_gOqKYJMKEeeIVYpeYaVS7g" name="cluster1">
       <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_ki4_sJMKEeeIVYpeYaVS7g" name="spark1">
         <deployment xmi:type="uml:Deployment" xmi:id="_-Hfl4JMLEeeIVYpeYaVS7g" client="_ki4_sJMKEeeIVYpeYaVS7g" supplier="_xS-nAJMKEeeIVYpeYaVS7g" deployedArtifact="_xS-nAJMKEeeIVYpeYaVS7g"/>
       </nestedNode>
     </packagedElement>
-    <packagedElement xmi:type="uml:Artifact" xmi:id="_xS-nAJMKEeeIVYpeYaVS7g" name="sparkSampleApp"/>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_xS-nAJMKEeeIVYpeYaVS7g" name="sparkSampleApp" fileName=""/>
+    <packagedElement xmi:type="uml:Device" xmi:id="_7xcaUPufEeeF3-6aUyC9qQ" name="rabbitmq_vm">
+      <nestedClassifier xmi:type="uml:Node" xmi:id="_CE-N4PugEeeF3-6aUyC9qQ" name="rabbitmq">
+        <nestedClassifier xmi:type="uml:Artifact" xmi:id="_DAKDwPugEeeF3-6aUyC9qQ" name="install-rabbitmq" fileName="scripts/install-rabbitmq.sh"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_HH1q0PugEeeF3-6aUyC9qQ" client="_xS-nAJMKEeeIVYpeYaVS7g" supplier="_CE-N4PugEeeF3-6aUyC9qQ"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_9SdbUJMLEeeIVYpeYaVS7g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9SeCYJMLEeeIVYpeYaVS7g" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DDSM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
     </profileApplication>
@@ -18,4 +24,6 @@
   <DDSM:DdsmSparkCluster xmi:id="_FZcwkJMMEeeIVYpeYaVS7g" base_Node="_ki4_sJMKEeeIVYpeYaVS7g" protected="true"/>
   <DDSM:DdsmBigDataJob xmi:id="_GOCPMJMMEeeIVYpeYaVS7g" application="sparkSampleApp" application_class="org.spark.sampleapp.Main" base_Artifact="_xS-nAJMKEeeIVYpeYaVS7g" application_name="sparkSampleApp"/>
   <DDSM:DdsmVMsCluster xmi:id="_HI3fwJMMEeeIVYpeYaVS7g" base_Device="_gOqKYJMKEeeIVYpeYaVS7g"/>
+  <DDSM:DdsmVMsCluster xmi:id="_Mwt-4PugEeeF3-6aUyC9qQ" base_Device="_7xcaUPufEeeF3-6aUyC9qQ"/>
+  <DDSM:DdsmInternalComponent xmi:id="_QT7m8PugEeeF3-6aUyC9qQ" base_Node="_CE-N4PugEeeF3-6aUyC9qQ" launch_script="launch-rabbitmq.sh"/>
 </xmi:XMI>
