@@ -6,7 +6,7 @@ cd ${DICER_HOME}/DICER/dicer-core/src
 mvn install:install-file -Dfile=../lib/com.masdes.dam.static.profile_0.11.0.201703021727.jar -DgroupId=com.masdes.dam.static \
     -DartifactId=profile -Dversion=0.11.0 -Dpackaging=jar
 
-mvn install:install-file -Dfile=../lib/es.unizar.disco.dice.static.profile_0.13.1.201801221407.jar -DgroupId=es.unizar.disco.dice.static \
+mvn install:install-file -Dfile=../lib/es.unizar.disco.dice.static.profile_0.13.1.201801222039.jar -DgroupId=es.unizar.disco.dice.static \
     -DartifactId=profile -Dversion=0.12.8 -Dpackaging=jar
 
 mvn install:install-file -Dfile=../lib/org.eclipse.emf.mapping.ecore2xml_2.9.0.v20160526-0356.jar -DgroupId=org.eclipse.emf.mapping \
