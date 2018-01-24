@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/viewpoints/policy/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_SPgOYNEEEee6_c7Jq87cFA" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_SPgOYNEEEee6_c7Jq87cFA" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
   <children xmi:type="notation:Shape" xmi:id="_V4aOwNEEEee6_c7Jq87cFA" type="Device_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_V4d5INEEEee6_c7Jq87cFA" type="Device_NameLabel"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_V4egMNEEEee6_c7Jq87cFA" type="Device_NestedNodeCompartment">
@@ -46,9 +46,9 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DZPS0tEGEee6_c7Jq87cFA" x="323" y="98"/>
   </children>
-  <styles xmi:type="notation:StringValueStyle" xmi:id="_SPgOYdEEEee6_c7Jq87cFA" name="diagram_compatibility_version" stringValue="1.2.0"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_SPgOYdEEEee6_c7Jq87cFA" name="diagram_compatibility_version" stringValue="1.3.0"/>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_SPgOYtEEEee6_c7Jq87cFA"/>
-  <styles xmi:type="style:PapyrusViewStyle" xmi:id="_SPgOY9EEEee6_c7Jq87cFA">
+  <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_5Myq4ABCEeiA9qmpDOVzaA" diagramKindId="org.eclipse.papyrus.uml.diagram.deployment">
     <owner xmi:type="uml:Model" href="custom_component.uml#_SN9WQNEEEee6_c7Jq87cFA"/>
   </styles>
   <element xmi:type="uml:Model" href="custom_component.uml#_SN9WQNEEEee6_c7Jq87cFA"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/viewpoints/policy/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_FqnD8JMKEeeIVYpeYaVS7g" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_FqnD8JMKEeeIVYpeYaVS7g" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
   <children xmi:type="notation:Shape" xmi:id="_gOt0wJMKEeeIVYpeYaVS7g" type="Device_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_gOub0JMKEeeIVYpeYaVS7g" type="Device_NameLabel"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_gOub0ZMKEeeIVYpeYaVS7g" type="Device_NestedNodeCompartment">
@@ -104,9 +104,9 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MxbJgvugEeeF3-6aUyC9qQ" x="287" y="166"/>
   </children>
-  <styles xmi:type="notation:StringValueStyle" xmi:id="_FqnD8ZMKEeeIVYpeYaVS7g" name="diagram_compatibility_version" stringValue="1.2.0"/>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_FqnD8ZMKEeeIVYpeYaVS7g" name="diagram_compatibility_version" stringValue="1.3.0"/>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_FqnD8pMKEeeIVYpeYaVS7g"/>
-  <styles xmi:type="style:PapyrusViewStyle" xmi:id="_FqnD85MKEeeIVYpeYaVS7g">
+  <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_nBjTIADqEeiD8fWM0ZKgng" diagramKindId="org.eclipse.papyrus.uml.diagram.deployment">
     <owner xmi:type="uml:Model" href="spark.uml#_FqVXIJMKEeeIVYpeYaVS7g"/>
   </styles>
   <element xmi:type="uml:Model" href="spark.uml#_FqVXIJMKEeeIVYpeYaVS7g"/>
