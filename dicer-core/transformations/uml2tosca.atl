@@ -441,7 +441,7 @@ lazy rule getDockerContainerTemplate {
 					getProperty('tag', s.getStereotypeProperty('tag',
 					'DdsmDockerContainer'))).union(
 					thisModule.getProperty('network', 
-						s.getStereotypeProperty('network', 'DdsmDockerContainer'))).union(
+						s.getStereotypeProperty('network', 'DdsmDockerContainer').toString())).union(
 					if s.refImmediateComposite().hasStereotype('DdsmExternalComponent') then
 					thisModule.getProperty('host', s.refImmediateComposite()
 						.getStereotypeProperty('location', 'DdsmExternalComponent'))
@@ -663,7 +663,7 @@ lazy rule generateSeedVm {
 			instances <- thisModule.getInstancesElement(1),
 			relationships <- if s.getStereotypeProperty('protected',
 					'DdsmCassandraCluster') = true then
-						Sequence{thisModule.getClusterRelationshipWithFirewall(s)}
+						thisModule.getClusterRelationshipWithFirewall(s)
 					else
 						Sequence{}
 					endif.union(thisModule.getIpAvailableFromRelationship(s.name +
