@@ -1494,6 +1494,96 @@ ruleNodeTemplate returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleConcat
+entryRuleConcat returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConcatRule()); }
+	iv_ruleConcat=ruleConcat
+	{ $current=$iv_ruleConcat.current; }
+	EOF;
+
+// Rule Concat
+ruleConcat returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getConcatAccess().getConcatAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getConcatAccess().getLeftCurlyBracketKeyword_1());
+		}
+		otherlv_2='"concat":'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getConcatAccess().getConcatKeyword_2());
+		}
+		otherlv_3='['
+		{
+			newLeafNode(otherlv_3, grammarAccess.getConcatAccess().getLeftSquareBracketKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getConcatAccess().getItemsValueParserRuleCall_4_0());
+				}
+				lv_items_4_0=ruleValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getConcatRule());
+					}
+					add(
+						$current,
+						"items",
+						lv_items_4_0,
+						"it.polimi.dice.dicer.ToscaDsl.Value");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_5=','
+			{
+				newLeafNode(otherlv_5, grammarAccess.getConcatAccess().getCommaKeyword_5_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getConcatAccess().getItemsValueParserRuleCall_5_1_0());
+					}
+					lv_items_6_0=ruleValue
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getConcatRule());
+						}
+						add(
+							$current,
+							"items",
+							lv_items_6_0,
+							"it.polimi.dice.dicer.ToscaDsl.Value");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		otherlv_7=']'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getConcatAccess().getRightSquareBracketKeyword_6());
+		}
+		otherlv_8='}'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getConcatAccess().getRightCurlyBracketKeyword_7());
+		}
+	)
+;
+
 // Entry rule entryRuleMonitoringProperty
 entryRuleMonitoringProperty returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getMonitoringPropertyRule()); }
@@ -3064,6 +3154,15 @@ ruleValue returns [EObject current=null]
 		this_GetAttribute_3=ruleGetAttribute
 		{
 			$current = $this_GetAttribute_3.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getValueAccess().getConcatParserRuleCall_4());
+		}
+		this_Concat_4=ruleConcat
+		{
+			$current = $this_Concat_4.current;
 			afterParserOrEnumRuleCall();
 		}
 	)

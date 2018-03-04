@@ -22,29 +22,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Instances extends EObject {
     /**
-     * Returns the value of the '<em><b>Deploy</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Deploy</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Deploy</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Deploy</em>' attribute.
-     * @see #setDeploy(Integer)
-     * @see tosca.ToscaPackage#getInstances_Deploy()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Deploy</em>' attribute.
+	 * @see #setDeploy(Integer)
+	 * @see tosca.ToscaPackage#getInstances_Deploy()
+	 * @model
+	 * @generated
+	 */
     Integer getDeploy();
 
     /**
-     * Sets the value of the '{@link tosca.Instances#getDeploy <em>Deploy</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link tosca.Instances#getDeploy <em>Deploy</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Deploy</em>' attribute.
-     * @see #getDeploy()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Deploy</em>' attribute.
+	 * @see #getDeploy()
+	 * @generated
+	 */
     void setDeploy(Integer value);
 
 } // Instances

@@ -65,7 +65,14 @@ NodeTemplate returns NodeTemplate:
 		(',\n"requirements" :' '{' requirements+=Requirement ( "," requirements+=Requirement)* '}' )?
 		(',\n"capabilities" :' '{' capabilities+=Capability ( "," capabilities+=Capability)* '}' )?
 	'}';
-
+	
+Concat returns Concat:
+	{Concat}
+	'{'
+		'"concat":' '[' items+=Value ( ',' items+=Value)* ']'
+	'}'
+	;
+	
 MonitoringProperty returns MonitoringProperty:
 	{MonitoringProperty}
 	(enabled?= '\n "enabled": true' | '\n "enabled": false')
@@ -164,7 +171,7 @@ Operation returns Operation:
 	;	
 	
 Value returns Value:
-	Value_Impl | Expression_Impl | SimpleValue | GetAttribute;
+	Value_Impl | Expression_Impl | SimpleValue | GetAttribute | Concat;
 	
 Argument returns Argument:
 	//'Argument'

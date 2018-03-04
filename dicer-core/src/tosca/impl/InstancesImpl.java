@@ -27,137 +27,137 @@ import tosca.ToscaPackage;
  */
 public class InstancesImpl extends MinimalEObjectImpl.Container implements Instances {
     /**
-     * The default value of the '{@link #getDeploy() <em>Deploy</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getDeploy() <em>Deploy</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDeploy()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDeploy()
+	 * @generated
+	 * @ordered
+	 */
     protected static final Integer DEPLOY_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getDeploy() <em>Deploy</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDeploy() <em>Deploy</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDeploy()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDeploy()
+	 * @generated
+	 * @ordered
+	 */
     protected Integer deploy = DEPLOY_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected InstancesImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.INSTANCES;
-    }
+		return ToscaPackage.Literals.INSTANCES;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Integer getDeploy() {
-        return deploy;
-    }
+		return deploy;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setDeploy(Integer newDeploy) {
-        Integer oldDeploy = deploy;
-        deploy = newDeploy;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INSTANCES__DEPLOY, oldDeploy, deploy));
-    }
+		Integer oldDeploy = deploy;
+		deploy = newDeploy;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INSTANCES__DEPLOY, oldDeploy, deploy));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.INSTANCES__DEPLOY:
-                return getDeploy();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.INSTANCES__DEPLOY:
+				return getDeploy();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.INSTANCES__DEPLOY:
-                setDeploy((Integer)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.INSTANCES__DEPLOY:
+				setDeploy((Integer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.INSTANCES__DEPLOY:
-                setDeploy(DEPLOY_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.INSTANCES__DEPLOY:
+				setDeploy(DEPLOY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.INSTANCES__DEPLOY:
-                return DEPLOY_EDEFAULT == null ? deploy != null : !DEPLOY_EDEFAULT.equals(deploy);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.INSTANCES__DEPLOY:
+				return DEPLOY_EDEFAULT == null ? deploy != null : !DEPLOY_EDEFAULT.equals(deploy);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (deploy: ");
-        result.append(deploy);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (deploy: ");
+		result.append(deploy);
+		result.append(')');
+		return result.toString();
+	}
 
 } //InstancesImpl

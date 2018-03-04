@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import tosca.Argument;
 import tosca.Capability;
+import tosca.Concat;
 import tosca.Configuration;
 import tosca.EnvironmentVariable;
 import tosca.Expression;
@@ -57,6 +58,9 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case ToscaPackage.CAPABILITY:
 				sequence_Capability(context, (Capability) semanticObject); 
+				return; 
+			case ToscaPackage.CONCAT:
+				sequence_Concat(context, (Concat) semanticObject); 
 				return; 
 			case ToscaPackage.CONFIGURATION:
 				sequence_Configuration(context, (Configuration) semanticObject); 
@@ -149,6 +153,19 @@ public class ToscaDslSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     (capability_name=STRING type=STRING description=STRING? (properties+=Property properties+=Property*)?)
 	 */
 	protected void sequence_Capability(ISerializationContext context, Capability semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Concat returns Concat
+	 *     Value returns Concat
+	 *
+	 * Constraint:
+	 *     (items+=Value items+=Value*)
+	 */
+	protected void sequence_Concat(ISerializationContext context, Concat semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

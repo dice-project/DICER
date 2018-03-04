@@ -28,190 +28,190 @@ import tosca.ToscaPackage;
  */
 public class ArtifactImpl extends MinimalEObjectImpl.Container implements Artifact {
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected String name = NAME_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getArtifactUri() <em>Artifact Uri</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getArtifactUri() <em>Artifact Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getArtifactUri()
-     * @generated
-     * @ordered
-     */
+	 * @see #getArtifactUri()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String ARTIFACT_URI_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getArtifactUri() <em>Artifact Uri</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getArtifactUri() <em>Artifact Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getArtifactUri()
-     * @generated
-     * @ordered
-     */
+	 * @see #getArtifactUri()
+	 * @generated
+	 * @ordered
+	 */
     protected String artifactUri = ARTIFACT_URI_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected ArtifactImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.ARTIFACT;
-    }
+		return ToscaPackage.Literals.ARTIFACT;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getName() {
-        return name;
-    }
+		return name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.ARTIFACT__NAME, oldName, name));
-    }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.ARTIFACT__NAME, oldName, name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getArtifactUri() {
-        return artifactUri;
-    }
+		return artifactUri;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setArtifactUri(String newArtifactUri) {
-        String oldArtifactUri = artifactUri;
-        artifactUri = newArtifactUri;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.ARTIFACT__ARTIFACT_URI, oldArtifactUri, artifactUri));
-    }
+		String oldArtifactUri = artifactUri;
+		artifactUri = newArtifactUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.ARTIFACT__ARTIFACT_URI, oldArtifactUri, artifactUri));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.ARTIFACT__NAME:
-                return getName();
-            case ToscaPackage.ARTIFACT__ARTIFACT_URI:
-                return getArtifactUri();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.ARTIFACT__NAME:
+				return getName();
+			case ToscaPackage.ARTIFACT__ARTIFACT_URI:
+				return getArtifactUri();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.ARTIFACT__NAME:
-                setName((String)newValue);
-                return;
-            case ToscaPackage.ARTIFACT__ARTIFACT_URI:
-                setArtifactUri((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.ARTIFACT__NAME:
+				setName((String)newValue);
+				return;
+			case ToscaPackage.ARTIFACT__ARTIFACT_URI:
+				setArtifactUri((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.ARTIFACT__NAME:
-                setName(NAME_EDEFAULT);
-                return;
-            case ToscaPackage.ARTIFACT__ARTIFACT_URI:
-                setArtifactUri(ARTIFACT_URI_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.ARTIFACT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ToscaPackage.ARTIFACT__ARTIFACT_URI:
+				setArtifactUri(ARTIFACT_URI_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.ARTIFACT__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case ToscaPackage.ARTIFACT__ARTIFACT_URI:
-                return ARTIFACT_URI_EDEFAULT == null ? artifactUri != null : !ARTIFACT_URI_EDEFAULT.equals(artifactUri);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.ARTIFACT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ToscaPackage.ARTIFACT__ARTIFACT_URI:
+				return ARTIFACT_URI_EDEFAULT == null ? artifactUri != null : !ARTIFACT_URI_EDEFAULT.equals(artifactUri);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
-        result.append(name);
-        result.append(", artifactUri: ");
-        result.append(artifactUri);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", artifactUri: ");
+		result.append(artifactUri);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ArtifactImpl

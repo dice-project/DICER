@@ -41,273 +41,273 @@ import tosca.ToscaPackage;
  */
 public class InterfaceImpl extends MinimalEObjectImpl.Container implements Interface {
     /**
-     * The default value of the '{@link #getInterface_name() <em>Interface name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getInterface_name() <em>Interface name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getInterface_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getInterface_name()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String INTERFACE_NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getInterface_name() <em>Interface name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInterface_name() <em>Interface name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getInterface_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getInterface_name()
+	 * @generated
+	 * @ordered
+	 */
     protected String interface_name = INTERFACE_NAME_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOperations()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Operation> operations;
 
     /**
-     * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getInputs()
-     * @generated
-     * @ordered
-     */
+	 * @see #getInputs()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Property> inputs;
 
     /**
-     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String TYPE_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
     protected String type = TYPE_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected InterfaceImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.INTERFACE;
-    }
+		return ToscaPackage.Literals.INTERFACE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getInterface_name() {
-        return interface_name;
-    }
+		return interface_name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setInterface_name(String newInterface_name) {
-        String oldInterface_name = interface_name;
-        interface_name = newInterface_name;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INTERFACE__INTERFACE_NAME, oldInterface_name, interface_name));
-    }
+		String oldInterface_name = interface_name;
+		interface_name = newInterface_name;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INTERFACE__INTERFACE_NAME, oldInterface_name, interface_name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Operation> getOperations() {
-        if (operations == null) {
-            operations = new EObjectContainmentEList<Operation>(Operation.class, this, ToscaPackage.INTERFACE__OPERATIONS);
-        }
-        return operations;
-    }
+		if (operations == null) {
+			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ToscaPackage.INTERFACE__OPERATIONS);
+		}
+		return operations;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Property> getInputs() {
-        if (inputs == null) {
-            inputs = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.INTERFACE__INPUTS);
-        }
-        return inputs;
-    }
+		if (inputs == null) {
+			inputs = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.INTERFACE__INPUTS);
+		}
+		return inputs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getType() {
-        return type;
-    }
+		return type;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setType(String newType) {
-        String oldType = type;
-        type = newType;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INTERFACE__TYPE, oldType, type));
-    }
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.INTERFACE__TYPE, oldType, type));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ToscaPackage.INTERFACE__OPERATIONS:
-                return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.INTERFACE__INPUTS:
-                return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ToscaPackage.INTERFACE__OPERATIONS:
+				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+			case ToscaPackage.INTERFACE__INPUTS:
+				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.INTERFACE__INTERFACE_NAME:
-                return getInterface_name();
-            case ToscaPackage.INTERFACE__OPERATIONS:
-                return getOperations();
-            case ToscaPackage.INTERFACE__INPUTS:
-                return getInputs();
-            case ToscaPackage.INTERFACE__TYPE:
-                return getType();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.INTERFACE__INTERFACE_NAME:
+				return getInterface_name();
+			case ToscaPackage.INTERFACE__OPERATIONS:
+				return getOperations();
+			case ToscaPackage.INTERFACE__INPUTS:
+				return getInputs();
+			case ToscaPackage.INTERFACE__TYPE:
+				return getType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.INTERFACE__INTERFACE_NAME:
-                setInterface_name((String)newValue);
-                return;
-            case ToscaPackage.INTERFACE__OPERATIONS:
-                getOperations().clear();
-                getOperations().addAll((Collection<? extends Operation>)newValue);
-                return;
-            case ToscaPackage.INTERFACE__INPUTS:
-                getInputs().clear();
-                getInputs().addAll((Collection<? extends Property>)newValue);
-                return;
-            case ToscaPackage.INTERFACE__TYPE:
-                setType((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.INTERFACE__INTERFACE_NAME:
+				setInterface_name((String)newValue);
+				return;
+			case ToscaPackage.INTERFACE__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends Operation>)newValue);
+				return;
+			case ToscaPackage.INTERFACE__INPUTS:
+				getInputs().clear();
+				getInputs().addAll((Collection<? extends Property>)newValue);
+				return;
+			case ToscaPackage.INTERFACE__TYPE:
+				setType((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.INTERFACE__INTERFACE_NAME:
-                setInterface_name(INTERFACE_NAME_EDEFAULT);
-                return;
-            case ToscaPackage.INTERFACE__OPERATIONS:
-                getOperations().clear();
-                return;
-            case ToscaPackage.INTERFACE__INPUTS:
-                getInputs().clear();
-                return;
-            case ToscaPackage.INTERFACE__TYPE:
-                setType(TYPE_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.INTERFACE__INTERFACE_NAME:
+				setInterface_name(INTERFACE_NAME_EDEFAULT);
+				return;
+			case ToscaPackage.INTERFACE__OPERATIONS:
+				getOperations().clear();
+				return;
+			case ToscaPackage.INTERFACE__INPUTS:
+				getInputs().clear();
+				return;
+			case ToscaPackage.INTERFACE__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.INTERFACE__INTERFACE_NAME:
-                return INTERFACE_NAME_EDEFAULT == null ? interface_name != null : !INTERFACE_NAME_EDEFAULT.equals(interface_name);
-            case ToscaPackage.INTERFACE__OPERATIONS:
-                return operations != null && !operations.isEmpty();
-            case ToscaPackage.INTERFACE__INPUTS:
-                return inputs != null && !inputs.isEmpty();
-            case ToscaPackage.INTERFACE__TYPE:
-                return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.INTERFACE__INTERFACE_NAME:
+				return INTERFACE_NAME_EDEFAULT == null ? interface_name != null : !INTERFACE_NAME_EDEFAULT.equals(interface_name);
+			case ToscaPackage.INTERFACE__OPERATIONS:
+				return operations != null && !operations.isEmpty();
+			case ToscaPackage.INTERFACE__INPUTS:
+				return inputs != null && !inputs.isEmpty();
+			case ToscaPackage.INTERFACE__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (interface_name: ");
-        result.append(interface_name);
-        result.append(", type: ");
-        result.append(type);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (interface_name: ");
+		result.append(interface_name);
+		result.append(", type: ");
+		result.append(type);
+		result.append(')');
+		return result.toString();
+	}
 
 } //InterfaceImpl

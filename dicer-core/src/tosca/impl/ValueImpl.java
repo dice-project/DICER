@@ -18,22 +18,22 @@ import tosca.Value;
  */
 public class ValueImpl extends MinimalEObjectImpl.Container implements Value {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected ValueImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.VALUE;
-    }
+		return ToscaPackage.Literals.VALUE;
+	}
 
 } //ValueImpl

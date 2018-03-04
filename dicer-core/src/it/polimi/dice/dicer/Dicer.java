@@ -48,10 +48,10 @@ public class Dicer {
     private boolean help = false;
 
     @Parameter(names = "-inModel", description = "The path to the input DDSM model.")
-    public String inModelPath = "./models/osv_application.uml";
+    public String inModelPath = "./models/spark-xlab.uml";
 
     @Parameter(names = "-outModel", description = "The path for the output TOSCA model.")
-    public String outModelPath = "./models/osv_application_out";
+    public String outModelPath = "./models/spark-xlab";
 
     @Parameter(names = "-inMetamodel", description = "The path to the DDSM metamodel.")
     public String ddsmMetamodelPath = "./metamodels/ddsm.ecore";
@@ -74,6 +74,7 @@ public class Dicer {
     public int runInTextMode = 0;
 
     public static void main(String[] args) throws IOException {
+    	
         Dicer dicer = new Dicer();
         JCommander jc = new JCommander(dicer, args);
 
@@ -184,7 +185,7 @@ public class Dicer {
                                 tmpTemplates.put("fw_ephemeral", fw_ephemeral);
                             }
                             
-                            if (type.contains("dice.hosts") || type.contains("User") || type.contains("osv")) {
+                            if (type.contains("dice.hosts") || type.contains("User")) {
                                 Map<String, Object> properties = (Map<String, Object>) nodeTemplate.get("properties");
                                 for (java.util.Iterator<Entry<String, Object>> it3 = properties.entrySet().iterator(); it3
                                         .hasNext();) {

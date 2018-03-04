@@ -43,396 +43,396 @@ import tosca.ToscaPackage;
  */
 public class RelationshipImpl extends MinimalEObjectImpl.Container implements Relationship {
     /**
-     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String TYPE_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
     protected String type = TYPE_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getInterfaces() <em>Interfaces</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInterfaces() <em>Interfaces</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getInterfaces()
-     * @generated
-     * @ordered
-     */
+	 * @see #getInterfaces()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Interface> interfaces;
 
     /**
-     * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getProperties()
-     * @generated
-     * @ordered
-     */
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Property> properties;
 
     /**
-     * The cached value of the '{@link #getSource_interfaces() <em>Source interfaces</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSource_interfaces() <em>Source interfaces</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getSource_interfaces()
-     * @generated
-     * @ordered
-     */
+	 * @see #getSource_interfaces()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Interface> source_interfaces;
 
     /**
-     * The cached value of the '{@link #getTarget_interfaces() <em>Target interfaces</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTarget_interfaces() <em>Target interfaces</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTarget_interfaces()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTarget_interfaces()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Interface> target_interfaces;
 
     /**
-     * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTarget()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String TARGET_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTarget()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
     protected String target = TARGET_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getRelationship_name() <em>Relationship name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getRelationship_name() <em>Relationship name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRelationship_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getRelationship_name()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String RELATIONSHIP_NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getRelationship_name() <em>Relationship name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRelationship_name() <em>Relationship name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRelationship_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getRelationship_name()
+	 * @generated
+	 * @ordered
+	 */
     protected String relationship_name = RELATIONSHIP_NAME_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected RelationshipImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.RELATIONSHIP;
-    }
+		return ToscaPackage.Literals.RELATIONSHIP;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getType() {
-        return type;
-    }
+		return type;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setType(String newType) {
-        String oldType = type;
-        type = newType;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__TYPE, oldType, type));
-    }
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__TYPE, oldType, type));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Interface> getInterfaces() {
-        if (interfaces == null) {
-            interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__INTERFACES);
-        }
-        return interfaces;
-    }
+		if (interfaces == null) {
+			interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__INTERFACES);
+		}
+		return interfaces;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Property> getProperties() {
-        if (properties == null) {
-            properties = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.RELATIONSHIP__PROPERTIES);
-        }
-        return properties;
-    }
+		if (properties == null) {
+			properties = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.RELATIONSHIP__PROPERTIES);
+		}
+		return properties;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Interface> getSource_interfaces() {
-        if (source_interfaces == null) {
-            source_interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES);
-        }
-        return source_interfaces;
-    }
+		if (source_interfaces == null) {
+			source_interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES);
+		}
+		return source_interfaces;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Interface> getTarget_interfaces() {
-        if (target_interfaces == null) {
-            target_interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__TARGET_INTERFACES);
-        }
-        return target_interfaces;
-    }
+		if (target_interfaces == null) {
+			target_interfaces = new EObjectContainmentEList<Interface>(Interface.class, this, ToscaPackage.RELATIONSHIP__TARGET_INTERFACES);
+		}
+		return target_interfaces;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getTarget() {
-        return target;
-    }
+		return target;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setTarget(String newTarget) {
-        String oldTarget = target;
-        target = newTarget;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__TARGET, oldTarget, target));
-    }
+		String oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__TARGET, oldTarget, target));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getRelationship_name() {
-        return relationship_name;
-    }
+		return relationship_name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setRelationship_name(String newRelationship_name) {
-        String oldRelationship_name = relationship_name;
-        relationship_name = newRelationship_name;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME, oldRelationship_name, relationship_name));
-    }
+		String oldRelationship_name = relationship_name;
+		relationship_name = newRelationship_name;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME, oldRelationship_name, relationship_name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ToscaPackage.RELATIONSHIP__INTERFACES:
-                return ((InternalEList<?>)getInterfaces()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.RELATIONSHIP__PROPERTIES:
-                return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
-                return ((InternalEList<?>)getSource_interfaces()).basicRemove(otherEnd, msgs);
-            case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
-                return ((InternalEList<?>)getTarget_interfaces()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ToscaPackage.RELATIONSHIP__INTERFACES:
+				return ((InternalEList<?>)getInterfaces()).basicRemove(otherEnd, msgs);
+			case ToscaPackage.RELATIONSHIP__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
+				return ((InternalEList<?>)getSource_interfaces()).basicRemove(otherEnd, msgs);
+			case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
+				return ((InternalEList<?>)getTarget_interfaces()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.RELATIONSHIP__TYPE:
-                return getType();
-            case ToscaPackage.RELATIONSHIP__INTERFACES:
-                return getInterfaces();
-            case ToscaPackage.RELATIONSHIP__PROPERTIES:
-                return getProperties();
-            case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
-                return getSource_interfaces();
-            case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
-                return getTarget_interfaces();
-            case ToscaPackage.RELATIONSHIP__TARGET:
-                return getTarget();
-            case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
-                return getRelationship_name();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.RELATIONSHIP__TYPE:
+				return getType();
+			case ToscaPackage.RELATIONSHIP__INTERFACES:
+				return getInterfaces();
+			case ToscaPackage.RELATIONSHIP__PROPERTIES:
+				return getProperties();
+			case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
+				return getSource_interfaces();
+			case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
+				return getTarget_interfaces();
+			case ToscaPackage.RELATIONSHIP__TARGET:
+				return getTarget();
+			case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
+				return getRelationship_name();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.RELATIONSHIP__TYPE:
-                setType((String)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__INTERFACES:
-                getInterfaces().clear();
-                getInterfaces().addAll((Collection<? extends Interface>)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__PROPERTIES:
-                getProperties().clear();
-                getProperties().addAll((Collection<? extends Property>)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
-                getSource_interfaces().clear();
-                getSource_interfaces().addAll((Collection<? extends Interface>)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
-                getTarget_interfaces().clear();
-                getTarget_interfaces().addAll((Collection<? extends Interface>)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__TARGET:
-                setTarget((String)newValue);
-                return;
-            case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
-                setRelationship_name((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.RELATIONSHIP__TYPE:
+				setType((String)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__INTERFACES:
+				getInterfaces().clear();
+				getInterfaces().addAll((Collection<? extends Interface>)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
+				getSource_interfaces().clear();
+				getSource_interfaces().addAll((Collection<? extends Interface>)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
+				getTarget_interfaces().clear();
+				getTarget_interfaces().addAll((Collection<? extends Interface>)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__TARGET:
+				setTarget((String)newValue);
+				return;
+			case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
+				setRelationship_name((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.RELATIONSHIP__TYPE:
-                setType(TYPE_EDEFAULT);
-                return;
-            case ToscaPackage.RELATIONSHIP__INTERFACES:
-                getInterfaces().clear();
-                return;
-            case ToscaPackage.RELATIONSHIP__PROPERTIES:
-                getProperties().clear();
-                return;
-            case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
-                getSource_interfaces().clear();
-                return;
-            case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
-                getTarget_interfaces().clear();
-                return;
-            case ToscaPackage.RELATIONSHIP__TARGET:
-                setTarget(TARGET_EDEFAULT);
-                return;
-            case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
-                setRelationship_name(RELATIONSHIP_NAME_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.RELATIONSHIP__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case ToscaPackage.RELATIONSHIP__INTERFACES:
+				getInterfaces().clear();
+				return;
+			case ToscaPackage.RELATIONSHIP__PROPERTIES:
+				getProperties().clear();
+				return;
+			case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
+				getSource_interfaces().clear();
+				return;
+			case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
+				getTarget_interfaces().clear();
+				return;
+			case ToscaPackage.RELATIONSHIP__TARGET:
+				setTarget(TARGET_EDEFAULT);
+				return;
+			case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
+				setRelationship_name(RELATIONSHIP_NAME_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.RELATIONSHIP__TYPE:
-                return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-            case ToscaPackage.RELATIONSHIP__INTERFACES:
-                return interfaces != null && !interfaces.isEmpty();
-            case ToscaPackage.RELATIONSHIP__PROPERTIES:
-                return properties != null && !properties.isEmpty();
-            case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
-                return source_interfaces != null && !source_interfaces.isEmpty();
-            case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
-                return target_interfaces != null && !target_interfaces.isEmpty();
-            case ToscaPackage.RELATIONSHIP__TARGET:
-                return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
-            case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
-                return RELATIONSHIP_NAME_EDEFAULT == null ? relationship_name != null : !RELATIONSHIP_NAME_EDEFAULT.equals(relationship_name);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.RELATIONSHIP__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case ToscaPackage.RELATIONSHIP__INTERFACES:
+				return interfaces != null && !interfaces.isEmpty();
+			case ToscaPackage.RELATIONSHIP__PROPERTIES:
+				return properties != null && !properties.isEmpty();
+			case ToscaPackage.RELATIONSHIP__SOURCE_INTERFACES:
+				return source_interfaces != null && !source_interfaces.isEmpty();
+			case ToscaPackage.RELATIONSHIP__TARGET_INTERFACES:
+				return target_interfaces != null && !target_interfaces.isEmpty();
+			case ToscaPackage.RELATIONSHIP__TARGET:
+				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
+			case ToscaPackage.RELATIONSHIP__RELATIONSHIP_NAME:
+				return RELATIONSHIP_NAME_EDEFAULT == null ? relationship_name != null : !RELATIONSHIP_NAME_EDEFAULT.equals(relationship_name);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (type: ");
-        result.append(type);
-        result.append(", target: ");
-        result.append(target);
-        result.append(", relationship_name: ");
-        result.append(relationship_name);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (type: ");
+		result.append(type);
+		result.append(", target: ");
+		result.append(target);
+		result.append(", relationship_name: ");
+		result.append(relationship_name);
+		result.append(')');
+		return result.toString();
+	}
 
 } //RelationshipImpl

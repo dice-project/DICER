@@ -27,190 +27,190 @@ import tosca.ToscaPackage;
  */
 public class GetAttributeImpl extends ExpressionImpl implements GetAttribute {
     /**
-     * The default value of the '{@link #getNode() <em>Node</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNode() <em>Node</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getNode()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNode()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String NODE_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getNode() <em>Node</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNode() <em>Node</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getNode()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNode()
+	 * @generated
+	 * @ordered
+	 */
     protected String node = NODE_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getAttribute()
-     * @generated
-     * @ordered
-     */
+	 * @see #getAttribute()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String ATTRIBUTE_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getAttribute()
-     * @generated
-     * @ordered
-     */
+	 * @see #getAttribute()
+	 * @generated
+	 * @ordered
+	 */
     protected String attribute = ATTRIBUTE_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected GetAttributeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.GET_ATTRIBUTE;
-    }
+		return ToscaPackage.Literals.GET_ATTRIBUTE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getNode() {
-        return node;
-    }
+		return node;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setNode(String newNode) {
-        String oldNode = node;
-        node = newNode;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.GET_ATTRIBUTE__NODE, oldNode, node));
-    }
+		String oldNode = node;
+		node = newNode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.GET_ATTRIBUTE__NODE, oldNode, node));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getAttribute() {
-        return attribute;
-    }
+		return attribute;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setAttribute(String newAttribute) {
-        String oldAttribute = attribute;
-        attribute = newAttribute;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
-    }
+		String oldAttribute = attribute;
+		attribute = newAttribute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.GET_ATTRIBUTE__NODE:
-                return getNode();
-            case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
-                return getAttribute();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.GET_ATTRIBUTE__NODE:
+				return getNode();
+			case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
+				return getAttribute();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.GET_ATTRIBUTE__NODE:
-                setNode((String)newValue);
-                return;
-            case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
-                setAttribute((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.GET_ATTRIBUTE__NODE:
+				setNode((String)newValue);
+				return;
+			case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
+				setAttribute((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.GET_ATTRIBUTE__NODE:
-                setNode(NODE_EDEFAULT);
-                return;
-            case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
-                setAttribute(ATTRIBUTE_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.GET_ATTRIBUTE__NODE:
+				setNode(NODE_EDEFAULT);
+				return;
+			case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
+				setAttribute(ATTRIBUTE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.GET_ATTRIBUTE__NODE:
-                return NODE_EDEFAULT == null ? node != null : !NODE_EDEFAULT.equals(node);
-            case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
-                return ATTRIBUTE_EDEFAULT == null ? attribute != null : !ATTRIBUTE_EDEFAULT.equals(attribute);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.GET_ATTRIBUTE__NODE:
+				return NODE_EDEFAULT == null ? node != null : !NODE_EDEFAULT.equals(node);
+			case ToscaPackage.GET_ATTRIBUTE__ATTRIBUTE:
+				return ATTRIBUTE_EDEFAULT == null ? attribute != null : !ATTRIBUTE_EDEFAULT.equals(attribute);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (node: ");
-        result.append(node);
-        result.append(", attribute: ");
-        result.append(attribute);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (node: ");
+		result.append(node);
+		result.append(", attribute: ");
+		result.append(attribute);
+		result.append(')');
+		return result.toString();
+	}
 
 } //GetAttributeImpl

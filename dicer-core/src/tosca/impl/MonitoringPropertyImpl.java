@@ -34,173 +34,173 @@ import tosca.ToscaPackage;
  */
 public class MonitoringPropertyImpl extends MinimalEObjectImpl.Container implements MonitoringProperty {
     /**
-     * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isEnabled()
-     * @generated
-     * @ordered
-     */
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
     protected static final boolean ENABLED_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isEnabled()
-     * @generated
-     * @ordered
-     */
+	 * @see #isEnabled()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean enabled = ENABLED_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getRoles() <em>Roles</em>}' attribute list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' attribute list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRoles()
-     * @generated
-     * @ordered
-     */
+	 * @see #getRoles()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<String> roles;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected MonitoringPropertyImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.MONITORING_PROPERTY;
-    }
+		return ToscaPackage.Literals.MONITORING_PROPERTY;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isEnabled() {
-        return enabled;
-    }
+		return enabled;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setEnabled(boolean newEnabled) {
-        boolean oldEnabled = enabled;
-        enabled = newEnabled;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.MONITORING_PROPERTY__ENABLED, oldEnabled, enabled));
-    }
+		boolean oldEnabled = enabled;
+		enabled = newEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.MONITORING_PROPERTY__ENABLED, oldEnabled, enabled));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<String> getRoles() {
-        if (roles == null) {
-            roles = new EDataTypeUniqueEList<String>(String.class, this, ToscaPackage.MONITORING_PROPERTY__ROLES);
-        }
-        return roles;
-    }
+		if (roles == null) {
+			roles = new EDataTypeUniqueEList<String>(String.class, this, ToscaPackage.MONITORING_PROPERTY__ROLES);
+		}
+		return roles;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.MONITORING_PROPERTY__ENABLED:
-                return isEnabled();
-            case ToscaPackage.MONITORING_PROPERTY__ROLES:
-                return getRoles();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.MONITORING_PROPERTY__ENABLED:
+				return isEnabled();
+			case ToscaPackage.MONITORING_PROPERTY__ROLES:
+				return getRoles();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.MONITORING_PROPERTY__ENABLED:
-                setEnabled((Boolean)newValue);
-                return;
-            case ToscaPackage.MONITORING_PROPERTY__ROLES:
-                getRoles().clear();
-                getRoles().addAll((Collection<? extends String>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.MONITORING_PROPERTY__ENABLED:
+				setEnabled((Boolean)newValue);
+				return;
+			case ToscaPackage.MONITORING_PROPERTY__ROLES:
+				getRoles().clear();
+				getRoles().addAll((Collection<? extends String>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.MONITORING_PROPERTY__ENABLED:
-                setEnabled(ENABLED_EDEFAULT);
-                return;
-            case ToscaPackage.MONITORING_PROPERTY__ROLES:
-                getRoles().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.MONITORING_PROPERTY__ENABLED:
+				setEnabled(ENABLED_EDEFAULT);
+				return;
+			case ToscaPackage.MONITORING_PROPERTY__ROLES:
+				getRoles().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.MONITORING_PROPERTY__ENABLED:
-                return enabled != ENABLED_EDEFAULT;
-            case ToscaPackage.MONITORING_PROPERTY__ROLES:
-                return roles != null && !roles.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.MONITORING_PROPERTY__ENABLED:
+				return enabled != ENABLED_EDEFAULT;
+			case ToscaPackage.MONITORING_PROPERTY__ROLES:
+				return roles != null && !roles.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (enabled: ");
-        result.append(enabled);
-        result.append(", roles: ");
-        result.append(roles);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (enabled: ");
+		result.append(enabled);
+		result.append(", roles: ");
+		result.append(roles);
+		result.append(')');
+		return result.toString();
+	}
 
 } //MonitoringPropertyImpl

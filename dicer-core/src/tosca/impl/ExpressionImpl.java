@@ -16,22 +16,22 @@ import tosca.ToscaPackage;
  */
 public class ExpressionImpl extends ValueImpl implements Expression {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected ExpressionImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.EXPRESSION;
-    }
+		return ToscaPackage.Literals.EXPRESSION;
+	}
 
 } //ExpressionImpl

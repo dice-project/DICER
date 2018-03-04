@@ -32,167 +32,167 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TopologyTemplate extends EObject {
     /**
-     * Returns the value of the '<em><b>Tosca definitions version</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Tosca definitions version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Tosca definitions version</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Tosca definitions version</em>' attribute.
-     * @see #setTosca_definitions_version(String)
-     * @see tosca.ToscaPackage#getTopologyTemplate_Tosca_definitions_version()
-     * @model required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Tosca definitions version</em>' attribute.
+	 * @see #setTosca_definitions_version(String)
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Tosca_definitions_version()
+	 * @model required="true"
+	 * @generated
+	 */
     String getTosca_definitions_version();
 
     /**
-     * Sets the value of the '{@link tosca.TopologyTemplate#getTosca_definitions_version <em>Tosca definitions version</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link tosca.TopologyTemplate#getTosca_definitions_version <em>Tosca definitions version</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Tosca definitions version</em>' attribute.
-     * @see #getTosca_definitions_version()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Tosca definitions version</em>' attribute.
+	 * @see #getTosca_definitions_version()
+	 * @generated
+	 */
     void setTosca_definitions_version(String value);
 
     /**
-     * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Import}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Import}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Imports</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Imports()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Imports()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Import> getImports();
 
     /**
-     * Returns the value of the '<em><b>Outputs</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Parameter}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Outputs</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Parameter}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Outputs</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Outputs</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Outputs()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Outputs</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Outputs()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Parameter> getOutputs();
 
     /**
-     * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Parameter}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Parameter}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Inputs</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Inputs</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Inputs()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Inputs</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Inputs()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Parameter> getInputs();
 
     /**
-     * Returns the value of the '<em><b>Node Templates</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.NodeTemplate}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Node Templates</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.NodeTemplate}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Node Templates</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Node Templates</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_NodeTemplates()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Node Templates</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_NodeTemplates()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<NodeTemplate> getNodeTemplates();
 
     /**
-     * Returns the value of the '<em><b>Realtionships</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Relationship}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Realtionships</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Relationship}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Realtionships</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Realtionships</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Realtionships()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Realtionships</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Realtionships()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Relationship> getRealtionships();
 
     /**
-     * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Group}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Group}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Groups</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Groups()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Groups</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Groups()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Group> getGroups();
 
     /**
-     * Returns the value of the '<em><b>Policies</b></em>' containment reference list.
-     * The list contents are of type {@link tosca.Policy}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Policies</b></em>' containment reference list.
+	 * The list contents are of type {@link tosca.Policy}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Policies</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Policies</em>' containment reference list.
-     * @see tosca.ToscaPackage#getTopologyTemplate_Policies()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Policies</em>' containment reference list.
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Policies()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Policy> getPolicies();
 
     /**
-     * Returns the value of the '<em><b>Description</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Description</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Description</em>' attribute.
-     * @see #setDescription(String)
-     * @see tosca.ToscaPackage#getTopologyTemplate_Description()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see tosca.ToscaPackage#getTopologyTemplate_Description()
+	 * @model
+	 * @generated
+	 */
     String getDescription();
 
     /**
-     * Sets the value of the '{@link tosca.TopologyTemplate#getDescription <em>Description</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link tosca.TopologyTemplate#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Description</em>' attribute.
-     * @see #getDescription()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
     void setDescription(String value);
 
 } // TopologyTemplate

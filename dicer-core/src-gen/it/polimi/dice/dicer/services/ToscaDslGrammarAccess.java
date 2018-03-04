@@ -1036,6 +1036,68 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_16() { return cRightCurlyBracketKeyword_16; }
 	}
+	public class ConcatElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "it.polimi.dice.dicer.ToscaDsl.Concat");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cConcatAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cConcatKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cItemsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cItemsValueParserRuleCall_4_0 = (RuleCall)cItemsAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cItemsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cItemsValueParserRuleCall_5_1_0 = (RuleCall)cItemsAssignment_5_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//Concat:
+		//	{Concat}
+		//	'{'
+		//	'"concat":' '[' items+=Value (',' items+=Value)* ']'
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Concat} '{' '"concat":' '[' items+=Value (',' items+=Value)* ']' '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{Concat}
+		public Action getConcatAction_0() { return cConcatAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//'"concat":'
+		public Keyword getConcatKeyword_2() { return cConcatKeyword_2; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_3() { return cLeftSquareBracketKeyword_3; }
+		
+		//items+=Value
+		public Assignment getItemsAssignment_4() { return cItemsAssignment_4; }
+		
+		//Value
+		public RuleCall getItemsValueParserRuleCall_4_0() { return cItemsValueParserRuleCall_4_0; }
+		
+		//(',' items+=Value)*
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//','
+		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
+		
+		//items+=Value
+		public Assignment getItemsAssignment_5_1() { return cItemsAssignment_5_1; }
+		
+		//Value
+		public RuleCall getItemsValueParserRuleCall_5_1_0() { return cItemsValueParserRuleCall_5_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_6() { return cRightSquareBracketKeyword_6; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
 	public class MonitoringPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "it.polimi.dice.dicer.ToscaDsl.MonitoringProperty");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -2073,12 +2135,13 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpression_ImplParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSimpleValueParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cGetAttributeParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cConcatParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Value:
-		//	Value_Impl | Expression_Impl | SimpleValue | GetAttribute;
+		//	Value_Impl | Expression_Impl | SimpleValue | GetAttribute | Concat;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Value_Impl | Expression_Impl | SimpleValue | GetAttribute
+		//Value_Impl | Expression_Impl | SimpleValue | GetAttribute | Concat
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Value_Impl
@@ -2092,6 +2155,9 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//GetAttribute
 		public RuleCall getGetAttributeParserRuleCall_3() { return cGetAttributeParserRuleCall_3; }
+		
+		//Concat
+		public RuleCall getConcatParserRuleCall_4() { return cConcatParserRuleCall_4; }
 	}
 	public class ArgumentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "it.polimi.dice.dicer.ToscaDsl.Argument");
@@ -2302,6 +2368,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 	private final ImportElements pImport;
 	private final ParameterElements pParameter;
 	private final NodeTemplateElements pNodeTemplate;
+	private final ConcatElements pConcat;
 	private final MonitoringPropertyElements pMonitoringProperty;
 	private final FirewallRuleElements pFirewallRule;
 	private final ConfigurationElements pConfiguration;
@@ -2337,6 +2404,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 		this.pImport = new ImportElements();
 		this.pParameter = new ParameterElements();
 		this.pNodeTemplate = new NodeTemplateElements();
+		this.pConcat = new ConcatElements();
 		this.pMonitoringProperty = new MonitoringPropertyElements();
 		this.pFirewallRule = new FirewallRuleElements();
 		this.pConfiguration = new ConfigurationElements();
@@ -2464,6 +2532,19 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNodeTemplateRule() {
 		return getNodeTemplateAccess().getRule();
+	}
+	
+	//Concat:
+	//	{Concat}
+	//	'{'
+	//	'"concat":' '[' items+=Value (',' items+=Value)* ']'
+	//	'}';
+	public ConcatElements getConcatAccess() {
+		return pConcat;
+	}
+	
+	public ParserRule getConcatRule() {
+		return getConcatAccess().getRule();
 	}
 	
 	//MonitoringProperty:
@@ -2624,7 +2705,7 @@ public class ToscaDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Value:
-	//	Value_Impl | Expression_Impl | SimpleValue | GetAttribute;
+	//	Value_Impl | Expression_Impl | SimpleValue | GetAttribute | Concat;
 	public ValueElements getValueAccess() {
 		return pValue;
 	}

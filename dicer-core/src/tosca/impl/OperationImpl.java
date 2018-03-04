@@ -42,326 +42,326 @@ import tosca.ToscaPackage;
  */
 public class OperationImpl extends MinimalEObjectImpl.Container implements Operation {
     /**
-     * The default value of the '{@link #getOperation_name() <em>Operation name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getOperation_name() <em>Operation name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOperation_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOperation_name()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String OPERATION_NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getOperation_name() <em>Operation name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOperation_name() <em>Operation name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOperation_name()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOperation_name()
+	 * @generated
+	 * @ordered
+	 */
     protected String operation_name = OPERATION_NAME_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDescription()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String DESCRIPTION_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDescription()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
     protected String description = DESCRIPTION_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getInputs()
-     * @generated
-     * @ordered
-     */
+	 * @see #getInputs()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Property> inputs;
 
     /**
-     * The cached value of the '{@link #getDependentArtifacts() <em>Dependent Artifacts</em>}' attribute list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDependentArtifacts() <em>Dependent Artifacts</em>}' attribute list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDependentArtifacts()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDependentArtifacts()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<String> dependentArtifacts;
 
     /**
-     * The default value of the '{@link #getPrimary() <em>Primary</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPrimary() <em>Primary</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getPrimary()
-     * @generated
-     * @ordered
-     */
+	 * @see #getPrimary()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String PRIMARY_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getPrimary() <em>Primary</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPrimary() <em>Primary</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getPrimary()
-     * @generated
-     * @ordered
-     */
+	 * @see #getPrimary()
+	 * @generated
+	 * @ordered
+	 */
     protected String primary = PRIMARY_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected OperationImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ToscaPackage.Literals.OPERATION;
-    }
+		return ToscaPackage.Literals.OPERATION;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getOperation_name() {
-        return operation_name;
-    }
+		return operation_name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setOperation_name(String newOperation_name) {
-        String oldOperation_name = operation_name;
-        operation_name = newOperation_name;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__OPERATION_NAME, oldOperation_name, operation_name));
-    }
+		String oldOperation_name = operation_name;
+		operation_name = newOperation_name;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__OPERATION_NAME, oldOperation_name, operation_name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getDescription() {
-        return description;
-    }
+		return description;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setDescription(String newDescription) {
-        String oldDescription = description;
-        description = newDescription;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__DESCRIPTION, oldDescription, description));
-    }
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__DESCRIPTION, oldDescription, description));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Property> getInputs() {
-        if (inputs == null) {
-            inputs = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.OPERATION__INPUTS);
-        }
-        return inputs;
-    }
+		if (inputs == null) {
+			inputs = new EObjectContainmentEList<Property>(Property.class, this, ToscaPackage.OPERATION__INPUTS);
+		}
+		return inputs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<String> getDependentArtifacts() {
-        if (dependentArtifacts == null) {
-            dependentArtifacts = new EDataTypeUniqueEList<String>(String.class, this, ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS);
-        }
-        return dependentArtifacts;
-    }
+		if (dependentArtifacts == null) {
+			dependentArtifacts = new EDataTypeUniqueEList<String>(String.class, this, ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS);
+		}
+		return dependentArtifacts;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getPrimary() {
-        return primary;
-    }
+		return primary;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setPrimary(String newPrimary) {
-        String oldPrimary = primary;
-        primary = newPrimary;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__PRIMARY, oldPrimary, primary));
-    }
+		String oldPrimary = primary;
+		primary = newPrimary;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ToscaPackage.OPERATION__PRIMARY, oldPrimary, primary));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ToscaPackage.OPERATION__INPUTS:
-                return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ToscaPackage.OPERATION__INPUTS:
+				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ToscaPackage.OPERATION__OPERATION_NAME:
-                return getOperation_name();
-            case ToscaPackage.OPERATION__DESCRIPTION:
-                return getDescription();
-            case ToscaPackage.OPERATION__INPUTS:
-                return getInputs();
-            case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
-                return getDependentArtifacts();
-            case ToscaPackage.OPERATION__PRIMARY:
-                return getPrimary();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ToscaPackage.OPERATION__OPERATION_NAME:
+				return getOperation_name();
+			case ToscaPackage.OPERATION__DESCRIPTION:
+				return getDescription();
+			case ToscaPackage.OPERATION__INPUTS:
+				return getInputs();
+			case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
+				return getDependentArtifacts();
+			case ToscaPackage.OPERATION__PRIMARY:
+				return getPrimary();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ToscaPackage.OPERATION__OPERATION_NAME:
-                setOperation_name((String)newValue);
-                return;
-            case ToscaPackage.OPERATION__DESCRIPTION:
-                setDescription((String)newValue);
-                return;
-            case ToscaPackage.OPERATION__INPUTS:
-                getInputs().clear();
-                getInputs().addAll((Collection<? extends Property>)newValue);
-                return;
-            case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
-                getDependentArtifacts().clear();
-                getDependentArtifacts().addAll((Collection<? extends String>)newValue);
-                return;
-            case ToscaPackage.OPERATION__PRIMARY:
-                setPrimary((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ToscaPackage.OPERATION__OPERATION_NAME:
+				setOperation_name((String)newValue);
+				return;
+			case ToscaPackage.OPERATION__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case ToscaPackage.OPERATION__INPUTS:
+				getInputs().clear();
+				getInputs().addAll((Collection<? extends Property>)newValue);
+				return;
+			case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
+				getDependentArtifacts().clear();
+				getDependentArtifacts().addAll((Collection<? extends String>)newValue);
+				return;
+			case ToscaPackage.OPERATION__PRIMARY:
+				setPrimary((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.OPERATION__OPERATION_NAME:
-                setOperation_name(OPERATION_NAME_EDEFAULT);
-                return;
-            case ToscaPackage.OPERATION__DESCRIPTION:
-                setDescription(DESCRIPTION_EDEFAULT);
-                return;
-            case ToscaPackage.OPERATION__INPUTS:
-                getInputs().clear();
-                return;
-            case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
-                getDependentArtifacts().clear();
-                return;
-            case ToscaPackage.OPERATION__PRIMARY:
-                setPrimary(PRIMARY_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.OPERATION__OPERATION_NAME:
+				setOperation_name(OPERATION_NAME_EDEFAULT);
+				return;
+			case ToscaPackage.OPERATION__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case ToscaPackage.OPERATION__INPUTS:
+				getInputs().clear();
+				return;
+			case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
+				getDependentArtifacts().clear();
+				return;
+			case ToscaPackage.OPERATION__PRIMARY:
+				setPrimary(PRIMARY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ToscaPackage.OPERATION__OPERATION_NAME:
-                return OPERATION_NAME_EDEFAULT == null ? operation_name != null : !OPERATION_NAME_EDEFAULT.equals(operation_name);
-            case ToscaPackage.OPERATION__DESCRIPTION:
-                return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-            case ToscaPackage.OPERATION__INPUTS:
-                return inputs != null && !inputs.isEmpty();
-            case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
-                return dependentArtifacts != null && !dependentArtifacts.isEmpty();
-            case ToscaPackage.OPERATION__PRIMARY:
-                return PRIMARY_EDEFAULT == null ? primary != null : !PRIMARY_EDEFAULT.equals(primary);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ToscaPackage.OPERATION__OPERATION_NAME:
+				return OPERATION_NAME_EDEFAULT == null ? operation_name != null : !OPERATION_NAME_EDEFAULT.equals(operation_name);
+			case ToscaPackage.OPERATION__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case ToscaPackage.OPERATION__INPUTS:
+				return inputs != null && !inputs.isEmpty();
+			case ToscaPackage.OPERATION__DEPENDENT_ARTIFACTS:
+				return dependentArtifacts != null && !dependentArtifacts.isEmpty();
+			case ToscaPackage.OPERATION__PRIMARY:
+				return PRIMARY_EDEFAULT == null ? primary != null : !PRIMARY_EDEFAULT.equals(primary);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (operation_name: ");
-        result.append(operation_name);
-        result.append(", description: ");
-        result.append(description);
-        result.append(", dependentArtifacts: ");
-        result.append(dependentArtifacts);
-        result.append(", primary: ");
-        result.append(primary);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (operation_name: ");
+		result.append(operation_name);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", dependentArtifacts: ");
+		result.append(dependentArtifacts);
+		result.append(", primary: ");
+		result.append(primary);
+		result.append(')');
+		return result.toString();
+	}
 
 } //OperationImpl

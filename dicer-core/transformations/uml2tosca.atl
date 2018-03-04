@@ -35,6 +35,13 @@ rule MMUML2TOSCA {
 					device.hasStereotype('DdsmVMsCluster')) ->
 					collect(device | device.nestedNode -> select(nested |
 					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmKafkaCluster')) ->
+					collect(kafka |
+					thisModule.kafkaToTosca(kafka))).flatten()).union(MMUML!Device.allInstances()
+					-> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
 					nested.hasStereotype('DdsmStormCluster')) ->
 					collect(storm |
 					thisModule.stormToTosca(storm))).flatten()).union(MMUML!Device.allInstances()
@@ -122,32 +129,22 @@ rule MMUML2TOSCA {
 --					allInstances() -> select(class | class.hasStereotype('User')) ->
 --					collect(user | thisModule.userToTosca(user)).flatten())
 			,
-			outputs <- s.packagedElement -> select(element | element.
-					oclIsTypeOf(MMUML!Device) and element.
-					hasStereotype('DdsmVMsCluster')) -> collect(element | thisModule.
-					getOutputIpFromVMsCluster(element))
+			outputs <- MMUML!Device.allInstances() -> select(device |
+					device.hasStereotype('DdsmVMsCluster')) ->
+					collect(device | device.nestedNode -> select(nested |
+					nested.oclIsTypeOf(MMUML!ExecutionEnvironment) and
+					nested.hasStereotype('DdsmSparkCluster') or nested.hasStereotype('DdsmStormCluster'))).flatten() -> collect(element | thisModule.
+					getStormSparkOutputIp(element))
 		)
 }
 
-lazy rule getMasterIpOutputFromExecEnv {
+lazy rule getStormSparkOutputIp {
 	from
-		s: MMUML!ExecutionEnvironment
+		s: MMUML!Node 
 	to
-		t: TOSCA!Parameter (
-			parameter_name <- s.name + '_master_ip_output',
-			parameter_value <- thisModule.getAttributeExpression(s.name + '_master', 'ip')
-		)
-}
-
-lazy rule getOutputIpFromVMsCluster {
-	from
-		s: MMUML!Device (
-			s.hasStereotype('DdsmVMsCluster')
-		)
-	to
-		t: TOSCA!Parameter (
+		ui_output: TOSCA!Parameter (
 			parameter_name <- s.name + '_ip_output',
-			parameter_value <- thisModule.getAttributeExpression(s.name, 'ip')
+			parameter_value <- thisModule.getConcatExpression(Sequence{thisModule.getSimpleValue('http://'), thisModule.getAttributeExpression(s.name + '_master_vm_ip', 'address'), thisModule.getSimpleValue(':8080')})
 		)
 }
 
@@ -218,8 +215,8 @@ rule getProviderImport() {
 	to
 		i: TOSCA!Import (
 			file <- 'https://github.' +
-					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.' +
-					'10/full.yaml'
+					'com/dice-project/DICE-Deployment-Cloudify/releases/download/0.8.0' +
+					'/full.yaml'
 		)
 	do {
 		Sequence{i}; 
@@ -261,14 +258,35 @@ lazy rule getVMsClusterToNodeTemplate {
 					stereotypeHasProperty('protected', ster.name) and nested.
 					getStereotypeProperty('protected', ster.name) = true)) ->
 					collect(protected | thisModule.
-					getClusterRelationshipWithFirewall(protected)).flatten().union(thisModule.getIpAvailableFromRelationship(s.name))
+					getClusterRelationshipWithFirewall(protected)).flatten().union(
+						if not (s.nestedNode.union(s.nestedClassifier) -> exists(nested |
+							nested.getAppliedStereotypes() -> exists(ster | ster.name = 'DdsmZookeeperCluster' 
+							or ster.name = 'DdsmKafkaCluster' 
+							or ster.name = 'DdsmCassandraCluster'))) 
+						then
+							thisModule.getIpAvailableFromRelationship(s.name)
+						else
+							Sequence{} 
+						endif						
+					)
 		),
 		vm_ip: TOSCA!NodeTemplate (
 			node_template_name <- s.name + '_ip',
 			type <- 'dice.VirtualIP'
 		)
 	do {
-		if s.getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then Sequence{} else Sequence{t, vm_ip} endif;
+		if s.getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+			Sequence{} 
+		else 
+			if not (s.nestedNode.union(s.nestedClassifier) -> exists(nested |
+					nested.getAppliedStereotypes() -> exists(ster | ster.name = 'DdsmZookeeperCluster' 
+						or ster.name = 'DdsmKafkaCluster' 
+						or ster.name = 'DdsmCassandraCluster'))) then
+				Sequence{t, vm_ip} 
+			else
+				Sequence{t} 
+			endif
+		endif;
 	}
 }
 
@@ -440,8 +458,13 @@ lazy rule getDockerContainerTemplate {
 					getStereotypeProperty('image', 'DdsmDockerContainer')).union(thisModule.
 					getProperty('tag', s.getStereotypeProperty('tag',
 					'DdsmDockerContainer'))).union(
-					thisModule.getProperty('network', 
-						s.getStereotypeProperty('network', 'DdsmDockerContainer').toString())).union(
+						if not s.getStereotypeProperty('network', 'DdsmDockerContainer').oclIsUndefined() then
+						thisModule.getProperty('network', 
+							s.getStereotypeProperty('network', 'DdsmDockerContainer').toString())
+						else
+							Sequence{}
+						endif
+					).union(
 					if s.refImmediateComposite().hasStereotype('DdsmExternalComponent') then
 					thisModule.getProperty('host', s.refImmediateComposite()
 						.getStereotypeProperty('location', 'DdsmExternalComponent'))
@@ -596,17 +619,17 @@ lazy rule cassandraToTosca {
 		worker: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
 			type <- 'dice.components.cassandra.Worker',
-			configurations <- thisModule.
-					getConfigurationFromAttribute('key_cache_save_period', s.
-					getStereotypeProperty('key_cache_save_period',
-					'DdsmCassandraCluster')).
+--			configurations <- thisModule.
+--					getConfigurationFromAttribute('key_cache_save_period', s.
+--					getStereotypeProperty('key_cache_save_period',
+--					'DdsmCassandraCluster')).
 --					union(thisModule.getConfigurationFromAttribute('memtable_cleanup_threshold',
 --					s.getStereotypeProperty('memtable_cleanup_threshold',
-		-- 'DdsmCassandraCluster'))).
-					union(thisModule.
-							getConfigurationFromAttribute('memtable_flush_writers', s.
-							getStereotypeProperty('memtable_flush_writers',
-							'DdsmCassandraCluster'))),
+--		-- 'DdsmCassandraCluster'))).
+--					union(thisModule.
+--							getConfigurationFromAttribute('memtable_flush_writers', s.
+--							getStereotypeProperty('memtable_flush_writers',
+--							'DdsmCassandraCluster'))),
 			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmCassandraCluster')
 					= true then
 					thisModule.getMonitoringProperty(true, s.
@@ -666,16 +689,10 @@ lazy rule generateSeedVm {
 						thisModule.getClusterRelationshipWithFirewall(s)
 					else
 						Sequence{}
-					endif.union(thisModule.getIpAvailableFromRelationship(s.name +
-							'_seed_vm'))
-		),
-		seed_vm_ip: TOSCA!NodeTemplate (
-			node_template_name <- s.name + '_seed_vm' + '_ip',
-			type <- 'dice.VirtualIP'
+					endif
 		)
 	do {
-		Sequence{seed_vm,
-					seed_vm_ip}; 
+		Sequence{seed_vm}; 
 	}
 }
 
@@ -723,6 +740,62 @@ lazy rule getContainedInRelationshipForCassandraClusterSeed {
 }
 
 -------------- CASSANDRA ---------------
+-------------- KAKFA ---------------
+lazy rule kafkaToTosca {
+	from
+		s: MMUML!ExecutionEnvironment (
+			s.hasStereotype('DdsmKafkaCluster')
+		)
+	to
+		broker: TOSCA!NodeTemplate (
+			node_template_name <- s.name,
+			type <- 'dice.components.kafka.Broker',
+			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmKafkaCluster')
+					= true then
+					thisModule.getMonitoringProperty(true, s.
+							getStereotypeProperty('monitoringRoles',
+							'DdsmKafkaCluster'))
+				else
+					thisModule.getMonitoringProperty(false, Sequence{})
+				endif,
+			relationships <- thisModule.
+					getKafkaBrokerRelationship(s)
+		),
+		firewall: TOSCA!NodeTemplate (
+			node_template_name <- s.name + '_firewall',
+			type <- 'dice.firewall_rules.kafka.Broker'
+		)
+	do {
+		if s.getStereotypeProperty('protected', 'DdsmKafkaCluster') = true then
+				Sequence{broker,
+						firewall}
+			else
+				Sequence{broker}
+			endif; 
+	}
+}
+
+lazy rule getKafkaBrokerRelationship {
+	from
+		kafkaCluster: MMUML!Node (
+			kafkaCluster.hasStereotype('DdsmKafkaCluster')
+		)
+	to
+		broker_to_host: TOSCA!Relationship (
+			target <- kafkaCluster.refImmediateComposite().name,
+			type <- 'dice.relationships.ContainedIn'
+		),
+		broker_to_zookeeper: TOSCA!Relationship (
+			target <- kafkaCluster.getZookeeperConnected,
+			type <- 'dice.relationships.zookeeper.ConnectedToZookeeperQuorum'
+		)
+	do {
+		Sequence{broker_to_host,
+					broker_to_zookeeper}; 
+	}
+}
+
+-------------- KAFKA ---------------
 -------------- ZOOKEEPER ---------------
 lazy rule zookeeperToTosca {
 	from
@@ -954,7 +1027,7 @@ lazy rule getStormMasterRelationshipForStormCluster {
 			type <- 'dice.relationships.ContainedIn'
 		),
 		master_to_zookeeper: TOSCA!Relationship (
-			target <- stormCluster.getZookeeperConnectedToStorm,
+			target <- stormCluster.getZookeeperConnected,
 			type <- 'dice.relationships.storm.ConnectedToZookeeperQuorum'
 		)
 	do {
@@ -974,7 +1047,7 @@ lazy rule getStormWorkerRelationshipForStormCluster {
 			type <- 'dice.relationships.ContainedIn'
 		),
 		worker_to_zookeeper: TOSCA!Relationship (
-			target <- stormCluster.getZookeeperConnectedToStorm,
+			target <- stormCluster.getZookeeperConnected,
 			type <- 'dice.relationships.storm.ConnectedToZookeeperQuorum'
 		),
 		worker_to_master: TOSCA!Relationship (
@@ -1036,7 +1109,7 @@ lazy rule sparkToTosca {
 		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
 			if masterHost.oclIsUndefined() then
 				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
-					Sequence{master,
+					Sequence{master, 
 								master_firewall,
 								thisModule.generateMasterVm(s, true)}.flatten()
 				else
@@ -1840,7 +1913,7 @@ helper context MMUML!Element def: stereotypeHasProperty(property: String, stereo
 
 -------------- STREOTYPE HELPERS ---------------
 -------------- OTHER HELPERS ---------------
-helper context MMUML!Node def: getZookeeperConnectedToStorm: Boolean =
+helper context MMUML!Node def: getZookeeperConnected: Boolean =
 	MMUML!Dependency.allInstances() -> select(dep | dep.oclIsTypeOf(MMUML!Dependency) and
 			dep.client -> exists(client | client.name = self.name) and dep.supplier ->
 			exists(supplier | supplier.hasStereotype('DdsmZookeeperCluster'))).first().
@@ -1944,6 +2017,15 @@ lazy rule getAttributeExpression {
 		t: TOSCA!GetAttribute (
 			node <- s,
 			attribute <- a
+		)
+}
+
+lazy rule getConcatExpression {
+	from
+		s: Sequence(TOSCA!Value)
+	to
+		t: TOSCA!Concat (
+			items <-  s
 		)
 }
 

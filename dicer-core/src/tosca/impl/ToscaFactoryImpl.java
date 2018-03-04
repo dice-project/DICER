@@ -20,318 +20,329 @@ import tosca.*;
  */
 public class ToscaFactoryImpl extends EFactoryImpl implements ToscaFactory {
     /**
-     * Creates the default factory implementation.
-     * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static ToscaFactory init() {
-        try {
-            ToscaFactory theToscaFactory = (ToscaFactory)EPackage.Registry.INSTANCE.getEFactory(ToscaPackage.eNS_URI);
-            if (theToscaFactory != null) {
-                return theToscaFactory;
-            }
-        }
-        catch (Exception exception) {
-            //EcorePlugin.INSTANCE.log(exception);
-        }
-        return new ToscaFactoryImpl();
-    }
+		try {
+			ToscaFactory theToscaFactory = (ToscaFactory)EPackage.Registry.INSTANCE.getEFactory(ToscaPackage.eNS_URI);
+			if (theToscaFactory != null) {
+				return theToscaFactory;
+			}
+		}
+		catch (Exception exception) {
+			//EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ToscaFactoryImpl();
+	}
 
     /**
-     * Creates an instance of the factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ToscaFactoryImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public EObject create(EClass eClass) {
-        switch (eClass.getClassifierID()) {
-            case ToscaPackage.NODE_TEMPLATE: return createNodeTemplate();
-            case ToscaPackage.INTERFACE: return createInterface();
-            case ToscaPackage.RELATIONSHIP: return createRelationship();
-            case ToscaPackage.PROPERTY: return createProperty();
-            case ToscaPackage.REQUIREMENT: return createRequirement();
-            case ToscaPackage.OPERATION: return createOperation();
-            case ToscaPackage.TOPOLOGY_TEMPLATE: return createTopologyTemplate();
-            case ToscaPackage.IMPORT: return createImport();
-            case ToscaPackage.GROUP: return createGroup();
-            case ToscaPackage.POLICY: return createPolicy();
-            case ToscaPackage.CAPABILITY: return createCapability();
-            case ToscaPackage.PARAMETER: return createParameter();
-            case ToscaPackage.ARTIFACT: return createArtifact();
-            case ToscaPackage.INSTANCES: return createInstances();
-            case ToscaPackage.CONFIGURATION: return createConfiguration();
-            case ToscaPackage.ARGUMENT: return createArgument();
-            case ToscaPackage.EXPRESSION: return createExpression();
-            case ToscaPackage.VALUE: return createValue();
-            case ToscaPackage.SIMPLE_VALUE: return createSimpleValue();
-            case ToscaPackage.GET_ATTRIBUTE: return createGetAttribute();
-            case ToscaPackage.FIREWALL_RULE: return createFirewallRule();
-            case ToscaPackage.MONITORING_PROPERTY: return createMonitoringProperty();
-            case ToscaPackage.ENVIRONMENT_VARIABLE: return createEnvironmentVariable();
-            default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eClass.getClassifierID()) {
+			case ToscaPackage.NODE_TEMPLATE: return createNodeTemplate();
+			case ToscaPackage.INTERFACE: return createInterface();
+			case ToscaPackage.RELATIONSHIP: return createRelationship();
+			case ToscaPackage.PROPERTY: return createProperty();
+			case ToscaPackage.REQUIREMENT: return createRequirement();
+			case ToscaPackage.OPERATION: return createOperation();
+			case ToscaPackage.TOPOLOGY_TEMPLATE: return createTopologyTemplate();
+			case ToscaPackage.IMPORT: return createImport();
+			case ToscaPackage.GROUP: return createGroup();
+			case ToscaPackage.POLICY: return createPolicy();
+			case ToscaPackage.CAPABILITY: return createCapability();
+			case ToscaPackage.PARAMETER: return createParameter();
+			case ToscaPackage.ARTIFACT: return createArtifact();
+			case ToscaPackage.INSTANCES: return createInstances();
+			case ToscaPackage.CONFIGURATION: return createConfiguration();
+			case ToscaPackage.ARGUMENT: return createArgument();
+			case ToscaPackage.EXPRESSION: return createExpression();
+			case ToscaPackage.VALUE: return createValue();
+			case ToscaPackage.SIMPLE_VALUE: return createSimpleValue();
+			case ToscaPackage.GET_ATTRIBUTE: return createGetAttribute();
+			case ToscaPackage.FIREWALL_RULE: return createFirewallRule();
+			case ToscaPackage.MONITORING_PROPERTY: return createMonitoringProperty();
+			case ToscaPackage.ENVIRONMENT_VARIABLE: return createEnvironmentVariable();
+			case ToscaPackage.CONCAT: return createConcat();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NodeTemplate createNodeTemplate() {
-        NodeTemplateImpl nodeTemplate = new NodeTemplateImpl();
-        return nodeTemplate;
-    }
+		NodeTemplateImpl nodeTemplate = new NodeTemplateImpl();
+		return nodeTemplate;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Interface createInterface() {
-        InterfaceImpl interface_ = new InterfaceImpl();
-        return interface_;
-    }
+		InterfaceImpl interface_ = new InterfaceImpl();
+		return interface_;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Relationship createRelationship() {
-        RelationshipImpl relationship = new RelationshipImpl();
-        return relationship;
-    }
+		RelationshipImpl relationship = new RelationshipImpl();
+		return relationship;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Property createProperty() {
-        PropertyImpl property = new PropertyImpl();
-        return property;
-    }
+		PropertyImpl property = new PropertyImpl();
+		return property;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Requirement createRequirement() {
-        RequirementImpl requirement = new RequirementImpl();
-        return requirement;
-    }
+		RequirementImpl requirement = new RequirementImpl();
+		return requirement;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Operation createOperation() {
-        OperationImpl operation = new OperationImpl();
-        return operation;
-    }
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TopologyTemplate createTopologyTemplate() {
-        TopologyTemplateImpl topologyTemplate = new TopologyTemplateImpl();
-        return topologyTemplate;
-    }
+		TopologyTemplateImpl topologyTemplate = new TopologyTemplateImpl();
+		return topologyTemplate;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Import createImport() {
-        ImportImpl import_ = new ImportImpl();
-        return import_;
-    }
+		ImportImpl import_ = new ImportImpl();
+		return import_;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Group createGroup() {
-        GroupImpl group = new GroupImpl();
-        return group;
-    }
+		GroupImpl group = new GroupImpl();
+		return group;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Policy createPolicy() {
-        PolicyImpl policy = new PolicyImpl();
-        return policy;
-    }
+		PolicyImpl policy = new PolicyImpl();
+		return policy;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Capability createCapability() {
-        CapabilityImpl capability = new CapabilityImpl();
-        return capability;
-    }
+		CapabilityImpl capability = new CapabilityImpl();
+		return capability;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Parameter createParameter() {
-        ParameterImpl parameter = new ParameterImpl();
-        return parameter;
-    }
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Artifact createArtifact() {
-        ArtifactImpl artifact = new ArtifactImpl();
-        return artifact;
-    }
+		ArtifactImpl artifact = new ArtifactImpl();
+		return artifact;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Instances createInstances() {
-        InstancesImpl instances = new InstancesImpl();
-        return instances;
-    }
+		InstancesImpl instances = new InstancesImpl();
+		return instances;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Configuration createConfiguration() {
-        ConfigurationImpl configuration = new ConfigurationImpl();
-        return configuration;
-    }
+		ConfigurationImpl configuration = new ConfigurationImpl();
+		return configuration;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Argument createArgument() {
-        ArgumentImpl argument = new ArgumentImpl();
-        return argument;
-    }
+		ArgumentImpl argument = new ArgumentImpl();
+		return argument;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Expression createExpression() {
-        ExpressionImpl expression = new ExpressionImpl();
-        return expression;
-    }
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Value createValue() {
-        ValueImpl value = new ValueImpl();
-        return value;
-    }
+		ValueImpl value = new ValueImpl();
+		return value;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public SimpleValue createSimpleValue() {
-        SimpleValueImpl simpleValue = new SimpleValueImpl();
-        return simpleValue;
-    }
+		SimpleValueImpl simpleValue = new SimpleValueImpl();
+		return simpleValue;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public GetAttribute createGetAttribute() {
-        GetAttributeImpl getAttribute = new GetAttributeImpl();
-        return getAttribute;
-    }
+		GetAttributeImpl getAttribute = new GetAttributeImpl();
+		return getAttribute;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public FirewallRule createFirewallRule() {
-        FirewallRuleImpl firewallRule = new FirewallRuleImpl();
-        return firewallRule;
-    }
+		FirewallRuleImpl firewallRule = new FirewallRuleImpl();
+		return firewallRule;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public MonitoringProperty createMonitoringProperty() {
-        MonitoringPropertyImpl monitoringProperty = new MonitoringPropertyImpl();
-        return monitoringProperty;
-    }
+		MonitoringPropertyImpl monitoringProperty = new MonitoringPropertyImpl();
+		return monitoringProperty;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EnvironmentVariable createEnvironmentVariable() {
-        EnvironmentVariableImpl environmentVariable = new EnvironmentVariableImpl();
-        return environmentVariable;
-    }
+		EnvironmentVariableImpl environmentVariable = new EnvironmentVariableImpl();
+		return environmentVariable;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Concat createConcat() {
+		ConcatImpl concat = new ConcatImpl();
+		return concat;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ToscaPackage getToscaPackage() {
-        return (ToscaPackage)getEPackage();
-    }
+		return (ToscaPackage)getEPackage();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @deprecated
-     * @generated
-     */
+	 * @deprecated
+	 * @generated
+	 */
     @Deprecated
     public static ToscaPackage getPackage() {
-        return ToscaPackage.eINSTANCE;
-    }
+		return ToscaPackage.eINSTANCE;
+	}
 
 } //ToscaFactoryImpl
