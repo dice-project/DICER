@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tosca="http://tosca/1.0">
+  <tosca:TopologyTemplate tosca_definitions_version="cloudify_dsl_1_3">
+    <imports file="https://github.com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.10/full.yaml"/>
+    <outputs parameter_name="vm1_ip_output">
+      <parameter_value xsi:type="tosca:GetAttribute" node="vm1" attribute="ip"/>
+    </outputs>
+    <outputs parameter_name="vm2_ip_output">
+      <parameter_value xsi:type="tosca:GetAttribute" node="vm2" attribute="ip"/>
+    </outputs>
+    <nodeTemplates node_template_name="vm1" type="dice.hosts.ubuntu.Small">
+      <properties property_name="platform" value="fco"/>
+      <relationships type="dice.relationships.ProtectedBy" target="hdfs_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="vm1_ip"/>
+      <instances deploy="1"/>
+      <monitoring/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="vm1_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="vm2" type="dice.hosts.ubuntu.Small">
+      <properties property_name="platform" value="fco"/>
+      <relationships type="dice.relationships.ProtectedBy" target="yarn_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="vm2_ip"/>
+      <instances deploy="1"/>
+      <monitoring/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="vm2_ip" type="dice.VirtualIP"/>
+  </tosca:TopologyTemplate>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+</xmi:XMI>

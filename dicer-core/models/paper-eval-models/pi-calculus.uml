@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_-gGW4AFbEei-9fkjPKpMew" name="pi-calculus">
+    <packagedElement xmi:type="uml:Device" xmi:id="_WX1oEAFcEei-9fkjPKpMew" name="vm1">
+      <nestedClassifier xmi:type="uml:ExecutionEnvironment" xmi:id="_DNZ-EAFdEei-9fkjPKpMew" name="spark">
+        <deployment xmi:type="uml:Deployment" xmi:id="_FyUK0AFdEei-9fkjPKpMew" client="_DNZ-EAFdEei-9fkjPKpMew" supplier="_YN1gYAFcEei-9fkjPKpMew" deployedArtifact="_YN1gYAFcEei-9fkjPKpMew"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_YN1gYAFcEei-9fkjPKpMew" name="pi-calculus"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_A4ACYAFcEei-9fkjPKpMew">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_A4DFsAFcEei-9fkjPKpMew" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmVMsCluster xmi:id="_bJkRsAFcEei-9fkjPKpMew" base_Device="_WX1oEAFcEei-9fkjPKpMew"/>
+  <DDSM:DdsmBigDataJob xmi:id="_epqUUAFcEei-9fkjPKpMew" application="pi-calculus" application_class="PI.java" base_Artifact="_YN1gYAFcEei-9fkjPKpMew" application_name="Pi"/>
+  <DDSM:DdsmSparkCluster xmi:id="_Hm3RoAFdEei-9fkjPKpMew" monitored="true" base_Node="_DNZ-EAFdEei-9fkjPKpMew" protected="true"/>
+</xmi:XMI>

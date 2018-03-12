@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM">
+  <uml:Model xmi:id="_GqvdEAFcEei-9fkjPKpMew" name="word-count">
+    <packagedElement xmi:type="uml:Device" xmi:id="_Z374cAFhEei-9fkjPKpMew" name="V1">
+      <nestedNode xmi:type="uml:ExecutionEnvironment" xmi:id="_a7PvkAFhEei-9fkjPKpMew" name="storm">
+        <deployment xmi:type="uml:Deployment" xmi:id="_eXoW4AFhEei-9fkjPKpMew" client="_a7PvkAFhEei-9fkjPKpMew" supplier="_dG8yIAFhEei-9fkjPKpMew" deployedArtifact="_dG8yIAFhEei-9fkjPKpMew"/>
+      </nestedNode>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_bgdVcAFhEei-9fkjPKpMew" name="vm2">
+      <nestedNode xmi:type="uml:Node" xmi:id="_cSSbAAFhEei-9fkjPKpMew" name="zookeeper"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_dG8yIAFhEei-9fkjPKpMew" name="word-count"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_fCZLIAFhEei-9fkjPKpMew" client="_a7PvkAFhEei-9fkjPKpMew" supplier="_cSSbAAFhEei-9fkjPKpMew"/>
+    <packagedElement xmi:type="uml:Device" xmi:id="_IEFm4AFiEei-9fkjPKpMew" name="VM3">
+      <nestedNode xmi:type="uml:Node" xmi:id="_JQiL4AFiEei-9fkjPKpMew" name="CASSANDRA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_KUbR0AFiEei-9fkjPKpMew" client="_dG8yIAFhEei-9fkjPKpMew" supplier="_JQiL4AFiEei-9fkjPKpMew"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_gxgYUAFhEei-9fkjPKpMew">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_gxg_YAFhEei-9fkjPKpMew" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
+    </profileApplication>
+  </uml:Model>
+  <DDSM:DdsmStormCluster xmi:id="_kQ-I0AFhEei-9fkjPKpMew" monitored="true" base_Node="_a7PvkAFhEei-9fkjPKpMew" protected="true" base_ExecutionEnvironment="_a7PvkAFhEei-9fkjPKpMew"/>
+  <DDSM:DdsmZookeeperCluster xmi:id="_lSgeUAFhEei-9fkjPKpMew" monitored="true" base_Node="_cSSbAAFhEei-9fkjPKpMew" protected="true"/>
+  <DDSM:DdsmVMsCluster xmi:id="_nCnKAAFhEei-9fkjPKpMew" base_Device="_Z374cAFhEei-9fkjPKpMew"/>
+  <DDSM:DdsmBigDataJob xmi:id="_n6MSQAFhEei-9fkjPKpMew" application="word-count" application_class="WOrdCOunt.class" base_Artifact="_dG8yIAFhEei-9fkjPKpMew" application_name="word-count">
+    <arguments>input-url</arguments>
+  </DDSM:DdsmBigDataJob>
+  <DDSM:DdsmVMsCluster xmi:id="_o6SdUAFhEei-9fkjPKpMew" base_Device="_bgdVcAFhEei-9fkjPKpMew"/>
+  <DDSM:DdsmVMsCluster xmi:id="_NWYm8AFiEei-9fkjPKpMew" base_Device="_IEFm4AFiEei-9fkjPKpMew"/>
+  <DDSM:DdsmCassandraCluster xmi:id="_OjbB0AFiEei-9fkjPKpMew" monitored="true" base_Node="_JQiL4AFiEei-9fkjPKpMew" protected="true"/>
+</xmi:XMI>

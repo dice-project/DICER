@@ -1,0 +1,337 @@
+{
+	"tosca_definitions_version" : "cloudify_dsl_1_3" ,
+"imports" : [
+	"https://github.com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.10/full.yaml"
+	] ,
+"outputs" : {
+		"V1_ip_output" : {
+		
+"value":  {
+				"get_attribute": [ "V1",
+				"ip" ]
+			}
+		},
+		"vm2_ip_output" : {
+		
+"value":  {
+				"get_attribute": [ "vm2",
+				"ip" ]
+			}
+		},
+		"VM3_ip_output" : {
+		
+"value":  {
+				"get_attribute": [ "VM3",
+				"ip" ]
+			}
+		}
+	}
+	,
+"node_templates" : {
+		"V1" : {
+			"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+		}
+		,
+"relationships" : [ {
+			"type" : "dice.relationships.ProtectedBy" ,
+"target" : "storm_firewall"
+		},
+		{
+			"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "V1_ip"
+		}
+		] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": false
+		},
+		
+		"platform" : "fco" } },
+		"V1_ip" : {
+			"type" : "dice.VirtualIP" ,
+"properties" : {
+				} },
+				"vm2" : {
+					"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+				}
+				,
+"relationships" : [ {
+					"type" : "dice.relationships.ProtectedBy" ,
+"target" : "zookeeper_firewall"
+				},
+				{
+					"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "vm2_ip"
+				}
+				] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": false
+				},
+				
+				"platform" : "fco" } },
+				"vm2_ip" : {
+					"type" : "dice.VirtualIP" ,
+"properties" : {
+						} },
+						"VM3" : {
+							"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+						}
+						,
+"relationships" : [ {
+							"type" : "dice.relationships.ProtectedBy" ,
+"target" : "CASSANDRA_firewall"
+						},
+						{
+							"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "VM3_ip"
+						}
+						] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": false
+						},
+						
+						"platform" : "fco" } },
+						"VM3_ip" : {
+							"type" : "dice.VirtualIP" ,
+"properties" : {
+								} },
+								"CASSANDRA" : {
+									"type" : "dice.components.cassandra.Worker" ,
+"relationships" : [ {
+										"type" : "dice.relationships.ContainedIn" ,
+"target" : "VM3"
+									},
+									{
+										"type" : "dice.relationships.cassandra.ConnectedToSeed" ,
+"target" : "CASSANDRA_seed"
+									}
+									] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+									}
+									,
+"configuration" : { 
+									"key_cache_save_period" : "0",
+									
+									"memtable_flush_writers" : "0" } } },
+									"CASSANDRA_seed" : {
+										"type" : "dice.components.cassandra.Seed" ,
+"relationships" : [ {
+											"type" : "dice.relationships.ContainedIn" ,
+"target" : "CASSANDRA_seed_vm"
+										}
+										] ,
+"properties" : {
+											} },
+											"CASSANDRA_firewall" : {
+												"type" : "dice.firewall_rules.cassandra.Common" ,
+"properties" : {
+													} },
+													"CASSANDRA_seed_vm" : {
+														"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+													}
+													,
+"relationships" : [ {
+														"type" : "dice.relationships.ProtectedBy" ,
+"target" : "CASSANDRA_firewall"
+													},
+													{
+														"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "CASSANDRA_seed_vm_ip"
+													}
+													] ,
+"properties" : {
+														} },
+														"CASSANDRA_seed_vm_ip" : {
+															"type" : "dice.VirtualIP" ,
+"properties" : {
+																} },
+																"zookeeper" : {
+																	"type" : "dice.components.zookeeper.Server" ,
+"relationships" : [ {
+																		"type" : "dice.relationships.ContainedIn" ,
+"target" : "vm2"
+																	},
+																	{
+																		"type" : "dice.relationships.zookeeper.MemberOfQuorum" ,
+"target" : "zookeeper_quorum"
+																	}
+																	] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+																	}
+																	,
+"configuration" : { 
+																	"tickTime" : "1500",
+																	
+																	"syncLimit" : "10",
+																	
+																	"initLimit" : "5" } } },
+																	"zookeeper_firewall" : {
+																		"type" : "dice.firewall_rules.zookeeper.Server" ,
+"properties" : {
+																			} },
+																			"zookeeper_quorum" : {
+																				"type" : "dice.components.zookeeper.Quorum" ,
+"relationships" : [ {
+																					"type" : "dice.relationships.zookeeper.QuorumContains" ,
+"target" : "vm2"
+																				}
+																				] ,
+"properties" : {
+																					} },
+																					"storm_master" : {
+																						"type" : "dice.components.storm.Nimbus" ,
+"relationships" : [ {
+																							"type" : "dice.relationships.ContainedIn" ,
+"target" : "storm_master_vm"
+																						},
+																						{
+																							"type" :
+																							"dice.relationships.storm.ConnectedToZookeeperQuorum" ,
+"target" : "zookeeper_quorum"
+																						}
+																						] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+																						}
+																						,
+"configuration" : { 
+																						"taskTimeout" : "60",
+																						
+																						"supervisorFrequency" : "60",
+																						
+																						"queueSize" : "10000",
+																						
+																						"monitorFrequency" : "40",
+																						
+																						"retryTimes" : "5",
+																						
+																						"retryInterval" : "2000",
+																						
+																						"workerStartTimeout" : "0",
+																						
+																						"cpuCapacity" : "0",
+																						
+																						"memoryCapacity" : "0",
+																						
+																						"heartbeatFrequency" : "0" } } },
+																						"storm" : {
+																							"type" : "dice.components.storm.Worker" ,
+"relationships" : [ {
+																								"type" : "dice.relationships.ContainedIn" ,
+"target" : "V1"
+																							},
+																							{
+																								"type" :
+																								"dice.relationships.storm.ConnectedToZookeeperQuorum" ,
+"target" : "zookeeper_quorum"
+																							},
+																							{
+																								"type" : "dice.relationships.storm.ConnectedToNimbus" ,
+"target" : "storm_master"
+																							}
+																							] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+																							}
+																							,
+"configuration" : { 
+																							"taskTimeout" : "60",
+																							
+																							"supervisorFrequency" : "60",
+																							
+																							"queueSize" : "10000",
+																							
+																							"monitorFrequency" : "40",
+																							
+																							"retryTimes" : "5",
+																							
+																							"retryInterval" : "2000",
+																							
+																							"workerStartTimeout" : "0",
+																							
+																							"cpuCapacity" : "0",
+																							
+																							"memoryCapacity" : "0",
+																							
+																							"heartbeatFrequency" : "0" } } },
+																							"storm_master_firewall" : {
+																								"type" : "dice.firewall_rules.storm.Nimbus" ,
+"properties" : {
+																									} },
+																									"storm_firewall" : {
+																										"type" : "dice.firewall_rules.storm.Worker" ,
+"properties" : {
+																											} },
+																											"storm_master_vm" : {
+																												"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+																											}
+																											,
+"relationships" : [ {
+																												"type" : "dice.relationships.ProtectedBy" ,
+"target" : "storm_master_firewall"
+																											},
+																											{
+																												"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "storm_master_vm_ip"
+																											}
+																											] ,
+"properties" : {
+																												} },
+																												"storm_master_vm_ip" : {
+																													"type" : "dice.VirtualIP" ,
+"properties" : {
+																														} },
+																														"word-count" : {
+																															"type" : "dice.components.storm.Topology" ,
+"relationships" : [ {
+																																"type" : "dice.relationships.Needs" ,
+"target" : "storm"
+																															},
+																															{
+																																"type" : "dice.relationships.storm.SubmittedBy" ,
+"target" : "storm_master"
+																															},
+																															{
+																																"type" : "dice.relationships.Needs" ,
+"target" : "CASSANDRA"
+																															}
+																															] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+																															}
+																															,
+"arguments" : [ {
+																																"get_attribute": [ "CASSANDRA",
+																																"ip" ]
+																															},
+																															"input-url" ],
+																															
+																															"application" : "word-count",
+																															
+																															"topology_class" : "WOrdCOunt.class",
+																															
+																															"topology_name" : "word-count" } }
+																														}
+																													}
