@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_-gupAAFbEei-9fkjPKpMew" type="PapyrusUMLDeploymentDiagram" name="Deployment Diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_WX7usAFcEei-9fkjPKpMew" type="Device_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WX9j4AFcEei-9fkjPKpMew" type="Device_NameLabel"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_WX-K8AFcEei-9fkjPKpMew" type="Device_NestedNodeCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_DNdBYAFdEei-9fkjPKpMew" type="ExecutionEnvironment_Shape">
+        <children xmi:type="notation:DecorationNode" xmi:id="_DNdocAFdEei-9fkjPKpMew" type="ExecutionEnvironment_NameLabel"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_DNdocQFdEei-9fkjPKpMew" type="ExecutionEnvironment_NestedNodeCompartment">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_DNdocgFdEei-9fkjPKpMew"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DNdocwFdEei-9fkjPKpMew"/>
+        </children>
+        <element xmi:type="uml:ExecutionEnvironment" href="pi-calculus.uml#_DNZ-EAFdEei-9fkjPKpMew"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DNdBYQFdEei-9fkjPKpMew" x="75" y="49"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_HnC30AFdEei-9fkjPKpMew" type="StereotypeComment">
+        <styles xmi:type="notation:TitleStyle" xmi:id="_HnC30QFdEei-9fkjPKpMew"/>
+        <styles xmi:type="notation:EObjectValueStyle" xmi:id="_HnDe4AFdEei-9fkjPKpMew" name="BASE_ELEMENT">
+          <eObjectValue xmi:type="uml:ExecutionEnvironment" href="pi-calculus.uml#_DNZ-EAFdEei-9fkjPKpMew"/>
+        </styles>
+        <element xsi:nil="true"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HnC30gFdEei-9fkjPKpMew" x="275" y="49"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_WX-K8QFcEei-9fkjPKpMew"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WX-K8gFcEei-9fkjPKpMew"/>
+    </children>
+    <element xmi:type="uml:Device" href="pi-calculus.uml#_WX1oEAFcEei-9fkjPKpMew"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WX7usQFcEei-9fkjPKpMew" x="140" y="40" width="290" height="260"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_YN38oAFcEei-9fkjPKpMew" type="Artifact_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_YN38ogFcEei-9fkjPKpMew" type="Artifact_NameLabel"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_YN38owFcEei-9fkjPKpMew" type="Artifact_FloatingNameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_YN38pAFcEei-9fkjPKpMew" x="25"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_YN4jsAFcEei-9fkjPKpMew" type="Artifact_NestedArtifactCompartment">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_YN4jsQFcEei-9fkjPKpMew"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YN4jsgFcEei-9fkjPKpMew"/>
+    </children>
+    <element xmi:type="uml:Artifact" href="pi-calculus.uml#_YN1gYAFcEei-9fkjPKpMew"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YN38oQFcEei-9fkjPKpMew" x="580" y="300"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_bKjwMAFcEei-9fkjPKpMew" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_bKjwMQFcEei-9fkjPKpMew"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_bKjwMwFcEei-9fkjPKpMew" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="pi-calculus.uml#_WX1oEAFcEei-9fkjPKpMew"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bKjwMgFcEei-9fkjPKpMew" x="340" y="40"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_eqEkBAFcEei-9fkjPKpMew" type="StereotypeComment">
+    <styles xmi:type="notation:TitleStyle" xmi:id="_eqEkBQFcEei-9fkjPKpMew"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_eqEkBwFcEei-9fkjPKpMew" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Artifact" href="pi-calculus.uml#_YN1gYAFcEei-9fkjPKpMew"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eqEkBgFcEei-9fkjPKpMew" x="780" y="300"/>
+  </children>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_-gupAQFbEei-9fkjPKpMew" name="diagram_compatibility_version" stringValue="1.3.0"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_-gupAgFbEei-9fkjPKpMew"/>
+  <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_-gupAwFbEei-9fkjPKpMew" diagramKindId="org.eclipse.papyrus.uml.diagram.deployment">
+    <owner xmi:type="uml:Model" href="pi-calculus.uml#_-gGW4AFbEei-9fkjPKpMew"/>
+  </styles>
+  <element xmi:type="uml:Model" href="pi-calculus.uml#_-gGW4AFbEei-9fkjPKpMew"/>
+  <edges xmi:type="notation:Connector" xmi:id="_bKkXQAFcEei-9fkjPKpMew" type="StereotypeCommentLink" source="_WX7usAFcEei-9fkjPKpMew" target="_bKjwMAFcEei-9fkjPKpMew">
+    <styles xmi:type="notation:FontStyle" xmi:id="_bKkXQQFcEei-9fkjPKpMew"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_bKk-UgFcEei-9fkjPKpMew" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Device" href="pi-calculus.uml#_WX1oEAFcEei-9fkjPKpMew"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bKkXQgFcEei-9fkjPKpMew" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bKk-UAFcEei-9fkjPKpMew"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bKk-UQFcEei-9fkjPKpMew"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_eqFLEAFcEei-9fkjPKpMew" type="StereotypeCommentLink" source="_YN38oAFcEei-9fkjPKpMew" target="_eqEkBAFcEei-9fkjPKpMew">
+    <styles xmi:type="notation:FontStyle" xmi:id="_eqFLEQFcEei-9fkjPKpMew"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_eqFLFQFcEei-9fkjPKpMew" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:Artifact" href="pi-calculus.uml#_YN1gYAFcEei-9fkjPKpMew"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_eqFLEgFcEei-9fkjPKpMew" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eqFLEwFcEei-9fkjPKpMew"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eqFLFAFcEei-9fkjPKpMew"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_FyqwIAFdEei-9fkjPKpMew" type="Deployment_Edge" source="_YN38oAFcEei-9fkjPKpMew" target="_DNdBYAFdEei-9fkjPKpMew">
+    <children xmi:type="notation:DecorationNode" xmi:id="_FyrXMAFdEei-9fkjPKpMew" type="Deployment_NameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_FyrXMQFdEei-9fkjPKpMew" y="60"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_FytMYAFdEei-9fkjPKpMew" type="Deployment_StereotypeLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_FytMYQFdEei-9fkjPKpMew" y="60"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_FyqwIQFdEei-9fkjPKpMew"/>
+    <element xmi:type="uml:Deployment" href="pi-calculus.uml#_FyUK0AFdEei-9fkjPKpMew"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FyqwIgFdEei-9fkjPKpMew" points="[620, 300, -643984, -643984]$[340, 260, -643984, -643984]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FzDxsAFdEei-9fkjPKpMew" id="(0.26666666666666666,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FzDxsQFdEei-9fkjPKpMew" id="(0.8,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_HnDe4QFdEei-9fkjPKpMew" type="StereotypeCommentLink" source="_DNdBYAFdEei-9fkjPKpMew" target="_HnC30AFdEei-9fkjPKpMew">
+    <styles xmi:type="notation:FontStyle" xmi:id="_HnDe4gFdEei-9fkjPKpMew"/>
+    <styles xmi:type="notation:EObjectValueStyle" xmi:id="_HnDe5gFdEei-9fkjPKpMew" name="BASE_ELEMENT">
+      <eObjectValue xmi:type="uml:ExecutionEnvironment" href="pi-calculus.uml#_DNZ-EAFdEei-9fkjPKpMew"/>
+    </styles>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_HnDe4wFdEei-9fkjPKpMew" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HnDe5AFdEei-9fkjPKpMew"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HnDe5QFdEei-9fkjPKpMew"/>
+  </edges>
+</notation:Diagram>

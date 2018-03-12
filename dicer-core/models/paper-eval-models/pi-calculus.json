@@ -1,0 +1,65 @@
+{
+	"tosca_definitions_version" : "cloudify_dsl_1_3" ,
+"imports" : [
+	"https://github.com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.10/full.yaml"
+	] ,
+"outputs" : {
+		"vm1_ip_output" : {
+		
+"value":  {
+				"get_attribute": [ "vm1",
+				"ip" ]
+			}
+		}
+	}
+	,
+"node_templates" : {
+		"vm1" : {
+			"type" : "dice.hosts.ubuntu.Small" ,
+"instances" : { "deploy" : 1
+		}
+		,
+"relationships" : [ {
+			"type" : "dice.relationships.ProtectedBy" ,
+"target" : "spark_firewall"
+		},
+		{
+			"type" : "dice.relationships.IPAvailableFrom" ,
+"target" : "vm1_ip"
+		}
+		] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": false
+		},
+		
+		"platform" : "fco" } },
+		"vm1_ip" : {
+			"type" : "dice.VirtualIP" ,
+"properties" : {
+				} },
+				"pi-calculus" : {
+					"type" : "dice.components.spark.Topology" ,
+"relationships" : [ {
+						"type" : "dice.relationships.Needs" ,
+"target" : "spark"
+					},
+					{
+						"type" : "dice.relationships.spark.SubmittedBy" ,
+"target" : "spark_master"
+					}
+					] ,
+"properties" : {
+
+"monitoring" : { 
+ "enabled": true
+					},
+					
+					"application" : "pi-calculus",
+					
+					"topology_class" : "PI.java",
+					
+					"topology_name" : "Pi" } }
+				}
+			}

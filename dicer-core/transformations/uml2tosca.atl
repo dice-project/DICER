@@ -160,7 +160,12 @@ lazy rule getDiaJobNodeTemplate {
 	to
 		t: TOSCA!NodeTemplate (
 			node_template_name <- s.name,
-			type <- 'dice.components.' + s.getDiaJobType() + '.Topology',
+			type <- 'dice.components.' + s.getDiaJobType() + 
+			if s.getDiaJobType() = 'spark' then
+			'.Application'
+			else
+			'.Topology'
+			endif,
 			properties <- thisModule.getProperty('application', s.
 					getStereotypeProperty('application', 'DdsmBigDataJob')).
 					union(thisModule.getProperty('topology_class', s.
@@ -1063,95 +1068,95 @@ lazy rule getStormWorkerRelationshipForStormCluster {
 
 -------------- STORM ---------------
 -------------- SPARK ---------------
-lazy rule sparkToTosca {
-	from
-		s: MMUML!Node (
-			s.hasStereotype('DdsmSparkCluster')
-		)
-	using {
-		masterHost: MMUML!Element = s.getStereotypeProperty('masterHost',
-				'DdsmSparkCluster');
-	}
-	to
-		master: TOSCA!NodeTemplate (
-			node_template_name <- s.name + '_master',
-			type <- 'dice.components.spark.Master',
-			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
-					true then
-					thisModule.getMonitoringProperty(true, s.
-							getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
+	lazy rule sparkToTosca {
+		from
+			s: MMUML!Node (
+				s.hasStereotype('DdsmSparkCluster')
+			)
+		using {
+			masterHost: MMUML!Element = s.getStereotypeProperty('masterHost',
+					'DdsmSparkCluster');
+		}
+		to
+			master: TOSCA!NodeTemplate (
+				node_template_name <- s.name + '_master',
+				type <- 'dice.components.spark.Master',
+				monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
+						true then
+						thisModule.getMonitoringProperty(true, s.
+								getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
+					else
+						thisModule.getMonitoringProperty(false, Sequence{})
+					endif,
+				relationships <- thisModule.getSparkMasterRelationshipForSparkCluster(s)
+			),
+			worker: TOSCA!NodeTemplate (
+				node_template_name <- s.name,
+				type <- 'dice.components.spark.Worker',
+				monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
+						true then
+						thisModule.getMonitoringProperty(true, s.
+								getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
+					else
+						thisModule.getMonitoringProperty(false, Sequence{})
+					endif,
+				relationships <- thisModule.getSparkWorkerRelationshipForSparkCluster(s)
+			),
+			master_firewall: TOSCA!NodeTemplate (
+				node_template_name <- s.name + '_master_firewall',
+				type <- 'dice.firewall_rules.spark.Master'
+			),
+			worker_firewall: TOSCA!NodeTemplate (
+				node_template_name <- s.name + '_firewall',
+				type <- 'dice.firewall_rules.spark.Worker'
+			)
+		do {
+			if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
+				if masterHost.oclIsUndefined() then
+					if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+						Sequence{master, 
+									master_firewall,
+									thisModule.generateMasterVm(s, true)}.flatten()
+					else
+						Sequence{master,
+									thisModule.generateMasterVm(s, false)}.flatten()
+					endif
 				else
-					thisModule.getMonitoringProperty(false, Sequence{})
-				endif,
-			relationships <- thisModule.getSparkMasterRelationshipForSparkCluster(s)
-		),
-		worker: TOSCA!NodeTemplate (
-			node_template_name <- s.name,
-			type <- 'dice.components.spark.Worker',
-			monitoring <- if s.getStereotypeProperty('monitored', 'DdsmSparkCluster') =
-					true then
-					thisModule.getMonitoringProperty(true, s.
-							getStereotypeProperty('monitoringRoles', 'DdsmSparkCluster'))
-				else
-					thisModule.getMonitoringProperty(false, Sequence{})
-				endif,
-			relationships <- thisModule.getSparkWorkerRelationshipForSparkCluster(s)
-		),
-		master_firewall: TOSCA!NodeTemplate (
-			node_template_name <- s.name + '_master_firewall',
-			type <- 'dice.firewall_rules.spark.Master'
-		),
-		worker_firewall: TOSCA!NodeTemplate (
-			node_template_name <- s.name + '_firewall',
-			type <- 'dice.firewall_rules.spark.Worker'
-		)
-	do {
-		if s.refImmediateComposite().getStereotypeProperty('instances', 'DdsmVMsCluster') = 0 then 
-			if masterHost.oclIsUndefined() then
-				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
-					Sequence{master, 
-								master_firewall,
-								thisModule.generateMasterVm(s, true)}.flatten()
-				else
-					Sequence{master,
-								thisModule.generateMasterVm(s, false)}.flatten()
+					if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+						Sequence{master,
+								master_firewall}
+					else
+						Sequence{master}
+					endif
 				endif
 			else
-				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
-					Sequence{master,
-							master_firewall}
+				if masterHost.oclIsUndefined() then
+					if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+						Sequence{master,
+									worker,
+									master_firewall,
+									worker_firewall,
+									thisModule.generateMasterVm(s, true)}.flatten()
+					else
+						Sequence{master,
+									worker,
+									thisModule.generateMasterVm(s, false)}.flatten()
+					endif
 				else
-					Sequence{master}
-				endif
-			endif
-		else
-			if masterHost.oclIsUndefined() then
-				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
-					Sequence{master,
+					if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
+						Sequence{master,
 								worker,
 								master_firewall,
-								worker_firewall,
-								thisModule.generateMasterVm(s, true)}.flatten()
-				else
-					Sequence{master,
-								worker,
-								thisModule.generateMasterVm(s, false)}.flatten()
+								worker_firewall}
+					else
+						Sequence{master,
+								worker}
+					endif
 				endif
-			else
-				if s.getStereotypeProperty('protected', 'DdsmSparkCluster') = true then
-					Sequence{master,
-							worker,
-							master_firewall,
-							worker_firewall}
-				else
-					Sequence{master,
-							worker}
-				endif
-			endif
-		endif;
-
+			endif;
+	
+		}
 	}
-}
 
 lazy rule getSparkMasterRelationshipForSparkCluster {
 	from

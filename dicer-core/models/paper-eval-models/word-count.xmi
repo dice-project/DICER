@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tosca="http://tosca/1.0">
+  <tosca:TopologyTemplate tosca_definitions_version="cloudify_dsl_1_3">
+    <imports file="https://github.com/dice-project/DICE-Deployment-Cloudify/releases/download/0.7.10/full.yaml"/>
+    <outputs parameter_name="V1_ip_output">
+      <parameter_value xsi:type="tosca:GetAttribute" node="V1" attribute="ip"/>
+    </outputs>
+    <outputs parameter_name="vm2_ip_output">
+      <parameter_value xsi:type="tosca:GetAttribute" node="vm2" attribute="ip"/>
+    </outputs>
+    <outputs parameter_name="VM3_ip_output">
+      <parameter_value xsi:type="tosca:GetAttribute" node="VM3" attribute="ip"/>
+    </outputs>
+    <nodeTemplates node_template_name="V1" type="dice.hosts.ubuntu.Small">
+      <properties property_name="platform" value="fco"/>
+      <relationships type="dice.relationships.ProtectedBy" target="storm_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="V1_ip"/>
+      <instances deploy="1"/>
+      <monitoring/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="V1_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="vm2" type="dice.hosts.ubuntu.Small">
+      <properties property_name="platform" value="fco"/>
+      <relationships type="dice.relationships.ProtectedBy" target="zookeeper_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="vm2_ip"/>
+      <instances deploy="1"/>
+      <monitoring/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="vm2_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="VM3" type="dice.hosts.ubuntu.Small">
+      <properties property_name="platform" value="fco"/>
+      <relationships type="dice.relationships.ProtectedBy" target="CASSANDRA_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="VM3_ip"/>
+      <instances deploy="1"/>
+      <monitoring/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="VM3_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="CASSANDRA" type="dice.components.cassandra.Worker">
+      <relationships type="dice.relationships.ContainedIn" target="VM3"/>
+      <relationships type="dice.relationships.cassandra.ConnectedToSeed" target="CASSANDRA_seed"/>
+      <configurations property_name="key_cache_save_period" value="0"/>
+      <configurations property_name="memtable_flush_writers" value="0"/>
+      <monitoring enabled="true"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="CASSANDRA_seed" type="dice.components.cassandra.Seed">
+      <relationships type="dice.relationships.ContainedIn" target="CASSANDRA_seed_vm"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="CASSANDRA_firewall" type="dice.firewall_rules.cassandra.Common"/>
+    <nodeTemplates node_template_name="CASSANDRA_seed_vm" type="dice.hosts.ubuntu.Small">
+      <relationships type="dice.relationships.ProtectedBy" target="CASSANDRA_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="CASSANDRA_seed_vm_ip"/>
+      <instances deploy="1"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="CASSANDRA_seed_vm_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="zookeeper" type="dice.components.zookeeper.Server">
+      <relationships type="dice.relationships.ContainedIn" target="vm2"/>
+      <relationships type="dice.relationships.zookeeper.MemberOfQuorum" target="zookeeper_quorum"/>
+      <configurations property_name="tickTime" value="1500"/>
+      <configurations property_name="syncLimit" value="10"/>
+      <configurations property_name="initLimit" value="5"/>
+      <monitoring enabled="true"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="zookeeper_firewall" type="dice.firewall_rules.zookeeper.Server"/>
+    <nodeTemplates node_template_name="zookeeper_quorum" type="dice.components.zookeeper.Quorum">
+      <relationships type="dice.relationships.zookeeper.QuorumContains" target="vm2"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="storm_master" type="dice.components.storm.Nimbus">
+      <relationships type="dice.relationships.ContainedIn" target="storm_master_vm"/>
+      <relationships type="dice.relationships.storm.ConnectedToZookeeperQuorum" target="zookeeper_quorum"/>
+      <configurations property_name="taskTimeout" value="60"/>
+      <configurations property_name="supervisorFrequency" value="60"/>
+      <configurations property_name="queueSize" value="10000"/>
+      <configurations property_name="monitorFrequency" value="40"/>
+      <configurations property_name="retryTimes" value="5"/>
+      <configurations property_name="retryInterval" value="2000"/>
+      <configurations property_name="workerStartTimeout" value="0"/>
+      <configurations property_name="cpuCapacity" value="0"/>
+      <configurations property_name="memoryCapacity" value="0"/>
+      <configurations property_name="heartbeatFrequency" value="0"/>
+      <monitoring enabled="true"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="storm" type="dice.components.storm.Worker">
+      <relationships type="dice.relationships.ContainedIn" target="V1"/>
+      <relationships type="dice.relationships.storm.ConnectedToZookeeperQuorum" target="zookeeper_quorum"/>
+      <relationships type="dice.relationships.storm.ConnectedToNimbus" target="storm_master"/>
+      <configurations property_name="taskTimeout" value="60"/>
+      <configurations property_name="supervisorFrequency" value="60"/>
+      <configurations property_name="queueSize" value="10000"/>
+      <configurations property_name="monitorFrequency" value="40"/>
+      <configurations property_name="retryTimes" value="5"/>
+      <configurations property_name="retryInterval" value="2000"/>
+      <configurations property_name="workerStartTimeout" value="0"/>
+      <configurations property_name="cpuCapacity" value="0"/>
+      <configurations property_name="memoryCapacity" value="0"/>
+      <configurations property_name="heartbeatFrequency" value="0"/>
+      <monitoring enabled="true"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="storm_master_firewall" type="dice.firewall_rules.storm.Nimbus"/>
+    <nodeTemplates node_template_name="storm_firewall" type="dice.firewall_rules.storm.Worker"/>
+    <nodeTemplates node_template_name="storm_master_vm" type="dice.hosts.ubuntu.Small">
+      <relationships type="dice.relationships.ProtectedBy" target="storm_master_firewall"/>
+      <relationships type="dice.relationships.IPAvailableFrom" target="storm_master_vm_ip"/>
+      <instances deploy="1"/>
+    </nodeTemplates>
+    <nodeTemplates node_template_name="storm_master_vm_ip" type="dice.VirtualIP"/>
+    <nodeTemplates node_template_name="word-count" type="dice.components.storm.Topology">
+      <properties property_name="application" value="word-count"/>
+      <properties property_name="topology_class" value="WOrdCOunt.class"/>
+      <properties property_name="topology_name" value="word-count"/>
+      <relationships type="dice.relationships.Needs" target="storm"/>
+      <relationships type="dice.relationships.storm.SubmittedBy" target="storm_master"/>
+      <relationships type="dice.relationships.Needs" target="CASSANDRA"/>
+      <arguments>
+        <argument_value xsi:type="tosca:GetAttribute" node="CASSANDRA" attribute="ip"/>
+      </arguments>
+      <arguments>
+        <argument_value xsi:type="tosca:SimpleValue" value="input-url"/>
+      </arguments>
+      <monitoring enabled="true"/>
+    </nodeTemplates>
+  </tosca:TopologyTemplate>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+  <tosca:Relationship type="dice.relationships.ProtectedBy" target="fw_ephemeral"/>
+</xmi:XMI>
