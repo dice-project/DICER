@@ -166,12 +166,21 @@ lazy rule getDiaJobNodeTemplate {
 			else
 			'.Topology'
 			endif,
-			properties <- thisModule.getProperty('application', s.
+			properties <- if s.getDiaJobType() = 'storm' then
+					thisModule.getProperty('application', s.
 					getStereotypeProperty('application', 'DdsmBigDataJob')).
 					union(thisModule.getProperty('topology_class', s.
 					getStereotypeProperty('application_class', 'DdsmBigDataJob')).
 					union(thisModule.getProperty('topology_name', s.
-					getStereotypeProperty('application_name', 'DdsmBigDataJob')))),
+					getStereotypeProperty('application_name', 'DdsmBigDataJob'))))
+			else
+					thisModule.getProperty('jar', s.
+					getStereotypeProperty('application', 'DdsmBigDataJob')).
+					union(thisModule.getProperty('class', s.
+					getStereotypeProperty('application_class', 'DdsmBigDataJob')).
+					union(thisModule.getProperty('name', s.
+					getStereotypeProperty('application_name', 'DdsmBigDataJob'))))
+			endif,
 			--to replicate the arguments, configurations and resources generation for
 					-- each node
 			monitoring <- thisModule.getMonitoringProperty(true, Sequence{}),
